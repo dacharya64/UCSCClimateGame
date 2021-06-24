@@ -30,14 +30,7 @@ public class Bill : MonoBehaviour {
 		List<RectTransform> showIcons = new List<RectTransform>();
 		foreach (Transform child in iconWrapper.transform) {
 			child.gameObject.SetActive(effects.ContainsKey(child.name));
-/*			if (effects.ContainsKey(child.name)) {
-				Debug.Log("Child name is " + child.name);
-				float result = effects[child.name];
-				Debug.Log("Result is: " + result);
-			}*/
 
-			//float result = effects[child.name];
-			//Debug.Log("Result is: " + result);
 			if (child.gameObject.activeSelf)
             {
 				showIcons.Add(child as RectTransform);
@@ -51,7 +44,6 @@ public class Bill : MonoBehaviour {
 			child.localPosition = new Vector2(size * ((i - num / 2) + (num % 2 == 1 ? 0 : .5f)), child.localPosition.y);
 			if (effects.ContainsKey(child.name))
 			{
-				Debug.Log("Child name is " + child.name);
 				float result = effects[child.name];
 				if (result > 0)
 				{
@@ -60,7 +52,6 @@ public class Bill : MonoBehaviour {
 				else if (result < 0) {
 					child.GetComponent<Image>().color = new Color32(255, 0, 0, 100);
 				}
-				Debug.Log("Result is: " + result);
 			}
 		}
 	}
