@@ -5,12 +5,12 @@
     "left": {
       "title": "Ocean Shipping",
       "body": "Most goods travel between continents on large ships. Should we improve the design and technology onboard to reduce ocean shipping emissions?",
-      "tags": "money-2 co2-2"
+      "tags": "money-2 emissions-2"
     },
     "right": {
       "title": "Electric Trains",
       "body": "Trains move passengers, goods, and equipment over land, and most of them run on fossil fuels. Should we develop and expand electric trains to replace diesel trains?",
-      "tags": "money-1 co2-1 opinion+1"
+      "tags": "money-1 emissions-1 opinion+1"
     }
   },
   {
@@ -19,12 +19,12 @@
     "left": {
       "title": "Public Transit",
       "body": "Busses, trains, and subway lines help people get around without relying on cars. They also help those who cannot drive or ride bikes. Should we increase these services?",
-      "tags": "money-2 co2-2 opinon-2"
+      "tags": "money-2 emissions-2 opinon-2"
     },
     "right": {
       "title": "Bicycle Paths and Planning",
       "body": "Bikes provide exercise and freedom for riders to choose their own routes. Should we add more bike paths and bike parking to increase bike safety and convenience?",
-      "tags": "money-1 co2-1 opinion+1"
+      "tags": "money-1 emissions-1 opinion+1"
     }
   },
   {
@@ -33,12 +33,12 @@
     "left": {
       "title": "Onshore Wind Power",
       "body": "Building wind turbines on land is easier-the ground is already there, after all. But some people don't like the look of these structures or the space they take up.",
-      "tags": "money-1 co2-2 opinon-1"
+      "tags": "money-1 emissions-2 opinon-1"
     },
     "right": {
       "title": "Offshore Wind Power",
       "body": "Building in the water is trickier and more expensive. On the plus-side, offshore wind turbines don't use up land that others want to build on.",
-      "tags": "money-2 co2-1"
+      "tags": "money-2 emissions-1"
     }
   }
 ]
