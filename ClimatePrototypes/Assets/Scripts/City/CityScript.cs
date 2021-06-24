@@ -27,6 +27,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	[SerializeField] Text mainTitle = default;
 	[SerializeField] Bill left = default, right = default;
 	[SerializeField, Range(0.01f, 0.1f)] float speed = .1f;
+	public GameObject returnPrompt;
 
 	/// <summary> Namespace to hold bill data </summary>
 	public struct BillData {
@@ -69,7 +70,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	static Dictionary<string, float> ParseTag(string tag) => tag.Split().ToDictionary(t => Regex.Match(t, @"[A-z]*(?=\+|-)").ToString(), t => float.Parse(Regex.Match(t, @"(?:\+|-).*").ToString()));
 
 	void InitBill(BillData currentBill) {
-		Debug.Log("Initializing bill number " + currentBillIndex);
+		//Debug.Log("Initializing bill number " + currentBillIndex);
 		currentBill.left.effects = ParseTag(currentBill.left.tags);
 		currentBill.right.effects = ParseTag(currentBill.right.tags);
 		left.SetBill(currentBill.left);
@@ -77,17 +78,18 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	}
 
 	public void GetNextBill() {
-		Debug.Log("getting next bill...");
-		if (currentBillIndex <= numberOfBills - 1)
+		//Debug.Log("getting next bill...");
+		if (currentBillIndex <= numberOfBills - 2)
 		{
 			currentBillIndex++;
-			Debug.Log("Current bill index: " + currentBillIndex);
+			//Debug.Log("Current bill index: " + currentBillIndex);
 			// Go to the next pair of bills
 			BillData currentBill = currentBillList[currentBillIndex];
 			InitBill(currentBill);
 		} else 
-		{ 
-			// Go back to the overworld
+		{
+			// Show return prompt
+			returnPrompt.SetActive(true); 
 		}
 	}
 
