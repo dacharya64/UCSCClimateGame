@@ -9,6 +9,8 @@ public class Bill : MonoBehaviour {
 	[SerializeField] Text title = default, body = default;
 	[SerializeField] GameObject iconWrapper = default;
 	[HideInInspector] public float speed;
+	private GameObject arrow1;
+	private GameObject arrow2;
 
 	void Start() {
 		foreach (Transform child in iconWrapper.transform)
@@ -45,11 +47,20 @@ public class Bill : MonoBehaviour {
 			if (effects.ContainsKey(child.name))
 			{
 				float result = effects[child.name];
-				if (result > 0)
+				if (result > 0) // Change color to green 
 				{
 					child.GetComponent<Image>().color = new Color32(0, 255, 0, 100);
+					// find the up arrow and enable it 
+					Debug.Log("child.name is " + child.name);
+					string totalName = child.name + "ArrowUp1";
+					Debug.Log("total name is " + totalName);
+					//arrow1 = GameObject.Find(totalName);
+					arrow1 = child.transform.Find(totalName).gameObject;
+					Debug.Log(arrow1.name);
+					arrow1.SetActive(true);
+
 				}
-				else if (result < 0) {
+				else if (result < 0) { // change color to red 
 					child.GetComponent<Image>().color = new Color32(255, 0, 0, 100);
 				}
 			}
