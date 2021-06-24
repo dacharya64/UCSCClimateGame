@@ -70,7 +70,6 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	static Dictionary<string, float> ParseTag(string tag) => tag.Split().ToDictionary(t => Regex.Match(t, @"[A-z]*(?=\+|-)").ToString(), t => float.Parse(Regex.Match(t, @"(?:\+|-).*").ToString()));
 
 	void InitBill(BillData currentBill) {
-		//Debug.Log("Initializing bill number " + currentBillIndex);
 		currentBill.left.effects = ParseTag(currentBill.left.tags);
 		currentBill.right.effects = ParseTag(currentBill.right.tags);
 		left.SetBill(currentBill.left);
@@ -78,11 +77,9 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	}
 
 	public void GetNextBill() {
-		//Debug.Log("getting next bill...");
 		if (currentBillIndex <= numberOfBills - 2)
 		{
 			currentBillIndex++;
-			//Debug.Log("Current bill index: " + currentBillIndex);
 			// Go to the next pair of bills
 			BillData currentBill = currentBillList[currentBillIndex];
 			InitBill(currentBill);
@@ -94,4 +91,6 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	}
 
 	public void SetTransparent(GameObject ui) => UIController.SetUIAlpha(ui, .7f);
+	
+	public void SetOpaque(GameObject ui) => UIController.SetUIAlpha(ui, 1f);
 }
