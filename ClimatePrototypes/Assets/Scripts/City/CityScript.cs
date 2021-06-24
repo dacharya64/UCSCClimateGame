@@ -15,7 +15,13 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	BillDifficulty currentDifficulty = BillDifficulty.Easy;
 	Dictionary<BillDifficulty, List<BillData>> bills = new Dictionary<BillDifficulty, List<BillData>>();
 	List<BillData> currentBillList => bills[currentDifficulty];
+
+	//int totalBills = currentBillList.Count;
+	// Find a random pair of bills out of all of the ones in the list
+	
+
 	BillData currentBill => currentBillList[currentBillIndex];
+	int numberOfBills = 3; // Total number of bill choices to make
 	int currentBillIndex = 0;
 
 	[SerializeField] Text mainTitle = default;
@@ -45,6 +51,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 		bills = LoadBills();
 		currentDifficulty = BillDifficulty.Easy;
 		(left.speed, right.speed) = (speed, speed);
+		//int billNumber = Random.Range(0, 3);
 	}
 
 	protected override void Init() { // called from parent
@@ -62,16 +69,25 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	static Dictionary<string, float> ParseTag(string tag) => tag.Split().ToDictionary(t => Regex.Match(t, @"[A-z]*(?=\+|-)").ToString(), t => float.Parse(Regex.Match(t, @"(?:\+|-).*").ToString()));
 
 	void InitBill(BillData currentBill) {
+		Debug.Log("Initializing bill number " + currentBillIndex);
 		currentBill.left.effects = ParseTag(currentBill.left.tags);
 		currentBill.right.effects = ParseTag(currentBill.right.tags);
 		left.SetBill(currentBill.left);
 		right.SetBill(currentBill.right);
 	}
 
-	void GetNextBill() {
-		if (currentBillIndex++ >= currentBillList.Count - 1) {
-			currentDifficulty = (BillDifficulty) (((int) currentDifficulty + 1) % 3);
-			currentBillIndex = 0;
+	public void GetNextBill() {
+		Debug.Log("getting next bill...");
+		if (currentBillIndex <= numberOfBills - 1)
+		{
+			currentBillIndex++;
+			Debug.Log("Current bill index: " + currentBillIndex);
+			// Go to the next pair of bills
+			BillData currentBill = currentBillList[currentBillIndex];
+			InitBill(currentBill);
+		} else 
+		{ 
+			// Go back to the overworld
 		}
 	}
 
