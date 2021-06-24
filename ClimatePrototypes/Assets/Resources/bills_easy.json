@@ -1,28 +1,44 @@
 [
   {
-    "name": "Reduce Reuse Recycle",
+    "name": "Moving Goods",
+    "tease": "People aren't the only ones moving around. Billions of tons of freight travels the planet every year. How can we lower emissions for goods?",
     "left": {
-      "title": "Taxes on Single-Use Plastics",
-      "body": "To discourage business from using single-use plastics in packaging, this proposal would impose taxes on companies that manufacture items that can only be used once. Companies argue that they would lose buisness and money as a result.",
-      "tags": "opinion+1 money-2 co2-3"
+      "title": "Ocean Shipping",
+      "body": "Most goods travel between continents on large ships. Should we improve the design and technology onboard to reduce ocean shipping emissions?",
+      "tags": "money-2 co2-2"
     },
     "right": {
-      "title": "Increase Funding for Single Stream Recycling Initiatives",
-      "body": "A new public survey suggests the largest barrier to recycling is convenience. This proposal would increase government support for public recyling services that does not include sorting of materials.",
-      "tags": "opinion+1 money-2 co2-1"
+      "title": "Electric Trains",
+      "body": "Trains move passengers, goods, and equipment over land, and most of them run on fossil fuels. Should we develop and expand electric trains to replace diesel trains?",
+      "tags": "money-1 co2-1 opinion+1"
     }
   },
   {
-    "name": "land",
+    "name": "Getting Around",
+    "tease": "We know we should use fewer cars- how should we help with personal travel?",
     "left": {
-      "title": "land bill left title",
-      "body": "land bill left body",
-      "tags": "land+1 co2-2"
+      "title": "Public Transit",
+      "body": "Busses, trains, and subway lines help people get around without relying on cars. They also help those who cannot drive or ride bikes. Should we increase these services?",
+      "tags": "money-2 co2-2 opinon-2"
     },
     "right": {
-      "title": "land bill right title",
-      "body": "land bill right body",
-      "tags": "money+10 opinion-1"
+      "title": "Bicycle Paths and Planning",
+      "body": "Bikes provide exercise and freedom for riders to choose their own routes. Should we add more bike paths and bike parking to increase bike safety and convenience?",
+      "tags": "money-1 co2-1 opinion+1"
+    }
+  },
+  {
+    "name": "Breezy",
+    "tease": "Windpower is a way to generate cleaner electricity. But where do we build the turbines?",
+    "left": {
+      "title": "Onshore Wind Power",
+      "body": "Building wind turbines on land is easier-the ground is already there, after all. But some people don't like the look of these structures or the space they take up.",
+      "tags": "money-1 co2-2 opinon-1"
+    },
+    "right": {
+      "title": "Offshore Wind Power",
+      "body": "Building in the water is trickier and more expensive. On the plus-side, offshore wind turbines don't use up land that others want to build on.",
+      "tags": "money-2 co2-1"
     }
   }
 ]
