@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class CityScript : RegionController { // TODO: maybe rename to CityController for consistency
 	public static CityScript Instance { get => instance as CityScript; } // static instance
 	public enum BillDifficulty { Easy, Med, Hard }
+	public Text billNumberText;
 
 	BillDifficulty currentDifficulty = BillDifficulty.Easy;
 	Dictionary<BillDifficulty, List<BillData>> bills = new Dictionary<BillDifficulty, List<BillData>>();
@@ -82,8 +83,11 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 		// Now check to see if go to another bill, or go back to overworld
 		if (currentBillIndex <= numberOfBills - 2)
 		{
-			billNumber = Random.Range(0, currentBillList.Count);
+			billNumber = Random.Range(0, 5); //update this to total number of bills
 			currentBillIndex++;
+			//Update the UI
+			int billOutputValue = currentBillIndex + 1; 
+			billNumberText.text = billOutputValue.ToString();
 			// Go to the next pair of bills
 			BillData currentBill = currentBillList[billNumber];
 			InitBill(currentBill);
