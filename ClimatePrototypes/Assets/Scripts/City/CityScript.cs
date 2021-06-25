@@ -21,7 +21,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	// Find a random pair of bills out of all of the ones in the list
 	int billNumber = 0;
 
-	BillData currentBill => currentBillList[billNumber];
+	BillData currentBill => currentBillList[2]; // TODO change this back to billNumber
 	int numberOfBills = 3; // Total number of bill choices to make
 	int currentBillIndex = 0;
 
@@ -31,6 +31,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	public GameObject returnPrompt;
 	public GameObject aboutPrompt;
 	public Text aboutText;
+	public GameObject[] arrows;
 
 	/// <summary> Namespace to hold bill data </summary>
 	public struct BillData {
@@ -57,7 +58,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 		bills = LoadBills();
 		currentDifficulty = BillDifficulty.Easy;
 		(left.speed, right.speed) = (speed, speed);
-		billNumber = Random.Range(0, 4);
+		billNumber = Random.Range(0, currentBillList.Count - 1);
 	}
 
 	protected override void Init() { // called from parent
@@ -84,8 +85,18 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	}
 
 	public void GetNextBill() {
-		// remove the previous item from the list 
-		currentBillList.RemoveAt(billNumber);
+		// clear the existing arrows 
+        arrows = GameObject.FindGameObjectsWithTag("Arrow");
+        Debug.Log(arrows.Length);
+        foreach (GameObject arrow in arrows)
+        {
+            Debug.Log("hiding arrows...");
+            arrow.SetActive(false);
+        }
+        // remove the previous item from the list 
+        currentBillList.RemoveAt(billNumber);
+		// hide all the arrows again 
+
 		// Now check to see if go to another bill, or go back to overworld
 		if (currentBillIndex <= numberOfBills - 2)
 		{

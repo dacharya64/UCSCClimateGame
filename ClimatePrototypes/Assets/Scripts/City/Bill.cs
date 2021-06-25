@@ -11,14 +11,17 @@ public class Bill : MonoBehaviour {
 	[HideInInspector] public float speed;
 	private GameObject arrow1;
 	private GameObject arrow2;
+	public GameObject[] arrows;
 
 	void Start() {
 		foreach (Transform child in iconWrapper.transform)
+		{
 			child.gameObject.SetActive(false);
+		}
 	}
 
 	public void SetBill(CityScript.BillData.BillHalf currentBill) {
-		Print(currentBill.title, currentBill.body);
+        Print(currentBill.title, currentBill.body);
 		ArrangeIcons(currentBill.effects);
 	}
 
@@ -29,7 +32,7 @@ public class Bill : MonoBehaviour {
 
 	/// <summary> Turn off icons that are not on bill </summary>
 	void ArrangeIcons(Dictionary<string, float> effects) {
-		List<RectTransform> showIcons = new List<RectTransform>();
+        List<RectTransform> showIcons = new List<RectTransform>();
 		foreach (Transform child in iconWrapper.transform) {
 			child.gameObject.SetActive(effects.ContainsKey(child.name));
 
@@ -48,22 +51,26 @@ public class Bill : MonoBehaviour {
 			{
 				string totalName = "";
 				float result = effects[child.name];
-				if (result > 0) // Change color to green 
+
+                
+                if (result > 0)
 				{
 					//child.GetComponent<Image>().color = new Color32(0, 255, 0, 100);
 					// find the up arrow and enable it 
 					totalName = child.name + "ArrowUp1";
 					arrow1 = child.transform.Find(totalName).gameObject;
 					arrow1.SetActive(true);
-					if (result > 1) {
+					if (result > 1)
+					{
 						totalName = child.name + "ArrowUp2";
 						arrow2 = child.transform.Find(totalName).gameObject;
 						arrow2.SetActive(true);
 					}
 
 				}
-				else if (result < 0) { // change color to red 
-									   //child.GetComponent<Image>().color = new Color32(255, 0, 0, 100);
+				else if (result < 0)
+				{
+					//child.GetComponent<Image>().color = new Color32(255, 0, 0, 100);
 					totalName = child.name + "ArrowDown1";
 					arrow1 = child.transform.Find(totalName).gameObject;
 					arrow1.SetActive(true);
