@@ -35,6 +35,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	/// <summary> Namespace to hold bill data </summary>
 	public struct BillData {
 		public string name;
+		public string tease;
 		public BillHalf left, right;
 
 		/// <summary> inner struct for each half to preserve namespace </summary>
@@ -44,8 +45,9 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 			public BillHalf(string title, string body, string tags) => (this.title, this.body, this.effects, this.tags) = (title, body, null, tags);
 		}
 
-		public BillData(string name, Dictionary<string, string> left = null, Dictionary<string, string> right = null) {
+		public BillData(string name, string tease,  Dictionary<string, string> left = null, Dictionary<string, string> right = null) {
 			this.name = name;
+			this.tease = tease;
 			this.left = new BillHalf(left["title"], left["body"], left["tags"]);
 			this.right = new BillHalf(right["title"], right["body"], right["tags"]);
 		}
@@ -74,6 +76,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 
 	void InitBill(BillData currentBill) {
 		mainTitle.text = currentBill.name.ToString();
+		aboutText.text = currentBill.tease.ToString();
 		currentBill.left.effects = ParseTag(currentBill.left.tags);
 		currentBill.right.effects = ParseTag(currentBill.right.tags);
 		left.SetBill(currentBill.left);
