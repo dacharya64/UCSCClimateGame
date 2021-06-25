@@ -29,6 +29,8 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	[SerializeField] Bill left = default, right = default;
 	[SerializeField, Range(0.01f, 0.1f)] float speed = .1f;
 	public GameObject returnPrompt;
+	public GameObject aboutPrompt;
+	public Text aboutText;
 
 	/// <summary> Namespace to hold bill data </summary>
 	public struct BillData {
@@ -102,4 +104,12 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	public void SetTransparent(GameObject ui) => UIController.SetUIAlpha(ui, .7f);
 	
 	public void SetOpaque(GameObject ui) => UIController.SetUIAlpha(ui, 1f);
+
+	public void OpenAbout() {
+		aboutPrompt.SetActive(true);
+	}
+
+	public void CloseAbout() {
+		aboutPrompt.SetActive(false);
+	}
 }
