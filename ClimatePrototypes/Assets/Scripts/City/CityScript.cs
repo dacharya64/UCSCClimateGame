@@ -53,7 +53,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 		bills = LoadBills();
 		currentDifficulty = BillDifficulty.Easy;
 		(left.speed, right.speed) = (speed, speed);
-		billNumber = Random.Range(0, 5);
+		billNumber = Random.Range(0, 4);
 	}
 
 	protected override void Init() { // called from parent
@@ -71,6 +71,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	static Dictionary<string, float> ParseTag(string tag) => tag.Split().ToDictionary(t => Regex.Match(t, @"[A-z]*(?=\+|-)").ToString(), t => float.Parse(Regex.Match(t, @"(?:\+|-).*").ToString()));
 
 	void InitBill(BillData currentBill) {
+		mainTitle.text = currentBill.name.ToString();
 		currentBill.left.effects = ParseTag(currentBill.left.tags);
 		currentBill.right.effects = ParseTag(currentBill.right.tags);
 		left.SetBill(currentBill.left);
@@ -83,7 +84,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 		// Now check to see if go to another bill, or go back to overworld
 		if (currentBillIndex <= numberOfBills - 2)
 		{
-			billNumber = Random.Range(0, 5); //update this to total number of bills
+			billNumber = Random.Range(0, currentBillList.Count - 1); // pulls bills from those left in the list 
 			currentBillIndex++;
 			//Update the UI
 			int billOutputValue = currentBillIndex + 1; 
