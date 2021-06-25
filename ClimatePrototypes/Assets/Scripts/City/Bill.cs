@@ -11,7 +11,6 @@ public class Bill : MonoBehaviour {
 	[HideInInspector] public float speed;
 	private GameObject arrow1;
 	private GameObject arrow2;
-	public GameObject[] arrows;
 
 	void Start() {
 		foreach (Transform child in iconWrapper.transform)

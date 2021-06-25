@@ -87,14 +87,16 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	public void GetNextBill() {
 		// clear the existing arrows 
         arrows = GameObject.FindGameObjectsWithTag("Arrow");
-        Debug.Log(arrows.Length);
         foreach (GameObject arrow in arrows)
         {
-            Debug.Log("hiding arrows...");
             arrow.SetActive(false);
         }
-        // remove the previous item from the list 
-        currentBillList.RemoveAt(billNumber);
+		// make both left and right opaque and hide "confirm" button 
+		SetOpaque(GameObject.Find("Left"));
+		SetOpaque(GameObject.Find("Right"));
+		GameObject.Find("Confirm Button").SetActive(false);
+		// remove the previous item from the list 
+		currentBillList.RemoveAt(billNumber);
 		// hide all the arrows again 
 
 		// Now check to see if go to another bill, or go back to overworld
