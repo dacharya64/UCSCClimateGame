@@ -18,9 +18,9 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 
 	//int totalBills = currentBillList.Count;
 	// Find a random pair of bills out of all of the ones in the list
-	
+	int billNumber = 0;
 
-	BillData currentBill => currentBillList[currentBillIndex];
+	BillData currentBill => currentBillList[billNumber];
 	int numberOfBills = 3; // Total number of bill choices to make
 	int currentBillIndex = 0;
 
@@ -52,7 +52,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 		bills = LoadBills();
 		currentDifficulty = BillDifficulty.Easy;
 		(left.speed, right.speed) = (speed, speed);
-		//int billNumber = Random.Range(0, 3);
+		billNumber = Random.Range(0, 5);
 	}
 
 	protected override void Init() { // called from parent
@@ -77,11 +77,15 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	}
 
 	public void GetNextBill() {
+		// remove the previous item from the list 
+		currentBillList.RemoveAt(billNumber);
+		// Now check to see if go to another bill, or go back to overworld
 		if (currentBillIndex <= numberOfBills - 2)
 		{
+			billNumber = Random.Range(0, currentBillList.Count);
 			currentBillIndex++;
 			// Go to the next pair of bills
-			BillData currentBill = currentBillList[currentBillIndex];
+			BillData currentBill = currentBillList[billNumber];
 			InitBill(currentBill);
 		} else 
 		{
