@@ -46,22 +46,33 @@ public class Bill : MonoBehaviour {
 			child.localPosition = new Vector2(size * ((i - num / 2) + (num % 2 == 1 ? 0 : .5f)), child.localPosition.y);
 			if (effects.ContainsKey(child.name))
 			{
+				string totalName = "";
 				float result = effects[child.name];
 				if (result > 0) // Change color to green 
 				{
-					child.GetComponent<Image>().color = new Color32(0, 255, 0, 100);
+					//child.GetComponent<Image>().color = new Color32(0, 255, 0, 100);
 					// find the up arrow and enable it 
-					Debug.Log("child.name is " + child.name);
-					string totalName = child.name + "ArrowUp1";
-					Debug.Log("total name is " + totalName);
-					//arrow1 = GameObject.Find(totalName);
+					totalName = child.name + "ArrowUp1";
 					arrow1 = child.transform.Find(totalName).gameObject;
-					Debug.Log(arrow1.name);
 					arrow1.SetActive(true);
+					if (result > 1) {
+						totalName = child.name + "ArrowUp2";
+						arrow2 = child.transform.Find(totalName).gameObject;
+						arrow2.SetActive(true);
+					}
 
 				}
 				else if (result < 0) { // change color to red 
-					child.GetComponent<Image>().color = new Color32(255, 0, 0, 100);
+									   //child.GetComponent<Image>().color = new Color32(255, 0, 0, 100);
+					totalName = child.name + "ArrowDown1";
+					arrow1 = child.transform.Find(totalName).gameObject;
+					arrow1.SetActive(true);
+					if (result < -1)
+					{
+						totalName = child.name + "ArrowDown2";
+						arrow2 = child.transform.Find(totalName).gameObject;
+						arrow2.SetActive(true);
+					}
 				}
 			}
 		}

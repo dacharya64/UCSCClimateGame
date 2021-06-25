@@ -19,7 +19,7 @@
     "left": {
       "title": "Public Transit",
       "body": "Busses, trains, and subway lines help people get around without relying on cars. They also help those who cannot drive or ride bikes. Should we increase these services?",
-      "tags": "money-2 emissions-2 opinon-2"
+      "tags": "money-2 emissions-2 opinion-2"
     },
     "right": {
       "title": "Bicycle Paths and Planning",
@@ -33,12 +33,40 @@
     "left": {
       "title": "Onshore Wind Power",
       "body": "Building wind turbines on land is easier-the ground is already there, after all. But some people don't like the look of these structures or the space they take up.",
-      "tags": "money-1 emissions-2 opinon-1"
+      "tags": "money-1 emissions-2 opinion-1"
     },
     "right": {
       "title": "Offshore Wind Power",
       "body": "Building in the water is trickier and more expensive. On the plus-side, offshore wind turbines don't use up land that others want to build on.",
       "tags": "money-2 emissions-1"
+    }
+  }, 
+  {
+    "name": "Building Power",
+    "tease": "Can the way we build structures help the climate?",
+    "left": {
+      "title": "Green Roofs",
+      "body": "By adding dirt and plant life to more roofs, we help keep buildings cooler. That in turn lowers the use of air conditioning.",
+      "tags": "money-1 emissions-1 opinion+1"
+    },
+    "right": {
+      "title": "Insulation Efficiency",
+      "body": "By improving existing buildings and requiring higher standards for new buildings, we can reduce the use of heating and cooling measures.",
+      "tags": "money-2 emissions-2"
+    }
+  }, 
+  {
+    "name": "Protecting the Land",
+    "tease": "Where should we focus to preserve and protect wild spaces?",
+    "left": {
+      "title": "The Wetlands",
+      "body": "Wetlands along the coast are home to many kinds of birds and fish, and also can absorb CO2 from the atmosphere if we protect them from building and development.",
+      "tags": ""
+    },
+    "right": {
+      "title": "Temperate Forests",
+      "body": "If we restore temperate forests that have previously been logged, those forests can help lower C02 in the atmosphere. Should we plant more trees and undertake measures to decrease deforestation?",
+      "tags": ""
     }
   }
 ]
