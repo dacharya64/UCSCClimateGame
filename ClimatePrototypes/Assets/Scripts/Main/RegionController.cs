@@ -55,8 +55,16 @@ public abstract class RegionController : MonoBehaviour {
 		}
 		else if (visits == 1) // give them the second tutorial for the region
 		{
-			Init();
-		}
+            if (intro[visited].Length == 0)
+                yield break;
+            SetPause(1);
+            introBlock = Instantiate(introPrefab);
+            var introText = introBlock.GetComponentInChildren<Text>();
+            var introButton = introBlock.GetComponentInChildren<Button>(true);
+            introButton?.onClick.AddListener(new UnityEngine.Events.UnityAction(() => SetPause(0)));
+            yield return StartCoroutine(UIController.ClickToAdvance(introText, intro[visited], introButton.gameObject));
+            Init();
+        }
 		else { // give them the region without the tutorial 
 			Init();
 		}
@@ -81,8 +89,7 @@ public abstract class RegionController : MonoBehaviour {
 	}
 
 	protected virtual void GameOver() {
-		if (timer == -2) // If in a region with a timer 
-		{
+		if (region != World.Region.City) {
 			timerText.text = "0";
 		}
 		UIController.Instance.SetPrompt(true);

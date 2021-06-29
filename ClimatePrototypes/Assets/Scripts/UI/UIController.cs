@@ -47,7 +47,10 @@ public class UIController : Singleton<UIController> {
 		GameManager.Transition(level);
 	}
 
-	public void SetPrompt(bool status) => returnPrompt.SetActive(status);
+	public void SetPrompt(bool status) {
+		returnPrompt.GetComponentInChildren<Text>().text = "You did it!";
+		returnPrompt.SetActive(status);
+	} 
 
 	static IEnumerator WaitForRealSeconds(float seconds) {
 		float startTime = Time.realtimeSinceStartup;
