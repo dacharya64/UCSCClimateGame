@@ -28,7 +28,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	[SerializeField] Text mainTitle = default;
 	[SerializeField] Bill left = default, right = default;
 	[SerializeField, Range(0.01f, 0.1f)] float speed = .1f;
-	public GameObject returnPrompt;
+	//public GameObject returnPrompt;
 	public GameObject aboutPrompt;
 	public Text aboutText;
 	public GameObject[] arrows;
@@ -113,7 +113,8 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 		} else 
 		{
 			// Show return prompt
-			returnPrompt.SetActive(true); 
+			base.GameOver();
+			//returnPrompt.SetActive(true); 
 		}
 	}
 
