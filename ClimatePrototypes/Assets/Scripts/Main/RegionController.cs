@@ -92,7 +92,18 @@ public abstract class RegionController : MonoBehaviour {
 		if (region != World.Region.City) {
 			timerText.text = "0";
 		}
-		UIController.Instance.SetPrompt(true);
+		// TODO: add custon text for all the regions to UIController
+		if (region == World.Region.City)
+		{
+			UIController.Instance.SetCityPrompt(true);
+		}
+		else if (region == World.Region.Arctic)
+		{
+			UIController.Instance.SetArcticPrompt(true);
+		}
+		else {
+			UIController.Instance.SetPrompt(true);
+		}
 		Pause();
 	}
 

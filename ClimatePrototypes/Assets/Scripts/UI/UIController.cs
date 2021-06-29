@@ -47,10 +47,22 @@ public class UIController : Singleton<UIController> {
 		GameManager.Transition(level);
 	}
 
-	public void SetPrompt(bool status) {
-		returnPrompt.GetComponentInChildren<Text>().text = "You did it!";
+	public void SetCityPrompt(bool status) {
+		returnPrompt.GetComponentInChildren<Text>().text = "You have selected all of the bills!";
 		returnPrompt.SetActive(status);
-	} 
+	}
+
+	public void SetArcticPrompt(bool status)
+	{
+		returnPrompt.GetComponentInChildren<Text>().text = "You have defended the Arctic for 60 seconds!";
+		returnPrompt.SetActive(status);
+	}
+
+	public void SetPrompt(bool status)
+	{
+		returnPrompt.GetComponentInChildren<Text>().text = "You have completed this region!";
+		returnPrompt.SetActive(status);
+	}
 
 	static IEnumerator WaitForRealSeconds(float seconds) {
 		float startTime = Time.realtimeSinceStartup;
