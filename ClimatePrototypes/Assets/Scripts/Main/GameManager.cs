@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager> {
 	[SerializeField] GameObject loadingScreen = default, quitPrompt = default;
 	[HideInInspector] public bool runningModel = false;
 	public bool runModel = true;
+	public List<int> billIndices = new List<int>();
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
