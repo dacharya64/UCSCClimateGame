@@ -63,7 +63,10 @@ public abstract class RegionController : MonoBehaviour {
 	}
 
 	protected virtual void GameOver() {
-		//timerText.text = "0"; //TODO uncomment this?
+		if (timer == -2)
+		{
+			timerText.text = "0";
+		}
 		UIController.Instance.SetPrompt(true);
 		Pause();
 	}
