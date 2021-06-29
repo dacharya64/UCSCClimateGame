@@ -18,6 +18,7 @@ public abstract class RegionController : MonoBehaviour {
 	[HideInInspector] public bool paused = false;
 	protected bool updated = false; // TODO: this variable currently does nothing
 	protected virtual void Init() { }
+	protected virtual void IntroInit() { }
 
 	public World.Region region;
 	protected static RegionController instance;
@@ -39,31 +40,48 @@ public abstract class RegionController : MonoBehaviour {
 	IEnumerator IntroRoutine(int visited, float time = .5f) {
 		yield return StartCoroutine(Camera.main.GetComponent<CameraFade>().FadeIn(time));
 		visits = visited;
-		if (intro[visited].Length == 0)
-			yield break;
-		SetPause(1);
-		introBlock = Instantiate(introPrefab); // could read different prefab from scriptable obj per visit // store func calls on scriptable obj?
-		var introText = introBlock.GetComponentInChildren<Text>();
-		var introButton = introBlock.GetComponentInChildren<Button>(true);
-		introButton?.onClick.AddListener(new UnityEngine.Events.UnityAction(() => SetPause(0)));
-		yield return StartCoroutine(UIController.ClickToAdvance(introText, intro[visited], introButton.gameObject));
-		Init();
+		// if this is the player's first time visiting the region, give them the first tutorial text 
+		if (visits == 0)
+		{
+			if (intro[visited].Length == 0)
+				yield break;
+			SetPause(1);
+			introBlock = Instantiate(introPrefab); // could read different prefab from scriptable obj per visit // store func calls on scriptable obj?
+			var introText = introBlock.GetComponentInChildren<Text>();
+			var introButton = introBlock.GetComponentInChildren<Button>(true);
+			introButton?.onClick.AddListener(new UnityEngine.Events.UnityAction(() => SetPause(0)));
+			yield return StartCoroutine(UIController.ClickToAdvance(introText, intro[visited], introButton.gameObject));
+			IntroInit(); // change this in other regions so it runs first time setup
+		}
+		else if (visits == 1) // give them the second tutorial for the region
+		{
+			Init();
+		}
+		else { // give them the region without the tutorial 
+			Init();
+		}
+		
 	}
 
 	protected virtual void Update() {
-		timer -= Time.deltaTime;
-		timerText.text = $"{Mathf.Max(0, Mathf.Floor(timer))}";
-		if (timer < -1) // if region does not have timer, like City
+		try {
+			timer -= Time.deltaTime;
+			timerText.text = $"{Mathf.Max(0, Mathf.Floor(timer))}";
+			if (timer <= 0)
+			{
+				timer = -2; // -2 is finished state
+				GameOver();
+				StartModel();
+			}
+		} catch {
+			// if in the city
 			return;
-		if (timer <= 0) {
-			timer = -2; // -2 is finished state
-			GameOver();
-			StartModel();
 		}
+		
 	}
 
 	protected virtual void GameOver() {
-		if (timer == -2)
+		if (timer == -2) // If in a region with a timer 
 		{
 			timerText.text = "0";
 		}

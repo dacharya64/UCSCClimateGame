@@ -2916,6 +2916,8 @@ MonoBehaviour:
   backgrounds:
   - {fileID: 2114293290}
   billNumberText: {fileID: 234952521}
+  totalBillNumberText: {fileID: 483352925}
+  counter: {fileID: 1662627967}
   mainTitle: {fileID: 1189416000}
   left: {fileID: 603820105}
   right: {fileID: 419475881}
@@ -5592,7 +5594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1662627968
 RectTransform:
   m_ObjectHideFlags: 0

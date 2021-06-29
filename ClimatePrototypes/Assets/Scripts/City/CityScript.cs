@@ -12,6 +12,9 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	public static CityScript Instance { get => instance as CityScript; } // static instance
 	public enum BillDifficulty { Easy, Med, Hard }
 	public Text billNumberText;
+	public Text totalBillNumberText;
+	public GameObject counter; 
+	private bool firstVisit;
 
 	BillDifficulty currentDifficulty = BillDifficulty.Easy;
 	Dictionary<BillDifficulty, List<BillData>> bills = new Dictionary<BillDifficulty, List<BillData>>();
@@ -61,10 +64,19 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	}
 
 	protected override void Init() { // called from parent
-		introBlock.GetComponentInChildren<Button>(true)?.onClick.AddListener(new UnityEngine.Events.UnityAction(() => {
-			mainTitle.transform.root.gameObject.SetActive(true);
-			InitBill(currentBill);
-		}));
+		firstVisit = false;
+		counter.SetActive(true);
+		mainTitle.transform.root.gameObject.SetActive(true);
+		InitBill(currentBill);
+	}
+
+	protected override void IntroInit()
+	{ // called from parent
+		firstVisit = true;
+		totalBillNumberText.text = "/1";
+		counter.SetActive(true);
+		mainTitle.transform.root.gameObject.SetActive(true);
+		InitBill(currentBill);
 	}
 
 	public static Dictionary<BillDifficulty, List<BillData>> LoadBills() =>
@@ -98,8 +110,8 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 		currentBillList.RemoveAt(billNumber);
 		// hide all the arrows again 
 
-		// Now check to see if go to another bill, or go back to overworld
-		if (currentBillIndex <= numberOfBills - 2)
+		// Now check to see if go to another bill, or go back to overworld -- true if counter at certain amount and not first visit 
+		if (currentBillIndex <= numberOfBills - 2 && !firstVisit)
 		{
 			billNumber = Random.Range(0, currentBillList.Count - 1); // pulls bills from those left in the list 
 			currentBillIndex++;
@@ -112,8 +124,7 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 		} else 
 		{
 			// Show return prompt
-			base.GameOver();
-			//returnPrompt.SetActive(true); 
+			base.GameOver(); 
 		}
 	}
 
