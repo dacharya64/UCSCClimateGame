@@ -17,11 +17,10 @@ public class CityScript : RegionController { // TODO: maybe rename to CityContro
 	Dictionary<BillDifficulty, List<BillData>> bills = new Dictionary<BillDifficulty, List<BillData>>();
 	List<BillData> currentBillList => bills[currentDifficulty];
 
-	//int totalBills = currentBillList.Count;
 	// Find a random pair of bills out of all of the ones in the list
 	int billNumber = 0;
 
-	BillData currentBill => currentBillList[2]; // TODO change this back to billNumber
+	BillData currentBill => currentBillList[billNumber]; // TODO change this back to billNumber
 	int numberOfBills = 3; // Total number of bill choices to make
 	int currentBillIndex = 0;
 
