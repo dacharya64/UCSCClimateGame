@@ -35,6 +35,7 @@ public class AudioManager : Singleton<AudioManager> { // TODO: ease transitions 
 	}
 
 	public void Play(string sound) => Play(GetSound(sound));
+
 	public void Play(Sound sound) {
 		AudioSource channel = GetChannel(sound.type);
 		sound.source = channel;
@@ -57,6 +58,25 @@ public class AudioManager : Singleton<AudioManager> { // TODO: ease transitions 
 		}
 	}
 
+	public void UpdateMusicVolume(float vol) {
+		Debug.Log("Adjusting music volume");
+		musicSource.volume = vol;
+	}
+
 	public static Sound GetSound(string name) => Instance.sounds.Find(s => s.name == name);
 	public void PlaySound(AudioClip clip) => Play(GetSound(clip.name));
+
+	/*public GameObject masterVolume;
+
+	private float aSliderValue = 1;*/
+
+/*	void Update()
+
+	{
+
+		aSliderValue = masterVolume.audio.volume;
+
+		AudioListener.volume = aSliderValue;
+
+	}*/
 }
