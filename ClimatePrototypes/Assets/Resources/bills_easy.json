@@ -5,12 +5,12 @@
     "left": {
       "title": "Ocean Shipping",
       "body": "Most goods travel between continents on large ships. Should we improve the design and technology onboard to reduce ocean shipping emissions?",
-      "tags": "money-2 emissions-2"
+      "tags": "money-10 emissions-10"
     },
     "right": {
       "title": "Electric Trains",
       "body": "Trains move passengers, goods, and equipment over land, and most of them run on fossil fuels. Should we develop and expand electric trains to replace diesel trains?",
-      "tags": "money-1 emissions-1 opinion+1"
+      "tags": "money-5 emissions-5 opinion+5"
     }
   },
   {
@@ -19,12 +19,12 @@
     "left": {
       "title": "Public Transit",
       "body": "Busses, trains, and subway lines help people get around without relying on cars. They also help those who cannot drive or ride bikes. Should we increase these services?",
-      "tags": "money-2 emissions-2 opinion-2"
+      "tags": "money-10 emissions-10 opinion-10"
     },
     "right": {
       "title": "Bicycle Paths and Planning",
       "body": "Bikes provide exercise and freedom for riders to choose their own routes. Should we add more bike paths and bike parking to increase bike safety and convenience?",
-      "tags": "money-1 emissions-1 opinion+1"
+      "tags": "money-5 emissions-5 opinion+5"
     }
   },
   {
@@ -33,12 +33,12 @@
     "left": {
       "title": "Onshore Wind Power",
       "body": "Building wind turbines on land is easier-the ground is already there, after all. But some people don't like the look of these structures or the space they take up.",
-      "tags": "money-1 emissions-2 opinion-1"
+      "tags": "money-5 emissions-10 opinion-5"
     },
     "right": {
       "title": "Offshore Wind Power",
       "body": "Building in the water is trickier and more expensive. On the plus-side, offshore wind turbines don't use up land that others want to build on.",
-      "tags": "money-2 emissions-1"
+      "tags": "money-10 emissions-5"
     }
   }, 
   {
@@ -47,12 +47,12 @@
     "left": {
       "title": "Green Roofs",
       "body": "By adding dirt and plant life to more roofs, we help keep buildings cooler. That in turn lowers the use of air conditioning.",
-      "tags": "money-1 emissions-1 opinion+1"
+      "tags": "money-5 emissions-5 opinion+5"
     },
     "right": {
       "title": "Insulation Efficiency",
       "body": "By improving existing buildings and requiring higher standards for new buildings, we can reduce the use of heating and cooling measures.",
-      "tags": "money-2 emissions-2"
+      "tags": "money-10 emissions-10"
     }
   }, 
   {
@@ -65,7 +65,7 @@
     },
     "right": {
       "title": "Temperate Forests",
-      "body": "If we restore temperate forests that have previously been logged, those forests can help lower C02 in the atmosphere. Should we plant more trees and undertake measures to decrease deforestation?",
+      "body": "If we restore temperate forests that have previously been logged, those forests can help lower CO2 in the atmosphere. Should we plant more trees and undertake measures to decrease deforestation?",
       "tags": "emissions+0"
     }
   },
@@ -75,12 +75,12 @@
     "left": {
       "title": "Silvopasture",
       "body": "Silvopasture is a farming technique where animals graze in wooded areas or orchards instead of open pasture. This allows the land to capture more CO2, and it also gives farmers two incomes--in trees or produce and in animals.",
-      "tags": "money-2 emissions-1"
+      "tags": "money-10 emissions-5"
     },
     "right": {
       "title": "Plant-based diet",
       "body": "Raising animals for meat and dairy is a large source of emissions on this planet. Should we reduce subsidies in these industries, and increase subsidies to support plant-based food production?",
-      "tags": "money-1 emissions-2 opinion-1"
+      "tags": "money-5 emissions-10 opinion-5"
     }
   },
   {

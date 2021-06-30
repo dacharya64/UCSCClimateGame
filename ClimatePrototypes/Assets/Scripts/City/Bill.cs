@@ -59,7 +59,7 @@ public class Bill : MonoBehaviour {
 					totalName = child.name + "ArrowUp1";
 					arrow1 = child.transform.Find(totalName).gameObject;
 					arrow1.SetActive(true);
-					if (result > 1)
+					if (result > 5)
 					{
 						totalName = child.name + "ArrowUp2";
 						arrow2 = child.transform.Find(totalName).gameObject;
@@ -72,7 +72,7 @@ public class Bill : MonoBehaviour {
 					totalName = child.name + "ArrowDown1";
 					arrow1 = child.transform.Find(totalName).gameObject;
 					arrow1.SetActive(true);
-					if (result < -1)
+					if (result < -5)
 					{
 						totalName = child.name + "ArrowDown2";
 						arrow2 = child.transform.Find(totalName).gameObject;

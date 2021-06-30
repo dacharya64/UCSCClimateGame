@@ -70,7 +70,6 @@ public class CityScript : RegionController
             // remove from the current bill list all of the indices that have been used 
             for (int i = 0; i < GameManager.Instance.billIndices.Count; i++)
             {
-                Debug.Log(GameManager.Instance.billIndices[i]);
                 usedBills.Add(GameManager.Instance.billIndices[i]);
                 currentBillList.RemoveAt(GameManager.Instance.billIndices[i]);
             }
@@ -155,7 +154,72 @@ public class CityScript : RegionController
         }
 
         void EnactBillEffects() {
-            Debug.Log("Selected bill is: " + selectedBillHalf);
+            if (selectedBillHalf == "left")
+            {
+                Dictionary<string, float> billEffects = ParseTag(currentBill.left.tags);
+                foreach (KeyValuePair<string, float> effect in billEffects)
+                {
+                    if (effect.Key == "emissions") { 
+                        // Implement changes to emissions
+                    }
+                    if (effect.Key == "money") {
+                        if (World.money + effect.Value < 100)
+                        {
+                            World.money = World.money + effect.Value;
+                        }
+                        else {
+                            World.money = 100f;
+                        }
+                    }
+                    if (effect.Key == "opinion") {
+                        if (World.publicOpinion + effect.Value < 100)
+                        {
+                            World.publicOpinion = World.publicOpinion + effect.Value;
+                        }
+                        else {
+                            World.publicOpinion = 100f;
+                        }
+                    }
+
+                }
+            }
+            else if (selectedBillHalf == "right")
+            {
+                Dictionary<string, float> billEffects = ParseTag(currentBill.right.tags);
+                foreach (KeyValuePair<string, float> effect in billEffects)
+                {
+                    if (effect.Key == "emissions")
+                    {
+                        // Implement changes to emissions
+                    }
+                    if (effect.Key == "money")
+                    {
+                        if (World.money + effect.Value < 100)
+                        {
+                            World.money = World.money + effect.Value;
+                        }
+                        else
+                        {
+                            World.money = 100f;
+                        }
+                    }
+                    if (effect.Key == "opinion")
+                    {
+                        if (World.publicOpinion + effect.Value < 100)
+                        {
+                            World.publicOpinion = World.publicOpinion + effect.Value;
+                        }
+                        else
+                        {
+                            World.publicOpinion = 100f;
+                        }
+                    }
+
+                }
+            }
+            else {
+                Debug.Log("ERROR: no bill half selected");
+            }
         }
     }
 
@@ -179,7 +243,6 @@ public class CityScript : RegionController
 
     public void SetSelectedBillHalf(string clickedBillHalf) {
         selectedBillHalf = clickedBillHalf;
-        //Debug.Log("selected " + selectedBillHalf);
     }
 }
 
