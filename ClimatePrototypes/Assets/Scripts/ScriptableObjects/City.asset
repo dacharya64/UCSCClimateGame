@@ -16,4 +16,8 @@ MonoBehaviour:
   - Hello, this is the City!
   - Please choose from one of two bills.
   - Your actions here will affect the greater world.
-  prefab: {fileID: 0}
+  secondVisit:
+  - 'Welcome back to the City! '
+  - From now on, you will be selecting three different pairs of bills.
+  - Your actions here will continue to affect the greater world.
+  thirdVisit: []

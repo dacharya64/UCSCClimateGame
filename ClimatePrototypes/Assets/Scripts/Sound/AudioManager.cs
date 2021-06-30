@@ -28,6 +28,12 @@ public class AudioManager : Singleton<AudioManager> { // TODO: ease transitions 
 
 	public void StopMusic() => musicSource.Stop();
 
+	public void StopSFX() {
+		sfxSource1.Stop();
+		sfxSource2.Stop();
+		sfxSource3.Stop();
+	}
+
 	public void Play(string sound) => Play(GetSound(sound));
 	public void Play(Sound sound) {
 		AudioSource channel = GetChannel(sound.type);

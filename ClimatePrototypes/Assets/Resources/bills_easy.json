@@ -1,28 +1,212 @@
 [
   {
-    "name": "Reduce Reuse Recycle",
+    "name": "Moving Goods",
+    "tease": "People aren't the only ones moving around. Billions of tons of freight travels the planet every year. How can we lower emissions for goods?",
     "left": {
-      "title": "Taxes on Single-Use Plastics",
-      "body": "To discourage business from using single-use plastics in packaging, this proposal would impose taxes on companies that manufacture items that can only be used once. Companies argue that they would lose buisness and money as a result.",
-      "tags": "opinion+1 money-2 co2-3"
+      "title": "Ocean Shipping",
+      "body": "Most goods travel between continents on large ships. Should we improve the design and technology onboard to reduce ocean shipping emissions?",
+      "tags": "money-10 emissions-10"
     },
     "right": {
-      "title": "Increase Funding for Single Stream Recycling Initiatives",
-      "body": "A new public survey suggests the largest barrier to recycling is convenience. This proposal would increase government support for public recyling services that does not include sorting of materials.",
-      "tags": "opinion+1 money-2 co2-1"
+      "title": "Electric Trains",
+      "body": "Trains move passengers, goods, and equipment over land, and most of them run on fossil fuels. Should we develop and expand electric trains to replace diesel trains?",
+      "tags": "money-5 emissions-5 opinion+5"
     }
   },
   {
-    "name": "land",
+    "name": "Getting Around",
+    "tease": "We know we should use fewer cars--how should we help with personal travel?",
     "left": {
-      "title": "land bill left title",
-      "body": "land bill left body",
-      "tags": "land+1 co2-2"
+      "title": "Public Transit",
+      "body": "Busses, trains, and subway lines help people get around without relying on cars. They also help those who cannot drive or ride bikes. Should we increase these services?",
+      "tags": "money-10 emissions-10 opinion-10"
     },
     "right": {
-      "title": "land bill right title",
-      "body": "land bill right body",
-      "tags": "money+10 opinion-1"
+      "title": "Bicycle Paths and Planning",
+      "body": "Bikes provide exercise and freedom for riders to choose their own routes. Should we add more bike paths and bike parking to increase bike safety and convenience?",
+      "tags": "money-5 emissions-5 opinion+5"
+    }
+  },
+  {
+    "name": "Breezy",
+    "tease": "Windpower is a way to generate cleaner electricity. But where do we build the turbines?",
+    "left": {
+      "title": "Onshore Wind Power",
+      "body": "Building wind turbines on land is easier-the ground is already there, after all. But some people don't like the look of these structures or the space they take up.",
+      "tags": "money-5 emissions-10 opinion-5"
+    },
+    "right": {
+      "title": "Offshore Wind Power",
+      "body": "Building in the water is trickier and more expensive. On the plus-side, offshore wind turbines don't use up land that others want to build on.",
+      "tags": "money-10 emissions-5"
+    }
+  }, 
+  {
+    "name": "Building Power",
+    "tease": "Can the way we build structures help the climate?",
+    "left": {
+      "title": "Green Roofs",
+      "body": "By adding dirt and plant life to more roofs, we help keep buildings cooler. That in turn lowers the use of air conditioning.",
+      "tags": "money-5 emissions-5 opinion+5"
+    },
+    "right": {
+      "title": "Insulation Efficiency",
+      "body": "By improving existing buildings and requiring higher standards for new buildings, we can reduce the use of heating and cooling measures.",
+      "tags": "money-10 emissions-10"
+    }
+  }, 
+  {
+    "name": "Protecting the Land",
+    "tease": "Where should we focus to preserve and protect wild spaces?",
+    "left": {
+      "title": "The Wetlands",
+      "body": "Wetlands along the coast are home to many kinds of birds and fish, and also can absorb CO2 from the atmosphere if we protect them from building and development.",
+      "tags": "emissions+0"
+    },
+    "right": {
+      "title": "Temperate Forests",
+      "body": "If we restore temperate forests that have previously been logged, those forests can help lower CO2 in the atmosphere. Should we plant more trees and undertake measures to decrease deforestation?",
+      "tags": "emissions+0"
+    }
+  },
+  {
+    "name": "Food on the Table",
+    "tease": "What changes can we make to food that will help the climate?",
+    "left": {
+      "title": "Silvopasture",
+      "body": "Silvopasture is a farming technique where animals graze in wooded areas or orchards instead of open pasture. This allows the land to capture more CO2, and it also gives farmers two incomes--in trees or produce and in animals.",
+      "tags": "money-10 emissions-5"
+    },
+    "right": {
+      "title": "Plant-based diet",
+      "body": "Raising animals for meat and dairy is a large source of emissions on this planet. Should we reduce subsidies in these industries, and increase subsidies to support plant-based food production?",
+      "tags": "money-5 emissions-10 opinion-5"
+    }
+  },
+  {
+    "name": "Reduce, Reuse, Recycle",
+    "tease": "How can we manage the impacts individuals have on the climate?",
+    "left": {
+      "title": "Bioplastics",
+      "body": "Bioplastics are made from plant and animal materials, instead of fossil fuels. Should we develop more alternative plastics for packaging, utensils, and electronics?",
+      "tags": "emissions+0"
+    },
+    "right": {
+      "title": "Recycling",
+      "body": "Half of household waste is recyclable. To encourage more recycling, should we increase landfill and manufacturing fees?",
+      "tags": "emissions+0"
+    }
+  },
+  {
+    "name": "Farming",
+    "tease": "Growing food takes skill, land, and resources. How can we change the way we farm?",
+    "left": {
+      "title": "Irrigation Measures",
+      "body": "Getting water to farmland takes a lot of energy. Should we increase infrastructure to drip and sprinkler systems to lower the emissions relating to moving water?",
+      "tags": "emissions+0"
+    },
+    "right": {
+      "title": "Improved Grazing",
+      "body": "Grassland can serve as a land sink, storing carbon from the atmosphere. Should we reduce the density of cattle grazing and better rotate grazing lands?",
+      "tags": "emissions+0"
+    }
+  },
+  {
+    "name": "Industry Measures",
+    "tease": "Large industry impacts our climate in a number of ways. How might we address these impacts?",
+    "left": {
+      "title": "Carbon Tax",
+      "body": "Carbon taxes effect companies based on their level of emissions. Companies that emit more are taxed at a higher level than companies that emit less. Should we try a Carbon tax policy to incentivise greener business?",
+      "tags": "emissions+0"
+    },
+    "right": {
+      "title": "Refrigerant Sanctions",
+      "body": "The chemicals we use in chilling (refrigeration, air conditioners and industrial cooling) cause a lot greenhouse gasses. Should we fine companies who do not dispose of them properly?",
+      "tags": "emissions+0"
+    }
+  },
+  {
+    "name": "Questions about power",
+    "tease": "Alternative energy sources might help us reduce emissions. Which should we develop further?",
+    "left": {
+      "title": "Solar Thermal Electricity",
+      "body": "This technology uses reflected sunlight to generate heat, and then to turn that heat into electricity. It is easier to store heat than some other forms of alerternative energy.",
+      "tags": "emissions+0"
+    },
+    "right": {
+      "title": "Geothermal Power",
+      "body": "There's a lot of heat if you dig deep enough. Geothermal power is generated by drawing very hot water from deep under the planet. This heat is inexhaustable, but only part of the planet is suitable for this kind of digging.",
+      "tags": "emissions+0"
+    }
+  },
+  {
+    "name": "Check out those wheels",
+    "tease": "We use cars and large trucks for moving goods and people. Which improvement to automobiles will help our planet the most?",
+    "left": {
+      "title": "Improving Large Trucks",
+      "body": "This initiative would set design standards for big trucks to have better, more efficient engines and lighter weights.",
+      "tags": "emissions+0"
+    },
+    "right": {
+      "title": "Electric Vehicles",
+      "body": "By increasing the number of electric cars on the road, we could substantially decrease emissions created by combustion-based engines.",
+      "tags": "emissions+0"
+    }
+  },
+  {
+    "name": "See the Forest for the Trees",
+    "tease": "More trees will help reduce emissions in out atmosphere. Where should we plant them?",
+    "left": {
+      "title": "Tropical Forest Re-Growth",
+      "body": "This initiative would restore land that was once tropical forest. That would mean working with our communities to turn some farmland back into preserved forest land in order for the forest to help capture emissions from the atmosphere.",
+      "tags": "emissions+0"
+    },
+    "right": {
+      "title": "New Forest Growth",
+      "body": "This initiative would find land to plant large forests where there have not been forests before. These tree farms wouldn't be for timber--they would be for capturing CO2 from the atmosphere.",
+      "tags": "emissions+0"
+    }
+  },
+  {
+    "name": "Improving our Cities",
+    "tease": "Sometimes small changes over a large area can make a big impact. How should we change our cities to lower emissions?",
+    "left": {
+      "title": "Replace Incandescent Bulbs with LEDs",
+      "body": "If we replaced our household and industrial lighting with LEDs, we would be using substantially less power to see at night.",
+      "tags": "emissions+0"
+    },
+    "right": {
+      "title": "Improved Walkability",
+      "body": "This initiative for would work to make our cities denser, with better sidewalks and lighting to encourage more walking and less driving.",
+      "tags": "emissions+0"
+    }
+  },
+  {
+    "name": "Getting Around Some More",
+    "tease": "We want to make more changes to the way we travel on a day-to-day basis. Which method should we try?",
+    "left": {
+      "title": "Increase Carpooling Benefits",
+      "body": "This initiative would use a mix of incentives and new technology to make carpooling easier, safer, and more convenient.",
+      "tags": "emissions+0"
+    },
+    "right": {
+      "title": "High Speed Rail",
+      "body": "This iniative would build more infrastructure for high-speed rail, which hopefully replaces travel that would normally be done by ship, car, or plane.",
+      "tags": "emissions+0"
+    }
+  },
+  {
+    "name": "More Food on the Table",
+    "tease": "What more can we do to limit emissions caused by the food we eat?",
+    "left": {
+      "title": "Reduce nitrogen fertilizers",
+      "body": "This initiative would limit and regulate  the amount of nitrogen fertilizers than farmers can use to reduce the release of nitrous oxide into our atmosphere.",
+      "tags": "emissions+0"
+    },
+    "right": {
+      "title": "New Composting Initiative",
+      "body": "This project would make the composting of biodegradable waste mandatory, reducing the emissions produced by food waste and redirecting its use towards growing more food.",
+      "tags": "emissions+0"
     }
   }
 ]
