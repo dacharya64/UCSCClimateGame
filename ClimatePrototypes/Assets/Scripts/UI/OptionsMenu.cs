@@ -4,20 +4,11 @@ using UnityEngine;
 
 public class OptionsMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
    public void adjustMusicVolume(float volume) {
-        Debug.Log("Running function adjustMusicVolume");
         AudioManager.Instance.UpdateMusicVolume(volume);
+    }
+
+    public void adjustSFXVolume(float volume) {
+        AudioManager.Instance.UpdateSFXVolume(volume);
     }
 }
