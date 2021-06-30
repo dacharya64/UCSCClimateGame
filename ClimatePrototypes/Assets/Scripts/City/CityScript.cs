@@ -25,6 +25,7 @@ public class CityScript : RegionController
     BillData currentBill => currentBillList[billNumber];
     int numberOfBills = 3; // Total number of bill choices to make
     int currentBillIndex = 0;
+    
 
     [SerializeField] Text mainTitle = default;
     [SerializeField] Bill left = default, right = default;
@@ -33,6 +34,7 @@ public class CityScript : RegionController
     public Text aboutText;
     public GameObject[] arrows;
     public List<int> usedBills = new List<int>();
+    public string selectedBillHalf;
 
     /// <summary> Namespace to hold bill data </summary>
     public struct BillData
@@ -112,6 +114,9 @@ public class CityScript : RegionController
 
     public void GetNextBill()
     {
+        //first, do the effects of the chosen bill
+        EnactBillEffects();
+
         // clear the existing arrows 
         arrows = GameObject.FindGameObjectsWithTag("Arrow");
         foreach (GameObject arrow in arrows)
@@ -121,6 +126,7 @@ public class CityScript : RegionController
         // make both left and right opaque and hide "confirm" button 
         SetOpaque(GameObject.Find("Left"));
         SetOpaque(GameObject.Find("Right"));
+        selectedBillHalf = "none";
         GameObject.Find("Confirm Button").SetActive(false);
         // remove the previous item from the list 
         usedBills.Add(billNumber);
@@ -147,6 +153,10 @@ public class CityScript : RegionController
             base.GameOver();
 
         }
+
+        void EnactBillEffects() {
+            Debug.Log("Selected bill is: " + selectedBillHalf);
+        }
     }
 
     public void SetTransparent(GameObject ui) => UIController.SetUIAlpha(ui, .7f);
@@ -164,9 +174,12 @@ public class CityScript : RegionController
     }
 
     public void PlayScribbleSound() {
-        // play scribble sound 
-        Debug.Log("Playing scribble SFX");
         AudioManager.Instance.Play("SFX_Scribble");
+    }
+
+    public void SetSelectedBillHalf(string clickedBillHalf) {
+        selectedBillHalf = clickedBillHalf;
+        //Debug.Log("selected " + selectedBillHalf);
     }
 }
 

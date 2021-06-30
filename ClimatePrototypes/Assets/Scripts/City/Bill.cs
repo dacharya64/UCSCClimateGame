@@ -55,7 +55,6 @@ public class Bill : MonoBehaviour {
                 
                 if (result > 0)
 				{
-					//child.GetComponent<Image>().color = new Color32(0, 255, 0, 100);
 					// find the up arrow and enable it 
 					totalName = child.name + "ArrowUp1";
 					arrow1 = child.transform.Find(totalName).gameObject;
@@ -70,7 +69,6 @@ public class Bill : MonoBehaviour {
 				}
 				else if (result < 0)
 				{
-					//child.GetComponent<Image>().color = new Color32(255, 0, 0, 100);
 					totalName = child.name + "ArrowDown1";
 					arrow1 = child.transform.Find(totalName).gameObject;
 					arrow1.SetActive(true);
