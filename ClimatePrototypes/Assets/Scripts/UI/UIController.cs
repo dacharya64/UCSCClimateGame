@@ -111,8 +111,12 @@ public class UIController : Singleton<UIController> {
 		for (int i = 0; i < text.Length; i++)
 		{
 			print.text += text[i];
-			if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) {
 				print.text = text.Substring(0, (i = text.Length));
+				AudioManager.Instance.StopSFX();
+			}
+				
+
 			yield return WaitForRealSeconds(delay);
 		}
 	}

@@ -25,6 +25,7 @@ public class Bill : MonoBehaviour {
 	}
 
 	void Print(string titleText, string bodyText) {
+		AudioManager.Instance.Play("SAMPLE_Typing");
 		StartCoroutine(UIController.TypewriterClickToAdvance(title, titleText, speed));
 		StartCoroutine(UIController.TypewriterClickToAdvance(body, bodyText, speed));
 	}

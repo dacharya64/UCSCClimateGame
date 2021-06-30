@@ -162,4 +162,11 @@ public class CityScript : RegionController
     {
         aboutPrompt.SetActive(false);
     }
+
+    public void PlayScribbleSound() {
+        // play scribble sound 
+        Debug.Log("Playing scribble SFX");
+        AudioManager.Instance.Play("SFX_Scribble");
+    }
 }
+
