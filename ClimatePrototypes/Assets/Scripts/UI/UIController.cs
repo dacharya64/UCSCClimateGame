@@ -93,8 +93,26 @@ public class UIController : Singleton<UIController> {
 		print.text = "";
 		for (int i = 0; i < text.Length; i++) {
 			print.text += text[i];
-			// if (Input.GetMouseButtonDown(0))
-			// print.text = text.Substring(0, (i = text.Length - 2));
+			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+			//	print.text = text.Substring(0, (i = text.Length));
+            yield return WaitForRealSeconds(delay);
+		}
+
+	}
+
+	public static IEnumerator TypewriterClickToAdvance(Text print, string text, float delay = .05f)
+	{ //given text to print, text ref, and print speed, does typewriter effect
+		if (print.text == "Title")
+		{
+			print.text = text;
+			print.transform.position += print.preferredWidth / 2 * Vector3.right;
+		}
+		print.text = "";
+		for (int i = 0; i < text.Length; i++)
+		{
+			print.text += text[i];
+			if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+				print.text = text.Substring(0, (i = text.Length));
 			yield return WaitForRealSeconds(delay);
 		}
 	}

@@ -25,8 +25,8 @@ public class Bill : MonoBehaviour {
 	}
 
 	void Print(string titleText, string bodyText) {
-		StartCoroutine(UIController.Typewriter(title, titleText, speed));
-		StartCoroutine(UIController.Typewriter(body, bodyText, speed));
+		StartCoroutine(UIController.TypewriterClickToAdvance(title, titleText, speed));
+		StartCoroutine(UIController.TypewriterClickToAdvance(body, bodyText, speed));
 	}
 
 	/// <summary> Turn off icons that are not on bill </summary>

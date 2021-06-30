@@ -66,7 +66,6 @@ public class CityScript : RegionController
         if (!firstVisit)
         {
             // remove from the current bill list all of the indices that have been used 
-            Debug.Log("Used incices are: ");
             for (int i = 0; i < GameManager.Instance.billIndices.Count; i++)
             {
                 Debug.Log(GameManager.Instance.billIndices[i]);
@@ -74,7 +73,6 @@ public class CityScript : RegionController
                 currentBillList.RemoveAt(GameManager.Instance.billIndices[i]);
             }
         }
-        Debug.Log("Number of bills left: " + currentBillList.Count);
         billNumber = Random.Range(0, currentBillList.Count);
     }
 
