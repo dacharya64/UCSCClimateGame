@@ -84,4 +84,11 @@ public class TitleScreen : MonoBehaviour {
 		yield return StartCoroutine(overworldController.EnterWorld());
 		SceneManager.UnloadSceneAsync(gameObject.scene);
 	}
+
+	public void OpenSettings() {
+		//AudioManager.Instance.
+		GameManager.Instance.OpenSettings(0);
+		//GameObject.Find("OptionsPrompt").SetActive(true);
+		//navBar.UIController.UIOpenSettings(0);
+	}
 }

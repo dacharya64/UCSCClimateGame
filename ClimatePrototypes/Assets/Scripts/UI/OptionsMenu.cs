@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour { 
-    public float previousMusicVolume;
-    public float previousSFXVolume;
     public Slider sfxSlider;
     public Slider musicSlider;
 
@@ -22,15 +20,10 @@ public class OptionsMenu : MonoBehaviour {
         AudioManager.Instance.UpdateSFXVolume(0.5f);
     }
 
-    public void savePreviousVolumes() {
-        previousMusicVolume = AudioManager.Instance.totalMusicVolume;
-        previousSFXVolume = AudioManager.Instance.totalSFXVolume;
-    }
-
     public void resetToPreviousVolumes() {
-        musicSlider.value = previousMusicVolume;
-        sfxSlider.value = previousSFXVolume;
-        AudioManager.Instance.UpdateMusicVolume(previousMusicVolume);
-        AudioManager.Instance.UpdateSFXVolume(previousSFXVolume);
+        musicSlider.value = GameManager.Instance.previousMusicVolume;
+        sfxSlider.value = GameManager.Instance.previousSFXVolume;
+        AudioManager.Instance.UpdateMusicVolume(GameManager.Instance.previousMusicVolume);
+        AudioManager.Instance.UpdateSFXVolume(GameManager.Instance.previousSFXVolume);
     }
 }

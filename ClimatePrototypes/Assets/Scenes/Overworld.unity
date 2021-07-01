@@ -2776,7 +2776,7 @@ PrefabInstance:
     - target: {fileID: 8003398446240627916, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8003398446240627916, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
@@ -5854,8 +5854,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fece2207b95eecf4bbd7a821688bc468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousMusicVolume: 0
-  previousSFXVolume: 0
   sfxSlider: {fileID: 647239923}
   musicSlider: {fileID: 1583500336}
 --- !u!1 &1759952512

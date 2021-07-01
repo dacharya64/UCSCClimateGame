@@ -12,6 +12,8 @@ public class GameManager : Singleton<GameManager> {
 	[HideInInspector] public bool runningModel = false;
 	public bool runModel = true;
 	public List<int> billIndices = new List<int>();
+	public float previousMusicVolume;
+	public float previousSFXVolume;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -53,12 +55,18 @@ public class GameManager : Singleton<GameManager> {
 		switch (settingsStatus)
 		{
 			case 0:
+				SavePreviousVolumes();
 				instance.optionsPrompt.SetActive(true);
 				break;
 			case 1:
 				instance.optionsPrompt.SetActive(false);
 				break;
 		}
+	}
+
+	public void SavePreviousVolumes() {
+		previousMusicVolume = AudioManager.Instance.totalMusicVolume;
+		previousSFXVolume = AudioManager.Instance.totalSFXVolume;
 	}
 
 	void InitScene(Scene from, Scene to) {
