@@ -62,6 +62,7 @@ public class CityScript : RegionController
 
     void Start()
     {
+       
         bills = LoadBills();
         currentDifficulty = BillDifficulty.Easy;
         (left.speed, right.speed) = (speed, speed);
@@ -131,8 +132,6 @@ public class CityScript : RegionController
         usedBills.Add(billNumber);
         currentBillList.RemoveAt(billNumber);
 
-        // hide all the arrows again 
-
         // Now check to see if go to another bill, or go back to overworld -- true if counter at certain amount and not first visit 
         if (currentBillIndex <= numberOfBills - 2 && !firstVisit)
         {
@@ -161,6 +160,7 @@ public class CityScript : RegionController
                 {
                     if (effect.Key == "forcing") {
                         EBM.F = EBM.F + effect.Value;
+                        World.ChangeAverageTemp();
                     }
                     if (effect.Key == "money") {
                         if (World.money + effect.Value < 100)
@@ -191,6 +191,7 @@ public class CityScript : RegionController
                     if (effect.Key == "forcing")
                     {
                         EBM.F = EBM.F + effect.Value;
+                        World.ChangeAverageTemp();
                     }
                     if (effect.Key == "money")
                     {

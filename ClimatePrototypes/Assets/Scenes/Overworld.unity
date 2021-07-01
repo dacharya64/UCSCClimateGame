@@ -2244,7 +2244,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 412111377}
   m_HandleRect: {fileID: 1739027695}
   m_Direction: 2
-  m_MinValue: 15
+  m_MinValue: 10
   m_MaxValue: 25
   m_WholeNumbers: 0
   m_Value: 16.31847
@@ -6826,6 +6826,7 @@ GameObject:
   - component: {fileID: 2083884749}
   - component: {fileID: 2083884748}
   - component: {fileID: 2083884747}
+  - component: {fileID: 2083884751}
   m_Layer: 5
   m_Name: Thermometer
   m_TagString: Untagged
@@ -6913,6 +6914,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2083884751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083884746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5050081261f8141b20d512bc4b9ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temperature: {fileID: 535246559}
 --- !u!1 &2124233803
 GameObject:
   m_ObjectHideFlags: 0

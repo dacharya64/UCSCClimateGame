@@ -82,4 +82,10 @@ public static class World {
 		timer.Stop();
 		Debug.Log($"Average Temp: {averageTemp} with regionals: {temp.AsString()}, calculated in {timer.ElapsedMilliseconds}ms");
 	}
+
+	public static double ChangeAverageTemp(bool useTemp = true, int years = 0, int steps = 0) {
+		(temp, energy, precip) = EBM.Calc(useTemp ? EBM.temp : null, years, steps);
+		Debug.Log("Average temp is: " + averageTemp);
+		return averageTemp; 
+	}
 }
