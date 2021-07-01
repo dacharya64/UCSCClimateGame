@@ -42,6 +42,8 @@ public class UIController : Singleton<UIController> {
 	// methods that start with UI are non-static methods for Unity Editor buttons
 	public void UIQuitGame(int status) => GameManager.Instance.QuitGame(status);
 
+	public void UIOpenSettings(int status) => GameManager.Instance.OpenSettings(status);
+
 	public void UITransition(string level) {
 		returnPrompt.SetActive(false);
 		GameManager.Transition(level);

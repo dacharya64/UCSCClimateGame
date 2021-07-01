@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager> {
-	[SerializeField] GameObject loadingScreen = default, quitPrompt = default;
+	[SerializeField] GameObject loadingScreen = default, quitPrompt = default, optionsPrompt = default;
 	[HideInInspector] public bool runningModel = false;
 	public bool runModel = true;
 	public List<int> billIndices = new List<int>();
@@ -44,6 +44,19 @@ public class GameManager : Singleton<GameManager> {
 				break;
 			case 2:
 				Application.Quit();
+				break;
+		}
+	}
+
+	public void OpenSettings(int settingsStatus = 0)
+	{
+		switch (settingsStatus)
+		{
+			case 0:
+				instance.optionsPrompt.SetActive(true);
+				break;
+			case 1:
+				instance.optionsPrompt.SetActive(false);
 				break;
 		}
 	}
