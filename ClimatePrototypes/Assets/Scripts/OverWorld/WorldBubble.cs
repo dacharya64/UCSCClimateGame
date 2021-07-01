@@ -65,7 +65,7 @@ public class WorldBubble : MonoBehaviour {
 	}
 
 	IEnumerator EnterRegion(Vector3 bubblePos, float time = .5f) {
-		StartCoroutine(UIController.SlideNav(UIController.Instance.navbar.transform, up : true));
+		//StartCoroutine(UIController.SlideNav(UIController.Instance.navbar.transform, up : true));
 		Vector3 camStartPos = Camera.main.transform.position;
 		for (var (start, step) = (Time.time, 0f); step < time; step = Time.time - start) {
 			yield return null;
