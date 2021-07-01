@@ -9,6 +9,7 @@ public class OverworldController : MonoBehaviour {
 	Transform world;
 	[SerializeField] SpriteRenderer bg = default;
 	[HideInInspector] public Material fadeMat;
+	[SerializeField] GameObject thermometerWrapper;
 
 	void Start() {
 		fadeMat = new Material(Shader.Find("Screen/Fade"));
@@ -55,6 +56,7 @@ public class OverworldController : MonoBehaviour {
 			foreach (var sr in sprites)
 				sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, step);
 		}
+		thermometerWrapper.SetActive(true);
 	}
 
 	void OnRenderImage(RenderTexture src, RenderTexture dest) {
