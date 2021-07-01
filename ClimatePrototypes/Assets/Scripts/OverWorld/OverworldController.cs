@@ -9,12 +9,30 @@ public class OverworldController : MonoBehaviour {
 	Transform world;
 	[SerializeField] SpriteRenderer bg = default;
 	[HideInInspector] public Material fadeMat;
+	//[SerializeField] GameObject thermometerWrapper;
+	public Canvas canvas;
+	public AnimationCurve animationCurve;
+	public float fadingSpeed = 5f;
+	private CanvasGroup canvasGroup; 
+
+	public enum Direction { FadeIn, FadeOut };
 
 	void Start() {
 		fadeMat = new Material(Shader.Find("Screen/Fade"));
 		world = worldWrapper.transform.GetChild(0);
+		if (canvas == null) canvas = GetComponent<Canvas>();
+		canvasGroup = canvas.GetComponent<CanvasGroup>();
+		if (canvasGroup == null) Debug.LogError("Please assign a canvas group to the canvas!");
+
+		//canvasGroup.alpha = 0;
+		if (animationCurve.length == 0)
+		{
+			Debug.Log("Animation curve not assigned: Create a default animation curve");
+			animationCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+		}
 
 		StartCoroutine(RotateMoon());
+		//StartCoroutine(FadeCanvas(canvasGroup, Direction.FadeIn, fadingSpeed));
 	}
 
 	IEnumerator RotateMoon() {
@@ -48,6 +66,7 @@ public class OverworldController : MonoBehaviour {
 	}
 
 	public IEnumerator EnterWorld(float time = 1) {
+		StartCoroutine(FadeCanvas(canvasGroup, Direction.FadeIn, fadingSpeed));
 		ClearWorld();
 		SpriteRenderer[] sprites = worldWrapper.GetComponentsInChildren<SpriteRenderer>();
 		for (var (start, step) = (Time.time, 0f); step < time; step = Time.time - start) {
@@ -55,9 +74,44 @@ public class OverworldController : MonoBehaviour {
 			foreach (var sr in sprites)
 				sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, step);
 		}
+		//thermometerWrapper.SetActive(true);
+		
 	}
 
 	void OnRenderImage(RenderTexture src, RenderTexture dest) {
 		Graphics.Blit(src, dest, fadeMat);
+	}
+
+	public IEnumerator FadeCanvas(CanvasGroup canvasGroup, Direction direction, float duration)
+	{
+		// keep track of when the fading started, when it should finish, and how long it has been running
+		var startTime = Time.time;
+		var endTime = Time.time + duration;
+		var elapsedTime = 0f;
+
+		// set the canvas to the start alpha – this ensures that the canvas is ‘reset’ if you fade it multiple times
+		if (direction == Direction.FadeIn) canvasGroup.alpha = animationCurve.Evaluate(0f);
+		else canvasGroup.alpha = animationCurve.Evaluate(1f);
+
+		// loop repeatedly until the previously calculated end time
+		while (Time.time <= endTime)
+		{
+			elapsedTime = Time.time - startTime; // update the elapsed time
+			var percentage = 1 / (duration / elapsedTime); // calculate how far along the timeline we are
+			if ((direction == Direction.FadeOut)) // if we are fading out
+			{
+				canvasGroup.alpha = animationCurve.Evaluate(1f - percentage);
+			}
+			else // if we are fading in/up
+			{
+				canvasGroup.alpha = animationCurve.Evaluate(percentage);
+			}
+
+			yield return new WaitForEndOfFrame(); // wait for the next frame before continuing the loop
+		}
+
+		// force the alpha to the end alpha before finishing – this is here to mitigate any rounding errors, e.g. leaving the alpha at 0.01 instead of 0
+		if (direction == Direction.FadeIn) canvasGroup.alpha = animationCurve.Evaluate(1f);
+		else canvasGroup.alpha = animationCurve.Evaluate(0f);
 	}
 }
