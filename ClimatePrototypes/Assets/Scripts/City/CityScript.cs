@@ -159,8 +159,8 @@ public class CityScript : RegionController
                 Dictionary<string, float> billEffects = ParseTag(currentBill.left.tags);
                 foreach (KeyValuePair<string, float> effect in billEffects)
                 {
-                    if (effect.Key == "emissions") { 
-                        // Implement changes to emissions
+                    if (effect.Key == "forcing") {
+                        EBM.F = EBM.F + effect.Value;
                     }
                     if (effect.Key == "money") {
                         if (World.money + effect.Value < 100)
@@ -188,9 +188,9 @@ public class CityScript : RegionController
                 Dictionary<string, float> billEffects = ParseTag(currentBill.right.tags);
                 foreach (KeyValuePair<string, float> effect in billEffects)
                 {
-                    if (effect.Key == "emissions")
+                    if (effect.Key == "forcing")
                     {
-                        // Implement changes to emissions
+                        EBM.F = EBM.F + effect.Value;
                     }
                     if (effect.Key == "money")
                     {
