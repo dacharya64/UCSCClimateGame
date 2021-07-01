@@ -13,7 +13,7 @@ public class StatsPanel : MonoBehaviour {
 		if (gameObject.activeSelf) { // only needs to update when turned on
 			UpdateSlider(landUse, (float) EBM.a0);
 			UpdateSlider(publicOpinion, World.publicOpinion / 100, invertColors : true);
-			UpdateSlider(emissions, (float) EBM.F / 14);
+			UpdateSlider(emissions, (float) EBM.F); // used to be /14
 			UpdateSlider(economy, World.money / 100);
 		}
 	}
