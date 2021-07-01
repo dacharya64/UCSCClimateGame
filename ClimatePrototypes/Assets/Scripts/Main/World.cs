@@ -13,7 +13,7 @@ public static class World {
 	public enum Region { Arctic, City, Forest, Fire }
 
 	public static string worldName = "";
-	public static float money = 100f, publicOpinion = 100f;
+	public static float money = 70f, publicOpinion = 70f;
 	public static int turn = 1;
 	public static double[] temp, energy, precip, startingTemp;
 	public static float maxTempChange = 10f;
