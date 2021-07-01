@@ -86,6 +86,7 @@ public class AudioManager : Singleton<AudioManager> { // TODO: ease transitions 
 		sfxSource3.volume = vol;
 	}
 
+	
 	public static Sound GetSound(string name) => Instance.sounds.Find(s => s.name == name);
 	public void PlaySound(AudioClip clip) => Play(GetSound(clip.name));
 
