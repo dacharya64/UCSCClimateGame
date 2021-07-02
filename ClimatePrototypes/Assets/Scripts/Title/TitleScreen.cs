@@ -86,9 +86,6 @@ public class TitleScreen : MonoBehaviour {
 	}
 
 	public void OpenSettings() {
-		//AudioManager.Instance.
 		GameManager.Instance.OpenSettings(0);
-		//GameObject.Find("OptionsPrompt").SetActive(true);
-		//navBar.UIController.UIOpenSettings(0);
 	}
 }
