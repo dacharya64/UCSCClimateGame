@@ -990,6 +990,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colour: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  canvas: {fileID: 2083884749}
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadingSpeed: 1
 --- !u!4 &237590790
 Transform:
   m_ObjectHideFlags: 0
@@ -2209,7 +2217,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 347.56, y: 2.23}
+  m_AnchoredPosition: {x: 450, y: 2.23}
   m_SizeDelta: {x: 20, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &535246559
@@ -2310,6 +2318,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 1}
+  canvas: {fileID: 2083884749}
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadingSpeed: 1
 --- !u!4 &608624361
 Transform:
   m_ObjectHideFlags: 0
@@ -5256,7 +5272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604367236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 359.23553, y: 158.6203, z: -245.64256}
+  m_LocalPosition: {x: 365.91, y: 158.6203, z: -245.64256}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2083884750}
@@ -5312,6 +5328,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colour: {r: 0, g: 1, b: 0, a: 1}
+  canvas: {fileID: 2083884749}
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadingSpeed: 1
 --- !u!58 &1622224479
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6863,6 +6887,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colour: {r: 0, g: 1, b: 1, a: 1}
+  canvas: {fileID: 2083884749}
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadingSpeed: 1
 --- !u!4 &2075063327
 Transform:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ public class OverworldController : MonoBehaviour {
 	Transform world;
 	[SerializeField] SpriteRenderer bg = default;
 	[HideInInspector] public Material fadeMat;
-	//[SerializeField] GameObject thermometerWrapper;
 	public Canvas canvas;
 	public AnimationCurve animationCurve;
 	public float fadingSpeed = 5f;
@@ -24,7 +23,6 @@ public class OverworldController : MonoBehaviour {
 		canvasGroup = canvas.GetComponent<CanvasGroup>();
 		if (canvasGroup == null) Debug.LogError("Please assign a canvas group to the canvas!");
 
-		//canvasGroup.alpha = 0;
 		if (animationCurve.length == 0)
 		{
 			Debug.Log("Animation curve not assigned: Create a default animation curve");
@@ -32,7 +30,6 @@ public class OverworldController : MonoBehaviour {
 		}
 
 		StartCoroutine(RotateMoon());
-		//StartCoroutine(FadeCanvas(canvasGroup, Direction.FadeIn, fadingSpeed));
 	}
 
 	IEnumerator RotateMoon() {
@@ -74,8 +71,6 @@ public class OverworldController : MonoBehaviour {
 			foreach (var sr in sprites)
 				sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, step);
 		}
-		//thermometerWrapper.SetActive(true);
-		
 	}
 
 	void OnRenderImage(RenderTexture src, RenderTexture dest) {
