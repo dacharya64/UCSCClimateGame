@@ -61,7 +61,7 @@ public class TitleScreen : MonoBehaviour {
 		overworldController = cam.GetComponent<OverworldController>();
 		overworldController.ClearWorld();
 		overworldController.SendToBottom();
-
+		overworldController.HideThermometer();
 		// StartCoroutine(SlideUp());
 	}
 
