@@ -35,19 +35,19 @@ public partial class EBM {
 
 	// standard consts
 	/// <summary> OLR when T = 0(W m^-2) </summary>
-	public static double A = 193;
+	public static double A = 195;
 	/// <summary> OLR temperature dependence(W M^-2 K^-1) </summary>
-	static readonly double B = 2.1;
+	static readonly double B = 1.8;
 	/// <summary> Ocean mixed layer heat capacity(W yr m^-2 K^-1)  </summary>
 	/// <remarks> Edit this to adjust model speed </remarks>
-	static readonly double cw = 9.8;
+	static readonly double cw = 7.8;
 	/// <summary> Diffusivity for heat transport(W m^-2 K^-1)  </summary>
-	static readonly double D = 0.6;
+	static readonly double D = 0.3;
 
 	/// <summary> Insolation at equator(W m^-2)  </summary>
 	static readonly double S0 = 420;
 	/// <summary> Insolation seasonal dependence(W m^-2)  </summary>
-	static readonly double S1 = 338;
+	static readonly double S1 = 290;
 	/// <summary> Insolation spatial dependence(W m^-2)  </summary>
 	static readonly double S2 = 240;
 	/// <summary> Ice-free co-albedo at equator  </summary>
@@ -68,21 +68,23 @@ public partial class EBM {
 
 	// // misc consts
 	// /// <summary> Latent heat of vaporization(J kg^-1) </summary>
-	// static readonly double Lv = 2500000;
+	static readonly double Lv = 2500000;
 	// /// <summary> Heat capacity of air at constant pressure(J kg^-1 K^-1) </summary>
-	// static readonly double cp = 1004.6;
+	static readonly double cp = 1004.6;
 	// /// <summary> Relative humidity </summary>
-	// static readonly double Rh = 0.8;
+	static readonly double RH = 0.8;
 	// /// <summary> Surface pressure(Pa) </summary>
-	// static readonly double Ps = 100000;
+	static readonly double Ps = 100000;
 	/// <summary> Heat flux from ocean below(W m^-2) </summary>
-	public static double Fb = 4;
+	public static double Fb = 0;
 	/// <summary> Sea ice thermal conductivity(W m^-2 K^-1) </summary>
 	static readonly int k = 2;
-	/// <summary> Sea ice latent heat of fusion(W yr m^-3) </summary>
+	/// <summary> Sea ice latent heat of fusion(W yr m^-1) </summary>
 	static readonly double Lf = 9.5;
 	/// <summary> Ghost layer heat capacity(W yr m^-2 K^-1) </summary>
-	static readonly double cg = cw / 100;
+	static readonly double cg = 0.098;
+
+
 
 	// # Diffusion Operator (WE15, Appendix A)
 	static readonly Vector<double> lam = D / dx / dx * (1 - xb.PointwisePower(2));
@@ -119,6 +121,8 @@ public partial class EBM {
 		Matrix<double>.Build.DenseOfRowVectors(new Vector<double>[nt].Map(v => simpleS).ToArray()) -
 		Matrix<double>.Build.DenseOfRowVectors(new Vector<double>[bands].Map(v => S1 * (ty * 2 * Math.PI).PointwiseCos()).ToArray()).Transpose().PointwiseMultiply(
 			Matrix<double>.Build.DenseOfRowVectors(new Vector<double>[nt].Map(v => x).ToArray()));
+	// zero out negative insolation
+	//S = np.where(S< 0, 0, S);
 	//could optimise with indices if needed
 
 	// precip constant values
