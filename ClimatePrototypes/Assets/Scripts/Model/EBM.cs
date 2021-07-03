@@ -105,7 +105,8 @@ public partial class EBM {
 		// (tempControl, energyControl) = (temp, energy);
 		p_e = p_e_raw.Split(',').Select(num => Double.Parse(num.Trim(new [] { '\n', ' ', '\t' }))).ToArray();
 		lat_p_e = Vector<double>.Build.Dense(p_e.Length, i => i / 2d - 90).SubVector(181, 180);
-		f = Interpolate.Common(lat_p_e, p_e);
+		//Debug.Log("lat_p_e count is: " + lat_p_e.Count); 
+		f = Interpolate.Common(lat_p_e, p_e.Skip(181));
 		//
 		var tempArray = x;
 		for (int i = 0; i < x.Count; i++)  
@@ -117,7 +118,7 @@ public partial class EBM {
 		{
 			tempArray2[i] = Mathf.Rad2Deg * tempArray[i];
 		}
-		np_e = tempArray2;//f(np.rad2deg(np.arcsin(x))) # net precip on model grid
+		np_e = lat;// tempArray2;//f(np.rad2deg(np.arcsin(x))) # net precip on model grid
 		//np_e = lat.Map(l => f.Interpolate(l)); // TODO change this value?
 	}
 
