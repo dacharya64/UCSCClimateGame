@@ -14,7 +14,8 @@ public partial class EBM {
 	}
 
 	/// <summary> Does entire timestep integration calculation </summary>
-	public static (Matrix<double>, Matrix<double>) Integrate(Vector<double> T = null, int years = 0, int timesteps = 0) {
+	public static (Matrix<double>, Matrix<double>) Integrate(Vector<double> T = null, int years = 0, int timesteps = 0)
+	{
 		T = T ?? 7.5f + 20 * (1 - 2 * x.PointwisePower(2));
 		years = years == 0 ? dur : years;
 		timesteps = timesteps == 0 ? nt : timesteps;
@@ -22,28 +23,32 @@ public partial class EBM {
 		Matrix<double> Efin = Matrix<double>.Build.Dense(bands, nt, 0);
 		Matrix<double> T0fin = Matrix<double>.Build.Dense(bands, nt, 0);
 		Matrix<double> ASRfin = Matrix<double>.Build.Dense(bands, nt, 0);
+		//Debug.Log(Tfin);
+		//Debug.Log(Efin);
 		//Matrix<double> tfin = Matrix<double>.Build.Dense()np.linspace(0, 1, nt);
 		Vector<double> Tg = Vector<double>.Build.DenseOfVector(T);
 		Vector<double> E = Tg * cw;
 
 		for (var (i, p) = (0, 0); i < years; i++)
-			for (int j = 0; j < timesteps; j++) {
-				if (j % (nt / 100f) == 0) {
-/*					E100.SetColumn(p, E);
-					T100.SetColumn(p, T);
-					p++;*/
+			for (int j = 0; j < timesteps; j++)
+			{
+				if (j % (nt / 100f) == 0)
+				{
+					Efin.SetColumn(p, E);
+					Tfin.SetColumn(p, T);
+					p++;
 				}
 				Vector<double> alpha = E.PointwiseSign().PointwiseMultiply(aw).Map(x => x < 0 ? aI : x); // aw * (E > 0) + ai * (E < 0)
 				Vector<double> C = alpha.PointwiseMultiply(S.Row(j)) + cg_tau * Tg - A + F; // alpha * S[i, :] + cg_tau * Tg - A
 				Vector<double> T0 = C / (M - k * Lf / E);
-
-				if (years == dur - 1)
-				{
-					Efin.SetColumn(j, E);// [":", i] = E;
-					Tfin.SetColumn(j, T);//[":", i] = T;
-					T0fin.SetColumn(j, T0);//[":", i] = T0;
-					ASRfin.SetColumn(j, alpha.PointwiseMultiply(S.Row(j)));//[":", i] = alpha * S[i, ":"];
-				}
+				/*
+								if (years == dur - 1)
+								{
+									Efin.SetColumn(p, E);// [":", i] = E;
+									Tfin.SetColumn(p, T);//[":", i] = T;
+									T0fin.SetColumn(p, T0);//[":", i] = T0;
+									ASRfin.SetColumn(p, alpha.PointwiseMultiply(S.Row(p)));//[":", i] = alpha * S[i, ":"];
+								}*/
 
 				T = Sign0(GreatOrE, E) / cw + Sign0(Less, Sign0(Less, E, T0)); // E/cw*(E >= 0)+T0*(E < 0)*(T0 < 0)
 				E = E + dt * (C - M * T + Fb);
@@ -59,7 +64,7 @@ public partial class EBM {
 				var rhs1 = (dt * diffop / cg) * (Lv * q / cp);
 				Tg = (kappa - Matrix<double>.Build.DiagonalOfDiagonalVector(
 					Sign0(Less, signlesset0, dc / mklfe) // np.diag(dc / (M - kLf / E) * (T0 < 0) * (E < 0)
-				)).Solve(Tg + dt_tau * (
+				)).Solve(Tg + rhs1 + dt_tau * (
 					Sign0(GreatOrE, E) / cw + (aI * S.Row(j) - A + F). // E / cw * (E >= 0) + (ai * S[i, :] - A)
 					Map2((a, b) => b != 0 ? a / b : 0, // funky division
 						Sign0(Less, signlesset0, mklfe)) // (M - kLf / E) * (T0 < 0) * (E < 0)
