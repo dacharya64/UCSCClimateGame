@@ -24,7 +24,7 @@ public class Factory : MonoBehaviour {
 		if (other.TryGetComponent(out Volunteer v)) {
 			// Debug.Log(other.gameObject);
 			v.OnReached.Invoke(v);
-			v.Stop();
+			//v.Stop();
 		}
 	}
 
