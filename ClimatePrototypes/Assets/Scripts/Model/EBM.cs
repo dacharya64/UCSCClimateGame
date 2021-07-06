@@ -32,25 +32,25 @@ public partial class EBM {
 		for (var (i, p) = (0, 0); i < years; i++)
 			for (int j = 0; j < timesteps; j++)
 			{
-				if (j % (nt / 100f) == 0)
+/*				if (j % (nt / 100f) == 0)
 				{
 					Efin.SetColumn(p, E);
 					Tfin.SetColumn(p, T);
 					p++;
-				}
+				}*/
 				Vector<double> alpha = E.PointwiseSign().PointwiseMultiply(aw).Map(x => x < 0 ? aI : x); // aw * (E > 0) + ai * (E < 0)
 				Vector<double> C = alpha.PointwiseMultiply(S.Row(j)) + cg_tau * Tg - A + F; // alpha * S[i, :] + cg_tau * Tg - A
 				Vector<double> T0 = C / (M - k * Lf / E);
-				/*
-								if (years == dur - 1)
-								{
-									Efin.SetColumn(p, E);// [":", i] = E;
-									Tfin.SetColumn(p, T);//[":", i] = T;
-									T0fin.SetColumn(p, T0);//[":", i] = T0;
-									ASRfin.SetColumn(p, alpha.PointwiseMultiply(S.Row(p)));//[":", i] = alpha * S[i, ":"];
-								}*/
 
-				T = Sign0(GreatOrE, E) / cw + Sign0(Less, Sign0(Less, E, T0)); // E/cw*(E >= 0)+T0*(E < 0)*(T0 < 0)
+                if (i == dur - 1)
+                {
+                    Efin.SetColumn(j, E);// [":", i] = E;
+                    Tfin.SetColumn(j, T);//[":", i] = T;
+                    T0fin.SetColumn(j, T0);//[":", i] = T0;
+                    ASRfin.SetColumn(j, alpha.PointwiseMultiply(S.Row(j)));//[":", i] = alpha * S[i, ":"];
+                }
+
+                T = Sign0(GreatOrE, E) / cw + Sign0(Less, Sign0(Less, E, T0)); // E/cw*(E >= 0)+T0*(E < 0)*(T0 < 0)
 				E = E + dt * (C - M * T + Fb);
 				var mklfe = M - k * Lf / E;
 				var signlesset0 = Sign0(Less, E, T0);
