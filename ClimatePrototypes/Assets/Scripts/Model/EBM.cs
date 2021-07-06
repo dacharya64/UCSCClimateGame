@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 using MathNet.Numerics.LinearAlgebra;
 using Interpolate = MathNet.Numerics.Interpolate;
@@ -13,39 +14,64 @@ public partial class EBM {
 	}
 
 	/// <summary> Does entire timestep integration calculation </summary>
-	public static (Matrix<double>, Matrix<double>) Integrate(Vector<double> T = null, int years = 0, int timesteps = 0) {
+	public static (Matrix<double>, Matrix<double>) Integrate(Vector<double> T = null, int years = 0, int timesteps = 0)
+	{
 		T = T ?? 7.5f + 20 * (1 - 2 * x.PointwisePower(2));
 		years = years == 0 ? dur : years;
 		timesteps = timesteps == 0 ? nt : timesteps;
-		Matrix<double> T100 = Matrix<double>.Build.Dense(bands, dur * 100, 0);
-		Matrix<double> E100 = Matrix<double>.Build.Dense(bands, dur * 100, 0);
+		Matrix<double> Tfin = Matrix<double>.Build.Dense(bands, nt, 0);
+		Matrix<double> Efin = Matrix<double>.Build.Dense(bands, nt, 0);
+		Matrix<double> T0fin = Matrix<double>.Build.Dense(bands, nt, 0);
+		Matrix<double> ASRfin = Matrix<double>.Build.Dense(bands, nt, 0);
+		//Debug.Log(Tfin);
+		//Debug.Log(Efin);
+		//Matrix<double> tfin = Matrix<double>.Build.Dense()np.linspace(0, 1, nt);
 		Vector<double> Tg = Vector<double>.Build.DenseOfVector(T);
 		Vector<double> E = Tg * cw;
 
 		for (var (i, p) = (0, 0); i < years; i++)
-			for (int j = 0; j < timesteps; j++) {
-				if (j % (nt / 100f) == 0) {
-					E100.SetColumn(p, E);
-					T100.SetColumn(p, T);
+			for (int j = 0; j < timesteps; j++)
+			{
+/*				if (j % (nt / 100f) == 0)
+				{
+					Efin.SetColumn(p, E);
+					Tfin.SetColumn(p, T);
 					p++;
-				}
+				}*/
 				Vector<double> alpha = E.PointwiseSign().PointwiseMultiply(aw).Map(x => x < 0 ? aI : x); // aw * (E > 0) + ai * (E < 0)
 				Vector<double> C = alpha.PointwiseMultiply(S.Row(j)) + cg_tau * Tg - A + F; // alpha * S[i, :] + cg_tau * Tg - A
 				Vector<double> T0 = C / (M - k * Lf / E);
-				T = Sign0(GreatOrE, E) / cw + Sign0(Less, Sign0(Less, E, T0)); // E/cw*(E >= 0)+T0*(E < 0)*(T0 < 0)
+
+                if (i == dur - 1)
+                {
+                    Efin.SetColumn(j, E);// [":", i] = E;
+                    Tfin.SetColumn(j, T);//[":", i] = T;
+                    T0fin.SetColumn(j, T0);//[":", i] = T0;
+                    ASRfin.SetColumn(j, alpha.PointwiseMultiply(S.Row(j)));//[":", i] = alpha * S[i, ":"];
+                }
+
+                T = Sign0(GreatOrE, E) / cw + Sign0(Less, Sign0(Less, E, T0)); // E/cw*(E >= 0)+T0*(E < 0)*(T0 < 0)
 				E = E + dt * (C - M * T + Fb);
 				var mklfe = M - k * Lf / E;
 				var signlesset0 = Sign0(Less, E, T0);
+
+				/*# Implicit Euler on Tg
+				# latent heat transport
+				# n.b. this is semi-implicit, with some derivatives are
+				# calculated on the previous time step*/
+				var q = RH * saturation_specific_humidity(Tg, Ps);
+				//var rhs1 = Matrix.Scale(dt * diffop / cg, Lv * q / cp);
+				var rhs1 = (dt * diffop / cg) * (Lv * q / cp);
 				Tg = (kappa - Matrix<double>.Build.DiagonalOfDiagonalVector(
 					Sign0(Less, signlesset0, dc / mklfe) // np.diag(dc / (M - kLf / E) * (T0 < 0) * (E < 0)
-				)).Solve(Tg + dt_tau * (
+				)).Solve(Tg + rhs1 + dt_tau * (
 					Sign0(GreatOrE, E) / cw + (aI * S.Row(j) - A + F). // E / cw * (E >= 0) + (ai * S[i, :] - A)
 					Map2((a, b) => b != 0 ? a / b : 0, // funky division
 						Sign0(Less, signlesset0, mklfe)) // (M - kLf / E) * (T0 < 0) * (E < 0)
 				));
 			}
 
-		return (T100.SubMatrix(0, T100.RowCount, T100.ColumnCount - 100, 100), E100.SubMatrix(0, E100.RowCount, E100.ColumnCount - 100, 100));
+		return (Tfin.SubMatrix(0, Tfin.RowCount, Tfin.ColumnCount - 100, 100), Efin.SubMatrix(0, Efin.RowCount, Efin.ColumnCount - 100, 100));
 	}
 
 	/// <summary> Calculates Precipitation of regions</summary>
@@ -68,13 +94,13 @@ public partial class EBM {
 	/// </example>
 	/// <returns> Tuple of double arrays(temp, energy, precip)</returns>
 	public static (double[], double[], double[]) Calc(IEnumerable<double> input = null, int years = 0, int timesteps = 0) {
-		var(T100, E100) = Integrate(input == null ? null : Vector<double>.Build.Dense(input.ToArray()), years, timesteps);
-		temp = T100.Column(99);
-		energy = E100.Column(99);
+		var(Tfin, Efin) = Integrate(input == null ? null : Vector<double>.Build.Dense(input.ToArray()), years, timesteps);
+		temp = Tfin.Column(99);
+		energy = Efin.Column(99);
 
-		if (tempControl is null) InitFirstRun(T100);
+		if (tempControl is null) InitFirstRun(Tfin);
 
-		precip = CalcPrecip(Vector<double>.Build.DenseOfEnumerable(T100.FoldByRow((mean, col) => mean + col / T100.ColumnCount, 0d)));
+		precip = CalcPrecip(Vector<double>.Build.DenseOfEnumerable(Tfin.FoldByRow((mean, col) => mean + col / Tfin.ColumnCount, 0d)));
 		return (Condense(temp, regions), Condense(energy, regions), Condense(precip, regions));
 	}
 
@@ -84,8 +110,21 @@ public partial class EBM {
 		// (tempControl, energyControl) = (temp, energy);
 		p_e = p_e_raw.Split(',').Select(num => Double.Parse(num.Trim(new [] { '\n', ' ', '\t' }))).ToArray();
 		lat_p_e = Vector<double>.Build.Dense(p_e.Length, i => i / 2d - 90).SubVector(181, 180);
+		//Debug.Log("lat_p_e count is: " + lat_p_e.Count); 
 		f = Interpolate.Common(lat_p_e, p_e.Skip(181));
-		np_e = lat.Map(l => f.Interpolate(l));
+		//
+		var tempArray = x;
+		for (int i = 0; i < x.Count; i++)  
+		{
+			tempArray[i] = Math.Asin(x[i]);
+		}
+		var tempArray2 = tempArray;
+		for (int i = 0; i < tempArray.Count; i++)
+		{
+			tempArray2[i] = Mathf.Rad2Deg * tempArray[i];
+		}
+		np_e = tempArray2;// lat;// tempArray2;//f(np.rad2deg(np.arcsin(x))) # net precip on model grid
+		//np_e = lat.Map(l => f.Interpolate(l)); // TODO change this value?
 	}
 
 	public static void Clear() => (temp, energy, precip) = (null, null, null);
@@ -116,4 +155,24 @@ public partial class EBM {
 	// debug printing function
 	static void Print(IEnumerable<double> nums) => UnityEngine.Debug.Log(nums == null ? "null" : nums.AsString());
 	static void Print(double num) => UnityEngine.Debug.Log(num);
+
+	public static Vector<double> saturation_specific_humidity(Vector<double> temp, double press) //TODO: double check if this should return a vector or a double
+	{
+		var es0 = 610.78;
+		var t0 = 273.16;
+		var Rv = 461.5;
+		var Lv = 2500000.0;
+		var ep = 0.622;
+		temp = temp + 273.15;
+		var exponent = (1 / temp - 1 / t0);
+		var value = -Lv / Rv * exponent;
+		var finalArray = value;
+        for (int i = 0; i < value.Count; i++) // TODO check if this value is correct 
+        {
+            finalArray[i] = Math.Exp(value[i]);
+        }
+        var es = es0 * finalArray;
+		var qs = ep * es / press;
+		return qs;
+	}
 }

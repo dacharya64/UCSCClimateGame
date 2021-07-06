@@ -9,12 +9,19 @@ public class OverworldController : MonoBehaviour {
 	Transform world;
 	[SerializeField] SpriteRenderer bg = default;
 	[HideInInspector] public Material fadeMat;
-	public Canvas canvas;
 	public AnimationCurve animationCurve;
 	public float fadingSpeed = 5f;
-	private CanvasGroup canvasGroup; 
+	[SerializeField] Canvas canvas;
+	private CanvasGroup canvasGroup;
 
 	public enum Direction { FadeIn, FadeOut };
+
+	void Awake() {
+		if (canvas == null) canvas = GetComponent<Canvas>();
+		canvasGroup = canvas.GetComponent<CanvasGroup>();
+		if (canvasGroup == null) Debug.LogError("Please assign a canvas group to the canvas!");
+
+	}
 
 	void Start() {
 		fadeMat = new Material(Shader.Find("Screen/Fade"));
@@ -25,7 +32,6 @@ public class OverworldController : MonoBehaviour {
 
 		if (animationCurve.length == 0)
 		{
-			Debug.Log("Animation curve not assigned: Create a default animation curve");
 			animationCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 		}
 
@@ -34,7 +40,7 @@ public class OverworldController : MonoBehaviour {
 
 	IEnumerator RotateMoon() {
 		float moonDist = (world.position - moon.position).magnitude;
-		float alpha = Vector2.Angle(Vector2.right, (Vector2) (moon.position - world.position)) * Mathf.Deg2Rad;
+		float alpha = Vector2.Angle(Vector2.right, (Vector2)(moon.position - world.position)) * Mathf.Deg2Rad;
 		SpriteRenderer moonSprite = moon.GetComponent<SpriteRenderer>();
 		UnityEngine.SceneManagement.Scene overworldScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
 
@@ -44,7 +50,7 @@ public class OverworldController : MonoBehaviour {
 			float x = moonDist * Mathf.Cos(step) * Mathf.Cos(alpha) - moonDist / 2 * Mathf.Sin(step) * Mathf.Sin(alpha);
 			float y = moonDist * Mathf.Cos(step) * Mathf.Sin(alpha) + moonDist / 2 * Mathf.Sin(step) * Mathf.Cos(alpha);
 
-			moon.transform.position = new Vector2(x, y) + (Vector2) world.position;
+			moon.transform.position = new Vector2(x, y) + (Vector2)world.position;
 			moon.transform.eulerAngles = Vector3.forward * Mathf.Sin(step) * Mathf.Rad2Deg;
 			moonSprite.sortingOrder = Mathf.Sin(step) > 0 ? 0 : 2;
 		}
@@ -75,6 +81,10 @@ public class OverworldController : MonoBehaviour {
 
 	void OnRenderImage(RenderTexture src, RenderTexture dest) {
 		Graphics.Blit(src, dest, fadeMat);
+	}
+
+	public void HideThermometer() {
+		canvasGroup.alpha = 0;
 	}
 
 	public IEnumerator FadeCanvas(CanvasGroup canvasGroup, Direction direction, float duration)
