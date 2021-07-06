@@ -38,14 +38,17 @@ public abstract class RegionController : MonoBehaviour {
 	public void Intro(int visited) => StartCoroutine(IntroRoutine(visited));
 
 	IEnumerator IntroRoutine(int visited, float time = .5f) {
+		Debug.Log("starting introtroutine");
 		yield return StartCoroutine(Camera.main.GetComponent<CameraFade>().FadeIn(time));
 		visits = visited;
 		// if this is the player's first time visiting the region, give them the first tutorial text 
+		Debug.Log("visits: " + visits);
 		if (visits == 0)
 		{
 			if (intro[visited].Length == 0)
 				yield break;
 			SetPause(1);
+			Debug.Log("This is first visit.");
 			introBlock = Instantiate(introPrefab); // could read different prefab from scriptable obj per visit // store func calls on scriptable obj?
 			var introText = introBlock.GetComponentInChildren<Text>();
 			var introButton = introBlock.GetComponentInChildren<Button>(true);

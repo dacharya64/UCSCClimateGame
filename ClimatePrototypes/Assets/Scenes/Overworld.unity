@@ -2217,7 +2217,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 450, y: 2.23}
+  m_AnchoredPosition: {x: 313.8, y: 2.23}
   m_SizeDelta: {x: 20, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &535246559
@@ -4492,7 +4492,6 @@ MonoBehaviour:
   moon: {fileID: 1726516201}
   bg: {fileID: 1598734784}
   fadeMat: {fileID: 0}
-  canvas: {fileID: 2083884749}
   animationCurve:
     serializedVersion: 2
     m_Curve: []
@@ -4500,6 +4499,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   fadingSpeed: 1
+  canvas: {fileID: 2083884749}
 --- !u!1 &1322553778
 GameObject:
   m_ObjectHideFlags: 0
