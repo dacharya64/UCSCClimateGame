@@ -81,13 +81,16 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void FindCurrentRegion(Scene s) {
-		foreach (GameObject o in s.GetRootGameObjects()) // RegionController child must be on root obj
-			if (o.TryComponent<RegionController>(out currentRegion)) {
+		foreach (GameObject o in s.GetRootGameObjects())
+		{// RegionController child must be on root obj
+			if (o.TryGetComponent<RegionController>(out currentRegion))
+			{
 				currentRegion.AssignRegion(s.name);
 				currentRegion.Intro(visits[currentRegion.region]++);
 				currentRegion.visits = visits[currentRegion.region];
 				break;
 			}
+		}
 	}
 
 	public static void Transition(string scene) => instance.StartCoroutine(LoadScene(scene));

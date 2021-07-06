@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorial:
   - Welcome to the Forest!
-  - There is a logging company deforesting this land.
-  - Stop them before they do too much damage!
-  secondVisit: []
+  - You can encourage people to take action to help climate in one of three ways.
+  - Place them at different locations to fight the effects of deforestation.
+  secondVisit:
+  - 'Welcome back to the Forest! '
+  - Here, you can change the placement of workers fighting against the effects of
+    deforestation.
+  - The number of people available is based on public opinion, which is influenced
+    by the bills you choose in the City.
   thirdVisit: []
