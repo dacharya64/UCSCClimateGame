@@ -38,17 +38,14 @@ public abstract class RegionController : MonoBehaviour {
 	public void Intro(int visited) => StartCoroutine(IntroRoutine(visited));
 
 	IEnumerator IntroRoutine(int visited, float time = .5f) {
-		Debug.Log("starting introtroutine");
 		yield return StartCoroutine(Camera.main.GetComponent<CameraFade>().FadeIn(time));
 		visits = visited;
 		// if this is the player's first time visiting the region, give them the first tutorial text 
-		Debug.Log("visits: " + visits);
 		if (visits == 0)
 		{
 			if (intro[visited].Length == 0)
 				yield break;
 			SetPause(1);
-			Debug.Log("This is first visit.");
 			introBlock = Instantiate(introPrefab); // could read different prefab from scriptable obj per visit // store func calls on scriptable obj?
 			var introText = introBlock.GetComponentInChildren<Text>();
 			var introButton = introBlock.GetComponentInChildren<Button>(true);
@@ -82,17 +79,17 @@ public abstract class RegionController : MonoBehaviour {
 			{
 				timer = -2; // -2 is finished state
 				GameOver();
-				StartModel();
+				//StartModel();
 			}
 		} catch {
-			// if in the city
+			// if in the city or tropics
 			return;
 		}
 		
 	}
 
 	protected virtual void GameOver() {
-		if (region != World.Region.City) {
+		if (region != World.Region.City && region != World.Region.Forest) {
 			timerText.text = "0";
 		}
 		// TODO: add custon text for all the regions to UIController
@@ -104,8 +101,12 @@ public abstract class RegionController : MonoBehaviour {
 		{
 			UIController.Instance.SetArcticPrompt(true);
 		}
-		else {
-			UIController.Instance.SetPrompt(true);
+		else if (region == World.Region.Forest)
+		{
+			UIController.Instance.SetForestPrompt(true);
+		}
+		else if (region == World.Region.Fire) {
+			UIController.Instance.SetFirePrompt(true);
 		}
 		Pause();
 	}

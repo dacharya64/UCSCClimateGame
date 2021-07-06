@@ -40,9 +40,9 @@ public class VolunteerActions {
 
 	public static IEnumerator WaitAndReturn(PathfindingAgent agent, float duration = 1) {
 		yield return new WaitForSeconds(duration);
-		agent.transform.localScale = Vector3.one;
+		/*agent.transform.localScale = Vector3.one;
 		agent.anim.SetTrigger("Walking");
-		agent.AssignTarget(agent.origin);
+		agent.AssignTarget(agent.origin);*/
 	}
 
 	public static void Protest(Volunteer v) {

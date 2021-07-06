@@ -60,6 +60,17 @@ public class UIController : Singleton<UIController> {
 		returnPrompt.SetActive(status);
 	}
 
+	public void SetForestPrompt(bool status) {
+		returnPrompt.GetComponentInChildren<Text>().text = "You have placed all of the volunteers!";
+		returnPrompt.SetActive(status);
+	}
+
+	public void SetFirePrompt(bool status)
+	{
+		returnPrompt.GetComponentInChildren<Text>().text = "You have successfully put out the fires!";
+		returnPrompt.SetActive(status);
+	}
+
 	public void SetPrompt(bool status)
 	{
 		returnPrompt.GetComponentInChildren<Text>().text = "You have completed this region!";

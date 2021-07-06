@@ -38,7 +38,6 @@ public class WorldBubble : MonoBehaviour {
 
 		if (animationCurve.length == 0)
 		{
-			Debug.Log("Animation curve not assigned: Create a default animation curve");
 			animationCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 		}
 	}
