@@ -101,8 +101,12 @@ public abstract class RegionController : MonoBehaviour {
 		{
 			UIController.Instance.SetArcticPrompt(true);
 		}
-		else {
-			UIController.Instance.SetPrompt(true);
+		else if (region == World.Region.Forest)
+		{
+			UIController.Instance.SetForestPrompt(true);
+		}
+		else if (region == World.Region.Fire) {
+			UIController.Instance.SetFirePrompt(true);
 		}
 		Pause();
 	}
