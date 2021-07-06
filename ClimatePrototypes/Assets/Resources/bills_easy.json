@@ -159,12 +159,12 @@
     "left": {
       "title": "Tropical Forest Re-Growth",
       "body": "This initiative would restore land that was once tropical forest. That would mean working with our communities to turn some farmland back into preserved forest land in order for the forest to help capture emissions from the atmosphere.",
-      "tags": "emissions-5 forcing-0.136039378778492"
+      "tags": "emissions-10 forcing-0.136039378778492"
     },
     "right": {
       "title": "New Forest Growth",
       "body": "This initiative would find land to plant large forests where there have not been forests before. These tree farms wouldn't be for timber--they would be for capturing CO2 from the atmosphere.",
-      "tags": "emissions-5"
+      "tags": "emissions-5 forcing-0.0551479707571685"
     }
   },
   {
@@ -201,7 +201,7 @@
     "left": {
       "title": "Reduce nitrogen fertilizers",
       "body": "This initiative would limit and regulate  the amount of nitrogen fertilizers than farmers can use to reduce the release of nitrous oxide into our atmosphere.",
-      "tags": "emissions-5"
+      "tags": "emissions-5 forcing-0.0057757644952389"
     },
     "right": {
       "title": "New Composting Initiative",
