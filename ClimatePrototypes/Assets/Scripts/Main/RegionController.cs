@@ -89,7 +89,7 @@ public abstract class RegionController : MonoBehaviour {
 	}
 
 	protected virtual void GameOver() {
-		if (region != World.Region.City) {
+		if (region != World.Region.City && region != World.Region.Forest) {
 			timerText.text = "0";
 		}
 		// TODO: add custon text for all the regions to UIController

@@ -5030,6 +5030,8 @@ MonoBehaviour:
   selected: {fileID: 0}
   numActive: 3
   overUI: 0
+  volunteersPlaced: 0
+  maxVolunteers: 0
   agentParent: {fileID: 0}
   utility: {fileID: 0}
   activeTrees: []

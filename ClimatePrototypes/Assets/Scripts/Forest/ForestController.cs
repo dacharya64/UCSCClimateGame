@@ -16,6 +16,8 @@ public class ForestController : RegionController {
 	public int numActive;
 	[HideInInspector] public bool overUI = false;
 	public bool hasSelected { get => selected != null && !overUI; }
+	public int volunteersPlaced;
+	public int maxVolunteers; 
 
 	[HideInInspector] public Transform agentParent, utility;
 	public List<VolunteerTask> volunteers = new List<VolunteerTask>();
@@ -32,6 +34,9 @@ public class ForestController : RegionController {
 		agentParent.parent = transform;
 		utility = new GameObject("Utility").transform;
 		utility.parent = transform;
+		volunteersPlaced = 0;
+		maxVolunteers = 3; //TODO: change this based on popular opinion
+		
 
 		uiPanel.GetComponentsInChildren<VolunteerUI>().Skip(numActive).ToList().ForEach(v => v.Deactivate());
 	}
@@ -50,6 +55,7 @@ public class ForestController : RegionController {
 
 	/// <summary> Generates new volunteer / logger on click </summary>
 	public PathfindingAgent NewAgent(GameObject prefab, Vector3 pos, Vector3 target) {
+		
 		var newAgent = GameObject.Instantiate(prefab, pos, Quaternion.identity, agentParent).GetComponent<PathfindingAgent>();
 		newAgent.transform.position = new Vector3(newAgent.transform.position.x, newAgent.transform.position.y, 0);
 		newAgent.gameObject.SetActive(true);
@@ -61,6 +67,8 @@ public class ForestController : RegionController {
 
 	/// <summary> Creates volunteer and applies path target </summary>
 	public void SetVolunteerTarget(Vector3 pos, UnityAction<Volunteer> onReached) {
+		volunteersPlaced++;
+		Debug.Log("Volunteers placed: " + volunteersPlaced);
 		var newVolunteer = NewAgent(volunteerPrefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
 		newVolunteer.ID = volunteers.Count;
 		newVolunteer.name += $" {newVolunteer.ID}";
@@ -75,6 +83,10 @@ public class ForestController : RegionController {
 			volunteers[newVolunteer.ID]?.UI.Reset();
 			volunteers.RemoveAt(newVolunteer.ID);
 		});
+
+		if (volunteersPlaced >= maxVolunteers) {
+			GameOver();
+		}
 	}
 
 	/// <summary> Vector3Int overload (for ForestGrid) </summary>
