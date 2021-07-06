@@ -76,15 +76,17 @@ public abstract class RegionController : MonoBehaviour {
 
 	protected virtual void Update() {
 		try {
+			//Debug.Log("Timer");
 			timer -= Time.deltaTime;
 			timerText.text = $"{Mathf.Max(0, Mathf.Floor(timer))}";
 			if (timer <= 0)
 			{
 				timer = -2; // -2 is finished state
 				GameOver();
-				StartModel();
+				//StartModel();
 			}
 		} catch {
+			Debug.Log("no timer");
 			// if in the city
 			return;
 		}

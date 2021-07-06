@@ -45,7 +45,7 @@ public class ForestController : RegionController {
 		base.GameOver();
 		StopAllCoroutines();
 		double effect = damage / 200;
-		TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
+		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
 	}
 
 	/// <summary> Generates new volunteer / logger on click </summary>
