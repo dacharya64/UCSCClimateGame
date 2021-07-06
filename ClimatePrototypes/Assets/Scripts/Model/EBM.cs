@@ -123,7 +123,7 @@ public partial class EBM {
 		{
 			tempArray2[i] = Mathf.Rad2Deg * tempArray[i];
 		}
-		np_e = lat;// tempArray2;//f(np.rad2deg(np.arcsin(x))) # net precip on model grid
+		np_e = tempArray2;// lat;// tempArray2;//f(np.rad2deg(np.arcsin(x))) # net precip on model grid
 		//np_e = lat.Map(l => f.Interpolate(l)); // TODO change this value?
 	}
 
