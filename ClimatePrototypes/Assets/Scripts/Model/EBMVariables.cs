@@ -17,11 +17,11 @@ public partial class EBM {
 
 	// space-time vars
 	/// <summary> Number of latitudinal bands </summary>
-	static readonly int bands = 12;
+	static readonly int bands = 24;
 	/// <summary> Number of game regions </summary>
 	public static int regions = 3;
 	/// <summary> Number of timesteps per year </summary>
-	static readonly int nt = 3000;
+	static readonly int nt = 1000;
 	/// <summary> Number of years </summary>
 	static readonly int dur = 30;
 	/// <summary> Change in time </summary>
