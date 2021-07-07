@@ -63,7 +63,7 @@ public class PathfindingAgent : MonoBehaviour {
 	void ReachedTarget() {
 		// pathfinder.canMove = false;
 		// pathfinder.enabled = false;
-		pathfinder.isStopped = true;
+		//pathfinder.isStopped = true;
 		transform.localScale = Vector3.one;
 		anim.ResetTrigger("Walking");
 		if (setter.target.position == origin)
