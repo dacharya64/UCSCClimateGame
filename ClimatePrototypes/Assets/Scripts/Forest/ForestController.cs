@@ -18,10 +18,17 @@ public class ForestController : RegionController {
 	public bool hasSelected { get => selected != null && !overUI; }
 	public int volunteersPlaced;
 	public int maxVolunteers;
-
+	// for showing the results of changing the model
 	public double forcingIncrease;
 	public double forcingDecrease;
 	public double percentageIncrease;
+	// text objects for results UI
+	public Text percentageIncreaseText;
+	public Text emissionsIncreaseText;
+	public Text emissionsDecreaseText;
+	public Text emissionsTotalText;
+
+
 
 	[HideInInspector] public Transform agentParent, utility;
 	public List<VolunteerTask> volunteers = new List<VolunteerTask>();
@@ -35,7 +42,7 @@ public class ForestController : RegionController {
 	void Start() {
 		forcingDecrease = 0.0;
 		percentageIncrease = 0.25;
-		forcingIncrease = 0.0;
+		forcingIncrease = (EBM.F + 0.5) * percentageIncrease;
 		damage = 100;
 		agentParent = new GameObject("Agent Parent").transform;
 		agentParent.parent = transform;
@@ -49,6 +56,10 @@ public class ForestController : RegionController {
 
 	protected override void Update() {
 		base.Update();
+		percentageIncreaseText.text = (percentageIncrease * 100).ToString() + "%";
+		emissionsIncreaseText.text = forcingIncrease.ToString();
+		emissionsDecreaseText.text = forcingDecrease.ToString();
+		emissionsTotalText.text = (forcingIncrease - forcingDecrease).ToString();
 		//emissionsTracker.value = damage / 200f; // TODO: fix slider visual logic, positive and negative but from the middle out
 	}
 
@@ -59,7 +70,7 @@ public class ForestController : RegionController {
 		double effect = forcingIncrease - forcingDecrease;
 		Debug.Log("Percentage increase is " + percentageIncrease);
 		Debug.Log("effect is " + forcingIncrease + " - " + forcingDecrease);
-		TriggerUpdate(() => World.co2.Update(region, delta: effect));
+		//TriggerUpdate(() => World.co2.Update(region, delta: effect));
 		World.ChangeAverageTemp();
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
 	}
