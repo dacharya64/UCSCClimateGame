@@ -17,7 +17,10 @@ public class ForestController : RegionController {
 	[HideInInspector] public bool overUI = false;
 	public bool hasSelected { get => selected != null && !overUI; }
 	public int volunteersPlaced;
-	public int maxVolunteers; 
+	public int maxVolunteers;
+
+	public double forcingIncrease;
+	public double forcingDecrease; 
 
 	[HideInInspector] public Transform agentParent, utility;
 	public List<VolunteerTask> volunteers = new List<VolunteerTask>();
@@ -29,6 +32,8 @@ public class ForestController : RegionController {
 	public void UIHover(bool over) => overUI = over;
 
 	void Start() {
+		forcingIncrease = 0.2;
+		forcingDecrease = 0.0;
 		damage = 100;
 		agentParent = new GameObject("Agent Parent").transform;
 		agentParent.parent = transform;
@@ -43,13 +48,16 @@ public class ForestController : RegionController {
 
 	protected override void Update() {
 		base.Update();
-		emissionsTracker.value = damage / 200f; // TODO: fix slider visual logic, positive and negative but from the middle out
+		//emissionsTracker.value = damage / 200f; // TODO: fix slider visual logic, positive and negative but from the middle out
 	}
 
 	protected override void GameOver() {
 		base.GameOver();
 		StopAllCoroutines();
-		double effect = damage / 200;
+		double effect = forcingIncrease - forcingDecrease;
+		Debug.Log("Effect: " + forcingIncrease + " - " + forcingDecrease);
+		TriggerUpdate(() => World.co2.Update(region, delta: effect));
+		World.ChangeAverageTemp();
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
 	}
 
@@ -84,16 +92,27 @@ public class ForestController : RegionController {
 			volunteers.RemoveAt(newVolunteer.ID);
 		});
 
-		if (volunteersPlaced >= maxVolunteers) {
-			GameOver();
-		}
+
 	}
 
 	/// <summary> Vector3Int overload (for ForestGrid) </summary>
 	public void SetVolunteerTarget(Vector3Int pos, UnityAction<Volunteer> onReached) {
 		SetVolunteerTarget((Vector3) pos, onReached);
 		volunteers[volunteers.Count - 1].activeTile = pos;
+		
 	}
+
+	public void ChangeForcingDecrease(double change)
+	{
+		forcingDecrease = forcingDecrease + change;
+
+		// Check to see if player has placed all the workers 
+		if (volunteersPlaced >= maxVolunteers)
+		{
+			GameOver();
+		}
+	}
+
 }
 
 // [System.Serializable]
@@ -105,3 +124,4 @@ public class VolunteerTask {
 	public UnityAction<Volunteer> action;
 	public VolunteerTask(Volunteer v, VolunteerUI vUI, UnityAction<Volunteer> vAction, Vector3Int? tile = null, Vector3 pos = default) => (volunteer, UI, action, activeTile, target) = (v, vUI, vAction, tile, pos);
 }
+

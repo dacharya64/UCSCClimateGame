@@ -22,9 +22,11 @@ public class VolunteerActions {
 	}
 
 	public static void Plant(Volunteer v) {
+		
 		v.anim.SetTrigger("Shoveling");
 		var task = ForestController.Instance.volunteers[v.ID];
 		ForestController.Instance.StartCoroutine(TreeGrow(task.volunteer, task.activeTile.Value));
+		ForestController.Instance.ChangeForcingDecrease(0.03);
 	}
 
 	public static IEnumerator TreeGrow(Volunteer v, Vector3Int tilePos) {
@@ -46,8 +48,10 @@ public class VolunteerActions {
 	}
 
 	public static void Protest(Volunteer v) {
+		
 		v.anim.SetTrigger("Protesting");
 		ForestController.Instance.StartCoroutine(WaitAndReturn(v, 3));
+		ForestController.Instance.ChangeForcingDecrease(0.05);
 	}
 
 	public static void Clear(Volunteer v) {
@@ -63,8 +67,10 @@ public class VolunteerActions {
 		ForestGrid.RemoveTree(tilePos);
 	}
 	public static void Capture(Volunteer v) {
+		
 		v.anim.SetTrigger("Facility");
 		ForestController.Instance.StartCoroutine(CaptureAndReturn(v, 3));
+		ForestController.Instance.ChangeForcingDecrease(0.09);
 	}
 
 	static IEnumerator CaptureAndReturn(Volunteer v, float time, int steps = 20) {
