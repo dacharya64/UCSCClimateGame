@@ -22,12 +22,19 @@ public class VolunteerActions {
 	}
 
 	public static void Plant(Volunteer v) {
-		ForestController.Instance.ChangeForcingDecrease(0.03);
 		v.anim.SetTrigger("Shoveling");
 		var task = ForestController.Instance.volunteers[v.ID];
 		ForestController.Instance.StartCoroutine(TreeGrow(task.volunteer, task.activeTile.Value));
+		ForestController.Instance.StartCoroutine(SetPlantChange(1, 0.03));
 		ForestController.Instance.CheckEndGame();
 	}
+
+	public static IEnumerator SetPlantChange (float duration = 1, double change = 0.03)
+	{
+		ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + change;
+		yield return null;
+	}
+
 
 	public static IEnumerator TreeGrow(Volunteer v, Vector3Int tilePos) {
 		ForestGrid.ClearHover(tilePos);
@@ -47,10 +54,15 @@ public class VolunteerActions {
 		agent.AssignTarget(agent.origin);*/
 	}
 
+	public static IEnumerator SetProtestChanges(float duration = 1, double change = 0.05)
+	{
+		ForestController.Instance.percentageIncrease = ForestController.Instance.percentageIncrease - change;
+		yield return null;
+	}
+
 	public static void Protest(Volunteer v) {
-		ForestController.Instance.ChangePercentageIncrease(0.05);
 		v.anim.SetTrigger("Protesting");
-		ForestController.Instance.StartCoroutine(WaitAndReturn(v, 3));
+		ForestController.Instance.StartCoroutine(SetProtestChanges(1, 0.05));
 		ForestController.Instance.CheckEndGame();
 	}
 
@@ -58,6 +70,7 @@ public class VolunteerActions {
 		v.anim.SetTrigger("Shoveling");
 		var task = ForestController.Instance.volunteers[v.ID];
 		ForestController.Instance.StartCoroutine(ClearAndReturn(v, task.activeTile.Value));
+		
 	}
 
 	static IEnumerator ClearAndReturn(Volunteer v, Vector3Int tilePos) {
@@ -67,10 +80,18 @@ public class VolunteerActions {
 		ForestGrid.RemoveTree(tilePos);
 	}
 	public static void Capture(Volunteer v) {
-		ForestController.Instance.ChangeForcingDecrease(0.09);
+		World.money = World.money - 5f;
 		v.anim.SetTrigger("Facility");
 		ForestController.Instance.StartCoroutine(CaptureAndReturn(v, 3));
+		ForestController.Instance.StartCoroutine(SetCaptureChanges(1, 0.09, 5f));
 		ForestController.Instance.CheckEndGame();
+	}
+
+	public static IEnumerator SetCaptureChanges(float duration = 1, double change = 0.09, float moneyDecrease = 5f)
+	{
+		ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + change;
+		World.money = World.money - moneyDecrease;
+		yield return null;
 	}
 
 	static IEnumerator CaptureAndReturn(Volunteer v, float time, int steps = 20) {

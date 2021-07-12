@@ -57,6 +57,8 @@ public class ForestController : RegionController {
 		StopAllCoroutines();
 		forcingIncrease = (EBM.F + 0.5) * percentageIncrease;
 		double effect = forcingIncrease - forcingDecrease;
+		Debug.Log("Percentage increase is " + percentageIncrease);
+		Debug.Log("effect is " + forcingIncrease + " - " + forcingDecrease);
 		TriggerUpdate(() => World.co2.Update(region, delta: effect));
 		World.ChangeAverageTemp();
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
@@ -99,16 +101,6 @@ public class ForestController : RegionController {
 	public void SetVolunteerTarget(Vector3Int pos, UnityAction<Volunteer> onReached) {
 		SetVolunteerTarget((Vector3) pos, onReached);
 		volunteers[volunteers.Count - 1].activeTile = pos;
-	}
-
-	public void ChangeForcingDecrease(double change)
-	{
-		forcingDecrease = forcingDecrease + change;
-	}
-	
-	public void ChangePercentageIncrease(double change)
-	{
-		percentageIncrease = percentageIncrease - change;
 	}
 
 	public void CheckEndGame() {
