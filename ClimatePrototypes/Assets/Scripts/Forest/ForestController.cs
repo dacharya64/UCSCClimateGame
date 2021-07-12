@@ -130,6 +130,18 @@ public class ForestController : RegionController {
 	{
 		aboutPrompt.SetActive(false);
 	}
+
+	public void SetAboutText(string area) {
+		if (area == "factory")
+		{
+			aboutText.text = "This is the factory. Volunteers here will protest, which will lower the rate at which emissions increases over time.";
+		}
+		else if (area == "forest") {
+			aboutText.text = "This is the area being deforested. Volunteers placed here will help plant trees. This will reduce emissions slightly.";
+		} else {
+			aboutText.text = "This is the carbon sequestration plant, which captures and stores carbon dioxide. Volunteers placed here will reduce emissions significantly, but this costs money. ";
+		}
+	}
 }
 
 // [System.Serializable]
