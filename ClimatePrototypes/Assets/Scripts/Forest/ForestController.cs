@@ -28,7 +28,8 @@ public class ForestController : RegionController {
 	public Text emissionsDecreaseText;
 	public Text emissionsTotalText;
 
-
+	public GameObject aboutPrompt;
+	public Text aboutText;
 
 	[HideInInspector] public Transform agentParent, utility;
 	public List<VolunteerTask> volunteers = new List<VolunteerTask>();
@@ -104,8 +105,6 @@ public class ForestController : RegionController {
 			volunteers[newVolunteer.ID]?.UI.Reset();
 			volunteers.RemoveAt(newVolunteer.ID);
 		});
-
-
 	}
 
 	/// <summary> Vector3Int overload (for ForestGrid) </summary>
@@ -120,6 +119,16 @@ public class ForestController : RegionController {
 		{
 			GameOver();
 		}
+	}
+
+	public void OpenAbout()
+	{
+		aboutPrompt.SetActive(true);
+	}
+
+	public void CloseAbout()
+	{
+		aboutPrompt.SetActive(false);
 	}
 }
 
