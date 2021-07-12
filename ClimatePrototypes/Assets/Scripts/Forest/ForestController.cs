@@ -28,7 +28,8 @@ public class ForestController : RegionController {
 	public Text emissionsDecreaseText;
 	public Text emissionsTotalText;
 
-
+	public GameObject aboutPrompt;
+	public Text aboutText;
 
 	[HideInInspector] public Transform agentParent, utility;
 	public List<VolunteerTask> volunteers = new List<VolunteerTask>();
@@ -104,8 +105,6 @@ public class ForestController : RegionController {
 			volunteers[newVolunteer.ID]?.UI.Reset();
 			volunteers.RemoveAt(newVolunteer.ID);
 		});
-
-
 	}
 
 	/// <summary> Vector3Int overload (for ForestGrid) </summary>
@@ -119,6 +118,28 @@ public class ForestController : RegionController {
 		if (volunteersPlaced >= maxVolunteers)
 		{
 			GameOver();
+		}
+	}
+
+	public void OpenAbout()
+	{
+		aboutPrompt.SetActive(true);
+	}
+
+	public void CloseAbout()
+	{
+		aboutPrompt.SetActive(false);
+	}
+
+	public void SetAboutText(string area) {
+		if (area == "factory")
+		{
+			aboutText.text = "This is the factory. Volunteers here will protest, which will lower the rate at which emissions increases over time.";
+		}
+		else if (area == "forest") {
+			aboutText.text = "This is the area being deforested. Volunteers placed here will help plant trees. This will reduce emissions slightly.";
+		} else {
+			aboutText.text = "This is the carbon sequestration plant, which captures and stores carbon dioxide. Volunteers placed here will reduce emissions significantly, but this costs money. ";
 		}
 	}
 }
