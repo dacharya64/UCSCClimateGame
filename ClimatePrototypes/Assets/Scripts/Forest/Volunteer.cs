@@ -30,9 +30,9 @@ public class VolunteerActions {
 	public static IEnumerator TreeGrow(Volunteer v, Vector3Int tilePos) {
 		ForestGrid.ClearHover(tilePos);
 		yield return new WaitForSeconds(1);
-		v.anim.ResetTrigger("Shoveling");
-		v.anim.SetTrigger("Walking");
-		v.AssignTarget(v.origin);
+		//v.anim.ResetTrigger("Shoveling");
+		//v.anim.SetTrigger("Walking");
+		//v.AssignTarget(v.origin);
 		ForestGrid.currentTrees.Add(new ForestTree(tilePos));
 		// if (i == 2)
 		// 	ForestController.Instance.activeTrees.Add(tilePos);
@@ -63,7 +63,7 @@ public class VolunteerActions {
 		ForestGrid.RemoveTree(tilePos);
 	}
 	public static void Capture(Volunteer v) {
-		// v.anim.SetTrigger("Facility");
+		v.anim.SetTrigger("Facility");
 		ForestController.Instance.StartCoroutine(CaptureAndReturn(v, 3));
 	}
 

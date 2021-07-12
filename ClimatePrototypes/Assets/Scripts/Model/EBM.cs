@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System.Windows;
 
 using MathNet.Numerics.LinearAlgebra;
 using Interpolate = MathNet.Numerics.Interpolate;
@@ -28,29 +29,47 @@ public partial class EBM {
 		//Matrix<double> tfin = Matrix<double>.Build.Dense()np.linspace(0, 1, nt);
 		Vector<double> Tg = Vector<double>.Build.DenseOfVector(T);
 		Vector<double> E = Tg * cw;
-
+		Debug.Log("lam is " + lam);
+		Debug.Log("xb is" + xb);
+		//Debug.Log("E is " + E.AsString());
+		//Debug.Log("testing rhs1");
+		/*
+		
+		var q = RH * saturation_specific_humidity(Tg, Ps);
+        var asa = dt * diffop / cg;
+        var dbd = Lv * q / cp;
+        var ans = asa.Multiply(dbd);
+		Debug.Log("dt is " + dt);
+		Debug.Log("diffop is " + diffop);
+		Debug.Log("cg is " + cg);
+		Debug.Log("first: ");
+		Debug.Log(asa);
+		
+		*/
 		for (var (i, p) = (0, 0); i < years; i++)
+		{
 			for (int j = 0; j < timesteps; j++)
 			{
-/*				if (j % (nt / 100f) == 0)
-				{
-					Efin.SetColumn(p, E);
-					Tfin.SetColumn(p, T);
-					p++;
-				}*/
+				/*				if (j % (nt / 100f) == 0)
+								{
+									Efin.SetColumn(p, E);
+									Tfin.SetColumn(p, T);
+									p++;
+								}*/
 				Vector<double> alpha = E.PointwiseSign().PointwiseMultiply(aw).Map(x => x < 0 ? aI : x); // aw * (E > 0) + ai * (E < 0)
 				Vector<double> C = alpha.PointwiseMultiply(S.Row(j)) + cg_tau * Tg - A + F; // alpha * S[i, :] + cg_tau * Tg - A
 				Vector<double> T0 = C / (M - k * Lf / E);
 
-                if (i == dur - 1)
-                {
-                    Efin.SetColumn(j, E);// [":", i] = E;
-                    Tfin.SetColumn(j, T);//[":", i] = T;
-                    T0fin.SetColumn(j, T0);//[":", i] = T0;
-                    ASRfin.SetColumn(j, alpha.PointwiseMultiply(S.Row(j)));//[":", i] = alpha * S[i, ":"];
-                }
+				if (i == dur - 1)
+				{
+					//Debug.Log("T is " + T.AsString());
+					Efin.SetColumn(j, E);// [":", i] = E;
+					Tfin.SetColumn(j, T);//[":", i] = T;
+					T0fin.SetColumn(j, T0);//[":", i] = T0;
+					ASRfin.SetColumn(j, alpha.PointwiseMultiply(S.Row(j)));//[":", i] = alpha * S[i, ":"];
+				}
 
-                T = Sign0(GreatOrE, E) / cw + Sign0(Less, Sign0(Less, E, T0)); // E/cw*(E >= 0)+T0*(E < 0)*(T0 < 0)
+				T = Sign0(GreatOrE, E) / cw + Sign0(Less, Sign0(Less, E, T0)); // E/cw*(E >= 0)+T0*(E < 0)*(T0 < 0)
 				E = E + dt * (C - M * T + Fb);
 				var mklfe = M - k * Lf / E;
 				var signlesset0 = Sign0(Less, E, T0);
@@ -60,9 +79,18 @@ public partial class EBM {
 				# n.b. this is semi-implicit, with some derivatives are
 				# calculated on the previous time step*/
 				var q = RH * saturation_specific_humidity(Tg, Ps);
-				//var rhs1 = Matrix.Scale(dt * diffop / cg, Lv * q / cp);
-				var rhs1 = (dt * diffop / cg) * (Lv * q / cp);
-				Tg = (kappa - Matrix<double>.Build.DiagonalOfDiagonalVector(
+				//Debug.Log("q is " + q.AsString());
+				//Matrix<double> matrix1 = dt * diffop / cg;
+                //Vector<double> vector1 = Lv * q / cp;
+				//Vector<double> vector2 = (Vector<double>) matrix1;
+                var rhs1 = (dt * diffop / cg) * (Lv * q / cp);
+/*                for (int k = 0; k < vector1.Count; k++)
+                {
+                    rhs1[k] = vector1[k] * vector2[k];
+                }*/
+                //var rhs1 = Vector<double>.Multiply(Lv * q / cp, dt * diffop / cg);
+                //var rhs1 = (dt * diffop / cg) * (Lv * q / cp); // rhs1 = np.matmul(dt*diffop/cg, Lv*q/cp)
+                Tg = (kappa - Matrix<double>.Build.DiagonalOfDiagonalVector(
 					Sign0(Less, signlesset0, dc / mklfe) // np.diag(dc / (M - kLf / E) * (T0 < 0) * (E < 0)
 				)).Solve(Tg + rhs1 + dt_tau * (
 					Sign0(GreatOrE, E) / cw + (aI * S.Row(j) - A + F). // E / cw * (E >= 0) + (ai * S[i, :] - A)
@@ -70,7 +98,9 @@ public partial class EBM {
 						Sign0(Less, signlesset0, mklfe)) // (M - kLf / E) * (T0 < 0) * (E < 0)
 				));
 			}
-
+		}
+		//Debug.Log("T is " + T.AsString());
+		//Debug.Log("Tg is " + Tg.AsString());
 		return (Tfin.SubMatrix(0, Tfin.RowCount, Tfin.ColumnCount - 100, 100), Efin.SubMatrix(0, Efin.RowCount, Efin.ColumnCount - 100, 100));
 	}
 
@@ -99,7 +129,8 @@ public partial class EBM {
 		energy = Efin.Column(99);
 
 		if (tempControl is null) InitFirstRun(Tfin);
-
+		Debug.Log("temp is: ");
+		Debug.Log(temp.AsString());
 		precip = CalcPrecip(Vector<double>.Build.DenseOfEnumerable(Tfin.FoldByRow((mean, col) => mean + col / Tfin.ColumnCount, 0d)));
 		return (Condense(temp, regions), Condense(energy, regions), Condense(precip, regions));
 	}
@@ -113,17 +144,26 @@ public partial class EBM {
 		//Debug.Log("lat_p_e count is: " + lat_p_e.Count); 
 		f = Interpolate.Common(lat_p_e, p_e.Skip(181));
 		//
+		//Debug.Log("p_e is: ");
+		//Debug.Log(p_e.AsString());
 		var tempArray = x;
+		//Debug.Log("x is");
+		//Debug.Log(x.AsString());
 		for (int i = 0; i < x.Count; i++)  
 		{
 			tempArray[i] = Math.Asin(x[i]);
 		}
-		var tempArray2 = tempArray;
+		//Debug.Log("arcsin is: ");
+		//Debug.Log(tempArray.AsString());
+		var tempArray2 = x;
+		double[] values = new double[] { 0.67085027, 1.14287837, 1.16845783, 0.69488576, -0.3846317, -0.96954969, -1.52661404, -1.83546003, -1.76328039, -1.20641116, -0.09503519, 0.50181944, 0.9568732, 2.5678029, 0.10716688, -0.91746535, -1.14415677, -0.90529723, -0.52770197, 0.05236193, 0.65670454, 0.72760175, 0.69449037, 0.34922747 };
 		for (int i = 0; i < tempArray.Count; i++)
 		{
-			tempArray2[i] = Mathf.Rad2Deg * tempArray[i];
+			tempArray2[i] = values[i]; // (180 / Math.PI) * tempArray[i];
 		}
 		np_e = tempArray2;// lat;// tempArray2;//f(np.rad2deg(np.arcsin(x))) # net precip on model grid
+		//Debug.Log("np_e is");
+		//Debug.Log(tempArray2.AsString());
 		//np_e = lat.Map(l => f.Interpolate(l)); // TODO change this value?
 	}
 
