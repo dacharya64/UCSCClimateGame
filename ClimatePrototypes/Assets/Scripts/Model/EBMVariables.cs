@@ -39,8 +39,8 @@ public partial class EBM {
 	//static readonly Vector<double> xb = Vector<double>.Build.Dense(bands, i => ++i * dx); TODO correct this
 	//static double[] xb_values = new double[] { -0.91666667, -0.83333333, -0.75, -0.66666667, -0.58333333, -0.5, -0.41666667, -0.33333333, -0.25, -0.16666667, -0.08333333, 0., 0.08333333, 0.16666667, 0.25, 0.33333333, 0.41666667, 0.5, 0.58333333, 0.66666667, 0.75, 0.83333333, 0.91666667 };
 	static double[] xb_values = new double[] { -0.91666667, -0.83333333, -0.75, -0.66666667, -0.58333333, -0.5, -0.41666667, -0.33333333, -0.25, -0.16666667, -0.08333333, 0.0, 0.08333333, 0.16666667, 0.25, 0.33333333, 0.41666667, 0.5, 0.58333333, 0.66666667, 0.75, 0.83333333, 0.91666667, 0.91666667 };
-	static Vector<double> xb = Vector<double>.Build.Dense(bands, i => xb_values[i++]);
-	//static Vector<double> xb = Vector<double>.Build.Dense(bands, i => -1 + dx / 2 + i++ * dx);
+	//static Vector<double> xb = Vector<double>.Build.Dense(bands, i => xb_values[i++]);
+	static Vector<double> xb = Vector<double>.Build.Dense(bands - 1, i => -1 + dx + i++ * dx);
 	// standard consts
 	/// <summary> OLR when T = 0(W m^-2) </summary>
 	public static double A = 195;
@@ -97,7 +97,7 @@ public partial class EBM {
 	// # Diffusion Operator (WE15, Appendix A)
 	static readonly Vector<double> lam = D / dx / dx * (1 - xb.PointwisePower(2));
 	static readonly Vector<double> L1 = Vector<double>.Build.Dense(bands, i => i == 0 ? 0 : -lam[i++ - 1]);
-	static readonly Vector<double> L2 = Vector<double>.Build.Dense(bands, i => i >= bands ? 0 : -lam[i++]);
+	static readonly Vector<double> L2 = Vector<double>.Build.Dense(bands, i => i >= bands - 1 ? 0 : -lam[i++]);
 	static readonly Vector<double> L3 = -L1 - L2;
 	static readonly Matrix<double> d3 = Matrix<double>.Build.DiagonalOfDiagonalVector(L3);
 	static readonly Matrix<double> d2 = new Func<Matrix<double>>(() => {
