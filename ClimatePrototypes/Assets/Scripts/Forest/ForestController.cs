@@ -20,7 +20,8 @@ public class ForestController : RegionController {
 	public int maxVolunteers;
 
 	public double forcingIncrease;
-	public double forcingDecrease; 
+	public double forcingDecrease;
+	public double percentageIncrease;
 
 	[HideInInspector] public Transform agentParent, utility;
 	public List<VolunteerTask> volunteers = new List<VolunteerTask>();
@@ -32,8 +33,9 @@ public class ForestController : RegionController {
 	public void UIHover(bool over) => overUI = over;
 
 	void Start() {
-		forcingIncrease = 0.2;
 		forcingDecrease = 0.0;
+		percentageIncrease = 0.25;
+		forcingIncrease = 0.0;
 		damage = 100;
 		agentParent = new GameObject("Agent Parent").transform;
 		agentParent.parent = transform;
@@ -41,7 +43,6 @@ public class ForestController : RegionController {
 		utility.parent = transform;
 		volunteersPlaced = 0;
 		maxVolunteers = 3; //TODO: change this based on popular opinion
-		
 
 		uiPanel.GetComponentsInChildren<VolunteerUI>().Skip(numActive).ToList().ForEach(v => v.Deactivate());
 	}
@@ -54,8 +55,8 @@ public class ForestController : RegionController {
 	protected override void GameOver() {
 		base.GameOver();
 		StopAllCoroutines();
+		forcingIncrease = (EBM.F + 0.5) * percentageIncrease;
 		double effect = forcingIncrease - forcingDecrease;
-		Debug.Log("Effect: " + forcingIncrease + " - " + forcingDecrease);
 		TriggerUpdate(() => World.co2.Update(region, delta: effect));
 		World.ChangeAverageTemp();
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
@@ -76,7 +77,6 @@ public class ForestController : RegionController {
 	/// <summary> Creates volunteer and applies path target </summary>
 	public void SetVolunteerTarget(Vector3 pos, UnityAction<Volunteer> onReached) {
 		volunteersPlaced++;
-		Debug.Log("Volunteers placed: " + volunteersPlaced);
 		var newVolunteer = NewAgent(volunteerPrefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
 		newVolunteer.ID = volunteers.Count;
 		newVolunteer.name += $" {newVolunteer.ID}";
@@ -99,20 +99,25 @@ public class ForestController : RegionController {
 	public void SetVolunteerTarget(Vector3Int pos, UnityAction<Volunteer> onReached) {
 		SetVolunteerTarget((Vector3) pos, onReached);
 		volunteers[volunteers.Count - 1].activeTile = pos;
-		
 	}
 
 	public void ChangeForcingDecrease(double change)
 	{
 		forcingDecrease = forcingDecrease + change;
+	}
+	
+	public void ChangePercentageIncrease(double change)
+	{
+		percentageIncrease = percentageIncrease - change;
+	}
 
+	public void CheckEndGame() {
 		// Check to see if player has placed all the workers 
 		if (volunteersPlaced >= maxVolunteers)
 		{
 			GameOver();
 		}
 	}
-
 }
 
 // [System.Serializable]

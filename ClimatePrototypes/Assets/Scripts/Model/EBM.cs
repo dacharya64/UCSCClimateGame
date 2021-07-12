@@ -29,8 +29,6 @@ public partial class EBM {
 		//Matrix<double> tfin = Matrix<double>.Build.Dense()np.linspace(0, 1, nt);
 		Vector<double> Tg = Vector<double>.Build.DenseOfVector(T);
 		Vector<double> E = Tg * cw;
-		Debug.Log("lam is " + lam);
-		Debug.Log("xb is" + xb);
 		//Debug.Log("E is " + E.AsString());
 		//Debug.Log("testing rhs1");
 		/*
@@ -129,8 +127,8 @@ public partial class EBM {
 		energy = Efin.Column(99);
 
 		if (tempControl is null) InitFirstRun(Tfin);
-		Debug.Log("temp is: ");
-		Debug.Log(temp.AsString());
+/*		Debug.Log("temp is: ");
+		Debug.Log(temp.AsString());*/
 		precip = CalcPrecip(Vector<double>.Build.DenseOfEnumerable(Tfin.FoldByRow((mean, col) => mean + col / Tfin.ColumnCount, 0d)));
 		return (Condense(temp, regions), Condense(energy, regions), Condense(precip, regions));
 	}
