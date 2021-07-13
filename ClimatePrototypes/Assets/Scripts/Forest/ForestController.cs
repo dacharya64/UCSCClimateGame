@@ -50,8 +50,31 @@ public class ForestController : RegionController {
 		utility = new GameObject("Utility").transform;
 		utility.parent = transform;
 		volunteersPlaced = 0;
-		maxVolunteers = 3; //TODO: change this based on popular opinion
-
+		// Set active and max number of workers based on popular opinion
+		if (World.publicOpinion < 20)
+		{
+			numActive = 1;
+			maxVolunteers = 1;
+		}
+		else if (World.publicOpinion >= 20 && World.publicOpinion < 40)
+		{
+			numActive = 2;
+			maxVolunteers = 2;
+		}
+		else if (World.publicOpinion >= 40 && World.publicOpinion < 60)
+		{
+			numActive = 3;
+			maxVolunteers = 3;
+		}
+		else if (World.publicOpinion >= 60 && World.publicOpinion < 80)
+		{
+			numActive = 4;
+			maxVolunteers = 4;
+		}
+		else {
+			numActive = 5;
+			maxVolunteers = 5;
+		}
 		uiPanel.GetComponentsInChildren<VolunteerUI>().Skip(numActive).ToList().ForEach(v => v.Deactivate());
 	}
 
