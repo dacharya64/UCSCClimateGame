@@ -185,6 +185,7 @@ public class ForestController : RegionController {
 				volunteers[i]?.UI.Reset();
 				//volunteers.RemoveAt(i);
 			}
+			volunteers.Clear();
 			volunteersPlaced = 0;
 		}
 		
