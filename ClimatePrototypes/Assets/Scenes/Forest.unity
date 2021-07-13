@@ -3370,7 +3370,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1122320761}
+      - m_Target: {fileID: 0}
         m_MethodName: SetAboutText
         m_Mode: 5
         m_Arguments:
@@ -3598,6 +3598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 396213017}
   - component: {fileID: 396213019}
+  - component: {fileID: 396213018}
   m_Layer: 0
   m_Name: ForestController
   m_TagString: Untagged
@@ -3619,6 +3620,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &396213018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396213016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba14f6af4fa9b954d91d55db620af0fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visits: 0
+  introPrefab: {fileID: 7828951428166734627, guid: e57646aa12c95da46a24c8c6aaf3ee51,
+    type: 3}
+  intro: {fileID: 11400000, guid: f5cac2c475f3d354eaa7a9566aff605f, type: 2}
+  timerText: {fileID: 0}
+  damage: 0
+  paused: 0
+  region: 2
+  backgrounds: []
+  volunteerPrefab: {fileID: 8216776056107443475}
+  uiPanel: {fileID: 1631926910}
+  selected: {fileID: 0}
+  numActive: 3
+  overUI: 0
+  volunteersPlaced: 0
+  maxVolunteers: 0
+  forcingIncrease: 0
+  forcingDecrease: 0
+  percentageIncrease: 0
+  percentageIncreaseText: {fileID: 1378888498}
+  emissionsIncreaseText: {fileID: 1103482962}
+  emissionsDecreaseText: {fileID: 1367283042}
+  emissionsTotalText: {fileID: 636395560}
+  aboutPrompt: {fileID: 506256797}
+  aboutText: {fileID: 854287849}
+  agentParent: {fileID: 0}
+  utility: {fileID: 0}
+  activeTrees: []
+  emissionsTracker: {fileID: 1653360902}
 --- !u!114 &396213019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5214,7 +5256,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1122320761}
+      - m_Target: {fileID: 0}
         m_MethodName: OpenAbout
         m_Mode: 1
         m_Arguments:
@@ -5499,7 +5541,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1122320761}
+      - m_Target: {fileID: 0}
         m_MethodName: CloseAbout
         m_Mode: 1
         m_Arguments:
@@ -5791,7 +5833,6 @@ GameObject:
   - component: {fileID: 1122320757}
   - component: {fileID: 1122320756}
   - component: {fileID: 1122320760}
-  - component: {fileID: 1122320761}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5891,47 +5932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9bbc62e1eb87ad4a82e5d22dfd311c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1122320761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1122320755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba14f6af4fa9b954d91d55db620af0fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visits: 0
-  introPrefab: {fileID: 7828951428166734627, guid: e57646aa12c95da46a24c8c6aaf3ee51,
-    type: 3}
-  intro: {fileID: 11400000, guid: f5cac2c475f3d354eaa7a9566aff605f, type: 2}
-  timerText: {fileID: 0}
-  damage: 0
-  paused: 0
-  region: 2
-  backgrounds: []
-  volunteerPrefab: {fileID: 8216776056107443475}
-  uiPanel: {fileID: 1631926910}
-  selected: {fileID: 0}
-  numActive: 3
-  overUI: 0
-  volunteersPlaced: 0
-  maxVolunteers: 0
-  forcingIncrease: 0
-  forcingDecrease: 0
-  percentageIncrease: 0
-  percentageIncreaseText: {fileID: 1378888498}
-  emissionsIncreaseText: {fileID: 1103482962}
-  emissionsDecreaseText: {fileID: 1367283042}
-  emissionsTotalText: {fileID: 636395560}
-  aboutPrompt: {fileID: 506256797}
-  aboutText: {fileID: 854287849}
-  agentParent: {fileID: 0}
-  utility: {fileID: 0}
-  activeTrees: []
-  emissionsTracker: {fileID: 1653360902}
 --- !u!1 &1155070101
 GameObject:
   m_ObjectHideFlags: 0
@@ -6682,7 +6682,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1122320761}
+      - m_Target: {fileID: 0}
         m_MethodName: SetAboutText
         m_Mode: 5
         m_Arguments:
@@ -7344,7 +7344,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1122320761}
+      - m_Target: {fileID: 0}
         m_MethodName: SetAboutText
         m_Mode: 5
         m_Arguments:
@@ -8056,7 +8056,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1122320761}
+      - m_Target: {fileID: 0}
         m_MethodName: SetAboutText
         m_Mode: 5
         m_Arguments:
