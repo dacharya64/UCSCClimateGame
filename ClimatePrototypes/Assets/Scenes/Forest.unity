@@ -3660,6 +3660,7 @@ MonoBehaviour:
   aboutText: {fileID: 854287849}
   agentParent: {fileID: 0}
   utility: {fileID: 0}
+  volunteerAgents: []
   activeTrees: []
   emissionsTracker: {fileID: 1653360902}
 --- !u!114 &396213019
@@ -5745,7 +5746,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 911253586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16, y: 1.29, z: 0}
+  m_LocalPosition: {x: 0.16, y: -2, z: 0}
   m_LocalScale: {x: 9.938879, y: 5.056187, z: 1}
   m_Children: []
   m_Father: {fileID: 1327450718}
