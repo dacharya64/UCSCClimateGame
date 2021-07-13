@@ -63,6 +63,7 @@ public class VolunteerActions {
 	public static void Protest(Volunteer v) {
 		v.anim.SetTrigger("Protesting");
 		ForestController.Instance.StartCoroutine(SetProtestChanges(1, 0.05));
+		//ForestController.Instance.StartCoroutine(SetLoadingPromptState(true));
 		ForestController.Instance.CheckEndGame();
 	}
 

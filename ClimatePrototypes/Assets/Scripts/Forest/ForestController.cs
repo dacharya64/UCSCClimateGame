@@ -92,10 +92,9 @@ public class ForestController : RegionController {
 		StopAllCoroutines();
 		forcingIncrease = (EBM.F + 0.5) * percentageIncrease;
 		double effect = forcingIncrease - forcingDecrease;
-		Debug.Log("Percentage increase is " + percentageIncrease);
-		Debug.Log("effect is " + forcingIncrease + " - " + forcingDecrease);
 		//TriggerUpdate(() => World.co2.Update(region, delta: effect));
 		World.ChangeAverageTemp();
+		base.Loading(false);
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
 	}
 
@@ -114,6 +113,7 @@ public class ForestController : RegionController {
 	/// <summary> Creates volunteer and applies path target </summary>
 	public void SetVolunteerTarget(Vector3 pos, UnityAction<Volunteer> onReached) {
 		volunteersPlaced++;
+		CheckDisplayLoadingScreen();
 		var newVolunteer = NewAgent(volunteerPrefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
 		newVolunteer.ID = volunteers.Count;
 		newVolunteer.name += $" {newVolunteer.ID}";
@@ -136,11 +136,21 @@ public class ForestController : RegionController {
 		volunteers[volunteers.Count - 1].activeTile = pos;
 	}
 
-	public void CheckEndGame() {
+    public void CheckEndGame()
+    {
+        // Check to see if player has placed all the workers 
+        if (volunteersPlaced >= maxVolunteers)
+        {
+			GameOver();
+        }
+    }
+
+	public void CheckDisplayLoadingScreen()
+	{
 		// Check to see if player has placed all the workers 
 		if (volunteersPlaced >= maxVolunteers)
 		{
-			GameOver();
+			base.Loading(true);
 		}
 	}
 

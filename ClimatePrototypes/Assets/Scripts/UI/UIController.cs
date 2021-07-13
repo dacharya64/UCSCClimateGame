@@ -11,6 +11,7 @@ public class UIController : Singleton<UIController> {
 	[SerializeField] Button backButton = default,
 	exitButton = default;
 	[SerializeField] GameObject returnPrompt = default;
+	[SerializeField] GameObject loadingPrompt = default;
 	public GameObject navbar;
 	Dictionary<GameObject, bool> uiActiveStatus = new Dictionary<GameObject, bool>();
 
@@ -75,6 +76,11 @@ public class UIController : Singleton<UIController> {
 	{
 		returnPrompt.GetComponentInChildren<Text>().text = "You have completed this region!";
 		returnPrompt.SetActive(status);
+	}
+
+	public void SetLoadingPrompt(bool status)
+	{
+		loadingPrompt.SetActive(status);
 	}
 
 	static IEnumerator WaitForRealSeconds(float seconds) {
