@@ -33,6 +33,7 @@ public class ForestController : RegionController {
 
 	[HideInInspector] public Transform agentParent, utility;
 	public List<VolunteerTask> volunteers = new List<VolunteerTask>();
+	public List<GameObject> volunteerAgents = new List<GameObject>();
 	public List<Vector3Int> activeTiles { get => volunteers.Where(v => v.activeTile != null).Select(v => v.activeTile.Value).ToList(); }
 	public List<Vector3Int> activeTrees = new List<Vector3Int>();
 
@@ -100,13 +101,10 @@ public class ForestController : RegionController {
 
 	/// <summary> Generates new volunteer / logger on click </summary>
 	public PathfindingAgent NewAgent(GameObject prefab, Vector3 pos, Vector3 target) {
-		
 		var newAgent = GameObject.Instantiate(prefab, pos, Quaternion.identity, agentParent).GetComponent<PathfindingAgent>();
 		newAgent.transform.position = new Vector3(newAgent.transform.position.x, newAgent.transform.position.y, 0);
 		newAgent.gameObject.SetActive(true);
-
 		newAgent.AssignTarget(target);
-
 		return newAgent;
 	}
 
@@ -115,6 +113,7 @@ public class ForestController : RegionController {
 		volunteersPlaced++;
 		CheckDisplayLoadingScreen();
 		var newVolunteer = NewAgent(volunteerPrefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
+		volunteerAgents.Add(newVolunteer.gameObject);
 		newVolunteer.ID = volunteers.Count;
 		newVolunteer.name += $" {newVolunteer.ID}";
 
@@ -179,16 +178,17 @@ public class ForestController : RegionController {
 	public void ResetAllWorkers() {
 		
 		if (volunteers.Count > 0) {
-			Debug.Log("Resetting workers");
 			for (int i = 0; i < volunteers.Count; i++)
 			{
 				volunteers[i]?.UI.Reset();
-				//volunteers.RemoveAt(i);
+			}
+			for (int i = 0; i < volunteerAgents.Count; i++) {
+				Destroy(volunteerAgents[i]);
 			}
 			volunteers.Clear();
+			volunteerAgents.Clear();
 			volunteersPlaced = 0;
 		}
-		
 	}
 }
 
