@@ -5111,7 +5111,7 @@ GameObject:
   - component: {fileID: 831285621}
   - component: {fileID: 831285620}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Reset Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5179,7 +5179,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 831285621}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 396213018}
+        m_MethodName: ResetAllWorkers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &831285621
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -175,6 +175,20 @@ public class ForestController : RegionController {
 			aboutText.text = "This is the carbon sequestration plant, which captures and stores carbon dioxide. Volunteers placed here will reduce emissions significantly, but this costs money. ";
 		}
 	}
+
+	public void ResetAllWorkers() {
+		
+		if (volunteers.Count > 0) {
+			Debug.Log("Resetting workers");
+			for (int i = 0; i < volunteers.Count; i++)
+			{
+				volunteers[i]?.UI.Reset();
+				//volunteers.RemoveAt(i);
+			}
+			volunteersPlaced = 0;
+		}
+		
+	}
 }
 
 // [System.Serializable]
