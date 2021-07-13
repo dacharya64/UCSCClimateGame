@@ -1938,7 +1938,7 @@ PrefabInstance:
     - target: {fileID: 5700787198685698286, guid: c6a2c3c2d24de904c9a8fd9217d3d8c0,
         type: 3}
       propertyPath: sounds.Array.data[15].volume
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5700787198685698286, guid: c6a2c3c2d24de904c9a8fd9217d3d8c0,
         type: 3}
@@ -1958,7 +1958,7 @@ PrefabInstance:
     - target: {fileID: 5700787198685698286, guid: c6a2c3c2d24de904c9a8fd9217d3d8c0,
         type: 3}
       propertyPath: sounds.Array.data[16].volume
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5700787198685698286, guid: c6a2c3c2d24de904c9a8fd9217d3d8c0,
         type: 3}
