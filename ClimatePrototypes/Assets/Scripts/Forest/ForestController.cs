@@ -114,6 +114,14 @@ public class ForestController : RegionController {
 		CheckDisplayLoadingScreen();
 		var newVolunteer = NewAgent(volunteerPrefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
 		volunteerAgents.Add(newVolunteer.gameObject);
+		if (Random.value > 0.5)
+		{
+			AudioManager.Instance.Play("SFX_Citizen_Acknowledgement");
+		}
+		else {
+			AudioManager.Instance.Play("SFX_Citizen_Ok");
+		}
+			
 		newVolunteer.ID = volunteers.Count;
 		newVolunteer.name += $" {newVolunteer.ID}";
 
