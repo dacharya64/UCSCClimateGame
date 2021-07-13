@@ -111,6 +111,11 @@ public abstract class RegionController : MonoBehaviour {
 		Pause();
 	}
 
+	protected virtual void Loading(bool state)
+	{
+		UIController.Instance.SetLoadingPrompt(state);
+	}
+
 	/// <summary> Opens a new thread to run the EBM model in the background while Unity manages UI </summary>
 	protected virtual void StartModel() {
 		if (GameManager.Instance.runModel && !GameManager.Instance.runningModel) {
