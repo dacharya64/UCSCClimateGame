@@ -22,7 +22,7 @@ public class RippleEffect : MonoBehaviour {
 	[Range(0.01f, 1.0f)][SerializeField] float reflectionStrength = 0.7f;
 	[Range(1.0f, 5.0f)][SerializeField] float waveSpeed = 1.25f;
 	[Range(0.0f, 2.0f)][SerializeField] float dropInterval = 0.5f;
-	Shader shader = default;
+	public Shader shader = default;
 
 	class Droplet {
 		Vector2 position;
