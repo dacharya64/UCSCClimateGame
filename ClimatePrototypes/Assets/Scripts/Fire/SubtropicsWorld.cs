@@ -77,6 +77,7 @@ public class SubtropicsWorld : MonoBehaviour {
 				go.transform.parent = cellParent.transform;
 				go.GetComponent<IdentityManager>().id = IdentityManager.Identity.Green; // default to green
 				cellArray[i, j] = go;
+				go.GetComponent<AudioSource>().enabled = false;
 			}
 	}
 
@@ -192,10 +193,14 @@ public class SubtropicsWorld : MonoBehaviour {
 	void MutateToFire() {
 		// pick a random cell
 		// if green, mutates to fire
-		IdentityManager I = cellArray[Random.Range(0, width), Random.Range(0, height)].GetComponent<IdentityManager>();
+		GameObject cell = cellArray[Random.Range(0, width), Random.Range(0, height)]; 
+		IdentityManager I = cell.GetComponent<IdentityManager>();
 		//if (I.id is IdentityManager.Identity.Green || I.id is IdentityManager.Identity.Tree )  // can mutate green or tree
 		if (I.id is IdentityManager.Identity.Tree)
+		{
 			I.id = IdentityManager.Identity.Fire;
+			cell.GetComponent<AudioSource>().enabled = true;
+		}
 	}
 
 	IEnumerator WaitForFire(float s) {

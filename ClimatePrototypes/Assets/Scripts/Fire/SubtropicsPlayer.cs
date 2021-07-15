@@ -101,6 +101,7 @@ public class SubtropicsPlayer : MonoBehaviour {
 				lastUsedWater = 0; // reset timer
 				waterTR.enabled = true;
 				AudioManager.Instance.Play("SFX_Smoulder");
+				neighbor.GetComponent<AudioSource>().enabled = false;
 			}
 			else if (neighbor.id == IdentityManager.Identity.Water && water < maxWater) {
 				filling = true;
