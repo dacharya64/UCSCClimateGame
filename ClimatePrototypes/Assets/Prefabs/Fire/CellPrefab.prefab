@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9129418839244638026}
   - component: {fileID: 9129418839244638027}
   - component: {fileID: 9129418839244638030}
+  - component: {fileID: 7442716629726679838}
   - component: {fileID: 9129418839244638028}
   - component: {fileID: 9129418839244638031}
   - component: {fileID: 9129418839244638017}
@@ -100,8 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e6c26905e98f664ab958843f9ab5da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   moisture: 0
+  fireVariance: 0
 --- !u!114 &9129418839244638029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541c466fcef1ed54494847703e82e9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenSprite: {fileID: 21300000, guid: 407da7c1744ea6e499a40a7a02aab0d1, type: 3}
 --- !u!114 &9129418839244638030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +161,20 @@ MonoBehaviour:
   burntTree: {fileID: 21300000, guid: 988a5e00ce48d104fbcac6281e9f371b, type: 3}
   alt: 0
   burnt: 0
+--- !u!114 &7442716629726679838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129418839244638135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 126c39635bb033f40b7cdd636deecc87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mountain: {fileID: 21300000, guid: 650c2193beb50914f9be814337ddd949, type: 3}
+  alt: 0
 --- !u!61 &9129418839244638028
 BoxCollider2D:
   m_ObjectHideFlags: 0

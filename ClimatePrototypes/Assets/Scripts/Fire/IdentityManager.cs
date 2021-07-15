@@ -10,7 +10,7 @@ using UnityEngine;
 
 /// <summary>  Controls the identity of the cell </summary>
 public class IdentityManager : MonoBehaviour { // TODO: definitely rename to TileManager
-	public enum Identity { Fire, Water, Green, Tree }
+	public enum Identity { Fire, Water, Green, Tree, Mountain }
 	/// <summary> Controls the chance of it being ignited </summary>
 	public enum Moisture { Moist, /* not likely that it could be ignited */ Normal, Dry }
 

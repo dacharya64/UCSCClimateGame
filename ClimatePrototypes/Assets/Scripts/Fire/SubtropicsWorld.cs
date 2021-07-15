@@ -44,6 +44,7 @@ public class SubtropicsWorld : MonoBehaviour {
 		PopulateWater();
 		PopulateTree();
 		PopulateCloud();
+		PopulateMountain();
 		StartCoroutine(WaitForFire(0)); // first fire mutation
 	}
 
@@ -135,7 +136,7 @@ public class SubtropicsWorld : MonoBehaviour {
 
 		// Region2    right
 		int width2_0 = Random.Range(width / 3 + 4, width / 2); // left
-		int width2_1 = width; // right
+		int width2_1 = width - 6; // right
 		int height2_0 = Random.Range(height / 6, height / 5); // bottom
 		int height2_1 = height * 2 / 3; // top 
 
@@ -143,23 +144,47 @@ public class SubtropicsWorld : MonoBehaviour {
 		int width3_0 = Random.Range(width / 9, width / 6); // left
 		int width3_1 = Random.Range(width * 8 / 9, width * 9 / 10); // right
 		int height3_0 = Random.Range(height * 2 / 3 + 4, height * 4 / 5); // top
-		int height3_1 = height; // bottom
+		int height3_1 = height - 6; // bottom
 
-		GenerateTreeInRegion(0, width1, 0, height1);
+		GenerateTreeInRegion(6, width1, 6, height1);
 		GenerateTreeInRegion(width2_0, width2_1, height2_0, height2_1);
 		GenerateTreeInRegion(width3_0, width3_1, height3_0, height3_1);
+	}
+
+	void PopulateMountain() {
+		int width1 = topRightCell.x - topLeftCell.x + 1;
+		int height1 = height / 8;
+		GenerateMountainInRegion(0, width1, 0, height1);
+		int width2 = width / 11;
+		int height2 = topLeftCell.y - bottomLeftCell.y + 1;
+		GenerateMountainInRegion(0, width2, 0, height2);
+		int width3 = width * 10 / 11;
+		GenerateMountainInRegion(width3, width1, 0, height2);
+		int height3 = height * 7 / 8;
+		GenerateMountainInRegion(0, width1, height3, height2);
 	}
 
 	void GenerateTreeInRegion(int w0, int w1, int h0, int h1) {
 		for (var i = w0; i <= w1; i++)
 			for (var j = h0; j <= h1; j++) {
 				IdentityManager I = cellArray[i, j].GetComponent<IdentityManager>();
-				if (I.id == IdentityManager.Identity.Green) {
+				if (I.id == IdentityManager.Identity.Green && I.id != IdentityManager.Identity.Mountain) {
 					if (Random.value * 100 < treeDensity) {
 						I.id = IdentityManager.Identity.Tree;
 						I.fireVariance = 1; // if fire happens, set variance type to tree fire 
 					}
 				}
+			}
+	}
+
+	void GenerateMountainInRegion(int w0, int w1, int h0, int h1)
+	{
+		for (var i = w0; i <= w1; i++)
+			for (var j = h0; j <= h1; j++)
+			{
+				IdentityManager I = cellArray[i, j].GetComponent<IdentityManager>();
+				I.id = IdentityManager.Identity.Mountain;
+
 			}
 	}
 
