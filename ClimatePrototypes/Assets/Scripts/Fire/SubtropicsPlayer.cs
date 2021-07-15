@@ -100,10 +100,12 @@ public class SubtropicsPlayer : MonoBehaviour {
 				water = water - 5; // use 1 water per cell
 				lastUsedWater = 0; // reset timer
 				waterTR.enabled = true;
+				AudioManager.Instance.Play("SFX_Smoulder");
 			}
 			else if (neighbor.id == IdentityManager.Identity.Water && water < maxWater) {
 				filling = true;
 				water += 1;
+				AudioManager.Instance.Play("SFX_Refill");
 				StartCoroutine(FillWater());
 			}
 		}
