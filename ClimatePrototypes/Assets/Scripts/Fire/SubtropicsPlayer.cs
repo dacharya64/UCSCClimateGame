@@ -10,6 +10,7 @@ public class SubtropicsPlayer : MonoBehaviour {
 	[SerializeField] Text leftWaterUI = default;
 	[SerializeField] Transform leftWaterBarUI = default;
 	[SerializeField] GameObject line = default;
+	[SerializeField] Slider waterTracker = default;
 	LineRenderer newLine;
 
 	Animator bladeAnimator;
@@ -40,6 +41,8 @@ public class SubtropicsPlayer : MonoBehaviour {
 	}
 
 	void Update() {
+		UpdateSlider(waterTracker, water);
+
 		lastUsedWater += Time.deltaTime; // TODO: do this timer logic better, maybe with coroutine
 
 		if (lastUsedWater >= 1f) // turn off renderer if not used water in 1 sec
@@ -83,25 +86,33 @@ public class SubtropicsPlayer : MonoBehaviour {
 
 		// kill all immediate neighbors fire, radius buffer
 		foreach (var neighbor in SubtropicsController.World.GetRadius(playerCell.transform.position)) {
-			if (neighbor.id == IdentityManager.Identity.Fire && water > 0) {
+			if (neighbor.id == IdentityManager.Identity.Fire && water > 0)
+			{
 				// check nature of the cell
-				if (neighbor.fireVariance == 1) { // if tree
+				if (neighbor.fireVariance == 1)
+				{ // if tree
 					neighbor.GetComponent<TreeID>().burnt = true;
 					neighbor.id = IdentityManager.Identity.Tree;
-				} else
+				}
+				else
 					neighbor.id = IdentityManager.Identity.Green;
 				neighbor.moisture = IdentityManager.Moisture.Moist;
-				water--; // use 1 water per cell
+				water = water - 5; // use 1 water per cell
 				lastUsedWater = 0; // reset timer
 				waterTR.enabled = true;
 			}
+			else if (neighbor.id == IdentityManager.Identity.Water && water < maxWater) {
+				filling = true;
+				water += 1;
+				StartCoroutine(FillWater());
+			}
 		}
 
-		if (!filling && water < maxWater) {
+		/*if (!filling && water < maxWater) {
 			filling = true;
 			water += 1;
 			StartCoroutine(FillWater());
-		}
+		}*/
 	}
 
 	IEnumerator FillWater() { // TODO: redo with Invoke and anonymous function instead of coroutine
@@ -138,5 +149,10 @@ public class SubtropicsPlayer : MonoBehaviour {
 		// speed = Mathf.Lerp(slowSpeed,factor * slowSpeed, 0.25f); 
 		slow = false;
 		speed = factor * slowSpeed;
+	}
+
+	void UpdateSlider(Slider slider, float value)
+	{
+		slider.value = value;
 	}
 }
