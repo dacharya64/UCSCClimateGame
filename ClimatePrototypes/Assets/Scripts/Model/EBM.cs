@@ -24,26 +24,11 @@ public partial class EBM {
 		Matrix<double> Efin = Matrix<double>.Build.Dense(bands, nt, 0);
 		Matrix<double> T0fin = Matrix<double>.Build.Dense(bands, nt, 0);
 		Matrix<double> ASRfin = Matrix<double>.Build.Dense(bands, nt, 0);
-		//Debug.Log(Tfin);
-		//Debug.Log(Efin);
+		
 		//Matrix<double> tfin = Matrix<double>.Build.Dense()np.linspace(0, 1, nt);
 		Vector<double> Tg = Vector<double>.Build.DenseOfVector(T);
 		Vector<double> E = Tg * cw;
-		//Debug.Log("E is " + E.AsString());
-		//Debug.Log("testing rhs1");
-		/*
 		
-		var q = RH * saturation_specific_humidity(Tg, Ps);
-        var asa = dt * diffop / cg;
-        var dbd = Lv * q / cp;
-        var ans = asa.Multiply(dbd);
-		Debug.Log("dt is " + dt);
-		Debug.Log("diffop is " + diffop);
-		Debug.Log("cg is " + cg);
-		Debug.Log("first: ");
-		Debug.Log(asa);
-		
-		*/
 		for (var (i, p) = (0, 0); i < years; i++)
 		{
 			for (int j = 0; j < timesteps; j++)
@@ -60,7 +45,6 @@ public partial class EBM {
 
 				if (i == dur - 1)
 				{
-					//Debug.Log("T is " + T.AsString());
 					Efin.SetColumn(j, E);// [":", i] = E;
 					Tfin.SetColumn(j, T);//[":", i] = T;
 					T0fin.SetColumn(j, T0);//[":", i] = T0;
@@ -77,17 +61,7 @@ public partial class EBM {
 				# n.b. this is semi-implicit, with some derivatives are
 				# calculated on the previous time step*/
 				var q = RH * saturation_specific_humidity(Tg, Ps);
-				//Debug.Log("q is " + q.AsString());
-				//Matrix<double> matrix1 = dt * diffop / cg;
-                //Vector<double> vector1 = Lv * q / cp;
-				//Vector<double> vector2 = (Vector<double>) matrix1;
                 var rhs1 = (dt * diffop / cg) * (Lv * q / cp);
-/*                for (int k = 0; k < vector1.Count; k++)
-                {
-                    rhs1[k] = vector1[k] * vector2[k];
-                }*/
-                //var rhs1 = Vector<double>.Multiply(Lv * q / cp, dt * diffop / cg);
-                //var rhs1 = (dt * diffop / cg) * (Lv * q / cp); // rhs1 = np.matmul(dt*diffop/cg, Lv*q/cp)
                 Tg = (kappa - Matrix<double>.Build.DiagonalOfDiagonalVector(
 					Sign0(Less, signlesset0, dc / mklfe) // np.diag(dc / (M - kLf / E) * (T0 < 0) * (E < 0)
 				)).Solve(Tg + rhs1 + dt_tau * (
@@ -97,8 +71,7 @@ public partial class EBM {
 				));
 			}
 		}
-		//Debug.Log("T is " + T.AsString());
-		//Debug.Log("Tg is " + Tg.AsString());
+		
 		return (Tfin.SubMatrix(0, Tfin.RowCount, Tfin.ColumnCount - 100, 100), Efin.SubMatrix(0, Efin.RowCount, Efin.ColumnCount - 100, 100));
 	}
 
@@ -127,8 +100,6 @@ public partial class EBM {
 		energy = Efin.Column(99);
 
 		if (tempControl is null) InitFirstRun(Tfin);
-/*		Debug.Log("temp is: ");
-		Debug.Log(temp.AsString());*/
 		precip = CalcPrecip(Vector<double>.Build.DenseOfEnumerable(Tfin.FoldByRow((mean, col) => mean + col / Tfin.ColumnCount, 0d)));
 		return (Condense(temp, regions), Condense(energy, regions), Condense(precip, regions));
 	}
@@ -139,29 +110,24 @@ public partial class EBM {
 		// (tempControl, energyControl) = (temp, energy);
 		p_e = p_e_raw.Split(',').Select(num => Double.Parse(num.Trim(new [] { '\n', ' ', '\t' }))).ToArray();
 		lat_p_e = Vector<double>.Build.Dense(p_e.Length, i => i / 2d - 90).SubVector(181, 180);
-		//Debug.Log("lat_p_e count is: " + lat_p_e.Count); 
+		
 		f = Interpolate.Common(lat_p_e, p_e.Skip(181));
-		//
-		//Debug.Log("p_e is: ");
-		//Debug.Log(p_e.AsString());
+		
 		var tempArray = x;
-		//Debug.Log("x is");
-		//Debug.Log(x.AsString());
+		
 		for (int i = 0; i < x.Count; i++)  
 		{
 			tempArray[i] = Math.Asin(x[i]);
 		}
-		//Debug.Log("arcsin is: ");
-		//Debug.Log(tempArray.AsString());
+		
 		var tempArray2 = x;
 		double[] values = new double[] { 0.67085027, 1.14287837, 1.16845783, 0.69488576, -0.3846317, -0.96954969, -1.52661404, -1.83546003, -1.76328039, -1.20641116, -0.09503519, 0.50181944, 0.9568732, 2.5678029, 0.10716688, -0.91746535, -1.14415677, -0.90529723, -0.52770197, 0.05236193, 0.65670454, 0.72760175, 0.69449037, 0.34922747 };
 		for (int i = 0; i < tempArray.Count; i++)
 		{
 			tempArray2[i] = values[i]; // (180 / Math.PI) * tempArray[i];
 		}
-		np_e = tempArray2;// lat;// tempArray2;//f(np.rad2deg(np.arcsin(x))) # net precip on model grid
-		//Debug.Log("np_e is");
-		//Debug.Log(tempArray2.AsString());
+		np_e = tempArray2;// lat; //f(np.rad2deg(np.arcsin(x))) # net precip on model grid
+		
 		//np_e = lat.Map(l => f.Interpolate(l)); // TODO change this value?
 	}
 
@@ -205,7 +171,7 @@ public partial class EBM {
 		var exponent = (1 / temp - 1 / t0);
 		var value = -Lv / Rv * exponent;
 		var finalArray = value;
-        for (int i = 0; i < value.Count; i++) // TODO check if this value is correct 
+        for (int i = 0; i < value.Count; i++) 
         {
             finalArray[i] = Math.Exp(value[i]);
         }

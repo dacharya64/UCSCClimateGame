@@ -82,7 +82,7 @@ public class VolunteerActions {
 	}
 	public static void Capture(Volunteer v) {
 		World.money = World.money - 5f;
-		v.anim.SetTrigger("Facility");
+		v.anim.SetTrigger("Working");
 		//ForestController.Instance.StartCoroutine(CaptureAndReturn(v, 3));
 		ForestController.Instance.StartCoroutine(SetCaptureChanges(1, 0.09, 5f));
 		ForestController.Instance.CheckEndGame();
