@@ -29,8 +29,6 @@ public partial class EBM {
 		Vector<double> Tg = Vector<double>.Build.DenseOfVector(T);
 		Vector<double> E = Tg * cw;
 		
-		
-		*/
 		for (var (i, p) = (0, 0); i < years; i++)
 		{
 			for (int j = 0; j < timesteps; j++)
