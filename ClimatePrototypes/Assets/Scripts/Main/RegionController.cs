@@ -75,10 +75,11 @@ public abstract class RegionController : MonoBehaviour {
 		try {
 			timer -= Time.deltaTime;
 			timerText.text = $"{Mathf.Max(0, Mathf.Floor(timer))}";
-			if (timer <= 0)
+			if (timer <= 0 && timer > -2)
 			{
 				timer = -2; // -2 is finished state
 				GameOver();
+				return;
 				//StartModel();
 			}
 		} catch {
@@ -115,6 +116,9 @@ public abstract class RegionController : MonoBehaviour {
 	{
 		UIController.Instance.SetLoadingPrompt(state);
 	}
+	public void ChangePublicOpinion(int change) {
+		World.publicOpinion = World.publicOpinion + change; 
+	}
 
 	/// <summary> Opens a new thread to run the EBM model in the background while Unity manages UI </summary>
 	protected virtual void StartModel() {
@@ -133,6 +137,10 @@ public abstract class RegionController : MonoBehaviour {
 			SetPause(1);
 			updated = false;
 		}
+	}
+
+	public double GetAverageTemp() {
+		return World.averageTemp; 
 	}
 
 	protected void TriggerUpdate(System.Action updateEBM) {
