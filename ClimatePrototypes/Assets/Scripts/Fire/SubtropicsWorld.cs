@@ -100,14 +100,10 @@ public class SubtropicsWorld : MonoBehaviour {
 			else
 				(waterX, waterY) = (15, 8);
 
-			// at the easiest level, we increase reservoir size
-			//if (SubtropicsController.Instance.difficulty == 1) {
-			//Debug.Log("WaterHeight: " + waterHeight);
-			Debug.Log("Difficulty is: " + SubtropicsController.Instance.difficulty);
-			waterHeight = waterHeight * (6 - SubtropicsController.Instance.difficulty); // *= 1; // (5 - SubtropicsController.Instance.difficulty);
-			waterWidth = waterWidth * (6 - SubtropicsController.Instance.difficulty); //*= 1; // (5 - SubtropicsController.Instance.difficulty);
-			//Debug.Log("WaterHeight: " + waterHeight);
-			//}
+			// modulate water based on difficulty 
+			waterHeight = waterHeight * (6 - SubtropicsController.Instance.difficulty); 
+			waterWidth = waterWidth * (6 - SubtropicsController.Instance.difficulty); 
+			
 
 			// TODO: don't hard code, ending here
 
@@ -210,7 +206,7 @@ public class SubtropicsWorld : MonoBehaviour {
 	IEnumerator WaitForFire(float s) {
 		yield return new WaitForSeconds(s);
 		MutateToFire();
-		StartCoroutine(WaitForFire(Random.Range(4f, 5f)));
+		StartCoroutine(WaitForFire(6 - SubtropicsController.Instance.difficulty));
 	}
 
 	/// <summary> Returns cell neighbors - up to 4 dir</summary>
