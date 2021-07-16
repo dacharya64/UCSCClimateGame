@@ -20,6 +20,26 @@ public class SubtropicsController : RegionController {
 	void Start() {
 		wind = GetComponentInChildren<Wind>();
 		world = GetComponentInChildren<SubtropicsWorld>();
+
+		if (base.GetAverageTemp() < 15)
+		{
+			difficulty = 1;
+		}
+		else if (base.GetAverageTemp() >= 15 && base.GetAverageTemp() < 20)
+		{
+			difficulty = 2;
+		}
+		else if (base.GetAverageTemp() >= 20 && base.GetAverageTemp() < 25)
+		{
+			difficulty = 3;
+		}
+		else if (base.GetAverageTemp() >= 25 && base.GetAverageTemp() < 30)
+		{
+			difficulty = 4;
+		}
+		else {
+			difficulty = 5;
+		}
 	}
 
 	protected override void GameOver() {

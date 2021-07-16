@@ -139,6 +139,10 @@ public abstract class RegionController : MonoBehaviour {
 		}
 	}
 
+	public double GetAverageTemp() {
+		return World.averageTemp; 
+	}
+
 	protected void TriggerUpdate(System.Action updateEBM) {
 		if (!updated) {
 			updateEBM();
