@@ -26,7 +26,28 @@ public class SubtropicsController : RegionController {
 		base.GameOver();
 		// Debug.Log(GetFirePercentage());
 		double effect = GetFirePercentage();
-		//Debug.Log(effect);
+		Debug.Log("Number of fires: " + effect);
+
+		if (effect >= 5 && effect < 10)
+		{
+			base.ChangePublicOpinion(-5); // World.publicOpinion = World.publicOpinion - 5;
+		}
+		else if (effect >= 10 && effect < 15)
+		{
+			base.ChangePublicOpinion(-10);
+		}
+		else if (effect >= 15 && effect < 20)
+		{
+			base.ChangePublicOpinion(-15);
+		}
+		else if (effect >= 20 && effect < 25)
+		{
+			base.ChangePublicOpinion(-20);
+		}
+		else if (effect >= 25) {
+			base.ChangePublicOpinion(-25);
+		}
+		
 		//TriggerUpdate(() => GlobalWorld.co2.Update(region, delta: -effect)); // [-1, 0]
 		// TODO: make the effect non linear
 		// TriggerUpdate(() => GlobalWorld.co2.Update(region, delta: -Math.Min(1, Math.Log(effect)))); // [-1, 0]
@@ -37,6 +58,7 @@ public class SubtropicsController : RegionController {
 			(obj.GetComponent<IdentityManager>().id == IdentityManager.Identity.Fire ? 1 : 0, obj.GetComponent<IdentityManager>().id == IdentityManager.Identity.Tree ? 1 : 0)
 		).Aggregate((tup, obj) => (tup.Item1 + obj.Item1, tup.Item2 + obj.Item2));
 
-		return fire / (float) trees;
+		//return fire / (float) trees;
+		return fire; 
 	}
 }

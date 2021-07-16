@@ -116,6 +116,9 @@ public abstract class RegionController : MonoBehaviour {
 	{
 		UIController.Instance.SetLoadingPrompt(state);
 	}
+	public void ChangePublicOpinion(int change) {
+		World.publicOpinion = World.publicOpinion + change; 
+	}
 
 	/// <summary> Opens a new thread to run the EBM model in the background while Unity manages UI </summary>
 	protected virtual void StartModel() {
