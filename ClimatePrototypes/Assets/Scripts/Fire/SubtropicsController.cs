@@ -26,7 +26,8 @@ public class SubtropicsController : RegionController {
 		base.GameOver();
 		// Debug.Log(GetFirePercentage());
 		double effect = GetFirePercentage();
-		TriggerUpdate(() => GlobalWorld.co2.Update(region, delta: -effect)); // [-1, 0]
+		//Debug.Log(effect);
+		//TriggerUpdate(() => GlobalWorld.co2.Update(region, delta: -effect)); // [-1, 0]
 		// TODO: make the effect non linear
 		// TriggerUpdate(() => GlobalWorld.co2.Update(region, delta: -Math.Min(1, Math.Log(effect)))); // [-1, 0]
 	}

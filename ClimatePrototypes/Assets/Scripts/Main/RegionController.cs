@@ -75,10 +75,11 @@ public abstract class RegionController : MonoBehaviour {
 		try {
 			timer -= Time.deltaTime;
 			timerText.text = $"{Mathf.Max(0, Mathf.Floor(timer))}";
-			if (timer <= 0)
+			if (timer <= 0 && timer > -2)
 			{
 				timer = -2; // -2 is finished state
 				GameOver();
+				return;
 				//StartModel();
 			}
 		} catch {
