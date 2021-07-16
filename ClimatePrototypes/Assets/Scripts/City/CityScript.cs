@@ -149,7 +149,7 @@ public class CityScript : RegionController
             // Show return prompt
             GameManager.Instance.billIndices = usedBills;
             base.GameOver();
-
+            World.ChangeAverageTemp();
         }
 
         void EnactBillEffects() {
@@ -160,7 +160,6 @@ public class CityScript : RegionController
                 {
                     if (effect.Key == "forcing") {
                         EBM.F = EBM.F + effect.Value;
-                        World.ChangeAverageTemp();
                     }
                     if (effect.Key == "money") {
                         if (World.money + effect.Value < 100)
@@ -191,7 +190,6 @@ public class CityScript : RegionController
                     if (effect.Key == "forcing")
                     {
                         EBM.F = EBM.F + effect.Value;
-                        World.ChangeAverageTemp();
                     }
                     if (effect.Key == "money")
                     {
