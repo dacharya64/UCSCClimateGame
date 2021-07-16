@@ -85,7 +85,8 @@ public class SubtropicsWorld : MonoBehaviour {
 	void PopulateWater() {
 		// TODO: water size according to precipitation
 		reservoirTotalSize = 0;
-		int reservoirGen = Random.Range(0, 5);
+		//int reservoirGen = Random.Range(0,4);
+		int reservoirGen = 0;
 
 		// TODO: don't hard code starting from here
 		for (int r = 0; r < 2; r++) {
@@ -100,10 +101,13 @@ public class SubtropicsWorld : MonoBehaviour {
 				(waterX, waterY) = (15, 8);
 
 			// at the easiest level, we increase reservoir size
-			if (SubtropicsController.Instance.difficulty == 1) {
-				waterHeight *= 2;
-				waterWidth *= 2;
-			}
+			//if (SubtropicsController.Instance.difficulty == 1) {
+			//Debug.Log("WaterHeight: " + waterHeight);
+			Debug.Log("Difficulty is: " + SubtropicsController.Instance.difficulty);
+			waterHeight = waterHeight * (6 - SubtropicsController.Instance.difficulty); // *= 1; // (5 - SubtropicsController.Instance.difficulty);
+			waterWidth = waterWidth * (6 - SubtropicsController.Instance.difficulty); //*= 1; // (5 - SubtropicsController.Instance.difficulty);
+			//Debug.Log("WaterHeight: " + waterHeight);
+			//}
 
 			// TODO: don't hard code, ending here
 
@@ -122,7 +126,7 @@ public class SubtropicsWorld : MonoBehaviour {
 
 			water.GetComponent<SpriteRenderer>().sprite = reservoirSprites[reservoirGen];
 			water.GetComponent<SpriteRenderer>().size = new Vector2(waterWidth / 4, waterHeight / 4);
-			water.transform.localScale = new Vector3(0.4f, 0.4f, 1) * (SubtropicsController.Instance.difficulty == 1 ? 2 : 1); // TODO: don't hard code
+			water.transform.localScale = new Vector3(0.4f, 0.4f, 1) * (6 - SubtropicsController.Instance.difficulty); // TODO: don't hard code
 
 			reservoirs[r] = water;
 			SubtropicsController.Instance.player.GetComponentsInChildren<WaterArrow>() [r].waterPosition = water.transform.position;

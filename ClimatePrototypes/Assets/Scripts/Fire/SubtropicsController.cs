@@ -13,7 +13,7 @@ public class SubtropicsController : RegionController {
 
 	public SubtropicsPlayer player;
 	[HideInInspector] public Wind wind;
-	[HideInInspector] public int difficulty = 3;
+	[HideInInspector] public int difficulty = 2;
 	[HideInInspector] public SubtropicsWorld world;
 	public static SubtropicsWorld World { get => Instance.world; }
 
