@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorial:
   - Hello, this is the Subtropics!
-  - There are ongoing wildfires, Click and Hold to put them out!
-  - Try not to run out of water!
-  prefab: {fileID: 0}
+  - There are ongoing wildfires, click and hold to fly over them and put them out!
+  - Putting out fires uses water, which you can refill at the reservoirs.
+  secondVisit:
+  - Welcome back to the Subtropics! The wildfires continue to spread.
+  - As the world gets hotter, there will be more fires and less water to use.
+  - The number of fires remaining when the time runs out will also affect public opinion.
+  thirdVisit: []
