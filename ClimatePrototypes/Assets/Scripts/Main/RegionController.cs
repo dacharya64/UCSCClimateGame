@@ -38,11 +38,13 @@ public abstract class RegionController : MonoBehaviour {
 	public void Intro(int visited) => StartCoroutine(IntroRoutine(visited));
 
 	IEnumerator IntroRoutine(int visited, float time = .5f) {
+		UIController.Instance.previousRegion = region; 
 		yield return StartCoroutine(Camera.main.GetComponent<CameraFade>().FadeIn(time));
 		visits = visited;
 		// if this is the player's first time visiting the region, give them the first tutorial text 
 		if (visits == 0)
 		{
+			UIController.Instance.firstTimeVisiting = true;
 			if (intro[visited].Length == 0)
 				yield break;
 			SetPause(1);
@@ -55,7 +57,8 @@ public abstract class RegionController : MonoBehaviour {
 		}
 		else if (visits == 1) // give them the second tutorial for the region
 		{
-            if (intro[visited].Length == 0)
+			UIController.Instance.firstTimeVisiting = false;
+			if (intro[visited].Length == 0)
                 yield break;
             SetPause(1);
             introBlock = Instantiate(introPrefab);
@@ -66,6 +69,7 @@ public abstract class RegionController : MonoBehaviour {
             Init();
         }
 		else { // give them the region without the tutorial 
+			UIController.Instance.firstTimeVisiting = false;
 			Init();
 		}
 		

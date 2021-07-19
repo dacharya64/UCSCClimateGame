@@ -12,8 +12,11 @@ public class UIController : Singleton<UIController> {
 	exitButton = default;
 	[SerializeField] GameObject returnPrompt = default;
 	[SerializeField] GameObject loadingPrompt = default;
+	[SerializeField] GameObject infoBox = default;
 	public GameObject navbar;
 	Dictionary<GameObject, bool> uiActiveStatus = new Dictionary<GameObject, bool>();
+	public World.Region previousRegion;
+	public bool firstTimeVisiting;
 
 	/// <summary> Flips active status of UI element and stores it </summary>
 	public void Toggle(GameObject obj) {
@@ -48,6 +51,12 @@ public class UIController : Singleton<UIController> {
 	public void UITransition(string level) {
 		returnPrompt.SetActive(false);
 		GameManager.Transition(level);
+		if (previousRegion == World.Region.Fire && firstTimeVisiting)
+		{
+			ChangeInfoBoxState(true);
+		}
+		firstTimeVisiting = false;
+		
 	}
 
 	public void SetCityPrompt(bool status) {
@@ -172,5 +181,9 @@ public class UIController : Singleton<UIController> {
 	public static void SetUIAlpha(GameObject ui, float a) {
 		foreach (var child in ui.GetComponentsInChildren<Graphic>())
 			child.color = new Color(child.color.r, child.color.g, child.color.b, a);
+	}
+
+	public void ChangeInfoBoxState(bool state) {
+		infoBox.SetActive(state);
 	}
 }
