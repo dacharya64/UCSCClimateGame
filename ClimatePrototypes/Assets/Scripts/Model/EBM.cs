@@ -71,7 +71,14 @@ public partial class EBM {
 				));
 			}
 		}
-		
+		double temp = 0;
+		for (int i = 0; i < Tfin.RowCount; i++) {
+			for (int j = 0; j < Tfin.ColumnCount; j++) {
+				temp = temp + Tfin[i, j];
+			}
+		}
+
+		Debug.Log("temp: " + temp / (Tfin.RowCount * Tfin.ColumnCount));
 		return (Tfin.SubMatrix(0, Tfin.RowCount, Tfin.ColumnCount - 100, 100), Efin.SubMatrix(0, Efin.RowCount, Efin.ColumnCount - 100, 100));
 	}
 
