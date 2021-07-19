@@ -37,7 +37,7 @@ public class Wind : MonoBehaviour {
 		WindDirArrow.localScale = Vector3.Slerp(WindDirArrow.localScale, targetSize, Time.deltaTime * smooth);
 
 		// arrow dir
-		float tiltAngle = Array.IndexOf(new [] { WindDir.NE, WindDir.SE, WindDir.SW, WindDir.NW }, dir) * -90 + 135; // TODO: use Enum values casted as array instead of anon instance
+		float tiltAngle = Array.IndexOf(new[] { WindDir.NE, WindDir.SE, WindDir.SW, WindDir.NW }, dir) * -90 + 315;// + 135; // TODO: use Enum values casted as array instead of anon instance
 		Quaternion target = Quaternion.Euler(0, 0, tiltAngle);
 		WindDirArrow.rotation = Quaternion.Slerp(WindDirArrow.rotation, target, Time.deltaTime * smooth);
 	}

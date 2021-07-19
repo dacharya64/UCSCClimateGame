@@ -14,6 +14,10 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class SubtropicsWorld : MonoBehaviour {
+
+	[HideInInspector] public SubtropicsWorld world;
+
+
 	public GameObject cloudPrefab, cellPrefab, waterPrefab;
 	[HideInInspector] public GameObject[] reservoirs = new GameObject[2];
 	public Sprite[] reservoirSprites;
@@ -38,6 +42,7 @@ public class SubtropicsWorld : MonoBehaviour {
 	List<GameObject> clouds = new List<GameObject>();
 
 	void Start() {
+		world = GetComponentInChildren<SubtropicsWorld>();
 		tilemap = transform.GetComponent<Tilemap>();
 		gridLayout = this.GetComponentInParent<GridLayout>();
 		PopulateVanillaWorld();
@@ -193,7 +198,7 @@ public class SubtropicsWorld : MonoBehaviour {
 	void MutateToFire() {
 		// pick a random cell
 		// if green, mutates to fire
-		GameObject cell = cellArray[Random.Range(0, width), Random.Range(0, height)]; 
+		GameObject cell = cellArray[Random.Range(0, width), Random.Range(0, height)];
 		IdentityManager I = cell.GetComponent<IdentityManager>();
 		//if (I.id is IdentityManager.Identity.Green || I.id is IdentityManager.Identity.Tree )  // can mutate green or tree
 		if (I.id is IdentityManager.Identity.Tree)
@@ -201,7 +206,37 @@ public class SubtropicsWorld : MonoBehaviour {
 			I.id = IdentityManager.Identity.Fire;
 			cell.GetComponent<AudioSource>().enabled = true;
 		}
-	}
+
+        // Spread the fire to random neighbors 
+        // find all cells that are fire 
+        List<GameObject> fireCells = new List<GameObject>();
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (cellArray[i, j].GetComponent<IdentityManager>().id is IdentityManager.Identity.Fire)
+                {
+                    fireCells.Add(cellArray[i, j]);
+                }
+            }
+        }
+
+        foreach (GameObject fireCell in fireCells)
+        {
+            List<GameObject> fire_neighbors = GetNeighbors(fireCell);
+
+            foreach (GameObject neighbor in fire_neighbors)
+            {
+                IdentityManager I_neighbor = neighbor.GetComponent<IdentityManager>();
+
+                if (I_neighbor.id is IdentityManager.Identity.Tree)
+                {
+                    I_neighbor.id = IdentityManager.Identity.Fire;
+                    neighbor.GetComponent<AudioSource>().enabled = true;
+                }
+            }
+        }
+    }
 
 	IEnumerator WaitForFire(float s) {
 		yield return new WaitForSeconds(s);
@@ -210,25 +245,55 @@ public class SubtropicsWorld : MonoBehaviour {
 	}
 
 	/// <summary> Returns cell neighbors - up to 4 dir</summary>
-	public GameObject[] GetNeighbors(GameObject cell) {
+	public List<GameObject> GetNeighbors(GameObject cell)
+	{
 		Vector3Int cellPosition = gridLayout.WorldToCell(cell.transform.position);
 
 		int x = cellPosition.x - topLeftCell.x; // convert pos vec3int to correct index in array
 		int y = cellPosition.y - bottomLeftCell.y;
 
-		return SubtropicsController.Instance.wind.dir.ToString().Select(d => (
-				new Dictionary<char, Vector2Int> { // TODO: move this dictionary to SubtropicsController or this class, used elsewhere
-					{ 'S', Vector2Int.down },
-					{ 'N', Vector2Int.up },
-					{ 'W', Vector2Int.left },
-					{ 'E', Vector2Int.right }
-				}
-			) [d])
-			.Select(pos =>
-				pos.x >= 0 && pos.x <= width &&
-				pos.y >= 0 && pos.y <= height ?
-				cellArray[pos.x, pos.y] : null
-			).Where(go => go != null).ToArray();
+		string windDirection = SubtropicsController.Instance.wind.dir.ToString();
+
+		List<GameObject> neighbors = new List<GameObject>();
+
+		if (windDirection == "NE")
+		{
+			neighbors.Add(cellArray[x, y + 1]);
+			neighbors.Add(cellArray[x + 1, y]);
+		}
+		else if (windDirection == "E")
+		{
+			neighbors.Add(cellArray[x + 1, y]);
+		}
+		else if (windDirection == "SE")
+		{
+			neighbors.Add(cellArray[x, y - 1]);
+			neighbors.Add(cellArray[x + 1, y]);
+		}
+		else if (windDirection == "S")
+		{
+			neighbors.Add(cellArray[x, y - 1]);
+		}
+		else if (windDirection == "SW")
+		{
+			neighbors.Add(cellArray[x, y - 1]);
+			neighbors.Add(cellArray[x - 1, y]);
+
+		}
+		else if (windDirection == "W")
+		{
+			neighbors.Add(cellArray[x - 1, y]);
+		}
+		else if (windDirection == "NW")
+		{
+			neighbors.Add(cellArray[x, y + 1]);
+			neighbors.Add(cellArray[x - 1, y]);
+		}
+		else if (windDirection == "N")
+		{
+			neighbors.Add(cellArray[x, y + 1]);
+		}
+		return neighbors;
 	}
 
 	/// <summary> Returns cell radius - outwards 2+ </summary>

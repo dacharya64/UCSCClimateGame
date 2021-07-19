@@ -97,7 +97,7 @@ public class SubtropicsPlayer : MonoBehaviour {
 				else
 					neighbor.id = IdentityManager.Identity.Green;
 				neighbor.moisture = IdentityManager.Moisture.Moist;
-				water = water - 5; // use 1 water per cell
+				water = water - 1; // use 1 water per cell
 				lastUsedWater = 0; // reset timer
 				waterTR.enabled = true;
 				AudioManager.Instance.Play("SFX_Smoulder");
