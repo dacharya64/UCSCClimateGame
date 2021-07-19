@@ -75,12 +75,14 @@ public abstract class RegionController : MonoBehaviour {
 		try {
 			timer -= Time.deltaTime;
 			timerText.text = $"{Mathf.Max(0, Mathf.Floor(timer))}";
-			if (timer <= 0 && timer > -2)
+			if (timer > 0 && timer < 2)
 			{
+				Loading(true);
+			}
+			else if (timer <= 0 && timer > -2) {
 				timer = -2; // -2 is finished state
 				GameOver();
 				return;
-				//StartModel();
 			}
 		} catch {
 			// if in the city or tropics
@@ -148,5 +150,9 @@ public abstract class RegionController : MonoBehaviour {
 			updateEBM();
 			updated = true;
 		}
+	}
+
+	public void ChangeAverageTemp() {
+		World.ChangeAverageTemp();
 	}
 }

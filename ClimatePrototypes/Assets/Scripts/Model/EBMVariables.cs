@@ -19,7 +19,7 @@ public partial class EBM {
 	/// <summary> Number of latitudinal bands </summary>
 	static readonly int bands = 24;
 	/// <summary> Number of game regions </summary>
-	public static int regions = 3;
+	public static int regions = 4;
 	/// <summary> Number of timesteps per year </summary>
 	static readonly int nt = 1000;
 	/// <summary> Number of years </summary>
@@ -38,7 +38,7 @@ public partial class EBM {
 	/// <summary> Delta between bands </summary>
 	//static readonly Vector<double> xb = Vector<double>.Build.Dense(bands, i => ++i * dx); TODO correct this
 	//static double[] xb_values = new double[] { -0.91666667, -0.83333333, -0.75, -0.66666667, -0.58333333, -0.5, -0.41666667, -0.33333333, -0.25, -0.16666667, -0.08333333, 0., 0.08333333, 0.16666667, 0.25, 0.33333333, 0.41666667, 0.5, 0.58333333, 0.66666667, 0.75, 0.83333333, 0.91666667 };
-	static double[] xb_values = new double[] { -0.91666667, -0.83333333, -0.75, -0.66666667, -0.58333333, -0.5, -0.41666667, -0.33333333, -0.25, -0.16666667, -0.08333333, 0.0, 0.08333333, 0.16666667, 0.25, 0.33333333, 0.41666667, 0.5, 0.58333333, 0.66666667, 0.75, 0.83333333, 0.91666667, 0.91666667 };
+	//static double[] xb_values = new double[] { -0.91666667, -0.83333333, -0.75, -0.66666667, -0.58333333, -0.5, -0.41666667, -0.33333333, -0.25, -0.16666667, -0.08333333, 0.0, 0.08333333, 0.16666667, 0.25, 0.33333333, 0.41666667, 0.5, 0.58333333, 0.66666667, 0.75, 0.83333333, 0.91666667, 0.91666667 };
 	//static Vector<double> xb = Vector<double>.Build.Dense(bands, i => xb_values[i++]);
 	static Vector<double> xb = Vector<double>.Build.Dense(bands - 1, i => -1 + dx + i++ * dx);
 	// standard consts

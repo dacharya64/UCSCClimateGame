@@ -43,6 +43,7 @@ public class SubtropicsController : RegionController {
 	}
 
 	protected override void GameOver() {
+		//base.Loading(true);
 		base.GameOver();
 		// Debug.Log(GetFirePercentage());
 		double effect = GetFirePercentage();
@@ -50,24 +51,31 @@ public class SubtropicsController : RegionController {
 
 		if (effect >= 5 && effect < 10)
 		{
-			base.ChangePublicOpinion(-5); // World.publicOpinion = World.publicOpinion - 5;
+			base.ChangePublicOpinion(-5);
+			EBM.F = EBM.F - 0.2;
 		}
 		else if (effect >= 10 && effect < 15)
 		{
 			base.ChangePublicOpinion(-10);
+			EBM.F = EBM.F - 0.4;
 		}
 		else if (effect >= 15 && effect < 20)
 		{
 			base.ChangePublicOpinion(-15);
+			EBM.F = EBM.F - 0.6;
 		}
 		else if (effect >= 20 && effect < 25)
 		{
 			base.ChangePublicOpinion(-20);
+			EBM.F = EBM.F - 0.8;
 		}
 		else if (effect >= 25) {
 			base.ChangePublicOpinion(-25);
+			EBM.F = EBM.F - 1;
 		}
-		
+
+		base.ChangeAverageTemp();
+		base.Loading(false);
 		//TriggerUpdate(() => GlobalWorld.co2.Update(region, delta: -effect)); // [-1, 0]
 		// TODO: make the effect non linear
 		// TriggerUpdate(() => GlobalWorld.co2.Update(region, delta: -Math.Min(1, Math.Log(effect)))); // [-1, 0]
