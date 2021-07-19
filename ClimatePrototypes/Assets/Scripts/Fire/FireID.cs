@@ -21,7 +21,7 @@ public class FireID : Tile { // TODO: rename FireID to something like FireTile
 
 	void FireGrowth() {
 		// if I am fire, I ignite my non-fire neighbors coroutine
-		GameObject[] myNeighbors = SubtropicsController.World.GetNeighbors(gameObject);
+		List<GameObject> myNeighbors = SubtropicsController.World.GetNeighbors(gameObject);
 
 		foreach (var neighbor in myNeighbors)
 			if (neighbor != null) {
