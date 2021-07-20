@@ -36,11 +36,6 @@ public class OverworldController : MonoBehaviour {
 		{
 			animationCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 		}
-
-		double targetValue = World.averageTemp;
-		Debug.Log("target value is: " + targetValue);
-		//thermometer.value = Mathf.Lerp(thermometer.value, (float) targetValue, Time.deltaTime * 8f);
-		
 		StartCoroutine(RotateMoon());
 	}
 
