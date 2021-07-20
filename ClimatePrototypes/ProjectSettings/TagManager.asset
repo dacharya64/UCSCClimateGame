@@ -12,6 +12,8 @@ TagManager:
   - Shadow
   - Fire
   - Arrow
+  - Slider
+  - Stats
   layers:
   - Default
   - TransparentFX

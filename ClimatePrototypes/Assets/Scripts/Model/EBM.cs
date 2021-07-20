@@ -8,6 +8,11 @@ using MathNet.Numerics.LinearAlgebra;
 using Interpolate = MathNet.Numerics.Interpolate;
 
 public partial class EBM {
+	public static double avg_temp;
+	public static double arctic_temp;
+	public static double tropics_temp;
+	public static double subtropics_temp; 
+
 	public static void Reset() {
 		F = 0;
 		a0 = 0.7;
@@ -71,14 +76,47 @@ public partial class EBM {
 				));
 			}
 		}
-		double temp = 0;
-		for (int i = 0; i < Tfin.RowCount; i++) {
-			for (int j = 0; j < Tfin.ColumnCount; j++) {
-				temp = temp + Tfin[i, j];
+
+		avg_temp = 0;
+		for (int i = 12; i < 24; i++)
+		{
+			for (int j = 0; j < Tfin.ColumnCount; j++)
+			{
+				avg_temp = avg_temp + Tfin[i, j];
 			}
 		}
 
-		Debug.Log("temp: " + temp / (Tfin.RowCount * Tfin.ColumnCount));
+		tropics_temp = 0;
+		for (int i = 12; i <= 14; i++)
+		{
+			for (int j = 0; j < Tfin.ColumnCount; j++)
+			{
+				tropics_temp = tropics_temp + Tfin[i, j];
+			}
+		}
+
+		subtropics_temp = 0;
+		for (int i = 15; i <= 17; i++)
+		{
+			for (int j = 0; j < Tfin.ColumnCount; j++)
+			{
+				subtropics_temp = subtropics_temp + Tfin[i, j];
+			}
+		}
+
+		arctic_temp = 0;
+		for (int i = 22; i < 24; i++)
+		{
+			for (int j = 0; j < Tfin.ColumnCount; j++)
+			{
+				arctic_temp = arctic_temp + Tfin[i, j];
+			}
+		}
+
+		avg_temp = avg_temp / (12 * Tfin.ColumnCount);
+		arctic_temp =  arctic_temp / (2 * Tfin.ColumnCount);
+		tropics_temp =  tropics_temp / (3 * Tfin.ColumnCount);
+		subtropics_temp = subtropics_temp / (3 * Tfin.ColumnCount);
 		return (Tfin.SubMatrix(0, Tfin.RowCount, Tfin.ColumnCount - 100, 100), Efin.SubMatrix(0, Efin.RowCount, Efin.ColumnCount - 100, 100));
 	}
 
@@ -108,7 +146,10 @@ public partial class EBM {
 
 		if (tempControl is null) InitFirstRun(Tfin);
 		precip = CalcPrecip(Vector<double>.Build.DenseOfEnumerable(Tfin.FoldByRow((mean, col) => mean + col / Tfin.ColumnCount, 0d)));
-		return (Condense(temp, regions), Condense(energy, regions), Condense(precip, regions));
+		//return (Condense(temp, regions), Condense(energy, regions), Condense(precip, regions));
+		double[] regionalTemps = new double[] { tropics_temp, subtropics_temp, arctic_temp }; 
+
+		return (regionalTemps, Condense(energy, regions), Condense(precip, regions));
 	}
 
 	/// <summary> Initialises precipidation data array and control temp </summary>
