@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager> {
 	public float previousMusicVolume;
 	public float previousSFXVolume;
 	[SerializeField] Slider thermometer;
-	public float previousValue;
+	public float previousTempValue;
 	[SerializeField] StatsPanel statsPanel;
 	[SerializeField] GameObject stats;
 
@@ -35,9 +35,8 @@ public class GameManager : Singleton<GameManager> {
 		FindCurrentRegion(SceneManager.GetActiveScene());
 		SceneManager.activeSceneChanged += instance.InitScene;
 		thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
-		thermometer.value = previousValue;
 		SetSlider(thermometer, (float) World.averageTemp);
-		previousValue = (float) World.averageTemp; 
+		previousTempValue = (float) World.averageTemp; 
 	}
 
 	public static void Restart() {
@@ -88,9 +87,9 @@ public class GameManager : Singleton<GameManager> {
 			statsPanel.Toggle(true);
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 			AudioManager.Instance.Play("BGM_Menu"); // TODO: sound name variable class
-			thermometer.value = previousValue;
+			thermometer.value = previousTempValue;
 			thermometer.DOValue((float) World.averageTemp, 1.5f);
-			previousValue = (float) World.averageTemp; 
+			previousTempValue = (float) World.averageTemp; 
 		}
 		else
 			AudioManager.Instance.Play("BGM_" + to.name); // TODO: sound name variable class
@@ -142,6 +141,5 @@ public class GameManager : Singleton<GameManager> {
 	void SetSlider(Slider slider, float targetValue)
 	{
 		slider.value = targetValue;
-		previousValue = targetValue;
 	}
 }
