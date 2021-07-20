@@ -17,6 +17,8 @@ public class GameManager : Singleton<GameManager> {
 	public float previousSFXVolume;
 	[SerializeField] Slider thermometer;
 	public float previousValue;
+	[SerializeField] StatsPanel statsPanel;
+	[SerializeField] GameObject stats;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -82,6 +84,8 @@ public class GameManager : Singleton<GameManager> {
 		UIController.Instance.ToggleBackButton(to.name != "Overworld");
 		if (to.name == "Overworld")
 		{
+			statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
+			statsPanel.Toggle(true);
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 			AudioManager.Instance.Play("BGM_Menu"); // TODO: sound name variable class
 			thermometer.value = previousValue;
