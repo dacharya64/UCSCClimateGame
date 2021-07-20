@@ -17,7 +17,7 @@ public static class World {
 	public static int turn = 1;
 	public static double[] temp, energy, precip, startingTemp;
 	public static float maxTempChange = 10f;
-	public static double averageTemp { get => temp?.Average() ?? 0; }
+	public static double averageTemp { get => EBM.avg_temp; }
 	public static Dictionary<string, Dictionary<double, List<double>>> ranges; // TODO: currently unused
 	public static List < (Region, Region, string) > lineToDraw = new List < (Region, Region, string) > (); // TODO: this draws lines on the overworld, store it there instead?
 
@@ -87,7 +87,7 @@ public static class World {
 
 	public static double ChangeAverageTemp(bool useTemp = true, int years = 0, int steps = 0) {
 		(temp, energy, precip) = EBM.Calc(useTemp ? EBM.temp : null, years, steps);
-		Debug.Log("Average temp is: " + averageTemp);
+		Debug.Log($"New average Temp: {averageTemp} with regionals: {temp.AsString()}");
 		return averageTemp; 
 	}
 }
