@@ -20,20 +20,19 @@ public class SubtropicsController : RegionController {
 	void Start() {
 		wind = GetComponentInChildren<Wind>();
 		world = GetComponentInChildren<SubtropicsWorld>();
-
-		if (base.GetAverageTemp() < 15)
+		if (base.GetSubtropicsTemp() < 20)
 		{
 			difficulty = 1;
 		}
-		else if (base.GetAverageTemp() >= 15 && base.GetAverageTemp() < 20)
+		else if (base.GetSubtropicsTemp() >= 20 && base.GetSubtropicsTemp() < 25)
 		{
 			difficulty = 2;
 		}
-		else if (base.GetAverageTemp() >= 20 && base.GetAverageTemp() < 25)
+		else if (base.GetSubtropicsTemp() >= 25 && base.GetSubtropicsTemp() < 30)
 		{
 			difficulty = 3;
 		}
-		else if (base.GetAverageTemp() >= 25 && base.GetAverageTemp() < 30)
+		else if (base.GetSubtropicsTemp() >= 30 && base.GetSubtropicsTemp() < 35)
 		{
 			difficulty = 4;
 		}
@@ -43,9 +42,7 @@ public class SubtropicsController : RegionController {
 	}
 
 	protected override void GameOver() {
-		//base.Loading(true);
 		base.GameOver();
-		// Debug.Log(GetFirePercentage());
 		double effect = GetFirePercentage();
 		Debug.Log("Number of fires: " + effect);
 

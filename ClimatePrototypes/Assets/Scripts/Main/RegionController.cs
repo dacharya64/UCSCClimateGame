@@ -149,6 +149,11 @@ public abstract class RegionController : MonoBehaviour {
 		return World.averageTemp; 
 	}
 
+	public double GetSubtropicsTemp()
+	{
+		return World.temp[1];
+	}
+
 	protected void TriggerUpdate(System.Action updateEBM) {
 		if (!updated) {
 			updateEBM();
