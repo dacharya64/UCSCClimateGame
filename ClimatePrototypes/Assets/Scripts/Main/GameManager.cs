@@ -83,13 +83,18 @@ public class GameManager : Singleton<GameManager> {
 		UIController.Instance.ToggleBackButton(to.name != "Overworld");
 		if (to.name == "Overworld")
 		{
+			// turn on stats panel
 			statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 			statsPanel.Toggle(true);
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 			AudioManager.Instance.Play("BGM_Menu"); // TODO: sound name variable class
+			// tween thermometer values
 			thermometer.value = previousTempValue;
 			thermometer.DOValue((float) World.averageTemp, 1.5f);
-			previousTempValue = (float) World.averageTemp; 
+			previousTempValue = (float) World.averageTemp;
+
+			// tween stats panel values 
+			statsPanel.CallUpdate();
 		}
 		else
 			AudioManager.Instance.Play("BGM_" + to.name); // TODO: sound name variable class
