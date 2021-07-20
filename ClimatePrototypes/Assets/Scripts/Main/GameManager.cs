@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameManager : Singleton<GameManager> {
 	[SerializeField] GameObject loadingScreen = default, quitPrompt = default, optionsPrompt = default;
@@ -14,6 +15,8 @@ public class GameManager : Singleton<GameManager> {
 	public List<int> billIndices = new List<int>();
 	public float previousMusicVolume;
 	public float previousSFXVolume;
+	[SerializeField] Slider thermometer;
+	public float previousValue;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -29,6 +32,10 @@ public class GameManager : Singleton<GameManager> {
 	void Start() {
 		FindCurrentRegion(SceneManager.GetActiveScene());
 		SceneManager.activeSceneChanged += instance.InitScene;
+		thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
+		thermometer.value = previousValue;
+		SetSlider(thermometer, (float) World.averageTemp);
+		previousValue = (float) World.averageTemp; 
 	}
 
 	public static void Restart() {
@@ -70,10 +77,17 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void InitScene(Scene from, Scene to) {
+		
 		instance.loadingScreen.SetActive(false);
 		UIController.Instance.ToggleBackButton(to.name != "Overworld");
 		if (to.name == "Overworld")
+		{
+			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 			AudioManager.Instance.Play("BGM_Menu"); // TODO: sound name variable class
+			thermometer.value = previousValue;
+			thermometer.DOValue((float) World.averageTemp, 1.5f);
+			previousValue = (float) World.averageTemp; 
+		}
 		else
 			AudioManager.Instance.Play("BGM_" + to.name); // TODO: sound name variable class
 		if (to.name != "Overworld")
@@ -103,10 +117,12 @@ public class GameManager : Singleton<GameManager> {
 
 		Instance.loadingScreen.SetActive(true); // TODO: news scroll during loading screen
 
-		while (!asyncLoad.isDone || GameManager.Instance.runningModel) {
+		while (!asyncLoad.isDone || GameManager.Instance.runningModel)
+		{
 			yield return null;
 
-			if (asyncLoad.progress >= .9f && Time.realtimeSinceStartup - start > 1 && !GameManager.Instance.runningModel) { // awaits both model and scene load
+			if (asyncLoad.progress >= .9f && Time.realtimeSinceStartup - start > 1 && !GameManager.Instance.runningModel)
+			{ // awaits both model and scene load
 				Time.timeScale = 1;
 				asyncLoad.allowSceneActivation = true;
 				AudioManager.Instance.StopMusic(); // could move earlier and play new music during newsscroll
@@ -117,5 +133,11 @@ public class GameManager : Singleton<GameManager> {
 				yield break;
 			}
 		}
+	}
+
+	void SetSlider(Slider slider, float targetValue)
+	{
+		slider.value = targetValue;
+		previousValue = targetValue;
 	}
 }

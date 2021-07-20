@@ -2640,7 +2640,7 @@ GameObject:
   - component: {fileID: 535246559}
   m_Layer: 5
   m_Name: Slider
-  m_TagString: Untagged
+  m_TagString: Slider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2710,10 +2710,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 412111377}
   m_HandleRect: {fileID: 1739027695}
   m_Direction: 2
-  m_MinValue: 10
-  m_MaxValue: 35
+  m_MinValue: 15
+  m_MaxValue: 16
   m_WholeNumbers: 0
-  m_Value: 10
+  m_Value: 15
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8161,6 +8161,11 @@ PrefabInstance:
       propertyPath: optionsPrompt
       value: 
       objectReference: {fileID: 1746057099}
+    - target: {fileID: 5174851537695450224, guid: 91c0bc0f5c849914094e66a42dac4167,
+        type: 3}
+      propertyPath: thermometer
+      value: 
+      objectReference: {fileID: 535246559}
     - target: {fileID: 5174851537695450225, guid: 91c0bc0f5c849914094e66a42dac4167,
         type: 3}
       propertyPath: m_Name

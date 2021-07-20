@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OverworldController : MonoBehaviour {
 	[SerializeField] GameObject worldWrapper = default;
@@ -13,6 +14,7 @@ public class OverworldController : MonoBehaviour {
 	public float fadingSpeed = 5f;
 	[SerializeField] Canvas canvas;
 	private CanvasGroup canvasGroup;
+	
 
 	public enum Direction { FadeIn, FadeOut };
 
@@ -35,6 +37,10 @@ public class OverworldController : MonoBehaviour {
 			animationCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 		}
 
+		double targetValue = World.averageTemp;
+		Debug.Log("target value is: " + targetValue);
+		//thermometer.value = Mathf.Lerp(thermometer.value, (float) targetValue, Time.deltaTime * 8f);
+		
 		StartCoroutine(RotateMoon());
 	}
 
@@ -118,5 +124,11 @@ public class OverworldController : MonoBehaviour {
 		// force the alpha to the end alpha before finishing – this is here to mitigate any rounding errors, e.g. leaving the alpha at 0.01 instead of 0
 		if (direction == Direction.FadeIn) canvasGroup.alpha = animationCurve.Evaluate(1f);
 		else canvasGroup.alpha = animationCurve.Evaluate(0f);
+	}
+
+	void UpdateSlider(Slider slider, float targetValue)
+	{
+		//slider.value = targetValue;
+		slider.value = Mathf.Lerp(slider.value, (float)targetValue, Time.deltaTime * 24f);
 	}
 }
