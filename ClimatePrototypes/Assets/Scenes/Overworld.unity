@@ -289,11 +289,11 @@ GameObject:
   - component: {fileID: 26942562}
   m_Layer: 0
   m_Name: Alert
-  m_TagString: TropicsAlert
+  m_TagString: FireAlert
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &26942561
 Transform:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ TagManager:
   - Slider
   - Stats
   - TropicsAlert
+  - FireAlert
   layers:
   - Default
   - TransparentFX

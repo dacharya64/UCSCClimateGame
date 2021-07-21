@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager> {
 	float previousEconomy;
 	float previousLandUse;
 	[SerializeField] GameObject tropicsAlert;
+	GameObject fireAlert;
+	double previousRegionalTemp;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -44,6 +46,10 @@ public class GameManager : Singleton<GameManager> {
 		previousTempValue = (float) World.averageTemp;
 		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
 		tropicsAlert.GetComponent<SpriteRenderer>().enabled = false;
+		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
+		fireAlert.GetComponent<SpriteRenderer>().enabled = false;
+		previousRegionalTemp = World.temp[1];
+		Debug.Log("setting previous regional temp to " + previousRegionalTemp);
 	}
 
 	public static void Restart() {
@@ -166,7 +172,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckAlerts() {
-		// Check if popular opinion has changed enough to influence the tropics minigame
+		// Check if popular opinion has changed enough to influence the subtropics minigame
 		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
 		if (previousPublicOpinion < .20 && World.publicOpinion >= .20)
 		{
@@ -192,7 +198,34 @@ public class GameManager : Singleton<GameManager> {
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = false;
 		}
 
-		//
+		
+		// Check if regional temp has gone up or down enough to change tropics minigame
+		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
+		double currentRegionalTemp = World.temp[1];
+		if (previousRegionalTemp < 20 && currentRegionalTemp >= 20)
+		{
+			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousRegionalTemp >= 20 && previousRegionalTemp < 25 && (currentRegionalTemp >= 25 || currentRegionalTemp < 20))
+		{
+			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousRegionalTemp >= 25 && previousRegionalTemp < 30 && (currentRegionalTemp >= 30 || currentRegionalTemp < 25))
+		{
+			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousRegionalTemp >= 30 && previousRegionalTemp < 35 && (currentRegionalTemp >= 35 || currentRegionalTemp < 30))
+		{
+			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousRegionalTemp >= 35 && currentRegionalTemp < 35)
+		{
+			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else {
+			fireAlert.GetComponent<SpriteRenderer>().enabled = false;
+		}
+		previousRegionalTemp = currentRegionalTemp; 
 
 
 	}
