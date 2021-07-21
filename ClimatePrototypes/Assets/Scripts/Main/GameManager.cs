@@ -19,6 +19,11 @@ public class GameManager : Singleton<GameManager> {
 	public float previousTempValue;
 	[SerializeField] StatsPanel statsPanel;
 	[SerializeField] GameObject stats;
+	float previousPublicOpinion;
+	float previousEmissions;
+	float previousEconomy;
+	float previousLandUse;
+	[SerializeField] GameObject tropicsAlert;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -36,7 +41,9 @@ public class GameManager : Singleton<GameManager> {
 		SceneManager.activeSceneChanged += instance.InitScene;
 		thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 		SetSlider(thermometer, (float) World.averageTemp);
-		previousTempValue = (float) World.averageTemp; 
+		previousTempValue = (float) World.averageTemp;
+		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
+		tropicsAlert.GetComponent<SpriteRenderer>().enabled = false;
 	}
 
 	public static void Restart() {
@@ -83,11 +90,18 @@ public class GameManager : Singleton<GameManager> {
 		UIController.Instance.ToggleBackButton(to.name != "Overworld");
 		if (to.name == "Overworld")
 		{
-			// turn on stats panel
 			statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
+			// Save the previous stats
+			previousPublicOpinion = statsPanel.previousPublicOpinion;
+			previousEmissions = statsPanel.previousEmissions;
+			previousEconomy = statsPanel.previousEconomy;
+			previousLandUse = statsPanel.previousLandUse;
+
+			// turn on stats panel
 			statsPanel.Toggle(true);
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 			AudioManager.Instance.Play("BGM_Menu"); // TODO: sound name variable class
+			
 			// tween thermometer values
 			thermometer.value = previousTempValue;
 			thermometer.DOValue((float) World.averageTemp, 1.5f);
@@ -95,6 +109,9 @@ public class GameManager : Singleton<GameManager> {
 
 			// tween stats panel values 
 			statsPanel.CallUpdate();
+
+			//check if turn on alert
+			CheckAlerts(); 
 		}
 		else
 			AudioManager.Instance.Play("BGM_" + to.name); // TODO: sound name variable class
@@ -146,5 +163,37 @@ public class GameManager : Singleton<GameManager> {
 	void SetSlider(Slider slider, float targetValue)
 	{
 		slider.value = targetValue;
+	}
+
+	void CheckAlerts() {
+		// Check if popular opinion has changed enough to influence the tropics minigame
+		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
+		if (previousPublicOpinion < .20 && World.publicOpinion >= .20)
+		{
+			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousPublicOpinion >= .20 && previousPublicOpinion < .40 && (World.publicOpinion / 100 < .20 || World.publicOpinion / 100 >= .40))
+		{
+			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousPublicOpinion >= .40 && previousPublicOpinion < .60 && (World.publicOpinion / 100 < .40 || World.publicOpinion / 100 >= .60))
+		{
+			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousPublicOpinion >= .60 && previousPublicOpinion <.80 && (World.publicOpinion / 100 < .60 || World.publicOpinion / 100 >= .80))
+		{
+			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousPublicOpinion >= .80 && World.publicOpinion / 100 < .80)
+		{
+			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else {
+			tropicsAlert.GetComponent<SpriteRenderer>().enabled = false;
+		}
+
+		//
+
+
 	}
 }

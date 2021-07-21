@@ -7,10 +7,10 @@ using DG.Tweening;
 
 public class StatsPanel : MonoBehaviour {
 	[SerializeField] Slider landUse = default, publicOpinion = default, emissions = default, economy = default;
-	float previousPublicOpinion;
-	float previousEmissions;
-	float previousEconomy;
-	float previousLandUse;
+	public float previousPublicOpinion;
+	public float previousEmissions;
+	public float previousEconomy;
+	public float previousLandUse;
 
 	void Start() {
 		CallUpdate();
@@ -26,13 +26,10 @@ public class StatsPanel : MonoBehaviour {
 	}
 
 	public void CallUpdate() {
-		//if (gameObject.activeSelf)
-		//{ // only needs to update when turned on
 		previousLandUse = UpdateSlider(landUse, (float)EBM.a0, previousLandUse);
 		previousPublicOpinion = UpdateSlider(publicOpinion, World.publicOpinion / 100, previousPublicOpinion, invertColors: true);
 		previousEmissions = UpdateSlider(emissions, (float)EBM.F, previousEmissions); // used to be /14
 		previousEconomy = UpdateSlider(economy, World.money / 100, previousEconomy);
-		//}
 	}
 
 	float UpdateSlider(Slider slider, float value, float previousValue, bool invertColors = false) {
