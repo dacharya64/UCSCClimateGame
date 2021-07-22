@@ -13,21 +13,21 @@ public class StatsPanel : MonoBehaviour {
 	public float previousLandUse;
 
 	void Start() {
-		CallUpdate();
+		InitializeValues();
 	}
 
-	void Update() {
-		/*if (gameObject.activeSelf) { // only needs to update when turned on
-			UpdateSlider(landUse, (float) EBM.a0);
-			UpdateSlider(publicOpinion, World.publicOpinion / 100, invertColors : true);
-			UpdateSlider(emissions, (float) EBM.F); // used to be /14
-			UpdateSlider(economy, World.money / 100);
-		}*/
+	void InitializeValues() {
+		SetSlider(landUse, (float) EBM.a0);
+		SetSlider(publicOpinion, World.publicOpinion / 100, invertColors : true);
+		SetSlider(emissions, (float) EBM.F); // used to be /14
+		SetSlider(economy, World.money / 100);
 	}
 
 	public void CallUpdate() {
 		previousLandUse = UpdateSlider(landUse, (float)EBM.a0, previousLandUse);
 		previousPublicOpinion = UpdateSlider(publicOpinion, World.publicOpinion / 100, previousPublicOpinion, invertColors: true);
+		Debug.Log("Previous emissions: " + previousEmissions);
+		Debug.Log("Current emissions: " + (float)EBM.F);
 		previousEmissions = UpdateSlider(emissions, (float)EBM.F, previousEmissions); // used to be /14
 		previousEconomy = UpdateSlider(economy, World.money / 100, previousEconomy);
 	}
@@ -37,6 +37,12 @@ public class StatsPanel : MonoBehaviour {
 		slider.DOValue(value, 1.5f);
 		slider.fillRect.GetComponentInChildren<Image>(true).color = invertColors ? Color.Lerp(Color.red, Color.green, value) : Color.Lerp(Color.green, Color.red, value);
 		return value;
+	}
+
+	void SetSlider(Slider slider, float value, bool invertColors = false)
+	{
+		slider.value = value;
+		slider.fillRect.GetComponentInChildren<Image>(true).color = invertColors ? Color.Lerp(Color.red, Color.green, value) : Color.Lerp(Color.green, Color.red, value);
 	}
 
 	public void Toggle() => gameObject.SetActive(!gameObject.activeSelf);

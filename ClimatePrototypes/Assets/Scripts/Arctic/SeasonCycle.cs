@@ -3,16 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SeasonCycle : MonoBehaviour {
 	SpriteRenderer summerSR, winterSR;
 	public bool isSummer = false;
-	float dayDuration = 20f;
+	float dayDuration = 30f;
 	System.Func<float, float, float> fadeIn, fadeOut;
 	[SerializeField] float transitionTime = 1.5f;
+	[SerializeField] Text SeasonText;
 
 	void Start() {
+		
 		isSummer = ArcticController.Instance.visits % 2 == 0;
+		if (isSummer)
+		{
+			SeasonText.text = "Summer";
+		}
+		else {
+			SeasonText.text = "Winter";
+		}
 		var srs = GetComponentsInChildren<SpriteRenderer>();
 		(summerSR, winterSR) = (srs[0], srs[1]);
 
@@ -34,6 +44,14 @@ public class SeasonCycle : MonoBehaviour {
 		ArcticController.Instance.buffers.ToList().ForEach(b => b.AssignSprite());
 		yield return new WaitForSeconds(duration);
 		isSummer = !isSummer;
+		if (isSummer)
+		{
+			SeasonText.text = "Summer";
+		}
+		else
+		{
+			SeasonText.text = "Winter";
+		}
 		StartCoroutine(ChangeSeasons(dayDuration));
 	}
 }

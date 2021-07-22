@@ -49,7 +49,6 @@ public class GameManager : Singleton<GameManager> {
 		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
 		fireAlert.GetComponent<SpriteRenderer>().enabled = false;
 		previousRegionalTemp = World.temp[1];
-		Debug.Log("setting previous regional temp to " + previousRegionalTemp);
 	}
 
 	public static void Restart() {
@@ -107,7 +106,7 @@ public class GameManager : Singleton<GameManager> {
 			statsPanel.Toggle(true);
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 			AudioManager.Instance.Play("BGM_Menu"); // TODO: sound name variable class
-			
+
 			// tween thermometer values
 			thermometer.value = previousTempValue;
 			thermometer.DOValue((float) World.averageTemp, 1.5f);

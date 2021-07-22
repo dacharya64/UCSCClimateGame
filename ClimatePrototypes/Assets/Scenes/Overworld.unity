@@ -3320,6 +3320,11 @@ PrefabInstance:
       propertyPath: previousEconomy
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 3974962082203995578, guid: 5b327410d7ac9db419b2785b56c9eca1,
+        type: 3}
+      propertyPath: previousLandUse
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4243893882681538145, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
       propertyPath: m_AnchorMin.x
