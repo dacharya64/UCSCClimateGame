@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4518090395556987545}
   - component: {fileID: 2090219403319581807}
   m_Layer: 0
-  m_Name: Low Cloud
+  m_Name: Dark Low Cloud
   m_TagString: Cloud
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9c2a94ba45e45b3408b3f5b316c420be, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa53343f6b2bf7b46ba372d7c46630b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,14 +101,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 2.56}
+    oldSize: {x: 6.14, y: 2.94}
     newSize: {x: 2.03, y: 1.21}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.07, y: 0.44}
+  m_Size: {x: 4.56, y: 0.25620008}
   m_EdgeRadius: 0
 --- !u!251 &2072777403796196790
 PlatformEffector2D:

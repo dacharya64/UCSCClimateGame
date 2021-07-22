@@ -538,8 +538,11 @@ MonoBehaviour:
   type: 1
   cloudPrefab: {fileID: 2072777403796196785, guid: 12e19168afda23640a539e808481c8c4,
     type: 3}
+  darkCloudPrefab: {fileID: 2072777403796196785, guid: e5f9c614bd41d2349826497ca99d66f3,
+    type: 3}
   canSpawn: 1
   cloudSpawnWaitSeconds: 8
+  chanceOfDarkCloud: 0.5
 --- !u!1 &1194167032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,8 +1229,11 @@ MonoBehaviour:
   type: 0
   cloudPrefab: {fileID: 7585854367735539506, guid: a31bc0f67f59aa94cbff89c7de934caf,
     type: 3}
+  darkCloudPrefab: {fileID: 7585854367735539506, guid: 9428caa540c96b3438eaa269a73c1e19,
+    type: 3}
   canSpawn: 1
   cloudSpawnWaitSeconds: 8
+  chanceOfDarkCloud: 0.5
 --- !u!1001 &1703692309
 PrefabInstance:
   m_ObjectHideFlags: 0
