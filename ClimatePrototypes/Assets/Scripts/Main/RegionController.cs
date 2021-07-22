@@ -154,6 +154,11 @@ public abstract class RegionController : MonoBehaviour {
 		return World.temp[1];
 	}
 
+	public double GetArcticTemp()
+	{
+		return World.temp[2];
+	}
+
 	protected void TriggerUpdate(System.Action updateEBM) {
 		if (!updated) {
 			updateEBM();

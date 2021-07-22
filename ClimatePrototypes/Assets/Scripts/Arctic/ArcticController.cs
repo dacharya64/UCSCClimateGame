@@ -16,12 +16,45 @@ public class ArcticController : RegionController {
 	[SerializeField] Transform ice = default;
 	[HideInInspector] public Transform longWaveParent;
 	[HideInInspector] public float tempInfluence;
+	public int difficulty;
+	[SerializeField] GameObject lowCloudSpawner;
+	[SerializeField] GameObject highCloudSpawner;
 
 	void Start() {
 		longWaveParent = new GameObject("Long Wave Ray").transform;
 		// init temp influence, drives game difficulty
 		tempInfluence = (float) (World.temp[2] - World.startingTemp[2]) / World.maxTempChange;
-		Debug.Log($"Arctic temp influence is: {tempInfluence}");
+		//Debug.Log($"Arctic temp influence is: {tempInfluence}");
+
+		if (base.GetArcticTemp() < -10)
+		{
+			difficulty = 1;
+			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.8f);
+			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.8f);
+		}
+		else if (base.GetArcticTemp() >= -10 && base.GetArcticTemp() < -5)
+		{
+			difficulty = 2;
+			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.6f);
+			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.6f);
+		}
+		else if (base.GetArcticTemp() >= -5 && base.GetArcticTemp() < 0)
+		{
+			difficulty = 3;
+			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.4f);
+			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.4f);
+		}
+		else if (base.GetArcticTemp() >= 0 && base.GetArcticTemp() < 5)
+		{
+			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.2f);
+			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.2f);
+		}
+		else
+		{
+			difficulty = 5;
+			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0f);
+			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0f);
+		}
 
 		buffers = ice.GetComponentsInChildren<Buffer>();
 		int totalHealth = buffers.Length * buffers[0].health;

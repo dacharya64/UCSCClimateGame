@@ -95,6 +95,9 @@ MonoBehaviour:
   ice: {fileID: 680337532}
   longWaveParent: {fileID: 0}
   tempInfluence: 0
+  difficulty: 0
+  lowCloudSpawner: {fileID: 891243671}
+  highCloudSpawner: {fileID: 1677652526}
 --- !u!114 &24
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,6 +546,7 @@ MonoBehaviour:
   canSpawn: 1
   cloudSpawnWaitSeconds: 8
   chanceOfDarkCloud: 0.5
+  darkCloudReflectivity: 0.75
 --- !u!1 &1194167032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,6 +1238,7 @@ MonoBehaviour:
   canSpawn: 1
   cloudSpawnWaitSeconds: 8
   chanceOfDarkCloud: 0.5
+  darkCloudReflectivity: 0.75
 --- !u!1001 &1703692309
 PrefabInstance:
   m_ObjectHideFlags: 0
