@@ -36,4 +36,8 @@ public class Paddle : MonoBehaviour {
 			Destroy(other.gameObject);
 		}
 	}
+
+	public void ShrinkPaddle(float amt) {
+		transform.localScale = new Vector3(Mathf.Max(.5f, transform.localScale.x * amt), 1, 1);
+	}
 }

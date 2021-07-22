@@ -98,6 +98,7 @@ MonoBehaviour:
   difficulty: 0
   lowCloudSpawner: {fileID: 891243671}
   highCloudSpawner: {fileID: 1677652526}
+  paddle: {fileID: 3330338654661585804}
 --- !u!114 &24
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1882,3 +1883,9 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b201077b1a723ff4cb25e811cf5c27ae, type: 3}
+--- !u!1 &3330338654661585804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3330338654449602561, guid: b201077b1a723ff4cb25e811cf5c27ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 3330338654661585803}
+  m_PrefabAsset: {fileID: 0}
