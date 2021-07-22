@@ -49,6 +49,8 @@ public class GameManager : Singleton<GameManager> {
 		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
 		fireAlert.GetComponent<SpriteRenderer>().enabled = false;
 		previousRegionalTemp = World.temp[1];
+		statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
+		statsPanel.InitializeValues();
 	}
 
 	public static void Restart() {

@@ -12,11 +12,7 @@ public class StatsPanel : MonoBehaviour {
 	public float previousEconomy;
 	public float previousLandUse;
 
-	void Start() {
-		InitializeValues();
-	}
-
-	void InitializeValues() {
+	public void InitializeValues() {
 		SetSlider(landUse, (float) EBM.a0);
 		SetSlider(publicOpinion, World.publicOpinion / 100, invertColors : true);
 		SetSlider(emissions, (float) EBM.F); // used to be /14
