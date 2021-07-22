@@ -16,6 +16,8 @@ TagManager:
   - Stats
   - TropicsAlert
   - FireAlert
+  - ArcticAlert
+  - CityAlert
   layers:
   - Default
   - TransparentFX

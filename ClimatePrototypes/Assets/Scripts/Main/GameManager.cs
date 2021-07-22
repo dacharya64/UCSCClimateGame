@@ -25,7 +25,11 @@ public class GameManager : Singleton<GameManager> {
 	float previousLandUse;
 	[SerializeField] GameObject tropicsAlert;
 	GameObject fireAlert;
+	GameObject arcticAlert;
+	GameObject cityAlert;
 	double previousRegionalTemp;
+	double previousArcticTemp;
+	int timesSinceVisitedCity = 0;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -48,7 +52,12 @@ public class GameManager : Singleton<GameManager> {
 		tropicsAlert.GetComponent<SpriteRenderer>().enabled = false;
 		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
 		fireAlert.GetComponent<SpriteRenderer>().enabled = false;
+		arcticAlert = GameObject.FindGameObjectWithTag("ArcticAlert");
+		arcticAlert.GetComponent<SpriteRenderer>().enabled = false;
+		cityAlert = GameObject.FindGameObjectWithTag("CityAlert");
+		cityAlert.GetComponent<SpriteRenderer>().enabled = false;
 		previousRegionalTemp = World.temp[1];
+		previousArcticTemp = World.temp[2];
 		statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 		statsPanel.InitializeValues();
 	}
@@ -131,6 +140,11 @@ public class GameManager : Singleton<GameManager> {
 		{// RegionController child must be on root obj
 			if (o.TryGetComponent<RegionController>(out currentRegion))
 			{
+				if (s.name != "City") {
+					timesSinceVisitedCity++;
+				} else {
+					timesSinceVisitedCity = 0;
+				}
 				currentRegion.AssignRegion(s.name);
 				currentRegion.Intro(visits[currentRegion.region]++);
 				currentRegion.visits = visits[currentRegion.region];
@@ -226,8 +240,45 @@ public class GameManager : Singleton<GameManager> {
 		else {
 			fireAlert.GetComponent<SpriteRenderer>().enabled = false;
 		}
-		previousRegionalTemp = currentRegionalTemp; 
+		previousRegionalTemp = currentRegionalTemp;
 
+		// Check if arctic temp has changed enough
+		arcticAlert = GameObject.FindGameObjectWithTag("ArcticAlert");
+		double currentArcticTemp = World.temp[2];
+		if (previousArcticTemp < -10 && currentRegionalTemp >= -10)
+		{
+			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousArcticTemp >= -10 && previousArcticTemp < -5 && (currentArcticTemp >= -5 || currentArcticTemp < -10))
+		{
+			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousArcticTemp >= -5 && previousArcticTemp < 0 && (currentArcticTemp >= 0 || currentArcticTemp < -5))
+		{
+			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousArcticTemp >= 0 && previousArcticTemp < 5 && (currentArcticTemp >= 5 || currentArcticTemp < 0))
+		{
+			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else if (previousArcticTemp >= 5 && currentArcticTemp < 5)
+		{
+			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else
+		{
+			arcticAlert.GetComponent<SpriteRenderer>().enabled = false;
+		}
+		previousArcticTemp = currentArcticTemp;
 
+		// Check if it's been too long since visited city 
+		cityAlert = GameObject.FindGameObjectWithTag("CityAlert");
+		if (timesSinceVisitedCity > 4)
+		{
+			cityAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else {
+			cityAlert.GetComponent<SpriteRenderer>().enabled = false;
+		}
 	}
 }

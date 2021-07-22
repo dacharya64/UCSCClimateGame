@@ -132,11 +132,11 @@ GameObject:
   - component: {fileID: 984103}
   m_Layer: 0
   m_Name: Alert
-  m_TagString: Untagged
+  m_TagString: CityAlert
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &984102
 Transform:
   m_ObjectHideFlags: 0
@@ -6717,11 +6717,11 @@ GameObject:
   - component: {fileID: 1757227993}
   m_Layer: 0
   m_Name: Alert
-  m_TagString: Untagged
+  m_TagString: ArcticAlert
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1757227992
 Transform:
   m_ObjectHideFlags: 0
