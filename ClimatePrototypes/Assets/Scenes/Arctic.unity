@@ -1616,7 +1616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6596f256fbe634e861787973a75ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballEmitWaitSeconds: 2
+  ballEmitWaitSeconds: 1
   ballPrefab: {fileID: 1111486439586294892, guid: aca84e25a3ef52947b6979561c625537,
     type: 3}
 --- !u!1 &1921775658
