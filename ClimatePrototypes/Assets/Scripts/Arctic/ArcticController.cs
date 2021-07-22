@@ -37,6 +37,7 @@ public class ArcticController : RegionController {
 	}
 
 	protected override void GameOver() {
+		base.Loading(false);
 		base.GameOver();
 		Debug.Log($"Remaining {buffers.Select(b => b.health).Aggregate((sum, b) => b + sum)} ice of total {buffers.Length * 5} ice");
 		// arctic does not affect model
