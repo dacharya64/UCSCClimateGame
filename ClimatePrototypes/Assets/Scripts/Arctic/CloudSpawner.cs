@@ -13,7 +13,7 @@ public class CloudSpawner : MonoBehaviour {
 	[SerializeField] bool canSpawn = true;
 	[SerializeField] float cloudSpawnWaitSeconds = 8f;
 	Transform cloudParent;
-	public float chanceOfDarkCloud = 0.5f;
+	public float chanceOfDarkCloud;
 	public float darkCloudReflectivity = 0.75f; // if this is higher, clouds let more through
 	bool left = true;
 
@@ -46,5 +46,9 @@ public class CloudSpawner : MonoBehaviour {
 		}
 		
 		StartCoroutine(SpawnCloud());
+	}
+
+	public void SetChanceOfDarkCloud(float chance) {
+		chanceOfDarkCloud = chance;
 	}
 }
