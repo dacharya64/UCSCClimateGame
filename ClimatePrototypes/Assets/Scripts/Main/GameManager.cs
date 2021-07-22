@@ -29,6 +29,7 @@ public class GameManager : Singleton<GameManager> {
 	GameObject cityAlert;
 	double previousRegionalTemp;
 	double previousArcticTemp;
+	int timesSinceVisitedCity = 0;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -139,6 +140,11 @@ public class GameManager : Singleton<GameManager> {
 		{// RegionController child must be on root obj
 			if (o.TryGetComponent<RegionController>(out currentRegion))
 			{
+				if (s.name != "City") {
+					timesSinceVisitedCity++;
+				} else {
+					timesSinceVisitedCity = 0;
+				}
 				currentRegion.AssignRegion(s.name);
 				currentRegion.Intro(visits[currentRegion.region]++);
 				currentRegion.visits = visits[currentRegion.region];
@@ -264,5 +270,15 @@ public class GameManager : Singleton<GameManager> {
 			arcticAlert.GetComponent<SpriteRenderer>().enabled = false;
 		}
 		previousArcticTemp = currentArcticTemp;
+
+		// Check if it's been too long since visited city 
+		cityAlert = GameObject.FindGameObjectWithTag("CityAlert");
+		if (timesSinceVisitedCity > 4)
+		{
+			cityAlert.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		else {
+			cityAlert.GetComponent<SpriteRenderer>().enabled = false;
+		}
 	}
 }
