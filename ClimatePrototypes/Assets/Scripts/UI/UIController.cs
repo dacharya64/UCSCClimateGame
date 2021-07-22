@@ -33,7 +33,7 @@ public class UIController : Singleton<UIController> {
 	}
 
 	void Update() {
-		moneyText.text = $"{World.money:F2}"; // technically we don't use money anymore?
+		//moneyText.text = $"{World.money:F2}"; // technically we don't use money anymore?
 	}
 
 	public void IncrementTurn() => turnText.text = $"Year {++World.turn}";

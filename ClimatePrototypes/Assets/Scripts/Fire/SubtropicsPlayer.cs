@@ -32,7 +32,7 @@ public class SubtropicsPlayer : MonoBehaviour {
 		newLine = line.GetComponent<LineRenderer>();
 		//newLine.material = new Material(Shader.Find("Sprites/Default"));
 
-		newLine.material = UnityEditor.AssetDatabase.GetBuiltinExtraResource<Material>("Default-Particle.mat"); // TODO: apply your own material
+		//newLine.material = UnityEditor.AssetDatabase.GetBuiltinExtraResource<Material>("Default-Particle.mat"); // TODO: apply your own material
 		newLine.material.SetTextureScale("_MainTex", new Vector2(10f, 1.0f));
 		newLine.widthMultiplier = 0.1f;
 
