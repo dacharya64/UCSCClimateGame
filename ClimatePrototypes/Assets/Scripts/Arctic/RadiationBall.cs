@@ -15,13 +15,24 @@ public class RadiationBall : MonoBehaviour {
 		screenMax = Camera.main.ViewportToWorldPoint(Vector2.one);
 		rb = GetComponent<Rigidbody2D>();
 
-		if (radiationType == Radiation.ShortWave)
+		if (radiationType == Radiation.ShortWave) {
 			rb.velocity = new Vector2(Random.Range(-force.x, force.x), -Random.Range(force.y * 0.8f, force.y));
-		else {
-			force = new Vector2(Random.Range(-force.x, force.x), Random.Range(-force.y, force.y));
-			rb.velocity = force.normalized * 5f;
+			Orient();
 		}
-		Orient();
+			
+		else { // if longwave radiation
+			float rand = Random.value;
+			if (rand <= .5f) {
+				force = new Vector2(1, -5);
+			}
+			else
+			{
+				force = new Vector2(1, 5);
+			}			
+			rb.velocity = force;
+		}
+		
+
 	}
 
 	/// <summary> points ball in proper direction </summary>
