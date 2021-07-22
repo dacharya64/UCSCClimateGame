@@ -26,8 +26,6 @@ public class StatsPanel : MonoBehaviour {
 	public void CallUpdate() {
 		previousLandUse = UpdateSlider(landUse, (float)EBM.a0, previousLandUse);
 		previousPublicOpinion = UpdateSlider(publicOpinion, World.publicOpinion / 100, previousPublicOpinion, invertColors: true);
-		Debug.Log("Previous emissions: " + previousEmissions);
-		Debug.Log("Current emissions: " + (float)EBM.F);
 		previousEmissions = UpdateSlider(emissions, (float)EBM.F, previousEmissions); // used to be /14
 		previousEconomy = UpdateSlider(economy, World.money / 100, previousEconomy);
 	}
