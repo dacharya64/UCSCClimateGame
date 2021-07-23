@@ -101,7 +101,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void InitScene(Scene from, Scene to) {
-		
+
 		instance.loadingScreen.SetActive(false);
 		UIController.Instance.ToggleBackButton(to.name != "Overworld");
 		if (to.name == "Overworld")
@@ -114,7 +114,14 @@ public class GameManager : Singleton<GameManager> {
 			previousLandUse = statsPanel.previousLandUse;
 
 			// turn on stats panel
-			statsPanel.Toggle(true);
+			// check to see if something in the stats panel changed 
+
+			float publicOpinion = (float)previousPublicOpinion * 100f;
+			float econ = (float)previousEconomy * 100f;
+			if (!Mathf.Approximately(publicOpinion, World.publicOpinion) || previousEmissions != (float)EBM.F || econ != World.money) {
+				statsPanel.Toggle(true);
+			}
+		
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 			AudioManager.Instance.Play("BGM_Menu"); // TODO: sound name variable class
 

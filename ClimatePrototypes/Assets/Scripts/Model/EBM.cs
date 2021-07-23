@@ -155,8 +155,6 @@ public partial class EBM {
 
 		double[] average_precip_subtropics_array = Condense(precip_subtropics, 1);
 		average_precip_subtropics = average_precip_subtropics_array[0];
-		Debug.Log(average_precip_subtropics_array.ToString());
-		Debug.Log(average_precip_subtropics);
 		//return (Condense(temp, regions), Condense(energy, regions), Condense(precip, regions));
 		double[] regionalTemps = new double[] { tropics_temp, subtropics_temp, arctic_temp };
 		
