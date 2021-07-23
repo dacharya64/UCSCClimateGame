@@ -82,9 +82,9 @@ public class ForestController : RegionController {
 	protected override void Update() {
 		base.Update();
 		percentageIncreaseText.text = (percentageIncrease * 100).ToString() + "%";
-		emissionsIncreaseText.text = forcingIncrease.ToString();
-		emissionsDecreaseText.text = forcingDecrease.ToString();
-		emissionsTotalText.text = (forcingIncrease - forcingDecrease).ToString();
+		emissionsIncreaseText.text = forcingIncrease.ToString("F3");
+		emissionsDecreaseText.text = forcingDecrease.ToString("F3");
+		emissionsTotalText.text = (forcingIncrease - forcingDecrease).ToString("F3");
 		//emissionsTracker.value = damage / 200f; // TODO: fix slider visual logic, positive and negative but from the middle out
 	}
 

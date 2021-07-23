@@ -5942,6 +5942,7 @@ GameObject:
   - component: {fileID: 973033186}
   - component: {fileID: 973033188}
   - component: {fileID: 973033187}
+  - component: {fileID: 973033189}
   m_Layer: 5
   m_Name: GameOverPrompt
   m_TagString: Untagged
@@ -6034,6 +6035,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973033185}
   m_CullTransparentMesh: 0
+--- !u!114 &973033189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973033185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9374f4da072f30b4daae2ca78f160b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FinalTemperatureText: {fileID: 346675076}
+  FinalTropicsTempText: {fileID: 2088641206}
+  FinalSubtropicsTempText: {fileID: 1286263579}
+  FinalArcticTempText: {fileID: 440894580}
+  FinalPublicOpinionText: {fileID: 1822416948}
+  FinalEmissionsText: {fileID: 1869310377}
+  FinalEconomyText: {fileID: 640828460}
 --- !u!1 &982069099
 GameObject:
   m_ObjectHideFlags: 0
