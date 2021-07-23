@@ -136,7 +136,7 @@ public abstract class RegionController : MonoBehaviour {
 		}
 	}
 
-	void SetPause(int on) => paused = (Time.timeScale = 1 - on) == 0;
+	public void SetPause(int on) => paused = (Time.timeScale = 1 - on) == 0;
 
 	protected void Pause() {
 		if (!paused) {
