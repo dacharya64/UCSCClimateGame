@@ -11,7 +11,10 @@ public partial class EBM {
 	public static double avg_temp;
 	public static double arctic_temp;
 	public static double tropics_temp;
-	public static double subtropics_temp; 
+	public static double subtropics_temp;
+	public static Matrix<double> subtropics_array;
+	public static Vector<double> precip_subtropics;
+	public static double average_precip_subtropics;
 
 	public static void Reset() {
 		F = 0;
@@ -96,11 +99,13 @@ public partial class EBM {
 		}
 
 		subtropics_temp = 0;
+		subtropics_array = Matrix<double>.Build.Dense(bands, nt, 0);
 		for (int i = 15; i <= 17; i++)
 		{
 			for (int j = 0; j < Tfin.ColumnCount; j++)
 			{
 				subtropics_temp = subtropics_temp + Tfin[i, j];
+				subtropics_array[i, j] = Tfin[i, j];
 			}
 		}
 
@@ -146,9 +151,15 @@ public partial class EBM {
 
 		if (tempControl is null) InitFirstRun(Tfin);
 		precip = CalcPrecip(Vector<double>.Build.DenseOfEnumerable(Tfin.FoldByRow((mean, col) => mean + col / Tfin.ColumnCount, 0d)));
-		//return (Condense(temp, regions), Condense(energy, regions), Condense(precip, regions));
-		double[] regionalTemps = new double[] { tropics_temp, subtropics_temp, arctic_temp }; 
+		precip_subtropics = CalcPrecip(Vector<double>.Build.DenseOfEnumerable(subtropics_array.FoldByRow((mean, col) => mean + col / subtropics_array.ColumnCount, 0d)));
 
+		double[] average_precip_subtropics_array = Condense(precip_subtropics, 1);
+		average_precip_subtropics = average_precip_subtropics_array[0];
+		Debug.Log(average_precip_subtropics_array.ToString());
+		Debug.Log(average_precip_subtropics);
+		//return (Condense(temp, regions), Condense(energy, regions), Condense(precip, regions));
+		double[] regionalTemps = new double[] { tropics_temp, subtropics_temp, arctic_temp };
+		
 		return (regionalTemps, Condense(energy, regions), Condense(precip, regions));
 	}
 
@@ -208,7 +219,7 @@ public partial class EBM {
 	static void Print(IEnumerable<double> nums) => UnityEngine.Debug.Log(nums == null ? "null" : nums.AsString());
 	static void Print(double num) => UnityEngine.Debug.Log(num);
 
-	public static Vector<double> saturation_specific_humidity(Vector<double> temp, double press) //TODO: double check if this should return a vector or a double
+	public static Vector<double> saturation_specific_humidity(Vector<double> temp, double press)
 	{
 		var es0 = 610.78;
 		var t0 = 273.16;
