@@ -65,6 +65,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	public static void Restart() {
+		UIController.Instance.ChangeGameOverPromptState(false);
 		SceneManager.LoadScene("TitleScreen");
 		EBM.Reset();
 	}
@@ -304,6 +305,7 @@ public class GameManager : Singleton<GameManager> {
 		{
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);
+			completedRegions = 0; //reset # of completed regions
 		}
 	}
 }
