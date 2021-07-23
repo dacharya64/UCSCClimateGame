@@ -20,6 +20,7 @@ public class ArcticController : RegionController {
 	[SerializeField] GameObject lowCloudSpawner;
 	[SerializeField] GameObject highCloudSpawner;
 	[SerializeField] GameObject paddle;
+	[SerializeField] GameObject aboutPrompt;
 
 	void Start() {
 		longWaveParent = new GameObject("Long Wave Ray").transform;
@@ -83,5 +84,17 @@ public class ArcticController : RegionController {
 		Debug.Log($"Remaining {buffers.Select(b => b.health).Aggregate((sum, b) => b + sum)} ice of total {buffers.Length * 5} ice");
 		// arctic does not affect model
 		// TriggerUpdate(() => World.albedo.Update(World.Region.Arctic, World.Region.City, effect));
+	}
+
+	public void OpenAbout()
+	{
+		base.SetPause(1);
+		aboutPrompt.SetActive(true);
+	}
+
+	public void CloseAbout()
+	{
+		aboutPrompt.SetActive(false);
+		base.SetPause(0);
 	}
 }
