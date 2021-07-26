@@ -301,11 +301,14 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
-		if (completedRegions > 0)
+		if (completedRegions > 19)
 		{
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);
 			completedRegions = 0; //reset # of completed regions
+			World.turn = 1;
+			timesSinceVisitedCity = 0;
+			visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
 		}
 	}
 }
