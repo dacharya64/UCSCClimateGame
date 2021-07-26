@@ -98,6 +98,7 @@ public abstract class RegionController : MonoBehaviour {
 	}
 
 	protected virtual void GameOver() {
+		GameManager.Instance.IncrementCompletedRegions();
 		if (region != World.Region.City && region != World.Region.Forest) {
 			timerText.text = "0";
 		}

@@ -30,6 +30,8 @@ public class GameManager : Singleton<GameManager> {
 	double previousRegionalTemp;
 	double previousArcticTemp;
 	int timesSinceVisitedCity = 0;
+	int completedRegions = 0;
+	GameObject GameOverPrompt;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -63,6 +65,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	public static void Restart() {
+		UIController.Instance.ChangeGameOverPromptState(false);
 		SceneManager.LoadScene("TitleScreen");
 		EBM.Reset();
 	}
@@ -121,23 +124,27 @@ public class GameManager : Singleton<GameManager> {
 			if (!Mathf.Approximately(publicOpinion, World.publicOpinion) || previousEmissions != (float)EBM.F || econ != World.money) {
 				statsPanel.Toggle(true);
 			}
-		
+
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 			AudioManager.Instance.Play("BGM_Menu"); // TODO: sound name variable class
 
 			// tween thermometer values
 			thermometer.value = previousTempValue;
-			thermometer.DOValue((float) World.averageTemp, 1.5f);
-			previousTempValue = (float) World.averageTemp;
+			thermometer.DOValue((float)World.averageTemp, 1.5f);
+			previousTempValue = (float)World.averageTemp;
 
 			// tween stats panel values 
 			statsPanel.CallUpdate();
 
-			//check if turn on alert
-			CheckAlerts(); 
+			// check if turn on alert
+			CheckAlerts();
+
+			// check if game over
+			CheckGameOver();
 		}
-		else
+		else if (to.name != "TitleScreen") {
 			AudioManager.Instance.Play("BGM_" + to.name); // TODO: sound name variable class
+		}
 		if (to.name != "Overworld")
 			FindCurrentRegion(to);
 	}
@@ -286,6 +293,22 @@ public class GameManager : Singleton<GameManager> {
 		}
 		else {
 			cityAlert.GetComponent<SpriteRenderer>().enabled = false;
+		}
+	}
+
+	public void IncrementCompletedRegions() {
+		completedRegions++;
+	}
+
+	void CheckGameOver() {
+		if (completedRegions > 19)
+		{
+			// show stats screen and let player restart
+			UIController.Instance.ChangeGameOverPromptState(true);
+			completedRegions = 0; //reset # of completed regions
+			World.turn = 1;
+			timesSinceVisitedCity = 0;
+			visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
 		}
 	}
 }
