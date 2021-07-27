@@ -81,7 +81,9 @@ public class TitleScreen : MonoBehaviour {
 		yield return StartCoroutine(PanUp());
 		UIController.Instance.gameObject.SetActive(true);
 		yield return StartCoroutine(UIController.SlideNav(UIController.Instance.navbar.transform));
-		yield return StartCoroutine(overworldController.EnterWorld());
+        GameManager.Instance.Awake();
+        GameManager.Instance.Start();
+        yield return StartCoroutine(overworldController.EnterWorld());
 		SceneManager.UnloadSceneAsync(gameObject.scene);
 	}
 

@@ -8,7 +8,7 @@ using MathNet.Numerics.LinearAlgebra;
 using Interpolate = MathNet.Numerics.Interpolate;
 
 public partial class EBM {
-	public static double avg_temp;
+	public static double avg_temp = 15.7881585877727;
 	public static double arctic_temp;
 	public static double tropics_temp;
 	public static double subtropics_temp;
