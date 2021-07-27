@@ -8,10 +8,10 @@ using MathNet.Numerics.LinearAlgebra;
 using Interpolate = MathNet.Numerics.Interpolate;
 
 public partial class EBM {
-	public static double avg_temp;
-	public static double arctic_temp;
-	public static double tropics_temp;
-	public static double subtropics_temp;
+	public static double avg_temp = 15.7881585877727;
+	public static double arctic_temp = -6.23866826474693;
+	public static double tropics_temp = 26.3169400178922;
+	public static double subtropics_temp = 23.1785980190623;
 	public static Matrix<double> subtropics_array;
 	public static Vector<double> precip_subtropics;
 	public static double average_precip_subtropics;
