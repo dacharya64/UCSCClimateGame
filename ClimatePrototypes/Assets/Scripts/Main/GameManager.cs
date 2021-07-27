@@ -38,8 +38,7 @@ public class GameManager : Singleton<GameManager> {
 
 	public override void Awake() {
 		base.Awake();
-		if (Instance.runModel) {
-			Debug.Log("init");
+		if (Instance.runModel && World.averageTemp == 0) {
 			World.Init();
 			// World.ranges = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<double, List<double>>>>(Resources.Load<TextAsset>("ipcc").text);
 		}
@@ -49,7 +48,6 @@ public class GameManager : Singleton<GameManager> {
 		FindCurrentRegion(SceneManager.GetActiveScene());
 		SceneManager.activeSceneChanged += instance.InitScene;
 		thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
-		Debug.Log("World average temp: " + World.averageTemp);
 		SetSlider(thermometer, (float) World.averageTemp);
 		previousTempValue = (float) World.averageTemp;
 		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
@@ -199,8 +197,14 @@ public class GameManager : Singleton<GameManager> {
 
 	void SetSlider(Slider slider, float targetValue)
 	{
-		Debug.Log("Setting slider to: " + targetValue);
-		slider.value = targetValue;
+		if (targetValue == 0)
+		{
+			slider.value = 15.7881585877727f;
+		}
+		else
+		{
+			slider.value = targetValue;
+		}
 	}
 
 	void CheckAlerts() {
