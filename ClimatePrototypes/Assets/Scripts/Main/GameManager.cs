@@ -44,7 +44,7 @@ public class GameManager : Singleton<GameManager> {
 		}
 	}
 
-	public void Start() {
+	void Start() {
 		FindCurrentRegion(SceneManager.GetActiveScene());
 		SceneManager.activeSceneChanged += instance.InitScene;
 		thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
@@ -197,14 +197,7 @@ public class GameManager : Singleton<GameManager> {
 
 	void SetSlider(Slider slider, float targetValue)
 	{
-		if (targetValue == 0)
-		{
-			slider.value = 15.7881585877727f;
-		}
-		else
-		{
-			slider.value = targetValue;
-		}
+		slider.value = targetValue;
 	}
 
 	void CheckAlerts() {

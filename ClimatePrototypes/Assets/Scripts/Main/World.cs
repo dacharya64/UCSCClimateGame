@@ -15,8 +15,7 @@ public static class World {
 	public static string worldName = "";
 	public static float money = 70f, publicOpinion = 70f;
 	public static int turn = 1;
-	public static double[] energy, precip, startingTemp;
-	public static double[] temp = new double[] { 26.3169400178922, 23.1785980190623, -6.23866826474693 };
+	public static double[] temp, energy, precip, startingTemp;
 	public static float maxTempChange = 10f;
 	public static double averageTemp { get => EBM.avg_temp; }
 	public static double subtropics_precip { get => EBM.average_precip_subtropics; }
