@@ -48,7 +48,6 @@ public partial class EBM {
 									p++;
 								}*/
 
-
 				//Vector<double> alpha = E.PointwiseSign().PointwiseMultiply(aw).Map(x => x < 0 ? aI : x); // aw * (E > 0) + ai * (E < 0)
 
 				Vector<double> alpha2 = Vector<double>.Build.DenseOfVector(T);
