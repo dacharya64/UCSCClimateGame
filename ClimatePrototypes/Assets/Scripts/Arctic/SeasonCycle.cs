@@ -14,15 +14,15 @@ public class SeasonCycle : MonoBehaviour {
 	[SerializeField] Text SeasonText;
 
 	void Start() {
-		
-		isSummer = ArcticController.Instance.visits % 2 == 0;
-		if (isSummer)
+
+		isSummer = true; // ArcticController.Instance.visits % 2 != 0;
+		/*if (isSummer)
 		{
 			SeasonText.text = "Summer";
 		}
 		else {
 			SeasonText.text = "Winter";
-		}
+		}*/
 		var srs = GetComponentsInChildren<SpriteRenderer>();
 		(summerSR, winterSR) = (srs[0], srs[1]);
 
