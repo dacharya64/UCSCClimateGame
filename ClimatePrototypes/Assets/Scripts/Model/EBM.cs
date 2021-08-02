@@ -47,6 +47,7 @@ public partial class EBM {
 									Tfin.SetColumn(p, T);
 									p++;
 								}*/
+
 				//Vector<double> alpha = E.PointwiseSign().PointwiseMultiply(aw).Map(x => x < 0 ? aI : x); // aw * (E > 0) + ai * (E < 0)
 
 				Vector<double> alpha2 = Vector<double>.Build.DenseOfVector(T);
@@ -71,6 +72,7 @@ public partial class EBM {
 				}
 
 				Vector<double> alpha = alpha2.PointwiseMultiply(aw).Map(x => x < 0 ? aI : x);
+
 
 				Vector<double> C = alpha.PointwiseMultiply(S.Row(j)) + cg_tau * Tg - A + F; // alpha * S[i, :] + cg_tau * Tg - A
 				Vector<double> T0 = C / (M - k * Lf / E);
