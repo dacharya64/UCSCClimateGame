@@ -25,7 +25,7 @@ public class ArcticController : RegionController {
 	void Start() {
 		longWaveParent = new GameObject("Long Wave Ray").transform;
 		// init temp influence, drives game difficulty
-		tempInfluence = (float) (World.temp[2] - World.startingTemp[2]) / World.maxTempChange;
+		//tempInfluence = (float) (World.temp[2] - World.startingTemp[2]) / World.maxTempChange;
 		//Debug.Log($"Arctic temp influence is: {tempInfluence}");
 		Paddle paddleScript = paddle.GetComponent<Paddle>();
 
@@ -40,30 +40,29 @@ public class ArcticController : RegionController {
 			difficulty = 2f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.6f);
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.6f);
-			paddleScript.ShrinkPaddle(0.95f);
+			paddleScript.ShrinkPaddle(0.90f);
 		}
 		else if (base.GetArcticTemp() >= -5 && base.GetArcticTemp() < 0)
 		{
 			difficulty = 3f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.4f);
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.4f);
-			paddleScript.ShrinkPaddle(0.85f);
+			paddleScript.ShrinkPaddle(0.80f);
 		}
 		else if (base.GetArcticTemp() >= 0 && base.GetArcticTemp() < 5)
 		{
 			difficulty = 4f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.2f);
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.2f);
-			paddleScript.ShrinkPaddle(0.75f);
+			paddleScript.ShrinkPaddle(0.70f);
 		}
 		else
 		{
 			difficulty = 5f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0f);
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0f);
-			paddleScript.ShrinkPaddle(0.65f);
+			paddleScript.ShrinkPaddle(0.60f);
 		}
-
 
 		buffers = ice.GetComponentsInChildren<Buffer>();
 		int totalHealth = buffers.Length * buffers[0].health;

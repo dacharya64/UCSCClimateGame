@@ -15,10 +15,10 @@ public class LongWaveSpawner : MonoBehaviour { // TODO: rename to be consister w
 			Instantiate(longWavePrefab, transform.position, Quaternion.identity, ArcticController.Instance.longWaveParent);
 		if (ArcticController.Instance.summer)
 		{
-			StartCoroutine(EmitBall(Random.Range(2, 5)));
+			StartCoroutine(EmitBall(Random.Range(1, 3)));
 		}
 		else {
-			StartCoroutine(EmitBall(Random.Range(4, 7)));
+			StartCoroutine(EmitBall(Random.Range(2, 5)));
 		}
 	}
 }
