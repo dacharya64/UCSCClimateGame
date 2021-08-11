@@ -10,6 +10,7 @@ public class TitleScreen : MonoBehaviour {
 	Scene overworldScene;
 	OverworldController overworldController;
 	[SerializeField] Graphic[] uiReveal = default;
+	public static GameObject loadingText;
 
 	public void Quit() => Application.Quit();
 
@@ -22,6 +23,8 @@ public class TitleScreen : MonoBehaviour {
 		} else SetOverWorldActive(SceneManager.GetSceneByName("Overworld"), LoadSceneMode.Single);
 
 		AudioManager.Instance.Play("BGM_Menu"); // TODO: global sound name class
+
+		
 
 		for (int i = 0; i < uiReveal.Length; i++) {
 			foreach (Graphic g in uiReveal[i].GetComponentsInChildren<Graphic>())
@@ -63,6 +66,11 @@ public class TitleScreen : MonoBehaviour {
 		overworldController.SendToBottom();
 		overworldController.HideThermometer();
 		// StartCoroutine(SlideUp());
+	}
+
+	public static void TurnOffLoadingText() {
+		loadingText = GameObject.FindGameObjectWithTag("LoadingText");
+		loadingText.SetActive(false);
 	}
 
 	public void ExitTitle() {

@@ -86,6 +86,7 @@ public static class World {
 		UIController.Instance.SetLoadingPrompt(false);
 		Debug.Log($"Average Temp: {averageTemp} with regionals: {temp.AsString()}, calculated in {timer.ElapsedMilliseconds}ms");
 		//Debug.Log($"subtropics precip: {subtropics_precip}");
+		TitleScreen.TurnOffLoadingText();
 	}
 
 	public static double ChangeAverageTemp(bool useTemp = true, int years = 0, int steps = 0) {
