@@ -13,6 +13,7 @@ public class UIController : Singleton<UIController> {
 	[SerializeField] GameObject returnPrompt = default;
 	[SerializeField] GameObject loadingPrompt = default;
 	[SerializeField] GameObject infoBox = default;
+	[SerializeField] GameObject cityPrompt = default;
 	[SerializeField] GameObject gameOverPrompt;
 	public GameObject navbar;
 	Dictionary<GameObject, bool> uiActiveStatus = new Dictionary<GameObject, bool>();
@@ -186,6 +187,11 @@ public class UIController : Singleton<UIController> {
 
 	public void ChangeInfoBoxState(bool state) {
 		infoBox.SetActive(state);
+	}
+
+	public void ChangeCityPromptState(bool state)
+	{
+		cityPrompt.SetActive(state);
 	}
 
 	public void ChangeGameOverPromptState(bool state)
