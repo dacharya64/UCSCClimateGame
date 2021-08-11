@@ -42,7 +42,7 @@ public class UIController : Singleton<UIController> {
 
 	public void ToggleBackButton(bool on) {
 		backButton.gameObject.SetActive(on);
-		exitButton.gameObject.SetActive(!on);
+		//exitButton.gameObject.SetActive(!on);
 	}
 
 	// methods that start with UI are non-static methods for Unity Editor buttons
