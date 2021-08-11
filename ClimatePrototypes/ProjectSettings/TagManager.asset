@@ -18,6 +18,7 @@ TagManager:
   - FireAlert
   - ArcticAlert
   - CityAlert
+  - LoadingText
   layers:
   - Default
   - TransparentFX
