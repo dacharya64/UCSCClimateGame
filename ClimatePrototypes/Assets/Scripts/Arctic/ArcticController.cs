@@ -25,7 +25,7 @@ public class ArcticController : RegionController {
 	void Start() {
 		longWaveParent = new GameObject("Long Wave Ray").transform;
 		// init temp influence, drives game difficulty
-		//tempInfluence = (float) (World.temp[2] - World.startingTemp[2]) / World.maxTempChange;
+		tempInfluence = (float) (World.temp[2] - World.startingTemp[2]) / World.maxTempChange;
 		//Debug.Log($"Arctic temp influence is: {tempInfluence}");
 		Paddle paddleScript = paddle.GetComponent<Paddle>();
 
@@ -63,6 +63,7 @@ public class ArcticController : RegionController {
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0f);
 			paddleScript.ShrinkPaddle(0.60f);
 		}
+
 
 		buffers = ice.GetComponentsInChildren<Buffer>();
 		int totalHealth = buffers.Length * buffers[0].health;

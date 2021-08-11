@@ -15,7 +15,8 @@ public static class World {
 	public static string worldName = "";
 	public static float money = 70f, publicOpinion = 70f;
 	public static int turn = 1;
-	public static double[] temp, energy, precip, startingTemp;
+	public static double[] energy, precip, startingTemp;
+	public static double[] temp = new double[] { 26, 23, -6 };
 	public static float maxTempChange = 10f;
 	public static double averageTemp { get => EBM.avg_temp; }
 	public static double subtropics_precip { get => EBM.average_precip_subtropics; }
@@ -77,13 +78,13 @@ public static class World {
 	}
 
 	public static void Calc(bool useTemp = true, int years = 0, int steps = 0) {
-		//UIController.Instance.SetLoadingPrompt(true);
+		UIController.Instance.SetLoadingPrompt(true);
 		var timer = new Stopwatch();
 		timer.Start();
 		(temp, energy, precip) = EBM.Calc(useTemp ? EBM.temp : null, years, steps);
 		timer.Stop();
-		//UIController.Instance.SetLoadingPrompt(false);
-		Debug.Log($"Average Temp: {averageTemp} with regionals: {temp.AsString()}");
+		UIController.Instance.SetLoadingPrompt(false);
+		Debug.Log($"Average Temp: {averageTemp} with regionals: {temp.AsString()}, calculated in {timer.ElapsedMilliseconds}ms");
 		//Debug.Log($"subtropics precip: {subtropics_precip}");
 	}
 

@@ -8,10 +8,10 @@ using MathNet.Numerics.LinearAlgebra;
 using Interpolate = MathNet.Numerics.Interpolate;
 
 public partial class EBM {
-	public static double avg_temp;// = 15.7881585877727;
-	public static double arctic_temp = -6.23866826474693;
-	public static double tropics_temp = 26.3169400178922;
-	public static double subtropics_temp = 23.1785980190623;
+	public static double avg_temp;
+	public static double arctic_temp;
+	public static double tropics_temp;
+	public static double subtropics_temp;
 	public static Matrix<double> subtropics_array;
 	public static Vector<double> precip_subtropics;
 	public static double average_precip_subtropics;
@@ -47,31 +47,7 @@ public partial class EBM {
 									Tfin.SetColumn(p, T);
 									p++;
 								}*/
-				//Vector<double> alpha = E.PointwiseSign().PointwiseMultiply(aw).Map(x => x < 0 ? aI : x); // aw * (E > 0) + ai * (E < 0)
-
-				Vector<double> alpha2 = Vector<double>.Build.DenseOfVector(T);
-				for (int counter = 0; counter < 24; counter++)
-				{
-					//alpha2[counter] = alpha3[counter];
-					//double result = Math.Sign(E[k]);
-					//Debug.Log("result is: " + result);
-					if (E[counter] > 0)
-					{
-						alpha2[counter] = 1;
-					}
-					else if (E[counter] < 0)
-					{
-						alpha2[counter] = -1;
-					}
-					else
-					{
-						alpha2[counter] = 0;
-					}
-					//alpha[k] = Math.Sign(E[k]);
-				}
-
-				Vector<double> alpha = alpha2.PointwiseMultiply(aw).Map(x => x < 0 ? aI : x);
-
+				Vector<double> alpha = E.PointwiseSign().PointwiseMultiply(aw).Map(x => x < 0 ? aI : x); // aw * (E > 0) + ai * (E < 0)
 				Vector<double> C = alpha.PointwiseMultiply(S.Row(j)) + cg_tau * Tg - A + F; // alpha * S[i, :] + cg_tau * Tg - A
 				Vector<double> T0 = C / (M - k * Lf / E);
 
