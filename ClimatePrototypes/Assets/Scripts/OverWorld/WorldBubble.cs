@@ -15,6 +15,7 @@ public class WorldBubble : MonoBehaviour {
 	public AnimationCurve animationCurve;
 	public float fadingSpeed = 5f;
 	private CanvasGroup canvasGroup;
+	public GameObject cityPrompt;
 
 	public enum Direction { FadeIn, FadeOut };
 
@@ -51,10 +52,17 @@ public class WorldBubble : MonoBehaviour {
 		if (!active)
 			StartCoroutine(Bubble(entering: true, dur: .25f));
 		if (Input.GetButtonDown("Fire1")) {
-			foreach (var node in transform.parent.GetComponentsInChildren<WorldBubble>())
-				foreach (var kvp in node.icons)
-					kvp.Value.gameObject.SetActive(false);
-			StartCoroutine(EnterRegion(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)));
+			// Check if the node is the city node and if there are still bills available
+			if (this.gameObject.name == "CityNode" && GameManager.Instance.billIndices.Count >= 13) // Change this value if # of bills goes up
+			{
+				UIController.Instance.ChangeCityPromptState(true);
+			}
+			else {
+				foreach (var node in transform.parent.GetComponentsInChildren<WorldBubble>())
+					foreach (var kvp in node.icons)
+						kvp.Value.gameObject.SetActive(false);
+				StartCoroutine(EnterRegion(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0)));
+			}
 		}
 	}
 
