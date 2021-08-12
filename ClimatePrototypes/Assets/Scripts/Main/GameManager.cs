@@ -128,16 +128,21 @@ public class GameManager : Singleton<GameManager> {
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 			AudioManager.Instance.Play("BGM_Menu"); // TODO: sound name variable class
 
-			// tween thermometer values
+			thermometer.value = previousTempValue;
+
+			StartCoroutine(UpdateOverworldValues());
+
+			
+			/*// tween thermometer values
 			thermometer.value = previousTempValue;
 			thermometer.DOValue((float)World.averageTemp, 1.5f);
-			previousTempValue = (float)World.averageTemp;
+			previousTempValue = (float)World.averageTemp;*/
 
 			// tween stats panel values 
-			statsPanel.CallUpdate();
+			//statsPanel.CallUpdate();
 
 			// check if turn on alert
-			CheckAlerts();
+			//CheckAlerts();
 
 			// check if game over
 			CheckGameOver();
@@ -165,6 +170,27 @@ public class GameManager : Singleton<GameManager> {
 				break;
 			}
 		}
+	}
+
+	IEnumerator UpdateOverworldValues()
+	{
+		bool yield = false;
+		if ((float) World.averageTemp != thermometer.value) {
+			yield = true;
+		}
+		UpdateThermometerValue();
+		if (yield) {
+			yield return new WaitForSeconds(1.5f);
+		}
+		StartCoroutine(statsPanel.CallUpdate());
+		yield return new WaitForSeconds(1.5f);
+		CheckAlerts();
+	}
+
+	// tween thermometer values
+	void UpdateThermometerValue() {
+		thermometer.DOValue((float)World.averageTemp, 1.5f);
+		previousTempValue = (float)World.averageTemp;
 	}
 
 	public static void Transition(string scene) => instance.StartCoroutine(LoadScene(scene));

@@ -102,7 +102,6 @@ public abstract class RegionController : MonoBehaviour {
 		if (region != World.Region.City && region != World.Region.Forest) {
 			timerText.text = "0";
 		}
-		// TODO: add custon text for all the regions to UIController
 		if (region == World.Region.City)
 		{
 			UIController.Instance.SetCityPrompt(true);

@@ -19,11 +19,51 @@ public class StatsPanel : MonoBehaviour {
 		SetSlider(economy, World.money / 100);
 	}
 
-	public void CallUpdate() {
+	public IEnumerator CallUpdate() {
+		bool yield = false;
+		if (previousLandUse != (float)EBM.a0)
+		{
+			yield = true;
+		}
 		previousLandUse = UpdateSlider(landUse, (float)EBM.a0, previousLandUse);
+		if (yield)
+		{
+			yield return new WaitForSeconds(1.5f);
+		}
+		yield = false;
+		
+		if (World.publicOpinion / 100 != previousPublicOpinion)
+		{
+			yield = true;
+		}
 		previousPublicOpinion = UpdateSlider(publicOpinion, World.publicOpinion / 100, previousPublicOpinion, invertColors: true);
+		if (yield)
+		{
+			yield return new WaitForSeconds(1.5f);
+		}
+		yield = false;
+
+		if (previousEmissions != (float)EBM.F)
+		{
+			yield = true;
+		}
 		previousEmissions = UpdateSlider(emissions, (float)EBM.F, previousEmissions); // used to be /14
+		if (yield)
+		{
+			yield return new WaitForSeconds(1.5f);
+		}
+		yield = false;
+
+		if (previousEconomy != World.money / 100)
+		{
+			yield = true;
+		}
 		previousEconomy = UpdateSlider(economy, World.money / 100, previousEconomy);
+		if (yield)
+		{
+			yield return new WaitForSeconds(1.5f);
+		}
+		yield return null;
 	}
 
 	float UpdateSlider(Slider slider, float value, float previousValue, bool invertColors = false) {
