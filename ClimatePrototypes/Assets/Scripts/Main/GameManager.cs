@@ -32,6 +32,8 @@ public class GameManager : Singleton<GameManager> {
 	int timesSinceVisitedCity = 0;
 	int completedRegions = 0;
 	GameObject GameOverPrompt;
+	[SerializeField] Image thermometerFill;
+	Image thermometerBottom;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -48,6 +50,8 @@ public class GameManager : Singleton<GameManager> {
 		FindCurrentRegion(SceneManager.GetActiveScene());
 		SceneManager.activeSceneChanged += instance.InitScene;
 		thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
+		thermometerFill = GameObject.FindGameObjectWithTag("ThermometerFill").GetComponent<Image>();
+		thermometerBottom = GameObject.FindGameObjectWithTag("ThermometerBottom").GetComponent<Image>();
 		SetSlider(thermometer, (float) World.averageTemp);
 		previousTempValue = (float) World.averageTemp;
 		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
@@ -126,23 +130,13 @@ public class GameManager : Singleton<GameManager> {
 			}
 
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
+			thermometerFill = GameObject.FindGameObjectWithTag("ThermometerFill").GetComponent<Image>();
+			thermometerBottom = GameObject.FindGameObjectWithTag("ThermometerBottom").GetComponent<Image>();
 			AudioManager.Instance.Play("BGM_Menu"); // TODO: sound name variable class
 
 			thermometer.value = previousTempValue;
 
 			StartCoroutine(UpdateOverworldValues());
-
-			
-			/*// tween thermometer values
-			thermometer.value = previousTempValue;
-			thermometer.DOValue((float)World.averageTemp, 1.5f);
-			previousTempValue = (float)World.averageTemp;*/
-
-			// tween stats panel values 
-			//statsPanel.CallUpdate();
-
-			// check if turn on alert
-			//CheckAlerts();
 
 			// check if game over
 			CheckGameOver();
@@ -182,15 +176,20 @@ public class GameManager : Singleton<GameManager> {
 		if (yield) {
 			yield return new WaitForSeconds(1.5f);
 		}
-		StartCoroutine(statsPanel.CallUpdate());
-		yield return new WaitForSeconds(1.5f);
+		yield return StartCoroutine(statsPanel.CallUpdate());
+		//yield return new WaitForSeconds(1.5f);
 		CheckAlerts();
 	}
 
 	// tween thermometer values
 	void UpdateThermometerValue() {
-		thermometer.DOValue((float)World.averageTemp, 1.5f);
-		previousTempValue = (float)World.averageTemp;
+		DOTween.Sequence()
+			.Append(thermometerFill.DOColor(new Color32(173, 173, 173, 255), .1f))
+			.Join(thermometerBottom.DOColor(new Color32(173, 173, 173, 255), .1f))
+			.Append(thermometer.DOValue((float) World.averageTemp, 1.5f))
+			.Append(thermometerFill.DOColor(Color.white, .1f))
+			.Join(thermometerBottom.DOColor(Color.white, .1f));
+		previousTempValue = (float) World.averageTemp;
 	}
 
 	public static void Transition(string scene) => instance.StartCoroutine(LoadScene(scene));

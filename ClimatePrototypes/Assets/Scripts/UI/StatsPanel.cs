@@ -20,47 +20,23 @@ public class StatsPanel : MonoBehaviour {
 	}
 
 	public IEnumerator CallUpdate() {
-		bool yield = false;
-		if (previousLandUse != (float)EBM.a0)
+		float newPublicOpinion = (float) previousPublicOpinion * 100f;
+		float newEcon = (float) previousEconomy * 100f;
+		if (!Mathf.Approximately(newPublicOpinion, World.publicOpinion))
 		{
-			yield = true;
-		}
-		previousLandUse = UpdateSlider(landUse, (float)EBM.a0, previousLandUse);
-		if (yield)
-		{
+			previousPublicOpinion = UpdateSlider(publicOpinion, World.publicOpinion / 100, previousPublicOpinion, invertColors: true);
 			yield return new WaitForSeconds(1.5f);
 		}
-		yield = false;
 		
-		if (World.publicOpinion / 100 != previousPublicOpinion)
-		{
-			yield = true;
-		}
-		previousPublicOpinion = UpdateSlider(publicOpinion, World.publicOpinion / 100, previousPublicOpinion, invertColors: true);
-		if (yield)
-		{
-			yield return new WaitForSeconds(1.5f);
-		}
-		yield = false;
-
 		if (previousEmissions != (float)EBM.F)
 		{
-			yield = true;
-		}
-		previousEmissions = UpdateSlider(emissions, (float)EBM.F, previousEmissions); // used to be /14
-		if (yield)
-		{
+			previousEmissions = UpdateSlider(emissions, (float)EBM.F, previousEmissions); // used to be /14
 			yield return new WaitForSeconds(1.5f);
 		}
-		yield = false;
-
-		if (previousEconomy != World.money / 100)
+		
+		if (!Mathf.Approximately(newEcon, World.money))
 		{
-			yield = true;
-		}
-		previousEconomy = UpdateSlider(economy, World.money / 100, previousEconomy);
-		if (yield)
-		{
+			previousEconomy = UpdateSlider(economy, World.money / 100, previousEconomy);
 			yield return new WaitForSeconds(1.5f);
 		}
 		yield return null;
@@ -68,7 +44,12 @@ public class StatsPanel : MonoBehaviour {
 
 	float UpdateSlider(Slider slider, float value, float previousValue, bool invertColors = false) {
 		slider.value = previousValue;
-		slider.DOValue(value, 1.5f);
+		Color originalColor = slider.fillRect.GetComponentInChildren<Image>(true).color;
+		Color newColor = new Color(originalColor.r - 0.4f, originalColor.g - 0.4f, originalColor.b - 0.4f, 1f);
+		DOTween.Sequence()
+			.Append(slider.fillRect.GetComponentInChildren<Image>(true).DOColor(newColor, .1f))
+			.Append(slider.DOValue(value, 1.5f))
+			.Append(slider.fillRect.GetComponentInChildren<Image>(true).DOColor(originalColor, .1f));
 		slider.fillRect.GetComponentInChildren<Image>(true).color = invertColors ? Color.Lerp(Color.red, Color.green, value) : Color.Lerp(Color.green, Color.red, value);
 		return value;
 	}
