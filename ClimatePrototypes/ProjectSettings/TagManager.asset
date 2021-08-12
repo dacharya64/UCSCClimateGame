@@ -19,6 +19,8 @@ TagManager:
   - ArcticAlert
   - CityAlert
   - LoadingText
+  - ThermometerFill
+  - ThermometerBottom
   layers:
   - Default
   - TransparentFX

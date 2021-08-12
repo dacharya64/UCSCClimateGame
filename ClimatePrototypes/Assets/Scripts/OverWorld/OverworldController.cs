@@ -123,7 +123,6 @@ public class OverworldController : MonoBehaviour {
 
 	void UpdateSlider(Slider slider, float targetValue)
 	{
-		//slider.value = targetValue;
 		slider.value = Mathf.Lerp(slider.value, (float)targetValue, Time.deltaTime * 24f);
 	}
 }

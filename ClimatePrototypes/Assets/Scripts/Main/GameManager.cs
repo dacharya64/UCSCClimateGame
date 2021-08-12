@@ -32,6 +32,8 @@ public class GameManager : Singleton<GameManager> {
 	int timesSinceVisitedCity = 0;
 	int completedRegions = 0;
 	GameObject GameOverPrompt;
+	[SerializeField] Image thermometerFill;
+	Image thermometerBottom;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -48,6 +50,8 @@ public class GameManager : Singleton<GameManager> {
 		FindCurrentRegion(SceneManager.GetActiveScene());
 		SceneManager.activeSceneChanged += instance.InitScene;
 		thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
+		thermometerFill = GameObject.FindGameObjectWithTag("ThermometerFill").GetComponent<Image>();
+		thermometerBottom = GameObject.FindGameObjectWithTag("ThermometerBottom").GetComponent<Image>();
 		SetSlider(thermometer, (float) World.averageTemp);
 		previousTempValue = (float) World.averageTemp;
 		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
@@ -126,18 +130,13 @@ public class GameManager : Singleton<GameManager> {
 			}
 
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
+			thermometerFill = GameObject.FindGameObjectWithTag("ThermometerFill").GetComponent<Image>();
+			thermometerBottom = GameObject.FindGameObjectWithTag("ThermometerBottom").GetComponent<Image>();
 			AudioManager.Instance.Play("BGM_Menu"); // TODO: sound name variable class
 
-			// tween thermometer values
 			thermometer.value = previousTempValue;
-			thermometer.DOValue((float)World.averageTemp, 1.5f);
-			previousTempValue = (float)World.averageTemp;
 
-			// tween stats panel values 
-			statsPanel.CallUpdate();
-
-			// check if turn on alert
-			CheckAlerts();
+			StartCoroutine(UpdateOverworldValues());
 
 			// check if game over
 			CheckGameOver();
@@ -165,6 +164,27 @@ public class GameManager : Singleton<GameManager> {
 				break;
 			}
 		}
+	}
+
+	IEnumerator UpdateOverworldValues()
+	{
+		if ((float) World.averageTemp != thermometer.value) {
+			UpdateThermometerValue();
+			yield return new WaitForSeconds(1.5f);
+		}	
+		yield return StartCoroutine(statsPanel.CallUpdate());
+		CheckAlerts();
+	}
+
+	// tween thermometer values
+	void UpdateThermometerValue() {
+		DOTween.Sequence()
+			.Append(thermometerFill.DOColor(new Color32(173, 173, 173, 255), .1f))
+			.Join(thermometerBottom.DOColor(new Color32(173, 173, 173, 255), .1f))
+			.Append(thermometer.DOValue((float) World.averageTemp, 1.5f))
+			.Append(thermometerFill.DOColor(Color.white, .1f))
+			.Join(thermometerBottom.DOColor(Color.white, .1f));
+		previousTempValue = (float) World.averageTemp;
 	}
 
 	public static void Transition(string scene) => instance.StartCoroutine(LoadScene(scene));
@@ -207,28 +227,40 @@ public class GameManager : Singleton<GameManager> {
 		}
 	}
 
+	void Bounce(Transform alert) {
+		DOTween.Sequence()
+			.Append(alert.DOMoveY(alert.position.y + 0.2f, 0.3f))
+			.Append(alert.DOMoveY(alert.position.y - 0.2f, 0.3f));
+	}
+
 	void CheckAlerts() {
 		// Check if popular opinion has changed enough to influence the subtropics minigame
 		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
+		Transform tropicsTransform = tropicsAlert.GetComponent<Transform>();
 		if (previousPublicOpinion < .20 && World.publicOpinion >= .20)
 		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(tropicsTransform);
 		}
 		else if (previousPublicOpinion >= .20 && previousPublicOpinion < .40 && (World.publicOpinion / 100 < .20 || World.publicOpinion / 100 >= .40))
 		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(tropicsTransform);
 		}
 		else if (previousPublicOpinion >= .40 && previousPublicOpinion < .60 && (World.publicOpinion / 100 < .40 || World.publicOpinion / 100 >= .60))
 		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(tropicsTransform);
 		}
 		else if (previousPublicOpinion >= .60 && previousPublicOpinion <.80 && (World.publicOpinion / 100 < .60 || World.publicOpinion / 100 >= .80))
 		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(tropicsTransform);
 		}
 		else if (previousPublicOpinion >= .80 && World.publicOpinion / 100 < .80)
 		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(tropicsTransform);
 		}
 		else {
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = false;
@@ -237,26 +269,32 @@ public class GameManager : Singleton<GameManager> {
 		
 		// Check if regional temp has gone up or down enough to change tropics minigame
 		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
+		Transform fireTransform = fireAlert.GetComponent<Transform>();
 		double currentRegionalTemp = World.temp[1];
 		if (previousRegionalTemp < 20 && currentRegionalTemp >= 20)
 		{
 			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(fireTransform);
 		}
 		else if (previousRegionalTemp >= 20 && previousRegionalTemp < 25 && (currentRegionalTemp >= 25 || currentRegionalTemp < 20))
 		{
 			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(fireTransform);
 		}
 		else if (previousRegionalTemp >= 25 && previousRegionalTemp < 30 && (currentRegionalTemp >= 30 || currentRegionalTemp < 25))
 		{
 			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(fireTransform);
 		}
 		else if (previousRegionalTemp >= 30 && previousRegionalTemp < 35 && (currentRegionalTemp >= 35 || currentRegionalTemp < 30))
 		{
 			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(fireTransform);
 		}
 		else if (previousRegionalTemp >= 35 && currentRegionalTemp < 35)
 		{
 			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(fireTransform);
 		}
 		else {
 			fireAlert.GetComponent<SpriteRenderer>().enabled = false;
@@ -265,26 +303,32 @@ public class GameManager : Singleton<GameManager> {
 
 		// Check if arctic temp has changed enough
 		arcticAlert = GameObject.FindGameObjectWithTag("ArcticAlert");
+		Transform arcticTransform = arcticAlert.GetComponent<Transform>();
 		double currentArcticTemp = World.temp[2];
 		if (previousArcticTemp < -10 && currentRegionalTemp >= -10)
 		{
 			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(arcticTransform);
 		}
 		else if (previousArcticTemp >= -10 && previousArcticTemp < -5 && (currentArcticTemp >= -5 || currentArcticTemp < -10))
 		{
 			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(arcticTransform);
 		}
 		else if (previousArcticTemp >= -5 && previousArcticTemp < 0 && (currentArcticTemp >= 0 || currentArcticTemp < -5))
 		{
 			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(arcticTransform);
 		}
 		else if (previousArcticTemp >= 0 && previousArcticTemp < 5 && (currentArcticTemp >= 5 || currentArcticTemp < 0))
 		{
 			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(arcticTransform);
 		}
 		else if (previousArcticTemp >= 5 && currentArcticTemp < 5)
 		{
 			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(arcticTransform);
 		}
 		else
 		{
@@ -294,9 +338,11 @@ public class GameManager : Singleton<GameManager> {
 
 		// Check if it's been too long since visited city 
 		cityAlert = GameObject.FindGameObjectWithTag("CityAlert");
+		Transform cityTransform = cityAlert.GetComponent<Transform>();
 		if (timesSinceVisitedCity > 4)
 		{
 			cityAlert.GetComponent<SpriteRenderer>().enabled = true;
+			Bounce(cityTransform);
 		}
 		else {
 			cityAlert.GetComponent<SpriteRenderer>().enabled = false;
