@@ -317,7 +317,7 @@ public class GameManager : Singleton<GameManager> {
 		arcticAlert = GameObject.FindGameObjectWithTag("ArcticAlert");
 		Transform arcticTransform = arcticAlert.GetComponent<Transform>();
 		double currentArcticTemp = World.temp[2];
-		if (previousArcticTemp < -10 && currentRegionalTemp >= -10)
+		if (previousArcticTemp < -10 && currentArcticTemp >= -10)
 		{
 			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
 			Bounce(arcticTransform);
