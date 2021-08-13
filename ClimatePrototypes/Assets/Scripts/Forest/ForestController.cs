@@ -39,6 +39,20 @@ public class ForestController : RegionController {
 
 	[SerializeField] Slider emissionsTracker = default;
 
+	public Image upArrow1;
+	public Image upArrow2;
+	public Image upArrow3;
+	public Image downArrow1;
+	public Image downArrow2;
+	public Image downArrow3;
+
+	public Image totalArrow1;
+	public Image totalArrow2;
+	public Image totalArrow3;
+	public Image totalArrow4;
+	public Image totalArrow5;
+	public Image totalArrow6; 
+
 	public void UIHover(bool over) => overUI = over;
 
 	void Start() {
@@ -82,9 +96,105 @@ public class ForestController : RegionController {
 	protected override void Update() {
 		base.Update();
 		percentageIncreaseText.text = (percentageIncrease * 100).ToString() + "%";
-		emissionsIncreaseText.text = forcingIncrease.ToString("F3");
-		emissionsDecreaseText.text = forcingDecrease.ToString("F3");
-		emissionsTotalText.text = (forcingIncrease - forcingDecrease).ToString("F3");
+		if (forcingIncrease > 0)
+		{
+			upArrow1.gameObject.SetActive(true);
+			if (forcingIncrease > 0.05)
+			{
+				upArrow2.gameObject.SetActive(true);
+				if (forcingIncrease > 0.1)
+				{
+					upArrow3.gameObject.SetActive(true);
+				}
+				else
+				{
+					upArrow3.gameObject.SetActive(false);
+				}
+			}
+			else {
+				upArrow2.gameObject.SetActive(false);
+			}
+		}
+		else {
+			upArrow1.gameObject.SetActive(true);
+		}
+
+		if (forcingDecrease > 0)
+		{
+			downArrow1.gameObject.SetActive(true);
+			if (forcingDecrease > 0.05)
+			{
+				downArrow2.gameObject.SetActive(true);
+				if (forcingDecrease > 0.1) {
+					downArrow3.gameObject.SetActive(true);
+				}
+				else {
+					downArrow3.gameObject.SetActive(false);
+				}
+			}
+			else {
+				downArrow2.gameObject.SetActive(false);
+			}
+		}
+		else
+		{
+			downArrow1.gameObject.SetActive(false);
+		}
+
+		double emissionsTotal = forcingIncrease - forcingDecrease;
+		if (emissionsTotal > 0)
+		{
+			totalArrow1.gameObject.SetActive(true);
+			if (emissionsTotal > 0.05)
+			{
+				totalArrow2.gameObject.SetActive(true);
+				if (emissionsTotal > 0.1)
+				{
+					totalArrow3.gameObject.SetActive(true);
+				}
+				else
+				{
+					totalArrow3.gameObject.SetActive(false);
+				}
+			}
+			else
+			{
+				totalArrow2.gameObject.SetActive(false);
+			}
+		}
+		else
+		{
+			totalArrow1.gameObject.SetActive(true);
+		}
+
+		if (emissionsTotal < 0)
+		{
+			totalArrow4.gameObject.SetActive(true);
+			if (emissionsTotal < -0.05)
+			{
+				totalArrow5.gameObject.SetActive(true);
+				if (emissionsTotal < -0.1)
+				{
+					totalArrow6.gameObject.SetActive(true);
+				}
+				else
+				{
+					totalArrow6.gameObject.SetActive(false);
+				}
+			}
+			else
+			{
+				totalArrow5.gameObject.SetActive(false);
+			}
+		}
+		else
+		{
+			totalArrow4.gameObject.SetActive(false);
+		} 
+
+		//emissionsIncreaseText.text = forcingIncrease.ToString("F3");
+		//emissionsDecreaseText.text = forcingDecrease.ToString("F3");
+		//emissionsTotalText.text = (forcingIncrease - forcingDecrease).ToString("F3");
 		//emissionsTracker.value = damage / 200f; // TODO: fix slider visual logic, positive and negative but from the middle out
 	}
 
