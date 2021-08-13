@@ -123,11 +123,8 @@ public class GameManager : Singleton<GameManager> {
 			// turn on stats panel
 			// check to see if something in the stats panel changed 
 
-			float publicOpinion = (float)previousPublicOpinion * 100f;
-			float econ = (float)previousEconomy * 100f;
-			if (!Mathf.Approximately(publicOpinion, World.publicOpinion) || previousEmissions != (float)EBM.F || econ != World.money) {
-				statsPanel.Toggle(true);
-			}
+			
+			
 
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 			thermometerFill = GameObject.FindGameObjectWithTag("ThermometerFill").GetComponent<Image>();
@@ -168,22 +165,34 @@ public class GameManager : Singleton<GameManager> {
 
 	IEnumerator UpdateOverworldValues()
 	{
+		float publicOpinion = (float)previousPublicOpinion * 100f;
+		float econ = (float)previousEconomy * 100f;
+
 		if ((float) World.averageTemp != thermometer.value) {
 			UpdateThermometerValue();
 			yield return new WaitForSeconds(1.5f);
-		}	
+		}
+		if (!Mathf.Approximately(publicOpinion, World.publicOpinion) || previousEmissions != (float)EBM.F || econ != World.money)
+		{
+			statsPanel.Toggle(true);
+		}
 		yield return StartCoroutine(statsPanel.CallUpdate());
+		statsPanel.Toggle(false);
 		CheckAlerts();
 	}
 
 	// tween thermometer values
 	void UpdateThermometerValue() {
+		Transform thermometerTransform = thermometer.GetComponent<Transform>();
+		float delay = 0.4f;
 		DOTween.Sequence()
-			.Append(thermometerFill.DOColor(new Color32(173, 173, 173, 255), .1f))
-			.Join(thermometerBottom.DOColor(new Color32(173, 173, 173, 255), .1f))
-			.Append(thermometer.DOValue((float) World.averageTemp, 1.5f))
-			.Append(thermometerFill.DOColor(Color.white, .1f))
-			.Join(thermometerBottom.DOColor(Color.white, .1f));
+			.Append(thermometerFill.DOColor(new Color32(173, 173, 173, 255), delay))
+			.Join(thermometerBottom.DOColor(new Color32(173, 173, 173, 255), delay))
+			.Join(thermometerTransform.DOScale(new Vector3(thermometerTransform.localScale.x + 0.5f, thermometerTransform.localScale.y + 0.5f, thermometerTransform.localScale.z), delay))
+			.Append(thermometer.DOValue((float)World.averageTemp, 1.5f))
+			.Append(thermometerFill.DOColor(Color.white, delay))
+			.Join(thermometerBottom.DOColor(Color.white, delay))
+			.Join(thermometerTransform.DOScale(new Vector3(thermometerTransform.localScale.x, thermometerTransform.localScale.y, thermometerTransform.localScale.z), delay));
 		previousTempValue = (float) World.averageTemp;
 	}
 
