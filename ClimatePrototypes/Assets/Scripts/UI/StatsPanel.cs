@@ -39,17 +39,22 @@ public class StatsPanel : MonoBehaviour {
 			previousEconomy = UpdateSlider(economy, World.money / 100, previousEconomy);
 			yield return new WaitForSeconds(1.5f);
 		}
-		yield return null;
+		yield return new WaitForSeconds(1f);
 	}
 
 	float UpdateSlider(Slider slider, float value, float previousValue, bool invertColors = false) {
+		Transform sliderTransform = slider.GetComponent<Transform>();
+		float delay = 0.4f;
+
 		slider.value = previousValue;
 		Color originalColor = slider.fillRect.GetComponentInChildren<Image>(true).color;
 		Color newColor = new Color(originalColor.r - 0.4f, originalColor.g - 0.4f, originalColor.b - 0.4f, 1f);
 		DOTween.Sequence()
-			.Append(slider.fillRect.GetComponentInChildren<Image>(true).DOColor(newColor, .1f))
+			.Append(slider.fillRect.GetComponentInChildren<Image>(true).DOColor(newColor, delay))
+			.Join(sliderTransform.DOScale(new Vector3(sliderTransform.localScale.x + 0.2f, sliderTransform.localScale.y + 0.2f, sliderTransform.localScale.z), delay))
 			.Append(slider.DOValue(value, 1.5f))
-			.Append(slider.fillRect.GetComponentInChildren<Image>(true).DOColor(originalColor, .1f));
+			.Append(slider.fillRect.GetComponentInChildren<Image>(true).DOColor(originalColor, delay))
+			.Join(sliderTransform.DOScale(new Vector3(sliderTransform.localScale.x, sliderTransform.localScale.y, sliderTransform.localScale.z), delay));
 		slider.fillRect.GetComponentInChildren<Image>(true).color = invertColors ? Color.Lerp(Color.red, Color.green, value) : Color.Lerp(Color.green, Color.red, value);
 		return value;
 	}
