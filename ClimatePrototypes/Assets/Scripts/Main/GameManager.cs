@@ -249,7 +249,8 @@ public class GameManager : Singleton<GameManager> {
 		// Check if popular opinion has changed enough to influence the subtropics minigame
 		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
 		Transform tropicsTransform = tropicsAlert.GetComponent<Transform>();
-		if (previousPublicOpinion < .20 && World.publicOpinion >= .20)
+
+		if (previousPublicOpinion < .20 && World.publicOpinion / 100 >= .20)
 		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
 			Bounce(tropicsTransform);
@@ -317,7 +318,7 @@ public class GameManager : Singleton<GameManager> {
 		arcticAlert = GameObject.FindGameObjectWithTag("ArcticAlert");
 		Transform arcticTransform = arcticAlert.GetComponent<Transform>();
 		double currentArcticTemp = World.temp[2];
-		if (previousArcticTemp < -10 && currentRegionalTemp >= -10)
+		if (previousArcticTemp < -10 && currentArcticTemp >= -10)
 		{
 			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
 			Bounce(arcticTransform);
