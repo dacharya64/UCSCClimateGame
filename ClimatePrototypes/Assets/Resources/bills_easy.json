@@ -130,7 +130,7 @@
     "tease": "Alternative energy sources might help us reduce emissions. Which should we develop further?",
     "left": {
       "title": "Solar Thermal Electricity",
-      "body": "This technology uses reflected sunlight to generate heat, and then to turn that heat into electricity. It is easier to store heat than some other forms of alerternative energy.",
+      "body": "This technology uses reflected sunlight to generate heat, and then to turn that heat into electricity. It is easier to store heat than some other forms of alternative energy.",
       "tags": "emissions-5 forcing-0.0088636646335667"
     },
     "right": {
