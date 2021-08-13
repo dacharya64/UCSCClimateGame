@@ -34,6 +34,7 @@ public class GameManager : Singleton<GameManager> {
 	GameObject GameOverPrompt;
 	[SerializeField] Image thermometerFill;
 	Image thermometerBottom;
+	public bool isAnimating = false;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -165,6 +166,7 @@ public class GameManager : Singleton<GameManager> {
 
 	IEnumerator UpdateOverworldValues()
 	{
+		isAnimating = true;
 		float publicOpinion = (float)previousPublicOpinion * 100f;
 		float econ = (float)previousEconomy * 100f;
 
@@ -179,6 +181,7 @@ public class GameManager : Singleton<GameManager> {
 		yield return StartCoroutine(statsPanel.CallUpdate());
 		statsPanel.Toggle(false);
 		CheckAlerts();
+		isAnimating = false;
 	}
 
 	// tween thermometer values
