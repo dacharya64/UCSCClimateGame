@@ -63,7 +63,6 @@ public class VolunteerActions {
 	public static void Protest(Volunteer v) {
 		v.anim.SetTrigger("Protesting");
 		ForestController.Instance.StartCoroutine(SetProtestChanges(1, 0.05));
-		//ForestController.Instance.StartCoroutine(SetLoadingPromptState(true));
 		ForestController.Instance.CheckEndGame();
 	}
 
@@ -103,5 +102,10 @@ public class VolunteerActions {
 			yield return new WaitForSeconds(time / steps);
 			ForestController.Instance.damage = Mathf.Max(-100, ForestController.Instance.damage - 1);
 		}
+	}
+
+	public static IEnumerator CheckEndGame()
+	{
+		yield return null;
 	}
 }

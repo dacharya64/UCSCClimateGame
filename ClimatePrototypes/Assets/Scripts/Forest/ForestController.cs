@@ -221,7 +221,6 @@ public class ForestController : RegionController {
 	/// <summary> Creates volunteer and applies path target </summary>
 	public void SetVolunteerTarget(Vector3 pos, UnityAction<Volunteer> onReached) {
 		volunteersPlaced++;
-		CheckDisplayLoadingScreen();
 		var newVolunteer = NewAgent(volunteerPrefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
 		volunteerAgents.Add(newVolunteer.gameObject);
 		if (Random.value > 0.5)
@@ -253,22 +252,20 @@ public class ForestController : RegionController {
 		volunteers[volunteers.Count - 1].activeTile = pos;
 	}
 
-    public void CheckEndGame()
-    {
-        // Check to see if player has placed all the workers 
-        if (volunteersPlaced >= maxVolunteers)
-        {
-			GameOver();
-        }
-    }
-
-	public void CheckDisplayLoadingScreen()
+	public IEnumerator CheckEndGame()
 	{
 		// Check to see if player has placed all the workers 
 		if (volunteersPlaced >= maxVolunteers)
 		{
 			base.Loading(true);
+			yield return new WaitForSeconds(1);
+			GameOver();
 		}
+		yield return null;
+	}
+
+	public void StartEndGameCoroutine() {
+		StartCoroutine(CheckEndGame());
 	}
 
 	public void OpenAbout()
