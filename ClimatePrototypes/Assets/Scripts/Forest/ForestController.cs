@@ -31,6 +31,7 @@ public class ForestController : RegionController {
 
 	public GameObject aboutPrompt;
 	public Text aboutText;
+	public Text titleText;
 
 	[HideInInspector] public Transform agentParent, utility;
 	public List<VolunteerTask> volunteers = new List<VolunteerTask>();
@@ -300,7 +301,22 @@ public class ForestController : RegionController {
 		else if (area == "forest") {
 			aboutText.text = "This is the area being deforested. Volunteers placed here will help plant trees. This will reduce emissions slightly.";
 		} else {
-			aboutText.text = "This is the carbon sequestration plant, which captures and stores carbon dioxide. Volunteers placed here will reduce emissions significantly, but this costs money. ";
+			aboutText.text = "This is the carbon sequestration plant, which captures and stores carbon dioxide. Volunteers placed here will reduce emissions significantly, but this costs money.";
+		}
+	}
+
+	public void SetTitleText(string area) {
+		if (area == "factory")
+		{
+			titleText.text = "Protest Emissions";
+		}
+		else if (area == "forest")
+		{
+			titleText.text = "Plant Trees";
+		}
+		else
+		{
+			titleText.text = "Capture Carbon";
 		}
 	}
 
