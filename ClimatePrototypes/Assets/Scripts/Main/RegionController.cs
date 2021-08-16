@@ -79,13 +79,7 @@ public abstract class RegionController : MonoBehaviour {
 		try {
 			timer -= Time.deltaTime;
 			timerText.text = $"{Mathf.Max(0, Mathf.Floor(timer))}";
-			if (timer > 0 && timer < 2)
-			{
-				if (region == World.Region.Fire) {
-					Loading(true);
-				}
-			}
-			else if (timer <= 0 && timer > -2) {
+			if (timer <= 0 && timer > -2) {
 				timer = -2; // -2 is finished state
 				GameOver();
 				return;

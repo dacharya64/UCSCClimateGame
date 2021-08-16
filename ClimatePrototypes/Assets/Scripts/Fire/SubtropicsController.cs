@@ -70,9 +70,6 @@ public class SubtropicsController : RegionController {
 			base.ChangePublicOpinion(-25);
 			EBM.F = EBM.F - 1;
 		}
-
-		base.ChangeAverageTemp();
-		base.Loading(false);
 		//TriggerUpdate(() => GlobalWorld.co2.Update(region, delta: -effect)); // [-1, 0]
 		// TODO: make the effect non linear
 		// TriggerUpdate(() => GlobalWorld.co2.Update(region, delta: -Math.Min(1, Math.Log(effect)))); // [-1, 0]

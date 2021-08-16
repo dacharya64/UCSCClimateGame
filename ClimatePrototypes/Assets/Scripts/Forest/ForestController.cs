@@ -59,9 +59,8 @@ public class ForestController : RegionController {
 
 	void Start() {
 		forcingDecrease = 0.0;
-		percentageIncrease = 0.25;
-		forcingIncrease = (EBM.F + 0.5) * percentageIncrease;
-		damage = 100;
+		percentageIncrease = 0.1;
+		forcingIncrease = EBM.F * percentageIncrease;
 		agentParent = new GameObject("Agent Parent").transform;
 		agentParent.parent = transform;
 		utility = new GameObject("Utility").transform;
@@ -101,10 +100,10 @@ public class ForestController : RegionController {
 		if (forcingIncrease > 0)
 		{
 			upArrow1.gameObject.SetActive(true);
-			if (forcingIncrease > 0.05)
+			if (forcingIncrease > 0.06)
 			{
 				upArrow2.gameObject.SetActive(true);
-				if (forcingIncrease > 0.1)
+				if (forcingIncrease > 0.12)
 				{
 					upArrow3.gameObject.SetActive(true);
 				}
@@ -127,10 +126,10 @@ public class ForestController : RegionController {
 		if (forcingDecrease > 0)
 		{
 			downArrow1.gameObject.SetActive(true);
-			if (forcingDecrease > 0.05)
+			if (forcingDecrease > 0.06)
 			{
 				downArrow2.gameObject.SetActive(true);
-				if (forcingDecrease > 0.1) {
+				if (forcingDecrease > 0.12) {
 					downArrow3.gameObject.SetActive(true);
 				}
 				else {
@@ -153,14 +152,14 @@ public class ForestController : RegionController {
 		if (emissionsTotal > 0)
 		{
 			totalArrow1.gameObject.SetActive(true);
-			if (emissionsTotal > 0.05)
+			if (emissionsTotal > 0.06)
 			{
 				totalArrow2.gameObject.SetActive(true);
-				if (emissionsTotal > 0.1)
+				if (emissionsTotal > 0.12)
 				{
 					totalArrow3.gameObject.SetActive(true);
 				}
-				else if (emissionsTotal <= 0.1)
+				else 
 				{
 					totalArrow3.gameObject.SetActive(false);
 				}
@@ -181,10 +180,10 @@ public class ForestController : RegionController {
 		if (emissionsTotal < 0)
 		{
 			totalArrow4.gameObject.SetActive(true);
-			if (emissionsTotal < -0.05)
+			if (emissionsTotal < -0.06)
 			{
 				totalArrow5.gameObject.SetActive(true);
-				if (emissionsTotal < -0.1)
+				if (emissionsTotal < -0.12)
 				{
 					totalArrow6.gameObject.SetActive(true);
 				}
@@ -205,22 +204,15 @@ public class ForestController : RegionController {
 			totalArrow5.gameObject.SetActive(false);
 			totalArrow6.gameObject.SetActive(false);
 		} 
-
-		//emissionsIncreaseText.text = forcingIncrease.ToString("F3");
-		//emissionsDecreaseText.text = forcingDecrease.ToString("F3");
-		//emissionsTotalText.text = (forcingIncrease - forcingDecrease).ToString("F3");
-		//emissionsTracker.value = damage / 200f; // TODO: fix slider visual logic, positive and negative but from the middle out
 	}
 
 	protected override void GameOver() {
 		base.GameOver();
 		StopAllCoroutines();
-		forcingIncrease = (EBM.F + 0.5) * percentageIncrease;
+		forcingIncrease = EBM.F * percentageIncrease;
 		double effect = forcingIncrease - forcingDecrease;
 		//TriggerUpdate(() => World.co2.Update(region, delta: effect));
-		EBM.F = EBM.F + effect;
-		World.ChangeAverageTemp();
-		base.Loading(false);
+		GameManager.Instance.forcingIncrease = effect;
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
 	}
 
@@ -272,8 +264,7 @@ public class ForestController : RegionController {
 		// Check to see if player has placed all the workers 
 		if (volunteersPlaced >= maxVolunteers)
 		{
-			base.Loading(true);
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds(0.01f);
 			GameOver();
 		}
 		yield return null;
