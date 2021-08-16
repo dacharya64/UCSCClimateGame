@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager> {
 	[SerializeField] Image thermometerFill;
 	Image thermometerBottom;
 	public bool isAnimating = false;
+	public double forcingIncrease = 0;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -109,11 +110,19 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void InitScene(Scene from, Scene to) {
-
 		instance.loadingScreen.SetActive(false);
 		UIController.Instance.ToggleBackButton(to.name != "Overworld");
 		if (to.name == "Overworld")
 		{
+			//first, increase emissions according to worker placement in tropics
+			// If they have never visited the tropics 
+			if (visits[World.Region.Forest] <= 0) {
+				forcingIncrease = EBM.F * 0.1; 
+			}
+			EBM.F = EBM.F + forcingIncrease;
+			Debug.Log("Forcing increase: " + forcingIncrease);
+			World.ChangeAverageTemp();
+
 			statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 			// Save the previous stats
 			previousPublicOpinion = statsPanel.previousPublicOpinion;
@@ -123,10 +132,6 @@ public class GameManager : Singleton<GameManager> {
 
 			// turn on stats panel
 			// check to see if something in the stats panel changed 
-
-			
-			
-
 			thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 			thermometerFill = GameObject.FindGameObjectWithTag("ThermometerFill").GetComponent<Image>();
 			thermometerBottom = GameObject.FindGameObjectWithTag("ThermometerBottom").GetComponent<Image>();

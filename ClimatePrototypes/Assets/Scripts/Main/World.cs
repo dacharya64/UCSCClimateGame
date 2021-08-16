@@ -15,11 +15,9 @@ public static class World {
 	public static string worldName = "";
 	public static float money = 70f, publicOpinion = 70f;
 	public static int turn = 1;
-	public static double[] energy, precip, startingTemp;
-	public static double[] temp = new double[] { 26, 23, -6 };
+	public static double[] energy, precip, startingTemp, temp;
 	public static float maxTempChange = 10f;
 	public static double averageTemp { get => EBM.avg_temp; }
-	public static double subtropics_precip { get => EBM.average_precip_subtropics; }
 	public static Dictionary<string, Dictionary<double, List<double>>> ranges; // TODO: currently unused
 	public static List < (Region, Region, string) > lineToDraw = new List < (Region, Region, string) > (); // TODO: this draws lines on the overworld, store it there instead?
 
@@ -85,15 +83,12 @@ public static class World {
 		timer.Stop();
 		UIController.Instance.SetLoadingPrompt(false);
 		Debug.Log($"Average Temp: {averageTemp} with regionals: {temp.AsString()}, calculated in {timer.ElapsedMilliseconds}ms");
-		//Debug.Log($"subtropics precip: {subtropics_precip}");
 		TitleScreen.TurnOffLoadingText();
 	}
 
 	public static double ChangeAverageTemp(bool useTemp = true, int years = 0, int steps = 0) {
 		(temp, energy, precip) = EBM.Calc(useTemp ? EBM.temp : null, years, steps);
 		Debug.Log($"New average Temp: {averageTemp} with regionals: {temp.AsString()}");
-		//Debug.Log($"subtropics precip: {subtropics_precip}");
-
 		return averageTemp; 
 	}
 }

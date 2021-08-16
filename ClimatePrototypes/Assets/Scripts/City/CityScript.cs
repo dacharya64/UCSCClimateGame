@@ -149,7 +149,6 @@ public class CityScript : RegionController
             // Show return prompt
             GameManager.Instance.billIndices = usedBills;
             base.GameOver();
-            World.ChangeAverageTemp();
         }
 
         void EnactBillEffects() {
