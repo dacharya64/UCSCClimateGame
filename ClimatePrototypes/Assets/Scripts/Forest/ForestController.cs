@@ -217,6 +217,7 @@ public class ForestController : RegionController {
 		forcingIncrease = (EBM.F + 0.5) * percentageIncrease;
 		double effect = forcingIncrease - forcingDecrease;
 		//TriggerUpdate(() => World.co2.Update(region, delta: effect));
+		EBM.F = EBM.F + effect;
 		World.ChangeAverageTemp();
 		base.Loading(false);
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
