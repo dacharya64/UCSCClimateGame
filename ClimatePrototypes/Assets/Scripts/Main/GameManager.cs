@@ -193,6 +193,11 @@ public class GameManager : Singleton<GameManager> {
 	void UpdateThermometerValue() {
 		Transform thermometerTransform = thermometer.GetComponent<Transform>();
 		float delay = 0.4f;
+		if (previousTempValue > (float)World.averageTemp) {
+			AudioManager.Instance.Play("SFX_SliderDown");
+		} else if (previousTempValue < (float)World.averageTemp) {
+			AudioManager.Instance.Play("SFX_SliderUp");
+		}
 		DOTween.Sequence()
 			.Append(thermometerFill.DOColor(new Color32(173, 173, 173, 255), delay))
 			.Join(thermometerBottom.DOColor(new Color32(173, 173, 173, 255), delay))
