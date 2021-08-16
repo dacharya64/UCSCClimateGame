@@ -22,6 +22,7 @@ public class ForestController : RegionController {
 	public double forcingIncrease;
 	public double forcingDecrease;
 	public double percentageIncrease;
+	public double emissionsTotal;
 	// text objects for results UI
 	public Text percentageIncreaseText;
 	public Text emissionsIncreaseText;
@@ -38,6 +39,20 @@ public class ForestController : RegionController {
 	public List<Vector3Int> activeTrees = new List<Vector3Int>();
 
 	[SerializeField] Slider emissionsTracker = default;
+
+	public Image upArrow1;
+	public Image upArrow2;
+	public Image upArrow3;
+	public Image downArrow1;
+	public Image downArrow2;
+	public Image downArrow3;
+
+	public Image totalArrow1;
+	public Image totalArrow2;
+	public Image totalArrow3;
+	public Image totalArrow4;
+	public Image totalArrow5;
+	public Image totalArrow6; 
 
 	public void UIHover(bool over) => overUI = over;
 
@@ -82,9 +97,117 @@ public class ForestController : RegionController {
 	protected override void Update() {
 		base.Update();
 		percentageIncreaseText.text = (percentageIncrease * 100).ToString() + "%";
-		emissionsIncreaseText.text = forcingIncrease.ToString("F3");
-		emissionsDecreaseText.text = forcingDecrease.ToString("F3");
-		emissionsTotalText.text = (forcingIncrease - forcingDecrease).ToString("F3");
+		if (forcingIncrease > 0)
+		{
+			upArrow1.gameObject.SetActive(true);
+			if (forcingIncrease > 0.05)
+			{
+				upArrow2.gameObject.SetActive(true);
+				if (forcingIncrease > 0.1)
+				{
+					upArrow3.gameObject.SetActive(true);
+				}
+				else
+				{
+					upArrow3.gameObject.SetActive(false);
+				}
+			}
+			else {
+				upArrow2.gameObject.SetActive(false);
+				upArrow3.gameObject.SetActive(false);
+			}
+		}
+		else {
+			upArrow1.gameObject.SetActive(false);
+			upArrow2.gameObject.SetActive(false);
+			upArrow3.gameObject.SetActive(false);
+		}
+
+		if (forcingDecrease > 0)
+		{
+			downArrow1.gameObject.SetActive(true);
+			if (forcingDecrease > 0.05)
+			{
+				downArrow2.gameObject.SetActive(true);
+				if (forcingDecrease > 0.1) {
+					downArrow3.gameObject.SetActive(true);
+				}
+				else {
+					downArrow3.gameObject.SetActive(false);
+				}
+			}
+			else {
+				downArrow2.gameObject.SetActive(false);
+				downArrow3.gameObject.SetActive(false);
+			}
+		}
+		else
+		{
+			downArrow1.gameObject.SetActive(false);
+			downArrow2.gameObject.SetActive(false);
+			downArrow3.gameObject.SetActive(false);
+		}
+
+		emissionsTotal = forcingIncrease - forcingDecrease;
+		if (emissionsTotal > 0)
+		{
+			totalArrow1.gameObject.SetActive(true);
+			if (emissionsTotal > 0.05)
+			{
+				totalArrow2.gameObject.SetActive(true);
+				if (emissionsTotal > 0.1)
+				{
+					totalArrow3.gameObject.SetActive(true);
+				}
+				else if (emissionsTotal <= 0.1)
+				{
+					totalArrow3.gameObject.SetActive(false);
+				}
+			}
+			else
+			{
+				totalArrow2.gameObject.SetActive(false);
+				totalArrow3.gameObject.SetActive(false);
+			}
+		}
+		else
+		{
+			totalArrow1.gameObject.SetActive(false);
+			totalArrow2.gameObject.SetActive(false);
+			totalArrow3.gameObject.SetActive(false);
+		}
+
+		if (emissionsTotal < 0)
+		{
+			totalArrow4.gameObject.SetActive(true);
+			if (emissionsTotal < -0.05)
+			{
+				totalArrow5.gameObject.SetActive(true);
+				if (emissionsTotal < -0.1)
+				{
+					totalArrow6.gameObject.SetActive(true);
+				}
+				else
+				{
+					totalArrow6.gameObject.SetActive(false);
+				}
+			}
+			else
+			{
+				totalArrow5.gameObject.SetActive(false);
+				totalArrow6.gameObject.SetActive(false);
+			}
+		}
+		else
+		{
+			totalArrow4.gameObject.SetActive(false);
+			totalArrow5.gameObject.SetActive(false);
+			totalArrow6.gameObject.SetActive(false);
+		} 
+
+		//emissionsIncreaseText.text = forcingIncrease.ToString("F3");
+		//emissionsDecreaseText.text = forcingDecrease.ToString("F3");
+		//emissionsTotalText.text = (forcingIncrease - forcingDecrease).ToString("F3");
 		//emissionsTracker.value = damage / 200f; // TODO: fix slider visual logic, positive and negative but from the middle out
 	}
 
@@ -94,6 +217,7 @@ public class ForestController : RegionController {
 		forcingIncrease = (EBM.F + 0.5) * percentageIncrease;
 		double effect = forcingIncrease - forcingDecrease;
 		//TriggerUpdate(() => World.co2.Update(region, delta: effect));
+		EBM.F = EBM.F + effect;
 		World.ChangeAverageTemp();
 		base.Loading(false);
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
@@ -111,7 +235,6 @@ public class ForestController : RegionController {
 	/// <summary> Creates volunteer and applies path target </summary>
 	public void SetVolunteerTarget(Vector3 pos, UnityAction<Volunteer> onReached) {
 		volunteersPlaced++;
-		CheckDisplayLoadingScreen();
 		var newVolunteer = NewAgent(volunteerPrefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
 		volunteerAgents.Add(newVolunteer.gameObject);
 		if (Random.value > 0.5)
@@ -143,22 +266,20 @@ public class ForestController : RegionController {
 		volunteers[volunteers.Count - 1].activeTile = pos;
 	}
 
-    public void CheckEndGame()
-    {
-        // Check to see if player has placed all the workers 
-        if (volunteersPlaced >= maxVolunteers)
-        {
-			GameOver();
-        }
-    }
-
-	public void CheckDisplayLoadingScreen()
+	public IEnumerator CheckEndGame()
 	{
 		// Check to see if player has placed all the workers 
 		if (volunteersPlaced >= maxVolunteers)
 		{
 			base.Loading(true);
+			yield return new WaitForSeconds(1);
+			GameOver();
 		}
+		yield return null;
+	}
+
+	public void StartEndGameCoroutine() {
+		StartCoroutine(CheckEndGame());
 	}
 
 	public void OpenAbout()
