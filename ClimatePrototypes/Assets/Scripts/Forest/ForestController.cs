@@ -22,6 +22,7 @@ public class ForestController : RegionController {
 	public double forcingIncrease;
 	public double forcingDecrease;
 	public double percentageIncrease;
+	public double emissionsTotal;
 	// text objects for results UI
 	public Text percentageIncreaseText;
 	public Text emissionsIncreaseText;
@@ -113,10 +114,13 @@ public class ForestController : RegionController {
 			}
 			else {
 				upArrow2.gameObject.SetActive(false);
+				upArrow3.gameObject.SetActive(false);
 			}
 		}
 		else {
-			upArrow1.gameObject.SetActive(true);
+			upArrow1.gameObject.SetActive(false);
+			upArrow2.gameObject.SetActive(false);
+			upArrow3.gameObject.SetActive(false);
 		}
 
 		if (forcingDecrease > 0)
@@ -134,14 +138,17 @@ public class ForestController : RegionController {
 			}
 			else {
 				downArrow2.gameObject.SetActive(false);
+				downArrow3.gameObject.SetActive(false);
 			}
 		}
 		else
 		{
 			downArrow1.gameObject.SetActive(false);
+			downArrow2.gameObject.SetActive(false);
+			downArrow3.gameObject.SetActive(false);
 		}
 
-		double emissionsTotal = forcingIncrease - forcingDecrease;
+		emissionsTotal = forcingIncrease - forcingDecrease;
 		if (emissionsTotal > 0)
 		{
 			totalArrow1.gameObject.SetActive(true);
@@ -152,7 +159,7 @@ public class ForestController : RegionController {
 				{
 					totalArrow3.gameObject.SetActive(true);
 				}
-				else
+				else if (emissionsTotal <= 0.1)
 				{
 					totalArrow3.gameObject.SetActive(false);
 				}
@@ -160,11 +167,14 @@ public class ForestController : RegionController {
 			else
 			{
 				totalArrow2.gameObject.SetActive(false);
+				totalArrow3.gameObject.SetActive(false);
 			}
 		}
 		else
 		{
-			totalArrow1.gameObject.SetActive(true);
+			totalArrow1.gameObject.SetActive(false);
+			totalArrow2.gameObject.SetActive(false);
+			totalArrow3.gameObject.SetActive(false);
 		}
 
 		if (emissionsTotal < 0)
@@ -185,11 +195,14 @@ public class ForestController : RegionController {
 			else
 			{
 				totalArrow5.gameObject.SetActive(false);
+				totalArrow6.gameObject.SetActive(false);
 			}
 		}
 		else
 		{
 			totalArrow4.gameObject.SetActive(false);
+			totalArrow5.gameObject.SetActive(false);
+			totalArrow6.gameObject.SetActive(false);
 		} 
 
 		//emissionsIncreaseText.text = forcingIncrease.ToString("F3");

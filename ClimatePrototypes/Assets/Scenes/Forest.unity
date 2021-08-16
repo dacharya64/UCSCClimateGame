@@ -3804,6 +3804,7 @@ MonoBehaviour:
   forcingIncrease: 0
   forcingDecrease: 0
   percentageIncrease: 0
+  emissionsTotal: 0
   percentageIncreaseText: {fileID: 1378888498}
   emissionsIncreaseText: {fileID: 1103482962}
   emissionsDecreaseText: {fileID: 1367283042}
