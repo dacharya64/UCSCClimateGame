@@ -388,11 +388,19 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
+		completedRegions = 20;
 		if (completedRegions > 19)
 		{
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);
-			worldNameText.text = World.worldName;
+			if (worldNameText.text != "")
+			{
+				worldNameText.text = World.worldName;
+			}
+			else {
+				worldNameText.text = "your planet";
+			}
+			
 			completedRegions = 0; //reset # of completed regions
 			World.turn = 1;
 			timesSinceVisitedCity = 0;
