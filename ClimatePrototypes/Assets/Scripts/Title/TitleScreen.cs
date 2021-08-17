@@ -10,13 +10,13 @@ public class TitleScreen : MonoBehaviour {
 	Scene overworldScene;
 	OverworldController overworldController;
 	[SerializeField] Graphic[] uiReveal = default;
+	public GameObject buttons;
+	public GameObject namingGroup;
+	public GameObject text;
+	public static bool isFirstTime = true;
 	public static GameObject loadingText;
 
 	public void Quit() => Application.Quit();
-
-	void Init() {
-		TurnOnLoadingText();
-	}
 
 	public void ChangeName(string name) => World.worldName = name;
 
@@ -33,6 +33,13 @@ public class TitleScreen : MonoBehaviour {
 				g.color = new Color(g.color.r, g.color.g, g.color.b, 0);
 			StartCoroutine(DropReveal(uiReveal[i].transform, i * .5f, uiReveal[i].TryGetComponent(out Button _)));
 			//StartCoroutine(TurnOffLoadingText());
+		}
+
+		if (!isFirstTime) {
+			buttons.SetActive(false);
+			namingGroup.SetActive(true);
+			isFirstTime = false;
+			text.SetActive(false);
 		}
 		
 	}
@@ -57,6 +64,14 @@ public class TitleScreen : MonoBehaviour {
 		}
 	}
 
+	public static void TurnOffLoadingText()
+	{
+		//Debug.Log("Disabling loading text");
+		loadingText = GameObject.FindGameObjectWithTag("LoadingText");
+		loadingText.GetComponent<Text>().enabled = false;
+		//loadingText.SetActive(false);
+	}
+
 	void SetOverWorldActive(Scene scene, LoadSceneMode mode) {
 		overworldScene = scene;
 		SceneManager.SetActiveScene(overworldScene);
@@ -70,18 +85,6 @@ public class TitleScreen : MonoBehaviour {
 		overworldController.SendToBottom();
 		overworldController.HideThermometer();
 		// StartCoroutine(SlideUp());
-	}
-
-	public static void TurnOnLoadingText() {
-		loadingText = GameObject.FindGameObjectWithTag("LoadingText");
-		loadingText.GetComponent<Text>().enabled = true;
-	}
-
-	public static void TurnOffLoadingText() {
-		Debug.Log("Disabling loading text");
-		loadingText = GameObject.FindGameObjectWithTag("LoadingText");
-		loadingText.GetComponent<Text>().enabled = false;
-		//loadingText.SetActive(false);
 	}
 
 	public void ExitTitle() {

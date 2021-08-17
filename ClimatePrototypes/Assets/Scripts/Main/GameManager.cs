@@ -38,7 +38,6 @@ public class GameManager : Singleton<GameManager> {
 	public double forcingIncrease;
 	public Text worldNameText;
 	public bool hasPlacedWorkers = false;
-
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
 
@@ -75,6 +74,8 @@ public class GameManager : Singleton<GameManager> {
 	public static void Restart() {
 		UIController.Instance.ChangeGameOverPromptState(false);
 		SceneManager.LoadScene("TitleScreen");
+		TitleScreen.isFirstTime = false;
+		//TitleScreen.Instance.TurnOffLoadingText();
 		EBM.Reset();
 		World.Calc();
 	}
@@ -387,7 +388,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
-		//completedRegions = 20;
+		completedRegions = 20;
 		if (completedRegions > 19)
 		{
 			// show stats screen and let player restart
@@ -397,7 +398,7 @@ public class GameManager : Singleton<GameManager> {
 			World.turn = 1;
 			timesSinceVisitedCity = 0;
 			billIndices = new List<int>();
-	//visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
-}
+			//visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
+		}
 	}
 }
