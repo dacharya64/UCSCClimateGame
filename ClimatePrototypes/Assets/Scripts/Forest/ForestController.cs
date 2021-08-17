@@ -21,7 +21,7 @@ public class ForestController : RegionController {
 	// for showing the results of changing the model
 	public double forcingIncrease;
 	public double forcingDecrease;
-	public double percentageIncrease;
+	public double percentageIncrease = 0.1;
 	public double emissionsTotal;
 	// text objects for results UI
 	public Text percentageIncreaseText;
@@ -214,6 +214,7 @@ public class ForestController : RegionController {
 		//TriggerUpdate(() => World.co2.Update(region, delta: effect));
 		GameManager.Instance.forcingIncrease = effect;
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
+		GameManager.Instance.hasPlacedWorkers = true;
 	}
 
 	/// <summary> Generates new volunteer / logger on click </summary>

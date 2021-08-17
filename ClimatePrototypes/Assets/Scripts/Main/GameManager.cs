@@ -35,7 +35,9 @@ public class GameManager : Singleton<GameManager> {
 	[SerializeField] Image thermometerFill;
 	Image thermometerBottom;
 	public bool isAnimating = false;
-	public double forcingIncrease = 0;
+	public double forcingIncrease;
+	public Text worldNameText;
+	public bool hasPlacedWorkers = false;
 
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -74,6 +76,7 @@ public class GameManager : Singleton<GameManager> {
 		UIController.Instance.ChangeGameOverPromptState(false);
 		SceneManager.LoadScene("TitleScreen");
 		EBM.Reset();
+		World.Calc();
 	}
 
 	public void QuitGame(int exitStatus = 0) {
@@ -112,17 +115,23 @@ public class GameManager : Singleton<GameManager> {
 	void InitScene(Scene from, Scene to) {
 		instance.loadingScreen.SetActive(false);
 		UIController.Instance.ToggleBackButton(to.name != "Overworld");
-		if (to.name == "Overworld")
-		{
+
+		if (to.name == "Overworld" && from.name != "TitleScreen") {
 			//first, increase emissions according to worker placement in tropics
 			// If they have never visited the tropics 
-			if (visits[World.Region.Forest] <= 0) {
-				forcingIncrease = EBM.F * 0.1; 
+			// Unless you are at title screen 
+			if (!hasPlacedWorkers)
+			{
+				forcingIncrease = EBM.F * 0.1;
 			}
 			EBM.F = EBM.F + forcingIncrease;
 			Debug.Log("Forcing increase: " + forcingIncrease);
 			World.ChangeAverageTemp();
+			CheckGameOver();
+		}
 
+		if (to.name == "Overworld")
+		{
 			statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 			// Save the previous stats
 			previousPublicOpinion = statsPanel.previousPublicOpinion;
@@ -140,9 +149,6 @@ public class GameManager : Singleton<GameManager> {
 			thermometer.value = previousTempValue;
 
 			StartCoroutine(UpdateOverworldValues());
-
-			// check if game over
-			CheckGameOver();
 		}
 		else if (to.name != "TitleScreen") {
 			AudioManager.Instance.Play("BGM_" + to.name); // TODO: sound name variable class
@@ -263,34 +269,38 @@ public class GameManager : Singleton<GameManager> {
 		if (previousPublicOpinion < .20 && World.publicOpinion / 100 >= .20)
 		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+			hasPlacedWorkers = false;
 			Bounce(tropicsTransform);
 		}
 		else if (previousPublicOpinion >= .20 && previousPublicOpinion < .40 && (World.publicOpinion / 100 < .20 || World.publicOpinion / 100 >= .40))
 		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+			hasPlacedWorkers = false;
 			Bounce(tropicsTransform);
 		}
 		else if (previousPublicOpinion >= .40 && previousPublicOpinion < .60 && (World.publicOpinion / 100 < .40 || World.publicOpinion / 100 >= .60))
 		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+			hasPlacedWorkers = false;
 			Bounce(tropicsTransform);
 		}
 		else if (previousPublicOpinion >= .60 && previousPublicOpinion <.80 && (World.publicOpinion / 100 < .60 || World.publicOpinion / 100 >= .80))
 		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+			hasPlacedWorkers = false;
 			Bounce(tropicsTransform);
 		}
 		else if (previousPublicOpinion >= .80 && World.publicOpinion / 100 < .80)
 		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+			hasPlacedWorkers = false;
 			Bounce(tropicsTransform);
 		}
 		else {
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = false;
 		}
-
 		
-		// Check if regional temp has gone up or down enough to change tropics minigame
+		// Check if regional temp has gone up or down enough to change fire minigame
 		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
 		Transform fireTransform = fireAlert.GetComponent<Transform>();
 		double currentRegionalTemp = World.temp[1];
@@ -377,14 +387,16 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
+		//completedRegions = 20;
 		if (completedRegions > 19)
 		{
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);
+			worldNameText.text = World.worldName;
 			completedRegions = 0; //reset # of completed regions
 			World.turn = 1;
 			timesSinceVisitedCity = 0;
-			visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
+			//visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
 		}
 	}
 }
