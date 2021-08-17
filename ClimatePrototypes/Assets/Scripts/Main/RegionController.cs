@@ -103,13 +103,16 @@ public abstract class RegionController : MonoBehaviour {
 		else if (region == World.Region.Arctic)
 		{
 			UIController.Instance.SetArcticPrompt(true);
+			GameManager.Instance.arcticIsAddressed = true;
 		}
 		else if (region == World.Region.Forest)
 		{
 			UIController.Instance.SetForestPrompt(true);
+			GameManager.Instance.tropicsIsAddressed = true;
 		}
 		else if (region == World.Region.Fire) {
 			UIController.Instance.SetFirePrompt(true);
+			GameManager.Instance.subtropicsIsAddressed = true;
 		}
 		Pause();
 	}

@@ -40,6 +40,9 @@ public class GameManager : Singleton<GameManager> {
 	public bool hasPlacedWorkers = false;
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
+	public bool arcticIsAddressed = true;
+	public bool tropicsIsAddressed = true;
+	public bool subtropicsIsAddressed = true;
 
 	public override void Awake() {
 		base.Awake();
@@ -261,73 +264,88 @@ public class GameManager : Singleton<GameManager> {
 			.Append(alert.DOMoveY(alert.position.y - 0.2f, 0.3f));
 	}
 
-	void CheckAlerts() {
-		// Check if popular opinion has changed enough to influence the subtropics minigame
+	void SetTropicsAlertOn() {
 		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
 		Transform tropicsTransform = tropicsAlert.GetComponent<Transform>();
 
+		tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
+		hasPlacedWorkers = false;
+		tropicsIsAddressed = false;
+		Bounce(tropicsTransform);
+	}
+
+	void SetFireAlertOn() {
+		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
+		Transform fireTransform = fireAlert.GetComponent<Transform>();
+
+		fireAlert.GetComponent<SpriteRenderer>().enabled = true;
+		Bounce(fireTransform);
+		subtropicsIsAddressed = false;
+	}
+
+	void SetArcticAlertOn() {
+		arcticAlert = GameObject.FindGameObjectWithTag("ArcticAlert");
+		Transform arcticTransform = arcticAlert.GetComponent<Transform>();
+
+		arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
+		Bounce(arcticTransform);
+		arcticIsAddressed = false;
+	}
+
+	void CheckAlerts() {
+		// Check if popular opinion has changed enough to influence the subtropics minigame
+		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
+
 		if (previousPublicOpinion < .20 && World.publicOpinion / 100 >= .20)
 		{
-			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
-			hasPlacedWorkers = false;
-			Bounce(tropicsTransform);
+			SetTropicsAlertOn();
 		}
 		else if (previousPublicOpinion >= .20 && previousPublicOpinion < .40 && (World.publicOpinion / 100 < .20 || World.publicOpinion / 100 >= .40))
 		{
-			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
-			hasPlacedWorkers = false;
-			Bounce(tropicsTransform);
+			SetTropicsAlertOn();
 		}
 		else if (previousPublicOpinion >= .40 && previousPublicOpinion < .60 && (World.publicOpinion / 100 < .40 || World.publicOpinion / 100 >= .60))
 		{
-			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
-			hasPlacedWorkers = false;
-			Bounce(tropicsTransform);
+			SetTropicsAlertOn();
 		}
-		else if (previousPublicOpinion >= .60 && previousPublicOpinion <.80 && (World.publicOpinion / 100 < .60 || World.publicOpinion / 100 >= .80))
+		else if (previousPublicOpinion >= .60 && previousPublicOpinion < .80 && (World.publicOpinion / 100 < .60 || World.publicOpinion / 100 >= .80))
 		{
-			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
-			hasPlacedWorkers = false;
-			Bounce(tropicsTransform);
+			SetTropicsAlertOn();
 		}
 		else if (previousPublicOpinion >= .80 && World.publicOpinion / 100 < .80)
 		{
-			tropicsAlert.GetComponent<SpriteRenderer>().enabled = true;
-			hasPlacedWorkers = false;
-			Bounce(tropicsTransform);
+			SetTropicsAlertOn();
 		}
-		else {
+		else if (!tropicsIsAddressed) {
+			SetTropicsAlertOn();
+		}
+		else
+		{
 			tropicsAlert.GetComponent<SpriteRenderer>().enabled = false;
 		}
 		
 		// Check if regional temp has gone up or down enough to change fire minigame
-		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
-		Transform fireTransform = fireAlert.GetComponent<Transform>();
 		double currentRegionalTemp = World.temp[1];
+		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
 		if (previousRegionalTemp < 20 && currentRegionalTemp >= 20)
 		{
-			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
-			Bounce(fireTransform);
+			SetFireAlertOn();
 		}
 		else if (previousRegionalTemp >= 20 && previousRegionalTemp < 25 && (currentRegionalTemp >= 25 || currentRegionalTemp < 20))
 		{
-			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
-			Bounce(fireTransform);
+			SetFireAlertOn();
 		}
 		else if (previousRegionalTemp >= 25 && previousRegionalTemp < 30 && (currentRegionalTemp >= 30 || currentRegionalTemp < 25))
 		{
-			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
-			Bounce(fireTransform);
+			SetFireAlertOn();
 		}
 		else if (previousRegionalTemp >= 30 && previousRegionalTemp < 35 && (currentRegionalTemp >= 35 || currentRegionalTemp < 30))
 		{
-			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
-			Bounce(fireTransform);
+			SetFireAlertOn();
 		}
 		else if (previousRegionalTemp >= 35 && currentRegionalTemp < 35)
 		{
-			fireAlert.GetComponent<SpriteRenderer>().enabled = true;
-			Bounce(fireTransform);
+			SetFireAlertOn();
 		}
 		else {
 			fireAlert.GetComponent<SpriteRenderer>().enabled = false;
@@ -335,33 +353,27 @@ public class GameManager : Singleton<GameManager> {
 		previousRegionalTemp = currentRegionalTemp;
 
 		// Check if arctic temp has changed enough
-		arcticAlert = GameObject.FindGameObjectWithTag("ArcticAlert");
-		Transform arcticTransform = arcticAlert.GetComponent<Transform>();
 		double currentArcticTemp = World.temp[2];
+		arcticAlert = GameObject.FindGameObjectWithTag("ArcticAlert");
 		if (previousArcticTemp < -10 && currentArcticTemp >= -10)
 		{
-			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
-			Bounce(arcticTransform);
+			SetArcticAlertOn();
 		}
 		else if (previousArcticTemp >= -10 && previousArcticTemp < -5 && (currentArcticTemp >= -5 || currentArcticTemp < -10))
 		{
-			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
-			Bounce(arcticTransform);
+			SetArcticAlertOn();
 		}
 		else if (previousArcticTemp >= -5 && previousArcticTemp < 0 && (currentArcticTemp >= 0 || currentArcticTemp < -5))
 		{
-			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
-			Bounce(arcticTransform);
+			SetArcticAlertOn();
 		}
 		else if (previousArcticTemp >= 0 && previousArcticTemp < 5 && (currentArcticTemp >= 5 || currentArcticTemp < 0))
 		{
-			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
-			Bounce(arcticTransform);
+			SetArcticAlertOn();
 		}
 		else if (previousArcticTemp >= 5 && currentArcticTemp < 5)
 		{
-			arcticAlert.GetComponent<SpriteRenderer>().enabled = true;
-			Bounce(arcticTransform);
+			SetArcticAlertOn();
 		}
 		else
 		{
