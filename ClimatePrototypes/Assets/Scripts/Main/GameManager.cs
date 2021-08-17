@@ -126,7 +126,6 @@ public class GameManager : Singleton<GameManager> {
 				forcingIncrease = EBM.F * 0.1;
 			}
 			EBM.F = EBM.F + forcingIncrease;
-			Debug.Log("Forcing increase: " + forcingIncrease);
 			World.ChangeAverageTemp();
 			CheckGameOver();
 		}
