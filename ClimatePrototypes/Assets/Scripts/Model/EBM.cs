@@ -17,9 +17,9 @@ public partial class EBM {
 	public static double average_precip_subtropics;
 
 	public static void Reset() {
-		F = 0;
-		a0 = 0.7;
-		Clear();
+		F = 2;
+		//a0 = 0.7;
+		//Clear();
 	}
 
 	/// <summary> Does entire timestep integration calculation </summary>

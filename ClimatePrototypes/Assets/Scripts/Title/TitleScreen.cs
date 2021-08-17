@@ -10,6 +10,10 @@ public class TitleScreen : MonoBehaviour {
 	Scene overworldScene;
 	OverworldController overworldController;
 	[SerializeField] Graphic[] uiReveal = default;
+	public GameObject buttons;
+	public GameObject namingGroup;
+	public GameObject text;
+	public static bool isFirstTime = true;
 	public static GameObject loadingText;
 
 	public void Quit() => Application.Quit();
@@ -24,16 +28,23 @@ public class TitleScreen : MonoBehaviour {
 
 		AudioManager.Instance.Play("BGM_Menu"); // TODO: global sound name class
 
-		
-
 		for (int i = 0; i < uiReveal.Length; i++) {
 			foreach (Graphic g in uiReveal[i].GetComponentsInChildren<Graphic>())
 				g.color = new Color(g.color.r, g.color.g, g.color.b, 0);
 			StartCoroutine(DropReveal(uiReveal[i].transform, i * .5f, uiReveal[i].TryGetComponent(out Button _)));
+			//StartCoroutine(TurnOffLoadingText());
 		}
+
+		if (!isFirstTime) {
+			buttons.SetActive(false);
+			namingGroup.SetActive(true);
+			isFirstTime = false;
+			text.SetActive(false);
+		}
+		
 	}
 
-	IEnumerator DropReveal(Transform g, float delay = 0, bool drop = true, bool fade = true, float time = .5f) {
+		IEnumerator DropReveal(Transform g, float delay = 0, bool drop = true, bool fade = true, float time = .5f) {
 		yield return new WaitForSeconds(delay);
 		float height = 0, startingHeight = 0;
 
@@ -53,6 +64,14 @@ public class TitleScreen : MonoBehaviour {
 		}
 	}
 
+	public static void TurnOffLoadingText()
+	{
+		//Debug.Log("Disabling loading text");
+		loadingText = GameObject.FindGameObjectWithTag("LoadingText");
+		loadingText.GetComponent<Text>().enabled = false;
+		//loadingText.SetActive(false);
+	}
+
 	void SetOverWorldActive(Scene scene, LoadSceneMode mode) {
 		overworldScene = scene;
 		SceneManager.SetActiveScene(overworldScene);
@@ -66,11 +85,6 @@ public class TitleScreen : MonoBehaviour {
 		overworldController.SendToBottom();
 		overworldController.HideThermometer();
 		// StartCoroutine(SlideUp());
-	}
-
-	public static void TurnOffLoadingText() {
-		loadingText = GameObject.FindGameObjectWithTag("LoadingText");
-		loadingText.SetActive(false);
 	}
 
 	public void ExitTitle() {

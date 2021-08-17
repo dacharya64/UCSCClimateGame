@@ -141,8 +141,6 @@ public partial class EBM {
 		double nextValue = StartValue;
 		for (int i = 0; i < numberofpoints; i++)
 		{
-
-
 			parameterVals.SetValue(nextValue, j);
 			j++;
 			if (j > numberofpoints)
@@ -152,9 +150,6 @@ public partial class EBM {
 			nextValue = nextValue + increment;
 		}
 		return parameterVals;
-
-
-
 	}
 
 	static readonly string p_e_raw =
@@ -219,8 +214,4 @@ public partial class EBM {
 , 0.34498391, 0.33771299, 0.32608182, 0.31822199, 0.30916282, 0.30288618
 , 0.29469955, 0.28085571, 0.27620448, 0.27370551, 0.27059146, 0.27116078
 , 0.21769079";
-
-	void Awake() {
-		//xb = Linspace(-1 + dx, 1 - dx, bands - 1);// = Vector<double>.Build.Dense(bands, i => -1 + dx / 2 + i++ * dx);
-	}
 }

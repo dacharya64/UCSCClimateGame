@@ -76,12 +76,10 @@ public static class World {
 	}
 
 	public static void Calc(bool useTemp = true, int years = 0, int steps = 0) {
-		UIController.Instance.SetLoadingPrompt(true);
 		var timer = new Stopwatch();
 		timer.Start();
 		(temp, energy, precip) = EBM.Calc(useTemp ? EBM.temp : null, years, steps);
 		timer.Stop();
-		UIController.Instance.SetLoadingPrompt(false);
 		Debug.Log($"Average Temp: {averageTemp} with regionals: {temp.AsString()}, calculated in {timer.ElapsedMilliseconds}ms");
 		TitleScreen.TurnOffLoadingText();
 	}
