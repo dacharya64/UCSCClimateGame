@@ -388,7 +388,6 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
-		completedRegions = 20;
 		if (completedRegions > 19)
 		{
 			// show stats screen and let player restart
