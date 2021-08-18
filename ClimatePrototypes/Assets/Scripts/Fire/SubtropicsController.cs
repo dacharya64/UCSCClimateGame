@@ -14,12 +14,14 @@ public class SubtropicsController : RegionController {
 	public SubtropicsPlayer player;
 	public Text fireActivityText;
 	public Text waterLevelText;
+	public static double fireNumber = 0;
 	[HideInInspector] public Wind wind;
 	[HideInInspector] public int difficulty = 2;
 	[HideInInspector] public SubtropicsWorld world;
 	public static SubtropicsWorld World { get => Instance.world; }
 
 	void Start() {
+		fireNumber = 0;
 		wind = GetComponentInChildren<Wind>();
 		world = GetComponentInChildren<SubtropicsWorld>();
 		if (base.GetSubtropicsTemp() < 24)
@@ -54,8 +56,9 @@ public class SubtropicsController : RegionController {
 	}
 
 	protected override void GameOver() {
-		base.GameOver();
 		double effect = GetFirePercentage();
+		fireNumber = effect;
+		base.GameOver();
 		Debug.Log("Number of fires: " + effect);
 
 		if (effect >= 5 && effect < 10)
