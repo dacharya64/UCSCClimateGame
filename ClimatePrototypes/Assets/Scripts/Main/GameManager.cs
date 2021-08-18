@@ -135,6 +135,13 @@ public class GameManager : Singleton<GameManager> {
 
 		if (to.name == "Overworld")
 		{
+			if (World.money <= 0f) {
+				UIController.Instance.ChangeOutOfMoneyPrompt(true);
+			}
+			
+			if (visits[World.Region.Fire] == 1) {
+				UIController.Instance.ChangeInfoBoxState(true);
+			}
 			statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 			// Save the previous stats
 			previousPublicOpinion = statsPanel.previousPublicOpinion;

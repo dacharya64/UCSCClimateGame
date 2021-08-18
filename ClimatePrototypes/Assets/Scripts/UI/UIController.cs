@@ -14,6 +14,7 @@ public class UIController : Singleton<UIController> {
 	[SerializeField] GameObject loadingPrompt = default;
 	[SerializeField] GameObject infoBox = default;
 	[SerializeField] GameObject cityPrompt = default;
+	[SerializeField] GameObject outOfMoneyPrompt = default;
 	[SerializeField] GameObject gameOverPrompt;
 	public GameObject navbar;
 	Dictionary<GameObject, bool> uiActiveStatus = new Dictionary<GameObject, bool>();
@@ -53,11 +54,11 @@ public class UIController : Singleton<UIController> {
 	public void UITransition(string level) {
 		returnPrompt.SetActive(false);
 		GameManager.Transition(level);
-		if (previousRegion == World.Region.Fire && firstTimeVisiting)
+		/*if (previousRegion == World.Region.Fire && firstTimeVisiting)
 		{
 			ChangeInfoBoxState(true);
 		}
-		firstTimeVisiting = false;
+		firstTimeVisiting = false;*/
 		
 	}
 
@@ -216,6 +217,10 @@ public class UIController : Singleton<UIController> {
 		infoBox.SetActive(state);
 	}
 
+	public void ChangeOutOfMoneyPrompt(bool state)
+	{
+		outOfMoneyPrompt.SetActive(state);
+	}
 	public void ChangeCityPromptState(bool state)
 	{
 		cityPrompt.SetActive(state);
