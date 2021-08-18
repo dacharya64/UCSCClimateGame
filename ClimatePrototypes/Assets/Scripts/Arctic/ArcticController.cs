@@ -29,27 +29,27 @@ public class ArcticController : RegionController {
 		//Debug.Log($"Arctic temp influence is: {tempInfluence}");
 		Paddle paddleScript = paddle.GetComponent<Paddle>();
 
-		if (base.GetArcticTemp() < -10)
+		if (base.GetArcticTemp() < -6)
 		{
 			difficulty = 1f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.8f);
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.8f);
 		}
-		else if (base.GetArcticTemp() >= -10 && base.GetArcticTemp() < -5)
+		else if (base.GetArcticTemp() >= -6 && base.GetArcticTemp() < -1)
 		{
 			difficulty = 2f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.6f);
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.6f);
 			paddleScript.ShrinkPaddle(0.90f);
 		}
-		else if (base.GetArcticTemp() >= -5 && base.GetArcticTemp() < 0)
+		else if (base.GetArcticTemp() >= -1 && base.GetArcticTemp() < 4)
 		{
 			difficulty = 3f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.4f);
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.4f);
 			paddleScript.ShrinkPaddle(0.80f);
 		}
-		else if (base.GetArcticTemp() >= 0 && base.GetArcticTemp() < 5)
+		else if (base.GetArcticTemp() >= 4 && base.GetArcticTemp() < 9)
 		{
 			difficulty = 4f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.2f);

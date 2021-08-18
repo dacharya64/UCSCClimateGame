@@ -327,23 +327,27 @@ public class GameManager : Singleton<GameManager> {
 		// Check if regional temp has gone up or down enough to change fire minigame
 		double currentRegionalTemp = World.temp[1];
 		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
-		if (previousRegionalTemp < 20 && currentRegionalTemp >= 20)
+		if (previousRegionalTemp < 24 && currentRegionalTemp >= 24)
 		{
 			SetFireAlertOn();
 		}
-		else if (previousRegionalTemp >= 20 && previousRegionalTemp < 25 && (currentRegionalTemp >= 25 || currentRegionalTemp < 20))
+		else if (previousRegionalTemp >= 24 && previousRegionalTemp < 25 && (currentRegionalTemp >= 25 || currentRegionalTemp < 24))
 		{
 			SetFireAlertOn();
 		}
-		else if (previousRegionalTemp >= 25 && previousRegionalTemp < 30 && (currentRegionalTemp >= 30 || currentRegionalTemp < 25))
+		else if (previousRegionalTemp >= 25 && previousRegionalTemp < 27 && (currentRegionalTemp >= 27 || currentRegionalTemp < 25))
 		{
 			SetFireAlertOn();
 		}
-		else if (previousRegionalTemp >= 30 && previousRegionalTemp < 35 && (currentRegionalTemp >= 35 || currentRegionalTemp < 30))
+		else if (previousRegionalTemp >= 27 && previousRegionalTemp < 29 && (currentRegionalTemp >= 29 || currentRegionalTemp < 27))
 		{
 			SetFireAlertOn();
 		}
-		else if (previousRegionalTemp >= 35 && currentRegionalTemp < 35)
+		else if (previousRegionalTemp >= 29 && currentRegionalTemp < 29)
+		{
+			SetFireAlertOn();
+		}
+		else if (!subtropicsIsAddressed)
 		{
 			SetFireAlertOn();
 		}
@@ -355,23 +359,27 @@ public class GameManager : Singleton<GameManager> {
 		// Check if arctic temp has changed enough
 		double currentArcticTemp = World.temp[2];
 		arcticAlert = GameObject.FindGameObjectWithTag("ArcticAlert");
-		if (previousArcticTemp < -10 && currentArcticTemp >= -10)
+		if (previousArcticTemp < -6 && currentArcticTemp >= -6)
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTemp >= -10 && previousArcticTemp < -5 && (currentArcticTemp >= -5 || currentArcticTemp < -10))
+		else if (previousArcticTemp >= -6 && previousArcticTemp < -1 && (currentArcticTemp >= -1 || currentArcticTemp < -6))
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTemp >= -5 && previousArcticTemp < 0 && (currentArcticTemp >= 0 || currentArcticTemp < -5))
+		else if (previousArcticTemp >= -1 && previousArcticTemp < 4 && (currentArcticTemp >= 4 || currentArcticTemp < -1))
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTemp >= 0 && previousArcticTemp < 5 && (currentArcticTemp >= 5 || currentArcticTemp < 0))
+		else if (previousArcticTemp >= 4 && previousArcticTemp < 9 && (currentArcticTemp >= 9 || currentArcticTemp < 4))
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTemp >= 5 && currentArcticTemp < 5)
+		else if (previousArcticTemp >= 9 && currentArcticTemp < 9)
+		{
+			SetArcticAlertOn();
+		}
+		else if (!arcticIsAddressed)
 		{
 			SetArcticAlertOn();
 		}

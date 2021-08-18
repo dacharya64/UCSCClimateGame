@@ -20,19 +20,19 @@ public class SubtropicsController : RegionController {
 	void Start() {
 		wind = GetComponentInChildren<Wind>();
 		world = GetComponentInChildren<SubtropicsWorld>();
-		if (base.GetSubtropicsTemp() < 20)
+		if (base.GetSubtropicsTemp() < 24)
 		{
 			difficulty = 1;
 		}
-		else if (base.GetSubtropicsTemp() >= 20 && base.GetSubtropicsTemp() < 25)
+		else if (base.GetSubtropicsTemp() >= 24 && base.GetSubtropicsTemp() < 25)
 		{
 			difficulty = 2;
 		}
-		else if (base.GetSubtropicsTemp() >= 25 && base.GetSubtropicsTemp() < 30)
+		else if (base.GetSubtropicsTemp() >= 25 && base.GetSubtropicsTemp() < 27)
 		{
 			difficulty = 3;
 		}
-		else if (base.GetSubtropicsTemp() >= 30 && base.GetSubtropicsTemp() < 35)
+		else if (base.GetSubtropicsTemp() >= 27 && base.GetSubtropicsTemp() < 29)
 		{
 			difficulty = 4;
 		}
