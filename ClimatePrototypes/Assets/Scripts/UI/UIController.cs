@@ -61,6 +61,8 @@ public class UIController : Singleton<UIController> {
 		
 	}
 
+	/* Controls the text for the game over prompts */
+
 	public void SetCityPrompt(bool status) {
 		returnPrompt.GetComponentInChildren<Text>().text = "You have selected all of the bills!";
 		returnPrompt.SetActive(status);
@@ -68,18 +70,43 @@ public class UIController : Singleton<UIController> {
 
 	public void SetArcticPrompt(bool status)
 	{
-		returnPrompt.GetComponentInChildren<Text>().text = "You have defended the Arctic for 60 seconds!";
+		returnPrompt.GetComponentInChildren<Text>().text = "Another year has passed.";
 		returnPrompt.SetActive(status);
 	}
 
-	public void SetForestPrompt(bool status) {
-		returnPrompt.GetComponentInChildren<Text>().text = "You have placed all of the volunteers!";
+	public void SetForestPrompt(bool status, double result) {
+		string emissionsResult;
+		if (result < 0.06)
+		{
+			emissionsResult = "Small";
+		}
+		else if (result < 0.12)
+		{
+			emissionsResult = "Moderate";
+		}
+		else
+		{
+			emissionsResult = "Large";
+		}
+		returnPrompt.GetComponentInChildren<Text>().text = "You have placed all of the volunteers! \n\nPrediced emissions increase: " + emissionsResult;
 		returnPrompt.SetActive(status);
 	}
 
-	public void SetFirePrompt(bool status)
+	public void SetFirePrompt(bool status, double fires)
 	{
-		returnPrompt.GetComponentInChildren<Text>().text = "You have successfully put out the fires!";
+		string publicOpinionResult;
+		if (fires < 10)
+		{
+			publicOpinionResult = "Increases";
+		}
+		else if (fires < 20)
+		{
+			publicOpinionResult = "Decreases";
+		}
+		else {
+			publicOpinionResult = "Greatly Decreases";
+		}
+		returnPrompt.GetComponentInChildren<Text>().text = "You have fought the fires!\nFires remaining: " + fires + "\nPublic opinion: " + publicOpinionResult;
 		returnPrompt.SetActive(status);
 	}
 
@@ -89,7 +116,7 @@ public class UIController : Singleton<UIController> {
 		returnPrompt.SetActive(status);
 	}
 
-	public void SetLoadingPrompt(bool status)
+		public void SetLoadingPrompt(bool status)
 	{
 		loadingPrompt.SetActive(status);
 	}

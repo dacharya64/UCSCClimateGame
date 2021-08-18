@@ -53,7 +53,9 @@ public class ForestController : RegionController {
 	public Image totalArrow3;
 	public Image totalArrow4;
 	public Image totalArrow5;
-	public Image totalArrow6; 
+	public Image totalArrow6;
+
+	public static double effect;
 
 	public void UIHover(bool over) => overUI = over;
 
@@ -210,7 +212,7 @@ public class ForestController : RegionController {
 		base.GameOver();
 		StopAllCoroutines();
 		forcingIncrease = EBM.F * percentageIncrease;
-		double effect = forcingIncrease - forcingDecrease;
+		effect = forcingIncrease - forcingDecrease;
 		//TriggerUpdate(() => World.co2.Update(region, delta: effect));
 		GameManager.Instance.forcingIncrease = effect;
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]

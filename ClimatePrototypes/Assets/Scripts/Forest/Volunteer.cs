@@ -75,7 +75,7 @@ public class VolunteerActions {
 		ForestGrid.RemoveTree(tilePos);
 	}
 	public static void Capture(Volunteer v) {
-		ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.05;
+		ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.04;
 		World.money = World.money - 5f;
 		v.anim.SetTrigger("Working");
 		//ForestController.Instance.StartCoroutine(CaptureAndReturn(v, 3));

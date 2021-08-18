@@ -107,11 +107,11 @@ public abstract class RegionController : MonoBehaviour {
 		}
 		else if (region == World.Region.Forest)
 		{
-			UIController.Instance.SetForestPrompt(true);
+			UIController.Instance.SetForestPrompt(true, ForestController.effect);
 			GameManager.Instance.tropicsIsAddressed = true;
 		}
 		else if (region == World.Region.Fire) {
-			UIController.Instance.SetFirePrompt(true);
+			UIController.Instance.SetFirePrompt(true, SubtropicsController.fireNumber);
 			GameManager.Instance.subtropicsIsAddressed = true;
 		}
 		Pause();

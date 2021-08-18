@@ -250,7 +250,7 @@ public class GameManager : Singleton<GameManager> {
 	{
 		if (targetValue == 0)
 		{
-			slider.value = 15.7881585877727f;
+			slider.value = 17.07f;
 		}
 		else
 		{

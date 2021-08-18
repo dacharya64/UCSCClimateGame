@@ -12,62 +12,77 @@ public class SubtropicsController : RegionController {
 	public static SubtropicsController Instance { get => instance as SubtropicsController; } // static instance
 
 	public SubtropicsPlayer player;
+	public Text fireActivityText;
+	public Text waterLevelText;
+	public static double fireNumber = 0;
 	[HideInInspector] public Wind wind;
 	[HideInInspector] public int difficulty = 2;
 	[HideInInspector] public SubtropicsWorld world;
 	public static SubtropicsWorld World { get => Instance.world; }
 
 	void Start() {
+		fireNumber = 0;
 		wind = GetComponentInChildren<Wind>();
 		world = GetComponentInChildren<SubtropicsWorld>();
 		if (base.GetSubtropicsTemp() < 24)
 		{
 			difficulty = 1;
+			fireActivityText.text = "Very Low";
+			waterLevelText.text = "Very High";
 		}
 		else if (base.GetSubtropicsTemp() >= 24 && base.GetSubtropicsTemp() < 25)
 		{
 			difficulty = 2;
+			fireActivityText.text = "Low";
+			waterLevelText.text = "High";
 		}
 		else if (base.GetSubtropicsTemp() >= 25 && base.GetSubtropicsTemp() < 27)
 		{
 			difficulty = 3;
+			fireActivityText.text = "Moderate";
+			waterLevelText.text = "Moderate";
 		}
 		else if (base.GetSubtropicsTemp() >= 27 && base.GetSubtropicsTemp() < 29)
 		{
 			difficulty = 4;
+			fireActivityText.text = "High";
+			waterLevelText.text = "Low";
 		}
 		else {
 			difficulty = 5;
+			fireActivityText.text = "Very High";
+			waterLevelText.text = "Very Low";
 		}
 	}
 
 	protected override void GameOver() {
-		base.GameOver();
 		double effect = GetFirePercentage();
+		fireNumber = effect;
+		base.GameOver();
 		Debug.Log("Number of fires: " + effect);
 
 		if (effect >= 5 && effect < 10)
 		{
-			base.ChangePublicOpinion(-5);
+			base.ChangePublicOpinion(+5);
 			EBM.F = EBM.F - .02;
 		}
 		else if (effect >= 10 && effect < 15)
 		{
-			base.ChangePublicOpinion(-10);
+			base.ChangePublicOpinion(-5);
 			EBM.F = EBM.F - .04;
 		}
 		else if (effect >= 15 && effect < 20)
 		{
-			base.ChangePublicOpinion(-15);
+			base.ChangePublicOpinion(-10);
 			EBM.F = EBM.F - .06;
 		}
 		else if (effect >= 20 && effect < 25)
 		{
-			base.ChangePublicOpinion(-20);
+			base.ChangePublicOpinion(-15);
 			EBM.F = EBM.F - .08;
 		}
 		else if (effect >= 25) {
-			base.ChangePublicOpinion(-25);
+			base.ChangePublicOpinion(-20);
 			EBM.F = EBM.F - .1;
 		}
 		//TriggerUpdate(() => GlobalWorld.co2.Update(region, delta: -effect)); // [-1, 0]
