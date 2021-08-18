@@ -53,7 +53,7 @@ public class OverworldController : MonoBehaviour {
 
 			moon.transform.position = new Vector2(x, y) + (Vector2)world.position;
 			moon.transform.eulerAngles = Vector3.forward * Mathf.Sin(step) * Mathf.Rad2Deg;
-			moonSprite.sortingOrder = Mathf.Sin(step) > 0 ? 0 : 2;
+			moonSprite.sortingOrder = Mathf.Sin(step) > 0 ? -2 : 1;
 		}
 	}
 
