@@ -60,26 +60,26 @@ public class SubtropicsController : RegionController {
 
 		if (effect >= 5 && effect < 10)
 		{
-			base.ChangePublicOpinion(-5);
+			base.ChangePublicOpinion(+5);
 			EBM.F = EBM.F - .02;
 		}
 		else if (effect >= 10 && effect < 15)
 		{
-			base.ChangePublicOpinion(-10);
+			base.ChangePublicOpinion(-5);
 			EBM.F = EBM.F - .04;
 		}
 		else if (effect >= 15 && effect < 20)
 		{
-			base.ChangePublicOpinion(-15);
+			base.ChangePublicOpinion(-10);
 			EBM.F = EBM.F - .06;
 		}
 		else if (effect >= 20 && effect < 25)
 		{
-			base.ChangePublicOpinion(-20);
+			base.ChangePublicOpinion(-15);
 			EBM.F = EBM.F - .08;
 		}
 		else if (effect >= 25) {
-			base.ChangePublicOpinion(-25);
+			base.ChangePublicOpinion(-20);
 			EBM.F = EBM.F - .1;
 		}
 		//TriggerUpdate(() => GlobalWorld.co2.Update(region, delta: -effect)); // [-1, 0]
