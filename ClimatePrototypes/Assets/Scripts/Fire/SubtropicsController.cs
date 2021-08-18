@@ -12,6 +12,8 @@ public class SubtropicsController : RegionController {
 	public static SubtropicsController Instance { get => instance as SubtropicsController; } // static instance
 
 	public SubtropicsPlayer player;
+	public Text fireActivityText;
+	public Text waterLevelText;
 	[HideInInspector] public Wind wind;
 	[HideInInspector] public int difficulty = 2;
 	[HideInInspector] public SubtropicsWorld world;
@@ -23,21 +25,31 @@ public class SubtropicsController : RegionController {
 		if (base.GetSubtropicsTemp() < 24)
 		{
 			difficulty = 1;
+			fireActivityText.text = "Very Low";
+			waterLevelText.text = "Very High";
 		}
 		else if (base.GetSubtropicsTemp() >= 24 && base.GetSubtropicsTemp() < 25)
 		{
 			difficulty = 2;
+			fireActivityText.text = "Low";
+			waterLevelText.text = "High";
 		}
 		else if (base.GetSubtropicsTemp() >= 25 && base.GetSubtropicsTemp() < 27)
 		{
 			difficulty = 3;
+			fireActivityText.text = "Moderate";
+			waterLevelText.text = "Moderate";
 		}
 		else if (base.GetSubtropicsTemp() >= 27 && base.GetSubtropicsTemp() < 29)
 		{
 			difficulty = 4;
+			fireActivityText.text = "High";
+			waterLevelText.text = "Low";
 		}
 		else {
 			difficulty = 5;
+			fireActivityText.text = "Very High";
+			waterLevelText.text = "Very Low";
 		}
 	}
 
