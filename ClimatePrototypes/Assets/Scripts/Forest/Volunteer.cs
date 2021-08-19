@@ -8,12 +8,15 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
-public class Volunteer : PathfindingAgent {
+public class Volunteer : PathfindingAgent
+{
 	// now all in parent+adj class, preserving in case of special logic
 }
 
-public class VolunteerActions {
-	public static int GetBubble(UnityAction<Volunteer> action) {
+public class VolunteerActions
+{
+	public static int GetBubble(UnityAction<Volunteer> action)
+	{
 		if (action == Capture)
 			return 1;
 		else if (action == Protest)
@@ -21,25 +24,18 @@ public class VolunteerActions {
 		return 2;
 	}
 
-	public static void Plant(Volunteer v) {
-		ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.02;
+	public static void Plant(Volunteer v)
+	{
 		v.anim.SetTrigger("Shoveling");
 		var task = ForestController.Instance.volunteers[v.ID];
 		ForestController.Instance.StartCoroutine(TreeGrow(task.volunteer, task.activeTile.Value));
-		//ForestController.Instance.StartCoroutine(SetPlantChange(1, 0.03));
-		ForestController.Instance.CheckEndGame();
 	}
 
-	/*public static IEnumerator SetPlantChange (float duration = 1, double change = 0.03)
+	public static IEnumerator TreeGrow(Volunteer v, Vector3Int tilePos)
 	{
-		
-		yield return new WaitForSeconds(duration);
-	}*/
-
-
-	public static IEnumerator TreeGrow(Volunteer v, Vector3Int tilePos) {
 		ForestGrid.ClearHover(tilePos);
 		yield return new WaitForSeconds(1);
+		ForestController.Instance.StartCoroutine(WaitAndReturn(v, 3));
 		//v.anim.ResetTrigger("Shoveling");
 		//v.anim.SetTrigger("Walking");
 		//v.AssignTarget(v.origin);
@@ -48,53 +44,50 @@ public class VolunteerActions {
 		// 	ForestController.Instance.activeTrees.Add(tilePos);
 	}
 
-	public static IEnumerator WaitAndReturn(PathfindingAgent agent, float duration = 1) {
-		yield return new WaitForSeconds(duration);
-        agent.transform.localScale = Vector3.one;
-        agent.anim.SetTrigger("Walking");
-        agent.AssignTarget(agent.origin);
-    }
-
-	public static void Protest(Volunteer v) {
-		/*ForestController.Instance.percentageIncrease = ForestController.Instance.percentageIncrease - 0.015;
-		ForestController.Instance.forcingIncrease = EBM.F * ForestController.Instance.percentageIncrease;*/
-		v.anim.SetTrigger("Protesting");
+	public static IEnumerator WaitAndReturn(PathfindingAgent agent, float duration = 1)
+	{
+		yield return new WaitForSeconds(10f);
 		ForestController.Instance.CheckEndGame();
+		//ForestController.Instance.StartEndGameCoroutine();
+		//agent.transform.localScale = Vector3.one;
+		//agent.anim.SetTrigger("Walking");
+		//agent.AssignTarget(agent.origin);
 	}
 
-	public static void Clear(Volunteer v) {
+	public static void Protest(Volunteer v)
+	{
+		v.anim.SetTrigger("Protesting");
+		ForestController.Instance.StartCoroutine(WaitAndReturn(v, 3));
+	}
+
+	public static void Clear(Volunteer v)
+	{
 		v.anim.SetTrigger("Shoveling");
 		var task = ForestController.Instance.volunteers[v.ID];
 		ForestController.Instance.StartCoroutine(ClearAndReturn(v, task.activeTile.Value));
 	}
 
-	static IEnumerator ClearAndReturn(Volunteer v, Vector3Int tilePos) {
-		yield return null; // ForestController.Instance.StartCoroutine(VolunteerActions.WaitAndReturn(v, 3));
+	static IEnumerator ClearAndReturn(Volunteer v, Vector3Int tilePos)
+	{
+		yield return ForestController.Instance.StartCoroutine(VolunteerActions.WaitAndReturn(v, 3));
 		ForestGrid.ClearHover(tilePos);
 		ForestGrid.map.SetTile(tilePos, ForestGrid.empty);
 		ForestGrid.RemoveTree(tilePos);
 	}
-	public static void Capture(Volunteer v) {
-		/*ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.04;
-		World.money = World.money - 5f;*/
+	public static void Capture(Volunteer v)
+	{
+		// v.anim.SetTrigger("Facility");
 		v.anim.SetTrigger("Working");
-		//ForestController.Instance.StartCoroutine(CaptureAndReturn(v, 3));
-		//ForestController.Instance.StartCoroutine(SetCaptureChanges(1, 0.09, 5f));
-		ForestController.Instance.CheckEndGame();
+		ForestController.Instance.StartCoroutine(CaptureAndReturn(v, 3));
 	}
 
-/*	public static IEnumerator SetCaptureChanges(float duration = 1, double change = 0.09, float moneyDecrease = 5f)
+	static IEnumerator CaptureAndReturn(Volunteer v, float time, int steps = 20)
 	{
-		ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + change;
-		World.money = World.money - moneyDecrease;
-		yield return new WaitForSeconds(duration);
-	}*/
-
-	static IEnumerator CaptureAndReturn(Volunteer v, float time, int steps = 20) {
-		//ForestController.Instance.StartCoroutine(WaitAndReturn(v, time));
+		ForestController.Instance.StartCoroutine(WaitAndReturn(v, time));
 		// for (var (start, step) = (Time.time, 0f); step < time; step = Time.time - start) {
 		// yield return null;
-		for (int i = steps; i > 0; i--) {
+		for (int i = steps; i > 0; i--)
+		{
 			yield return new WaitForSeconds(time / steps);
 			ForestController.Instance.damage = Mathf.Max(-100, ForestController.Instance.damage - 1);
 		}

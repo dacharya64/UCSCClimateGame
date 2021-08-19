@@ -70,7 +70,7 @@ public class PathfindingAgent : MonoBehaviour {
 			OnReturn.Invoke();
 		else
 			OnReached.Invoke(this);
-			ForestController.Instance.StartEndGameCoroutine();
+			//ForestController.Instance.StartEndGameCoroutine();
 		setter.target = null;
 	}
 
