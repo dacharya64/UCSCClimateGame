@@ -128,11 +128,11 @@ public class UIController : Singleton<UIController> {
 			yield return null;
 	}
 
-	public static IEnumerator Typewriter(TMPro.TextMeshProUGUI print, string text, float delay = .05f) { //given text to print, text ref, and print speed, does typewriter effect
+	public static IEnumerator Typewriter(TMPro.TextMeshProUGUI print, string text, string header, float delay = .05f) { //given text to print, text ref, and print speed, does typewriter effect
 		if (text.Length == 0)
 			yield break;
 		if (print.text == "Title") {
-			print.text = text;
+			print.text = header;
 			print.transform.position += print.preferredWidth * Vector3.right;
 		}
 		print.text = "";
@@ -143,7 +143,7 @@ public class UIController : Singleton<UIController> {
 			yield return WaitForRealSeconds(delay);
 		}
 	}
-	public static IEnumerator Typewriter(Text print, string text, float delay = .05f) { //given text to print, text ref, and print speed, does typewriter effect
+	public static IEnumerator Typewriter(Text print, string text, string header, float delay = .05f) { //given text to print, text ref, and print speed, does typewriter effect
 		if (print.text == "Title") {
 			print.text = text;
 			print.transform.position += print.preferredWidth / 2 * Vector3.right;
@@ -179,15 +179,25 @@ public class UIController : Singleton<UIController> {
 		}
 	}
 
-	public static IEnumerator ClickToAdvance(Text text, string[] words, GameObject button = null) {
+	public static IEnumerator ClickToAdvance(Text text, string[] words, GameObject button = null) { 
+		Text header = GameObject.FindWithTag("Title").GetComponent<Text>();
+		header.text = words[0];
 		var clickPrompt = text.GetComponentOnlyInChildren<Text>()?.gameObject;
-		yield return instance.StartCoroutine(Typewriter(text, words[0]));
-		clickPrompt.SetActive(true);
+		yield return instance.StartCoroutine(Typewriter(text, words[1], words[0]));
 
-		for (int i = 1; i < words.Length; i++) {
+		if (words.Length <= 2)
+		{
+			clickPrompt.SetActive(false);
+			if (button)
+				button.SetActive(true);
+		}
+		else {
+			clickPrompt.SetActive(true);
+		}
+		for (int i = 2; i < words.Length; i++) {
 			yield return new WaitForMouseDown();
 			clickPrompt.SetActive(false);
-			yield return instance.StartCoroutine(Typewriter(text, words[i]));
+			yield return instance.StartCoroutine(Typewriter(text, words[i], words[0]));
 			clickPrompt.SetActive(true);
 			if (i == words.Length - 1) {
 				clickPrompt.SetActive(false);

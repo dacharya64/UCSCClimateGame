@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   tutorial:
-  - Hello, this is the Subtropics!
+  - Fire
   - There are ongoing wildfires, click and hold to fly over them and put them out!
-  - Putting out fires uses water, which you can refill at the reservoirs.
+  - 'Fighting fires uses water. You can refill at the reservoirs. '
   secondVisit:
-  - Welcome back to the Subtropics! The wildfires continue to spread.
-  - As the world gets hotter, there will be more fires and less water to use.
-  - The number of fires remaining when the time runs out will also affect public opinion.
+  - Fire
+  - The wildfires continue to spread.
+  - As the world warms, fires will be more frequent and the subtropical regions will
+    be dryer.
+  - The fire remaining when the time runs out will also affect public opinion.
   thirdVisit: []
