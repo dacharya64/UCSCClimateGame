@@ -44,7 +44,7 @@ public class StatsPanel : MonoBehaviour {
 
 	float UpdateSlider(Slider slider, float value, float previousValue, bool invertColors = false) {
 		Transform sliderTransform = slider.GetComponent<Transform>();
-		float delay = 0.4f;
+		float delay = 0.8f;
 		if (previousValue > value)
 		{
 			AudioManager.Instance.Play("SFX_SliderDown");

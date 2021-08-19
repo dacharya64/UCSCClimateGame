@@ -210,7 +210,7 @@ public class GameManager : Singleton<GameManager> {
 	// tween thermometer values
 	void UpdateThermometerValue() {
 		Transform thermometerTransform = thermometer.GetComponent<Transform>();
-		float delay = 0.4f;
+		float delay = 0.8f;
 		if (previousTempValue > (float)World.averageTemp) {
 			AudioManager.Instance.Play("SFX_SliderDown");
 		} else if (previousTempValue < (float)World.averageTemp) {
