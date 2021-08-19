@@ -43,6 +43,7 @@ public class GameManager : Singleton<GameManager> {
 	public bool arcticIsAddressed = true;
 	public bool tropicsIsAddressed = true;
 	public bool subtropicsIsAddressed = true;
+	public bool hasShownFirePopup = false;
 
 	public override void Awake() {
 		base.Awake();
@@ -139,8 +140,9 @@ public class GameManager : Singleton<GameManager> {
 				UIController.Instance.ChangeOutOfMoneyPrompt(true);
 			}
 			
-			if (visits[World.Region.Fire] == 1) {
+			if (visits[World.Region.Fire] == 1 && !hasShownFirePopup) {
 				UIController.Instance.ChangeInfoBoxState(true);
+				hasShownFirePopup = true;
 			}
 			statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 			// Save the previous stats
