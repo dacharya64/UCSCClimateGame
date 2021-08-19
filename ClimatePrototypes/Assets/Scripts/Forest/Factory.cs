@@ -30,6 +30,10 @@ public class Factory : MonoBehaviour {
 
 	void OnMouseDown() {
 		if (ForestController.Instance.hasSelected)
+		{
+			ForestController.Instance.percentageIncrease = ForestController.Instance.percentageIncrease - 0.015;
+			ForestController.Instance.forcingIncrease = EBM.F * ForestController.Instance.percentageIncrease;
 			ForestController.Instance.SetVolunteerTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition), VolunteerActions.Protest);
+		}
 	}
 }

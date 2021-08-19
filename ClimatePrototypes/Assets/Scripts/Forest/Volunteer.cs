@@ -56,8 +56,8 @@ public class VolunteerActions {
     }
 
 	public static void Protest(Volunteer v) {
-		ForestController.Instance.percentageIncrease = ForestController.Instance.percentageIncrease - 0.015;
-		ForestController.Instance.forcingIncrease = EBM.F * ForestController.Instance.percentageIncrease;
+		/*ForestController.Instance.percentageIncrease = ForestController.Instance.percentageIncrease - 0.015;
+		ForestController.Instance.forcingIncrease = EBM.F * ForestController.Instance.percentageIncrease;*/
 		v.anim.SetTrigger("Protesting");
 		ForestController.Instance.CheckEndGame();
 	}
@@ -75,8 +75,8 @@ public class VolunteerActions {
 		ForestGrid.RemoveTree(tilePos);
 	}
 	public static void Capture(Volunteer v) {
-		ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.04;
-		World.money = World.money - 5f;
+		/*ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.04;
+		World.money = World.money - 5f;*/
 		v.anim.SetTrigger("Working");
 		//ForestController.Instance.StartCoroutine(CaptureAndReturn(v, 3));
 		//ForestController.Instance.StartCoroutine(SetCaptureChanges(1, 0.09, 5f));
