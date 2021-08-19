@@ -209,11 +209,10 @@ public class ForestController : RegionController {
 	}
 
 	protected override void GameOver() {
+		forcingIncrease = EBM.F * percentageIncrease;
 		effect = forcingIncrease - forcingDecrease;
-		Debug.Log("Outputted emissions: " + effect);
 		base.GameOver();
 		StopAllCoroutines();
-		forcingIncrease = EBM.F * percentageIncrease;
 		//TriggerUpdate(() => World.co2.Update(region, delta: effect));
 		GameManager.Instance.forcingIncrease = effect;
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
@@ -263,12 +262,19 @@ public class ForestController : RegionController {
 		volunteers[volunteers.Count - 1].activeTile = pos;
 	}
 
-	public void CheckEndGame()
+	public IEnumerator CheckEndGame()
 	{
+		// Check to see if player has placed all the workers 
 		if (volunteersPlaced >= maxVolunteers)
 		{
+			yield return new WaitForSeconds(0.01f);
 			GameOver();
 		}
+		yield return null;
+	}
+
+	public void StartEndGameCoroutine() {
+		StartCoroutine(CheckEndGame());
 	}
 
 	public void OpenAbout()
