@@ -131,7 +131,6 @@ public class GameManager : Singleton<GameManager> {
 			}
 			EBM.F = EBM.F + forcingIncrease;
 			World.ChangeAverageTemp();
-			CheckGameOver();
 		}
 
 		if (to.name == "Overworld")
@@ -205,6 +204,7 @@ public class GameManager : Singleton<GameManager> {
 		statsPanel.Toggle(false);
 		CheckAlerts();
 		isAnimating = false;
+		CheckGameOver();
 	}
 
 	// tween thermometer values

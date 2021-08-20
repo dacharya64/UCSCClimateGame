@@ -107,7 +107,7 @@ public class UIController : Singleton<UIController> {
 		else {
 			publicOpinionResult = "Greatly Decreases";
 		}
-		returnPrompt.GetComponentInChildren<Text>().text = "You have fought the fires!\nFires remaining: " + fires + "\nPublic opinion: " + publicOpinionResult;
+		returnPrompt.GetComponentInChildren<Text>().text = "You have fought the fires!\n\nFires remaining: " + fires + "\n\nPublic opinion: " + publicOpinionResult;
 		returnPrompt.SetActive(status);
 	}
 
@@ -238,6 +238,7 @@ public class UIController : Singleton<UIController> {
 
 	public void ChangeGameOverPromptState(bool state)
 	{
+		//gameOverPrompt = GameObject.FindGameObjectWithTag("GameOverPrompt");
 		gameOverPrompt.SetActive(state);
 	}
 
