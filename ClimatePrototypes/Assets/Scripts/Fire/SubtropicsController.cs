@@ -59,11 +59,12 @@ public class SubtropicsController : RegionController {
 		double effect = GetFirePercentage();
 		fireNumber = effect;
 		base.GameOver();
+
 		Debug.Log("Number of fires: " + effect);
 
-		if (effect >= 5 && effect < 10)
+		if (effect < 10)
 		{
-			base.ChangePublicOpinion(+5);
+			base.ChangePublicOpinion(5);
 			EBM.F = EBM.F - .02;
 		}
 		else if (effect >= 10 && effect < 15)
