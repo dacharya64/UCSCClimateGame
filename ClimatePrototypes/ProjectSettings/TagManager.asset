@@ -21,6 +21,7 @@ TagManager:
   - LoadingText
   - ThermometerFill
   - ThermometerBottom
+  - Title
   layers:
   - Default
   - TransparentFX

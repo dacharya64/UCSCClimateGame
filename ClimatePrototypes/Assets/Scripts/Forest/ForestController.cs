@@ -209,10 +209,10 @@ public class ForestController : RegionController {
 	}
 
 	protected override void GameOver() {
-		base.GameOver();
-		StopAllCoroutines();
 		forcingIncrease = EBM.F * percentageIncrease;
 		effect = forcingIncrease - forcingDecrease;
+		base.GameOver();
+		StopAllCoroutines();
 		//TriggerUpdate(() => World.co2.Update(region, delta: effect));
 		GameManager.Instance.forcingIncrease = effect;
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]

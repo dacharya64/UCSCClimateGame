@@ -155,7 +155,7 @@
   },
   {
     "name": "See the Forest for the Trees",
-    "tease": "More trees will help reduce emissions in out atmosphere. Where should we plant them?",
+    "tease": "More trees will help reduce emissions in our atmosphere. Where should we plant them?",
     "left": {
       "title": "Tropical Forest Re-Growth",
       "body": "This initiative would restore land that was once tropical forest. That would mean working with our communities to turn some farmland back into preserved forest land in order for the forest to help capture emissions from the atmosphere.",
@@ -191,7 +191,7 @@
     },
     "right": {
       "title": "High Speed Rail",
-      "body": "This iniative would build more infrastructure for high-speed rail, which hopefully replaces travel that would normally be done by ship, car, or plane.",
+      "body": "This initiative would build more infrastructure for high-speed rail, which hopefully replaces travel that would normally be done by ship, car, or plane.",
       "tags": "emissions-5 forcing-0.00320798856318937"
     }
   },

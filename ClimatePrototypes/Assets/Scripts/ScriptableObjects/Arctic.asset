@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Arctic
   m_EditorClassIdentifier: 
   tutorial:
-  - Hello, welcome to the Arctic!
+  - Arctic
   - Use the A|D Keys or the Left|Right Arrow Keys to move your paddle!
-  - Block incoming solar radiation (orange) and avoid longwave radiation (purple).
+  - Block incoming solar radiation (orange) and avoid atmospheric longwave radiation
+    (purple).
   secondVisit:
-  - Welcome back to the Arctic!
-  - As the temperature increases, brighter clouds may reflect more solar radiation.
-  - Higher temperatures also mean that the ice you are protecting starts damaged,
-    and you have a smaller paddle.
+  - Arctic
+  - As the region warms, brighter clouds reflect more solar radiation.
+  - With higher temperatures, there is less ice. Your paddle is smaller.
   thirdVisit: []

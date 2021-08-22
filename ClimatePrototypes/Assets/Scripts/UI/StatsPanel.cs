@@ -44,7 +44,7 @@ public class StatsPanel : MonoBehaviour {
 
 	float UpdateSlider(Slider slider, float value, float previousValue, bool invertColors = false) {
 		Transform sliderTransform = slider.GetComponent<Transform>();
-		float delay = 0.4f;
+		float delay = 1f;
 		if (previousValue > value)
 		{
 			AudioManager.Instance.Play("SFX_SliderDown");
@@ -60,7 +60,7 @@ public class StatsPanel : MonoBehaviour {
 		DOTween.Sequence()
 			.Append(slider.fillRect.GetComponentInChildren<Image>(true).DOColor(newColor, delay))
 			.Join(sliderTransform.DOScale(new Vector3(sliderTransform.localScale.x + 0.2f, sliderTransform.localScale.y + 0.2f, sliderTransform.localScale.z), delay))
-			.Append(slider.DOValue(value, 1.5f))
+			.Append(slider.DOValue(value, 1.8f))
 			.Append(slider.fillRect.GetComponentInChildren<Image>(true).DOColor(originalColor, delay))
 			.Join(sliderTransform.DOScale(new Vector3(sliderTransform.localScale.x, sliderTransform.localScale.y, sliderTransform.localScale.z), delay));
 		slider.fillRect.GetComponentInChildren<Image>(true).color = invertColors ? Color.Lerp(Color.red, Color.green, value) : Color.Lerp(Color.green, Color.red, value);

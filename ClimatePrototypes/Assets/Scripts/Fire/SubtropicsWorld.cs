@@ -241,7 +241,7 @@ public class SubtropicsWorld : MonoBehaviour {
 	IEnumerator WaitForFire(float s) {
 		yield return new WaitForSeconds(s);
 		MutateToFire();
-		StartCoroutine(WaitForFire(8 - SubtropicsController.Instance.difficulty));
+		StartCoroutine(WaitForFire(7 - SubtropicsController.Instance.difficulty));
 	}
 
 	/// <summary> Returns cell neighbors - up to 4 dir</summary>

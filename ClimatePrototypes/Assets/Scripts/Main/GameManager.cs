@@ -43,6 +43,7 @@ public class GameManager : Singleton<GameManager> {
 	public bool arcticIsAddressed = true;
 	public bool tropicsIsAddressed = true;
 	public bool subtropicsIsAddressed = true;
+	public bool hasShownFirePopup = false;
 
 	public override void Awake() {
 		base.Awake();
@@ -130,7 +131,6 @@ public class GameManager : Singleton<GameManager> {
 			}
 			EBM.F = EBM.F + forcingIncrease;
 			World.ChangeAverageTemp();
-			CheckGameOver();
 		}
 
 		if (to.name == "Overworld")
@@ -139,8 +139,9 @@ public class GameManager : Singleton<GameManager> {
 				UIController.Instance.ChangeOutOfMoneyPrompt(true);
 			}
 			
-			if (visits[World.Region.Fire] == 1) {
+			if (visits[World.Region.Fire] == 1 && !hasShownFirePopup) {
 				UIController.Instance.ChangeInfoBoxState(true);
+				hasShownFirePopup = true;
 			}
 			statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 			// Save the previous stats
@@ -203,12 +204,13 @@ public class GameManager : Singleton<GameManager> {
 		statsPanel.Toggle(false);
 		CheckAlerts();
 		isAnimating = false;
+		CheckGameOver();
 	}
 
 	// tween thermometer values
 	void UpdateThermometerValue() {
 		Transform thermometerTransform = thermometer.GetComponent<Transform>();
-		float delay = 0.4f;
+		float delay = 0.8f;
 		if (previousTempValue > (float)World.averageTemp) {
 			AudioManager.Instance.Play("SFX_SliderDown");
 		} else if (previousTempValue < (float)World.averageTemp) {

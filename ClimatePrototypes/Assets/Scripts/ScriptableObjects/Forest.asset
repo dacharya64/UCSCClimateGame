@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Forest
   m_EditorClassIdentifier: 
   tutorial:
-  - Welcome to the Forest!
-  - You can encourage people to take action to help climate in one of three ways.
-  - Place them at different locations to fight the effects of deforestation.
+  - Carbon
+  - 'Here you can deploy volunteers to take action to mitigate climate change in
+    one of three ways. '
+  - 'Place volunteers at different locations to protest emissions, plant trees, '
+  - or capture carbon from the atmosphere.
   secondVisit:
-  - 'Welcome back to the Forest! '
-  - Here, you can change the placement of workers fighting against the effects of
-    deforestation.
-  - The number of people available is based on public opinion, which is influenced
-    by the bills you choose in the City.
+  - Carbon
+  - You may wish to change the placement of volunteers to mitigate climate change.
+  - The number of volunteers available is based on public opinion.
   thirdVisit: []
