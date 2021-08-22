@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class SubtropicsPlayer : MonoBehaviour {
 	[SerializeField] float speed = 10;
+	[SerializeField] float cameraSpeed = 20;
 	[SerializeField] Text leftWaterUI = default;
 	[SerializeField] Transform leftWaterBarUI = default;
 	[SerializeField] GameObject line = default;
@@ -41,6 +42,16 @@ public class SubtropicsPlayer : MonoBehaviour {
 	}
 
 	void Update() {
+		/*float charPosX = transform.position.x;
+		float charPosZ = transform.position.z;
+		float cameraOffset = 18.0f;
+
+		Camera.main.transform.position = new Vector3(charPosX, cameraOffset, charPosZ);*/
+		float step = cameraSpeed * Time.deltaTime;
+		//Camera.main.transform.position = Vector2.MoveTowards(Camera.main.transform.position, transform.position, step); // move camera
+		Camera.main.transform.position = Vector3.MoveTowards(Camera.main.transform.position, new Vector3(transform.position.x, transform.position.y, -10), step);
+		//cameraFollow();
+
 		UpdateSlider(waterTracker, water);
 
 		lastUsedWater += Time.deltaTime; // TODO: do this timer logic better, maybe with coroutine
@@ -63,7 +74,7 @@ public class SubtropicsPlayer : MonoBehaviour {
 			float step = speed * Time.deltaTime;
 			// Are we currently moving towards a region?
 			transform.position = Vector3.MoveTowards(transform.position, target.Value, step); // move player
-			Camera.main.transform.position = Vector3.MoveTowards(Camera.main.transform.position, Camera.main.transform.position + target.Value - transform.position, step); // move camera
+			//Camera.main.transform.position = Vector3.MoveTowards(Camera.main.transform.position, Camera.main.transform.position + target.Value - transform.position, step); // move camera
 			// TODO: nest camera under player
 
 			Vector3 vectorToTarget = target.Value - transform.position;
@@ -75,6 +86,16 @@ public class SubtropicsPlayer : MonoBehaviour {
 				target = null;
 			DrawPlayerPath();
 		}
+	}
+
+	void cameraFollow()
+	{
+		Debug.Log("Camera following...");
+		float charPosX = transform.position.x;
+		float charPosZ = transform.position.z;
+		float cameraOffset = 18.0f;
+
+		Camera.main.transform.position = new Vector3(charPosX, cameraOffset, charPosZ);
 	}
 
 	void Extinguish() {
