@@ -16,19 +16,24 @@ public class GameOverScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FinalTemperatureText.text = World.averageTemp.ToString("F3");
-        FinalTropicsTempText.text = World.temp[0].ToString("F3");
-        FinalSubtropicsTempText.text = World.temp[1].ToString("F3");
-        FinalArcticTempText.text = World.temp[2].ToString("F3");
+        FinalTemperatureText.text = World.averageTemp.ToString("F2");
+        FinalTropicsTempText.text = World.temp[0].ToString("F2");
+        FinalSubtropicsTempText.text = World.temp[1].ToString("F2");
+        FinalArcticTempText.text = World.temp[2].ToString("F2");
         FinalPublicOpinionText.text = World.publicOpinion.ToString();
-        FinalEmissionsText.text = ((float)EBM.F).ToString("F3");
+        FinalEmissionsText.text = ((float)EBM.F).ToString("F2");
         FinalEconomyText.text = World.money.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-
+        FinalTemperatureText.text = World.averageTemp.ToString("F2");
+        FinalTropicsTempText.text = World.temp[0].ToString("F2");
+        FinalSubtropicsTempText.text = World.temp[1].ToString("F2");
+        FinalArcticTempText.text = World.temp[2].ToString("F2");
+        FinalPublicOpinionText.text = World.publicOpinion.ToString();
+        FinalEmissionsText.text = ((float)EBM.F).ToString("F2");
+        FinalEconomyText.text = World.money.ToString();
     }
 }

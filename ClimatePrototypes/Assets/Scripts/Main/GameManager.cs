@@ -159,7 +159,10 @@ public class GameManager : Singleton<GameManager> {
 
 			thermometer.value = previousTempValue;
 
-			StartCoroutine(UpdateOverworldValues());
+			if (from.name != "TitleScreen" && from.name != "Overworld") {
+				StartCoroutine(UpdateOverworldValues());
+			}
+			
 		}
 		else if (to.name != "TitleScreen") {
 			AudioManager.Instance.Play("BGM_" + to.name); // TODO: sound name variable class
@@ -416,10 +419,12 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
+		completedRegions = 20;
 		if (completedRegions > 19)
 		{
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);
+			UIController.Instance.UpdateGameOverScreen();
 			if (worldNameText.text != "")
 			{
 				worldNameText.text = World.worldName;
@@ -432,6 +437,9 @@ public class GameManager : Singleton<GameManager> {
 			World.turn = 1;
 			timesSinceVisitedCity = 0;
 			billIndices = new List<int>();
+			EBM.F = 2;
+			World.money = 70f; 
+			World.publicOpinion = 70f;
 			//visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
 		}
 	}
