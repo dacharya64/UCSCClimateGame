@@ -8,7 +8,7 @@ using DG.Tweening;
 public class StatsPanel : MonoBehaviour {
 	[SerializeField] Slider landUse = default, publicOpinion = default, emissions = default, economy = default;
 	public float previousPublicOpinion;
-	public float previousEmissions;
+	public float previousEmissions = 2;
 	public float previousEconomy;
 	public float previousLandUse;
 
@@ -16,6 +16,7 @@ public class StatsPanel : MonoBehaviour {
 		SetSlider(landUse, (float) EBM.a0);
 		SetSlider(publicOpinion, World.publicOpinion / 100, invertColors : true);
 		SetSlider(emissions, (float) EBM.F); // used to be /14
+		previousEmissions = (float) EBM.F;
 		SetSlider(economy, World.money / 100);
 	}
 
