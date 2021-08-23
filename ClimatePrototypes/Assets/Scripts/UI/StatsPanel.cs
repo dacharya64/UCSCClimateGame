@@ -13,6 +13,7 @@ public class StatsPanel : MonoBehaviour {
 	public float previousLandUse;
 
 	public void InitializeValues() {
+		Debug.Log("Initializing stats panel");
 		SetSlider(landUse, (float) EBM.a0);
 		SetSlider(publicOpinion, World.publicOpinion / 100, invertColors : true);
 		SetSlider(emissions, (float) EBM.F); // used to be /14

@@ -71,17 +71,22 @@ public class GameManager : Singleton<GameManager> {
 		cityAlert.GetComponent<SpriteRenderer>().enabled = false;
 		previousRegionalTemp = World.temp[1];
 		previousArcticTemp = World.temp[2];
+		InitStats();
+	}
+
+	public void InitStats() {
 		statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 		statsPanel.InitializeValues();
 	}
 
 	public static void Restart() {
+		EBM.F = 2;
+		TitleScreen.isFirstTime = false;
 		UIController.Instance.ChangeGameOverPromptState(false);
 		SceneManager.LoadScene("TitleScreen");
-		TitleScreen.isFirstTime = false;
 		//TitleScreen.Instance.TurnOffLoadingText();
-		EBM.Reset();
-		World.Calc();
+		//EBM.Reset();
+		//World.Calc();
 	}
 
 	public void QuitGame(int exitStatus = 0) {

@@ -36,10 +36,17 @@ public class TitleScreen : MonoBehaviour {
 		}
 
 		if (!isFirstTime) {
+			EBM.F = 2;
+			World.money = 70f;
+			World.publicOpinion = 70f;
+			GameManager.Instance.InitStats();
 			buttons.SetActive(false);
 			namingGroup.SetActive(true);
 			isFirstTime = false;
 			text.SetActive(false);
+			//World.Init();
+			Debug.Log("Restarted");
+			
 		}
 		
 	}
