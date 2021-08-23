@@ -20,6 +20,8 @@ public class UIController : Singleton<UIController> {
 	Dictionary<GameObject, bool> uiActiveStatus = new Dictionary<GameObject, bool>();
 	public World.Region previousRegion;
 	public bool firstTimeVisiting;
+	public GameObject aboutPrompt;
+	public bool timed = false;
 
 	/// <summary> Flips active status of UI element and stores it </summary>
 	public void Toggle(GameObject obj) {
@@ -89,7 +91,7 @@ public class UIController : Singleton<UIController> {
 		{
 			emissionsResult = "Large";
 		}
-		returnPrompt.GetComponentInChildren<Text>().text = "You have placed all of the volunteers! \n\nPrediced emissions increase: " + emissionsResult;
+		returnPrompt.GetComponentInChildren<Text>().text = "You have placed all of the volunteers! \n\nPredicted emissions increase: " + emissionsResult;
 		returnPrompt.SetActive(status);
 	}
 
@@ -245,4 +247,14 @@ public class UIController : Singleton<UIController> {
 	public void RestartGame() {
 		GameManager.Restart();
 	}
+
+	public void OpenAboutBox() {
+        if (aboutPrompt != null)
+        {
+			aboutPrompt.SetActive(true);
+			if (timed) {
+				Time.timeScale = 0;
+			}
+        }
+    }
 }

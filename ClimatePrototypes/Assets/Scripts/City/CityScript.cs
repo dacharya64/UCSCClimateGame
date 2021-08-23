@@ -62,7 +62,10 @@ public class CityScript : RegionController
 
     void Start()
     {
-       
+        // Tell the UI controller where the about prompt is
+        UIController.Instance.timed = false;
+        UIController.Instance.aboutPrompt = aboutPrompt;
+
         bills = LoadBills();
         currentDifficulty = BillDifficulty.Easy;
         (left.speed, right.speed) = (speed, speed);

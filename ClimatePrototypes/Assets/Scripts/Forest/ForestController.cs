@@ -60,6 +60,10 @@ public class ForestController : RegionController {
 	public void UIHover(bool over) => overUI = over;
 
 	void Start() {
+		// Tell the UI controller where the about prompt is
+		UIController.Instance.timed = false;
+		UIController.Instance.aboutPrompt = aboutPrompt;
+
 		forcingDecrease = 0.0;
 		percentageIncrease = 0.1;
 		forcingIncrease = EBM.F * percentageIncrease;
