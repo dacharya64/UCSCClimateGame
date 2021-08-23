@@ -401,7 +401,7 @@ public class GameManager : Singleton<GameManager> {
 		// Check if it's been too long since visited city 
 		cityAlert = GameObject.FindGameObjectWithTag("CityAlert");
 		Transform cityTransform = cityAlert.GetComponent<Transform>();
-		if (timesSinceVisitedCity > 4)
+		if (timesSinceVisitedCity > 4 && billIndices.Count < 13)
 		{
 			cityAlert.GetComponent<SpriteRenderer>().enabled = true;
 			Bounce(cityTransform);
