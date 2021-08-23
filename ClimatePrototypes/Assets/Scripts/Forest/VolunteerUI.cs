@@ -8,6 +8,7 @@ public class VolunteerUI : MonoBehaviour {
 	[SerializeField] Sprite[] bubbles = default;
 	[SerializeField] Sprite /*active = default,*/ vacant = default;
 	[SerializeField] GameObject selector = default, bubble = default;
+	[SerializeField] List<GameObject> allSelectors = default;
 
 	bool selected { get => ForestController.Instance.selected == this; }
 	Animator animator;
@@ -23,6 +24,12 @@ public class VolunteerUI : MonoBehaviour {
 	}
 
 	public void SelectUI() {
+		// first turn off all selectors
+		foreach (GameObject select in allSelectors) {
+			select.SetActive(false);
+		}
+
+		//then turn on the appropriate selector
 		ForestController.Instance.selected = selected != this ? this : null;
 		selector.SetActive(selected);
 	}
