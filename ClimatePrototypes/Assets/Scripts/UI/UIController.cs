@@ -91,7 +91,7 @@ public class UIController : Singleton<UIController> {
 		{
 			emissionsResult = "Large";
 		}
-		returnPrompt.GetComponentInChildren<Text>().text = "You have placed all of the volunteers! \n\nPrediced emissions increase: " + emissionsResult;
+		returnPrompt.GetComponentInChildren<Text>().text = "You have placed all of the volunteers! \n\nPredicted emissions increase: " + emissionsResult;
 		returnPrompt.SetActive(status);
 	}
 
