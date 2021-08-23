@@ -23,6 +23,14 @@ public class UIController : Singleton<UIController> {
 	public GameObject aboutPrompt;
 	public bool timed = false;
 
+	[SerializeField] Text FinalTemperatureText;
+	[SerializeField] Text FinalTropicsTempText;
+	[SerializeField] Text FinalSubtropicsTempText;
+	[SerializeField] Text FinalArcticTempText;
+	[SerializeField] Text FinalPublicOpinionText;
+	[SerializeField] Text FinalEmissionsText;
+	[SerializeField] Text FinalEconomyText;
+
 	/// <summary> Flips active status of UI element and stores it </summary>
 	public void Toggle(GameObject obj) {
 		if (!uiActiveStatus.ContainsKey(obj))
@@ -240,7 +248,6 @@ public class UIController : Singleton<UIController> {
 
 	public void ChangeGameOverPromptState(bool state)
 	{
-		//gameOverPrompt = GameObject.FindGameObjectWithTag("GameOverPrompt");
 		gameOverPrompt.SetActive(state);
 	}
 
@@ -257,4 +264,14 @@ public class UIController : Singleton<UIController> {
 			}
         }
     }
+
+	public void UpdateGameOverScreen() {
+		FinalTemperatureText.text = World.averageTemp.ToString("F2");
+		FinalTropicsTempText.text = World.temp[0].ToString("F2");
+		FinalSubtropicsTempText.text = World.temp[1].ToString("F2");
+		FinalArcticTempText.text = World.temp[2].ToString("F2");
+		FinalPublicOpinionText.text = World.publicOpinion.ToString();
+		FinalEmissionsText.text = ((float)EBM.F).ToString("F2");
+		FinalEconomyText.text = World.money.ToString();
+	}
 }

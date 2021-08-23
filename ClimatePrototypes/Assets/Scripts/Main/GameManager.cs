@@ -59,8 +59,6 @@ public class GameManager : Singleton<GameManager> {
 		thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 		thermometerFill = GameObject.FindGameObjectWithTag("ThermometerFill").GetComponent<Image>();
 		thermometerBottom = GameObject.FindGameObjectWithTag("ThermometerBottom").GetComponent<Image>();
-		SetSlider(thermometer, (float) World.averageTemp);
-		previousTempValue = (float) World.averageTemp;
 		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
 		tropicsAlert.GetComponent<SpriteRenderer>().enabled = false;
 		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
@@ -71,17 +69,28 @@ public class GameManager : Singleton<GameManager> {
 		cityAlert.GetComponent<SpriteRenderer>().enabled = false;
 		previousRegionalTemp = World.temp[1];
 		previousArcticTemp = World.temp[2];
+		InitStats();
+		SetThermometerValue();
+	}
+
+	public void InitStats() {
 		statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 		statsPanel.InitializeValues();
 	}
 
+	public void SetThermometerValue() {
+		SetSlider(thermometer, (float)World.averageTemp);
+		previousTempValue = (float)World.averageTemp;
+	}
+
 	public static void Restart() {
+		EBM.F = 2;
+		TitleScreen.isFirstTime = false;
 		UIController.Instance.ChangeGameOverPromptState(false);
 		SceneManager.LoadScene("TitleScreen");
-		TitleScreen.isFirstTime = false;
 		//TitleScreen.Instance.TurnOffLoadingText();
-		EBM.Reset();
-		World.Calc();
+		//EBM.Reset();
+		//World.Calc();
 	}
 
 	public void QuitGame(int exitStatus = 0) {
@@ -159,7 +168,10 @@ public class GameManager : Singleton<GameManager> {
 
 			thermometer.value = previousTempValue;
 
-			StartCoroutine(UpdateOverworldValues());
+			if (from.name != "TitleScreen" && from.name != "Overworld") {
+				StartCoroutine(UpdateOverworldValues());
+			}
+			
 		}
 		else if (to.name != "TitleScreen") {
 			AudioManager.Instance.Play("BGM_" + to.name); // TODO: sound name variable class
@@ -420,6 +432,7 @@ public class GameManager : Singleton<GameManager> {
 		{
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);
+			UIController.Instance.UpdateGameOverScreen();
 			if (worldNameText.text != "")
 			{
 				worldNameText.text = World.worldName;
@@ -432,6 +445,9 @@ public class GameManager : Singleton<GameManager> {
 			World.turn = 1;
 			timesSinceVisitedCity = 0;
 			billIndices = new List<int>();
+			EBM.F = 2;
+			World.money = 70f; 
+			World.publicOpinion = 70f;
 			//visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
 		}
 	}

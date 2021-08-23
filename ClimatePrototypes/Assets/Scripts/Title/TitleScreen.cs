@@ -32,16 +32,20 @@ public class TitleScreen : MonoBehaviour {
 			foreach (Graphic g in uiReveal[i].GetComponentsInChildren<Graphic>())
 				g.color = new Color(g.color.r, g.color.g, g.color.b, 0);
 			StartCoroutine(DropReveal(uiReveal[i].transform, i * .5f, uiReveal[i].TryGetComponent(out Button _)));
-			//StartCoroutine(TurnOffLoadingText());
 		}
 
 		if (!isFirstTime) {
+			EBM.F = 2;
+			World.money = 70f;
+			World.publicOpinion = 70f;
+			GameManager.Instance.InitStats();
 			buttons.SetActive(false);
 			namingGroup.SetActive(true);
 			isFirstTime = false;
 			text.SetActive(false);
+			World.Calc();
+			GameManager.Instance.SetThermometerValue();
 		}
-		
 	}
 
 		IEnumerator DropReveal(Transform g, float delay = 0, bool drop = true, bool fade = true, float time = .5f) {
@@ -66,10 +70,9 @@ public class TitleScreen : MonoBehaviour {
 
 	public static void TurnOffLoadingText()
 	{
-		//Debug.Log("Disabling loading text");
 		loadingText = GameObject.FindGameObjectWithTag("LoadingText");
-		loadingText.GetComponent<Text>().enabled = false;
-		//loadingText.SetActive(false);
+		if (loadingText != null)
+			loadingText.SetActive(false);
 	}
 
 	void SetOverWorldActive(Scene scene, LoadSceneMode mode) {

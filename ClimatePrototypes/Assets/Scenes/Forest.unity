@@ -5971,6 +5971,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Volunteer UI (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[0]
+      value: 
+      objectReference: {fileID: 2539321275832021699}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[1]
+      value: 
+      objectReference: {fileID: 1207028717}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[2]
+      value: 
+      objectReference: {fileID: 1612272214}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[3]
+      value: 
+      objectReference: {fileID: 2072454211}
     - target: {fileID: 2539321276665417485, guid: d284e157756a48940b54d94e7a9d793c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -6086,6 +6106,12 @@ PrefabInstance:
 --- !u!224 &892710271 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2539321276665417486, guid: d284e157756a48940b54d94e7a9d793c,
+    type: 3}
+  m_PrefabInstance: {fileID: 892710270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &892710272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6132049480776441381, guid: d284e157756a48940b54d94e7a9d793c,
     type: 3}
   m_PrefabInstance: {fileID: 892710270}
   m_PrefabAsset: {fileID: 0}
@@ -6642,6 +6668,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Volunteer UI (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[0]
+      value: 
+      objectReference: {fileID: 2539321275832021699}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[2]
+      value: 
+      objectReference: {fileID: 1612272214}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[3]
+      value: 
+      objectReference: {fileID: 2072454211}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[4]
+      value: 
+      objectReference: {fileID: 892710272}
     - target: {fileID: 2539321276665417486, guid: d284e157756a48940b54d94e7a9d793c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6752,6 +6798,12 @@ PrefabInstance:
 --- !u!224 &1207028716 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2539321276665417486, guid: d284e157756a48940b54d94e7a9d793c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1207028715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1207028717 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6132049480776441381, guid: d284e157756a48940b54d94e7a9d793c,
     type: 3}
   m_PrefabInstance: {fileID: 1207028715}
   m_PrefabAsset: {fileID: 0}
@@ -7679,6 +7731,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Volunteer UI (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[0]
+      value: 
+      objectReference: {fileID: 2539321275832021699}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[1]
+      value: 
+      objectReference: {fileID: 1207028717}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[2]
+      value: 
+      objectReference: {fileID: 1612272214}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[3]
+      value: 
+      objectReference: {fileID: 2072454211}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[4]
+      value: 
+      objectReference: {fileID: 892710272}
     - target: {fileID: 2539321276665417485, guid: d284e157756a48940b54d94e7a9d793c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -7794,6 +7876,12 @@ PrefabInstance:
 --- !u!224 &1612272213 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2539321276665417486, guid: d284e157756a48940b54d94e7a9d793c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1612272212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1612272214 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6132049480776441381, guid: d284e157756a48940b54d94e7a9d793c,
     type: 3}
   m_PrefabInstance: {fileID: 1612272212}
   m_PrefabAsset: {fileID: 0}
@@ -9486,6 +9574,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Volunteer UI (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[0]
+      value: 
+      objectReference: {fileID: 2539321275832021699}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[1]
+      value: 
+      objectReference: {fileID: 1207028717}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[2]
+      value: 
+      objectReference: {fileID: 1612272214}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[4]
+      value: 
+      objectReference: {fileID: 892710272}
     - target: {fileID: 2539321276665417485, guid: d284e157756a48940b54d94e7a9d793c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -9601,6 +9714,12 @@ PrefabInstance:
 --- !u!224 &2072454210 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2539321276665417486, guid: d284e157756a48940b54d94e7a9d793c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2072454209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2072454211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6132049480776441381, guid: d284e157756a48940b54d94e7a9d793c,
     type: 3}
   m_PrefabInstance: {fileID: 2072454209}
   m_PrefabAsset: {fileID: 0}
@@ -9804,11 +9923,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Volunteer UI
       objectReference: {fileID: 0}
-    - target: {fileID: 2539321276665417481, guid: d284e157756a48940b54d94e7a9d793c,
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: allSelectors.Array.data[1]
+      value: 
+      objectReference: {fileID: 1207028717}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[2]
+      value: 
+      objectReference: {fileID: 1612272214}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[3]
+      value: 
+      objectReference: {fileID: 2072454211}
+    - target: {fileID: 2539321276665417484, guid: d284e157756a48940b54d94e7a9d793c,
+        type: 3}
+      propertyPath: allSelectors.Array.data[4]
+      value: 
+      objectReference: {fileID: 892710272}
     - target: {fileID: 2539321276665417486, guid: d284e157756a48940b54d94e7a9d793c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -9916,6 +10050,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d284e157756a48940b54d94e7a9d793c, type: 3}
+--- !u!1 &2539321275832021699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6132049480776441381, guid: d284e157756a48940b54d94e7a9d793c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2539321275832021698}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8204951425365612148
 PrefabInstance:
   m_ObjectHideFlags: 0

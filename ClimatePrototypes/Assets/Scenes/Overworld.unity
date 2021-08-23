@@ -1175,7 +1175,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 26.317
+  m_Text: 27.23
 --- !u!222 &166570687
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1828,7 +1828,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 15.788
+  m_Text: 17.07
 --- !u!222 &265845416
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4837,9 +4837,44 @@ PrefabInstance:
       objectReference: {fileID: 973033185}
     - target: {fileID: 4289077913081300319, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
+      propertyPath: FinalEconomyText
+      value: 
+      objectReference: {fileID: 640828460}
+    - target: {fileID: 4289077913081300319, guid: 5b327410d7ac9db419b2785b56c9eca1,
+        type: 3}
       propertyPath: outOfMoneyPrompt
       value: 
       objectReference: {fileID: 1147518423}
+    - target: {fileID: 4289077913081300319, guid: 5b327410d7ac9db419b2785b56c9eca1,
+        type: 3}
+      propertyPath: FinalEmissionsText
+      value: 
+      objectReference: {fileID: 1869310377}
+    - target: {fileID: 4289077913081300319, guid: 5b327410d7ac9db419b2785b56c9eca1,
+        type: 3}
+      propertyPath: FinalArcticTempText
+      value: 
+      objectReference: {fileID: 440894580}
+    - target: {fileID: 4289077913081300319, guid: 5b327410d7ac9db419b2785b56c9eca1,
+        type: 3}
+      propertyPath: FinalTemperatureText
+      value: 
+      objectReference: {fileID: 346675076}
+    - target: {fileID: 4289077913081300319, guid: 5b327410d7ac9db419b2785b56c9eca1,
+        type: 3}
+      propertyPath: FinalTropicsTempText
+      value: 
+      objectReference: {fileID: 2088641206}
+    - target: {fileID: 4289077913081300319, guid: 5b327410d7ac9db419b2785b56c9eca1,
+        type: 3}
+      propertyPath: FinalPublicOpinionText
+      value: 
+      objectReference: {fileID: 1822416948}
+    - target: {fileID: 4289077913081300319, guid: 5b327410d7ac9db419b2785b56c9eca1,
+        type: 3}
+      propertyPath: FinalSubtropicsTempText
+      value: 
+      objectReference: {fileID: 1286263579}
     - target: {fileID: 4492140674855053267, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -6850,7 +6885,6 @@ GameObject:
   - component: {fileID: 973033186}
   - component: {fileID: 973033188}
   - component: {fileID: 973033187}
-  - component: {fileID: 973033189}
   m_Layer: 5
   m_Name: GameOverPrompt
   m_TagString: Untagged
@@ -6946,25 +6980,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973033185}
   m_CullTransparentMesh: 0
---- !u!114 &973033189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973033185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9374f4da072f30b4daae2ca78f160b76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FinalTemperatureText: {fileID: 346675076}
-  FinalTropicsTempText: {fileID: 2088641206}
-  FinalSubtropicsTempText: {fileID: 1286263579}
-  FinalArcticTempText: {fileID: 440894580}
-  FinalPublicOpinionText: {fileID: 1822416948}
-  FinalEmissionsText: {fileID: 1869310377}
-  FinalEconomyText: {fileID: 640828460}
 --- !u!1 &982069099
 GameObject:
   m_ObjectHideFlags: 0
@@ -7279,7 +7294,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: -6.239
+  m_Text: -4.12
 --- !u!222 &1034242053
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7471,7 +7486,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 2
 --- !u!222 &1116043792
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8847,7 +8862,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 23.178
+  m_Text: 24.18
 --- !u!222 &1401010605
 CanvasRenderer:
   m_ObjectHideFlags: 0
