@@ -59,8 +59,6 @@ public class GameManager : Singleton<GameManager> {
 		thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
 		thermometerFill = GameObject.FindGameObjectWithTag("ThermometerFill").GetComponent<Image>();
 		thermometerBottom = GameObject.FindGameObjectWithTag("ThermometerBottom").GetComponent<Image>();
-		SetSlider(thermometer, (float) World.averageTemp);
-		previousTempValue = (float) World.averageTemp;
 		tropicsAlert = GameObject.FindGameObjectWithTag("TropicsAlert");
 		tropicsAlert.GetComponent<SpriteRenderer>().enabled = false;
 		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
@@ -72,11 +70,17 @@ public class GameManager : Singleton<GameManager> {
 		previousRegionalTemp = World.temp[1];
 		previousArcticTemp = World.temp[2];
 		InitStats();
+		SetThermometerValue();
 	}
 
 	public void InitStats() {
 		statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 		statsPanel.InitializeValues();
+	}
+
+	public void SetThermometerValue() {
+		SetSlider(thermometer, (float)World.averageTemp);
+		previousTempValue = (float)World.averageTemp;
 	}
 
 	public static void Restart() {
@@ -424,7 +428,6 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
-		completedRegions = 20;
 		if (completedRegions > 19)
 		{
 			// show stats screen and let player restart
