@@ -245,7 +245,7 @@ public class GameManager : Singleton<GameManager> {
 			{ // awaits both model and scene load
 				Time.timeScale = 1;
 				asyncLoad.allowSceneActivation = true;
-				AudioManager.Instance.StopMusic(); // could move earlier and play new music during newsscroll
+				//AudioManager.Instance.StopMusic(); // could move earlier and play new music during newsscroll
 				if (name == "Overworld")
 					UIController.Instance.IncrementTurn();
 				UIController.Instance.SetPrompt(false);
