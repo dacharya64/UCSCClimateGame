@@ -24,6 +24,10 @@ public class ArcticController : RegionController {
 	[SerializeField] Text seaIceLossText;
 
 	void Start() {
+		// Tell the UI controller where the about prompt is
+		UIController.Instance.timed = true;
+		UIController.Instance.aboutPrompt = aboutPrompt;
+
 		longWaveParent = new GameObject("Long Wave Ray").transform;
 		// init temp influence, drives game difficulty
 		tempInfluence = (float) (World.temp[2] - World.startingTemp[2]) / World.maxTempChange;
@@ -94,7 +98,7 @@ public class ArcticController : RegionController {
 
 	public void OpenAbout()
 	{
-		base.SetPause(1);
+		//base.SetPause(1);
 		aboutPrompt.SetActive(true);
 	}
 
