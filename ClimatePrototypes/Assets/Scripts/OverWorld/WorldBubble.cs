@@ -49,9 +49,9 @@ public class WorldBubble : MonoBehaviour {
 	}
 
 	void OnMouseOver() {
-		if (!active)
+		if (!active && !GameManager.Instance.isAnimating && !GameManager.Instance.menuUp)
 			StartCoroutine(Bubble(entering: true, dur: .25f));
-		if (Input.GetButtonDown("Fire1") && !GameManager.Instance.isAnimating) {
+		if (Input.GetButtonDown("Fire1") && !GameManager.Instance.isAnimating && !GameManager.Instance.menuUp) {
 			// Check if the node is the city node and if there are still bills available
 			if (this.gameObject.name == "CityNode" && GameManager.Instance.billIndices.Count >= 13) // Change this value if # of bills goes up
 			{

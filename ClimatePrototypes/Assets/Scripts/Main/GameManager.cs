@@ -44,6 +44,7 @@ public class GameManager : Singleton<GameManager> {
 	public bool tropicsIsAddressed = true;
 	public bool subtropicsIsAddressed = true;
 	public bool hasShownFirePopup = false;
+	public bool menuUp = false;
 
 	public override void Awake() {
 		base.Awake();
@@ -71,6 +72,11 @@ public class GameManager : Singleton<GameManager> {
 		previousArcticTemp = World.temp[2];
 		InitStats();
 		SetThermometerValue();
+	}
+
+	public void TurnOffMenu() {
+		menuUp = false;
+		Time.timeScale = 1;
 	}
 
 	public void InitStats() {
