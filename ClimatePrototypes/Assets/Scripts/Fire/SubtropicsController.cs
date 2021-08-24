@@ -21,6 +21,8 @@ public class SubtropicsController : RegionController {
 	public static SubtropicsWorld World { get => Instance.world; }
 
 	void Start() {
+		UIController.Instance.timed = true;
+
 		fireNumber = 0;
 		wind = GetComponentInChildren<Wind>();
 		world = GetComponentInChildren<SubtropicsWorld>();
