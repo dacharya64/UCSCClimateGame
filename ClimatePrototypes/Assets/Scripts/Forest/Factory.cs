@@ -10,9 +10,14 @@ public class Factory : MonoBehaviour {
 	int step = 0;
 	int damageMultiplier = 1;
 	public static int protesters = 0;
+	Dictionary<Transform, bool> subtargets = new Dictionary<Transform, bool>();
+	int awaitSubTargetReached = 0;
+	int counter = 0;
 
 	void Start() {
 		col = GetComponent<BoxCollider2D>();
+		foreach (Transform child in transform)
+			subtargets.Add(child, false);
 	}
 
 	void FixedUpdate() {
@@ -33,7 +38,11 @@ public class Factory : MonoBehaviour {
 		{
 			ForestController.Instance.percentageIncrease = ForestController.Instance.percentageIncrease - 0.015;
 			ForestController.Instance.forcingIncrease = EBM.F * ForestController.Instance.percentageIncrease;
-			ForestController.Instance.SetVolunteerTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition), VolunteerActions.Protest);
+			var selectedTarget = subtargets.ElementAt(counter).Key;
+			counter++;
+			//var selectedTarget = subtargets.Where(kvp => !kvp.Value).OrderBy(kvp => kvp.Key.position.y).ElementAt(0).Key;
+			subtargets[selectedTarget] = true;
+			ForestController.Instance.SetVolunteerTarget(selectedTarget.position, VolunteerActions.Protest);
 		}
 	}
 }
