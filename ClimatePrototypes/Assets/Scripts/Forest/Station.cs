@@ -9,6 +9,7 @@ public class Station : MonoBehaviour { // TODO: remove subtargets and make it mo
 	BoxCollider2D col;
 	Dictionary<Transform, bool> subtargets = new Dictionary<Transform, bool>();
 	int awaitSubTargetReached = 0;
+	int counter = 0;
 
 	void Start() {
 		col = GetComponent<BoxCollider2D>();
@@ -37,7 +38,9 @@ public class Station : MonoBehaviour { // TODO: remove subtargets and make it mo
 		if (ForestController.Instance.hasSelected) {
 			ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.04;
 			World.money = World.money - 5f;
-			var selectedTarget = subtargets.Where(kvp => !kvp.Value).OrderBy(kvp => kvp.Key.position.y).ElementAt(0).Key;
+			var selectedTarget = subtargets.ElementAt(counter).Key;
+			counter++;
+			//var selectedTarget = subtargets.Where(kvp => !kvp.Value).OrderBy(kvp => kvp.Key.position.y).ElementAt(0).Key;
 			subtargets[selectedTarget] = true;
 			ForestController.Instance.SetVolunteerTarget(selectedTarget.position, VolunteerActions.Capture);
 		}
