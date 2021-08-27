@@ -12,6 +12,7 @@ public class ForestController : RegionController {
 	public static ForestController Instance { get => instance as ForestController; } // static instance
 
 	[SerializeField] GameObject volunteerPrefab = default, uiPanel = default;
+	[SerializeField] GameObject volunteer2Prefab;
 	[HideInInspector] public VolunteerUI selected;
 	public int numActive;
 	[HideInInspector] public bool overUI = false;
@@ -235,7 +236,15 @@ public class ForestController : RegionController {
 	/// <summary> Creates volunteer and applies path target </summary>
 	public void SetVolunteerTarget(Vector3 pos, UnityAction<Volunteer> onReached) {
 		volunteersPlaced++;
-		var newVolunteer = NewAgent(volunteerPrefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
+		var newVolunteer = new Volunteer();
+		if (Random.value < 0.5f)
+		{
+			newVolunteer = NewAgent(volunteerPrefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
+		}
+		else
+		{
+			newVolunteer = NewAgent(volunteer2Prefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
+		}
 		volunteerAgents.Add(newVolunteer.gameObject);
 		if (Random.value > 0.5)
 		{
