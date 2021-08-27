@@ -1743,7 +1743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ed2be99ad5ddc4596d2d47cea12683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colour: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  colour: {r: 0.3647059, g: 0.36862746, b: 0.37254903, a: 1}
   canvas: {fileID: 2083884749}
   animationCurve:
     serializedVersion: 2
@@ -4247,7 +4247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ed2be99ad5ddc4596d2d47cea12683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colour: {r: 1, g: 0, b: 0, a: 1}
+  colour: {r: 0.76862746, g: 0.3019608, b: 0.41960785, a: 1}
   canvas: {fileID: 2083884749}
   animationCurve:
     serializedVersion: 2
@@ -10564,7 +10564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ed2be99ad5ddc4596d2d47cea12683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colour: {r: 0, g: 1, b: 0, a: 1}
+  colour: {r: 0.65882355, g: 0.7372549, b: 0.47058824, a: 1}
   canvas: {fileID: 2083884749}
   animationCurve:
     serializedVersion: 2
@@ -11000,7 +11000,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 657ccb1ae77d8cb4585c45c9bf2ca373, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -13075,7 +13075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ed2be99ad5ddc4596d2d47cea12683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colour: {r: 0, g: 1, b: 1, a: 1}
+  colour: {r: 0.90588236, g: 0.92941177, b: 0.9764706, a: 1}
   canvas: {fileID: 2083884749}
   animationCurve:
     serializedVersion: 2
