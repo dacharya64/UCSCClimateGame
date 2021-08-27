@@ -150,10 +150,6 @@ public class GameManager : Singleton<GameManager> {
 
 		if (to.name == "Overworld")
 		{
-			if (World.money <= 0f) {
-				UIController.Instance.ChangeOutOfMoneyPrompt(true);
-			}
-			
 			if (visits[World.Region.Fire] == 1 && !hasShownFirePopup) {
 				UIController.Instance.ChangeInfoBoxState(true);
 				hasShownFirePopup = true;
@@ -164,6 +160,12 @@ public class GameManager : Singleton<GameManager> {
 			previousEmissions = statsPanel.previousEmissions;
 			previousEconomy = statsPanel.previousEconomy;
 			previousLandUse = statsPanel.previousLandUse;
+
+			var currentMoney = previousEconomy * 100;
+			if (World.money <= 0f && World.money < currentMoney)
+			{
+				UIController.Instance.ChangeOutOfMoneyPrompt(true);
+			} 
 
 			// turn on stats panel
 			// check to see if something in the stats panel changed 
