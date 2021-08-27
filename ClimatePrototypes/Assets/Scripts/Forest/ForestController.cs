@@ -250,7 +250,7 @@ public class ForestController : RegionController {
 		else {
 			newVolunteer = NewAgent(volunteerPrefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
 		}
-		Debug.Log("Random value is: " + value);
+		//Debug.Log("Random value is: " + value);
 		volunteerAgents.Add(newVolunteer.gameObject);
 		if (Random.value > 0.5)
 		{
