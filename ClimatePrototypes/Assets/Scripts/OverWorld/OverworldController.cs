@@ -48,8 +48,8 @@ public class OverworldController : MonoBehaviour {
 		while (overworldScene.isLoaded) {
 			yield return null;
 			float step = Time.time / 2;
-			float x = moonDist * Mathf.Cos(step) * Mathf.Cos(alpha) + moonDist / 2 * Mathf.Sin(step) * Mathf.Sin(alpha);
-			float y = moonDist * Mathf.Cos(step) * Mathf.Sin(alpha) - moonDist / 2 * Mathf.Sin(step) * Mathf.Cos(alpha);
+			float x = moonDist * Mathf.Cos(step) * Mathf.Cos(alpha) - moonDist / 2 * Mathf.Sin(step) * Mathf.Sin(alpha);
+			float y = moonDist * Mathf.Cos(step) * Mathf.Sin(alpha) + moonDist / 2 * Mathf.Sin(step) * Mathf.Cos(alpha);
 
 			moon.transform.position = new Vector2(x, y) + (Vector2)world.position;
 			moon.transform.eulerAngles = Vector3.forward * Mathf.Sin(step) * Mathf.Rad2Deg;
