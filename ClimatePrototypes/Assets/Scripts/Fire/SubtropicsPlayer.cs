@@ -13,6 +13,7 @@ public class SubtropicsPlayer : MonoBehaviour {
 	[SerializeField] GameObject line = default;
 	[SerializeField] Slider waterTracker = default;
 	LineRenderer newLine;
+	public Material heliLine;
 
 	Animator bladeAnimator;
 	TrailRenderer waterTR;
@@ -34,8 +35,9 @@ public class SubtropicsPlayer : MonoBehaviour {
 		//newLine.material = new Material(Shader.Find("Sprites/Default"));
 
 		//newLine.material = UnityEditor.AssetDatabase.GetBuiltinExtraResource<Material>("Default-Particle.mat"); // TODO: apply your own material
-		newLine.material.SetTextureScale("_MainTex", new Vector2(10f, 1.0f));
-		newLine.widthMultiplier = 0.1f;
+		newLine.material = heliLine;
+		newLine.material.SetTextureScale("_MainTex", new Vector2(0.1f, 1.0f));
+		newLine.widthMultiplier = 0.2f;
 
 		bladeAnimator.SetBool("isMoving", true);
 		water = maxWater;

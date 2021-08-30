@@ -2125,12 +2125,12 @@ PrefabInstance:
     - target: {fileID: 5700787198685698286, guid: c6a2c3c2d24de904c9a8fd9217d3d8c0,
         type: 3}
       propertyPath: sounds.Array.data[18].volume
-      value: 0.9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5700787198685698286, guid: c6a2c3c2d24de904c9a8fd9217d3d8c0,
         type: 3}
       propertyPath: sounds.Array.data[19].volume
-      value: 0.9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5700787198685698286, guid: c6a2c3c2d24de904c9a8fd9217d3d8c0,
         type: 3}
@@ -2225,7 +2225,7 @@ RectTransform:
   m_GameObject: {fileID: 1242054836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children:
   - {fileID: 2033951821}
   - {fileID: 667297966}
