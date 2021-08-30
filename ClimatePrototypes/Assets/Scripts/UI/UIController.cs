@@ -30,6 +30,18 @@ public class UIController : Singleton<UIController> {
 	[SerializeField] Text FinalPublicOpinionText;
 	[SerializeField] Text FinalEmissionsText;
 	[SerializeField] Text FinalEconomyText;
+	[SerializeField] GameObject globalUpArrow;
+	[SerializeField] GameObject globalDownArrow;
+	[SerializeField] GameObject tropicsUpArrow;
+	[SerializeField] GameObject tropicsDownArrow;
+	[SerializeField] GameObject subtropicsUpArrow;
+	[SerializeField] GameObject subtropicsDownArrow;
+	[SerializeField] GameObject arcticUpArrow;
+	[SerializeField] GameObject arcticDownArrow;
+
+	[SerializeField] GameObject gameOverPrompt2;
+	[SerializeField] Text increaseText;
+	[SerializeField] Text tempChangeText;
 
 	/// <summary> Flips active status of UI element and stores it </summary>
 	public void Toggle(GameObject obj) {
@@ -256,6 +268,10 @@ public class UIController : Singleton<UIController> {
 		gameOverPrompt.SetActive(state);
 	}
 
+	public void ChangeGameOverPrompt2State(bool state) {
+		gameOverPrompt2.SetActive(state);	
+	}
+
 	public void RestartGame() {
 		GameManager.Restart();
 	}
@@ -271,12 +287,58 @@ public class UIController : Singleton<UIController> {
     }
 
 	public void UpdateGameOverScreen() {
-		FinalTemperatureText.text = World.averageTemp.ToString("F2");
-		FinalTropicsTempText.text = World.temp[0].ToString("F2");
-		FinalSubtropicsTempText.text = World.temp[1].ToString("F2");
-		FinalArcticTempText.text = World.temp[2].ToString("F2");
+		var finalTempChange = World.averageTemp - World.globalStartingTemp; 
+		FinalTemperatureText.text = Mathf.Abs((float) finalTempChange).ToString("F2") + "°";
+		if (finalTempChange < 0)
+		{
+			globalUpArrow.SetActive(false);
+		}
+		else {
+			globalDownArrow.SetActive(false);		
+		}
+
+		var finalTropicsChange = World.temp[0] - World.tropicsStartingTemp; 
+		FinalTropicsTempText.text = Mathf.Abs((float)finalTropicsChange).ToString("F2") + "°";
+		if (finalTropicsChange < 0)
+		{
+			tropicsUpArrow.SetActive(false);
+		}
+		else
+		{
+			tropicsDownArrow.SetActive(false);
+		}
+
+		var finalSubtropicsChange = World.temp[1] - World.subtropicsStartingTemp; 
+		FinalSubtropicsTempText.text = Mathf.Abs((float)finalSubtropicsChange).ToString("F2") + "°";
+		if (finalSubtropicsChange < 0)
+		{
+			subtropicsUpArrow.SetActive(false);
+		}
+		else
+		{
+			subtropicsDownArrow.SetActive(false);
+		}
+
+		var finalArcticChange = World.temp[2] - World.arcticStartingTemp;
+		FinalArcticTempText.text = Mathf.Abs((float)finalArcticChange).ToString("F2") + "°";
+		if (finalArcticChange < 0)
+		{
+			arcticUpArrow.SetActive(false);
+		}
+		else
+		{
+			arcticDownArrow.SetActive(false);
+		}
+
 		FinalPublicOpinionText.text = World.publicOpinion.ToString();
 		FinalEmissionsText.text = ((float)EBM.F).ToString("F2");
 		FinalEconomyText.text = World.money.ToString();
+
+		//Change values on page 2
+		if (finalTempChange < 0)
+		{
+			increaseText.text = "With a decrease in global temperature of ";
+		}
+		tempChangeText.text = Mathf.Abs((float)finalTempChange).ToString("F2") + "°:";
 	}
 }

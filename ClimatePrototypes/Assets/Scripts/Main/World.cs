@@ -20,6 +20,7 @@ public static class World {
 	public static double averageTemp { get => EBM.avg_temp; }
 	public static Dictionary<string, Dictionary<double, List<double>>> ranges; // TODO: currently unused
 	public static List < (Region, Region, string) > lineToDraw = new List < (Region, Region, string) > (); // TODO: this draws lines on the overworld, store it there instead?
+	public static double globalStartingTemp, tropicsStartingTemp, subtropicsStartingTemp, arcticStartingTemp;
 
 	public static void DetermineImpact() { // TODO: set up restart prompt or auto with player guide
 		if (averageTemp > startingTemp.Average() + maxTempChange) {
@@ -81,6 +82,11 @@ public static class World {
 		(temp, energy, precip) = EBM.Calc(useTemp ? EBM.temp : null, years, steps);
 		timer.Stop();
 		Debug.Log($"Average Temp: {averageTemp} with regionals: {temp.AsString()}, calculated in {timer.ElapsedMilliseconds}ms");
+		//record the initial starting temperatures 
+		globalStartingTemp = averageTemp;
+		tropicsStartingTemp = temp[0];
+		subtropicsStartingTemp = temp[1];
+		arcticStartingTemp = temp[2];
 		TitleScreen.TurnOffLoadingText();
 	}
 

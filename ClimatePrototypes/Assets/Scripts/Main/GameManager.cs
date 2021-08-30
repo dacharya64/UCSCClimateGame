@@ -37,6 +37,7 @@ public class GameManager : Singleton<GameManager> {
 	public bool isAnimating = false;
 	public double forcingIncrease;
 	public Text worldNameText;
+	public Text worldNameText2;
 	public bool hasPlacedWorkers = false;
 	public RegionController currentRegion;
 	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
@@ -444,9 +445,11 @@ public class GameManager : Singleton<GameManager> {
 			if (worldNameText.text != "")
 			{
 				worldNameText.text = World.worldName;
+				worldNameText2.text = World.worldName;
 			}
 			else {
-				worldNameText.text = "your planet";
+				worldNameText.text = "Your Planet";
+				worldNameText2.text = "Your Planet";
 			}
 			
 			completedRegions = 0; //reset # of completed regions
