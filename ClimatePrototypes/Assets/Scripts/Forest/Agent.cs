@@ -68,10 +68,24 @@ public class PathfindingAgent : MonoBehaviour {
 		anim.ResetTrigger("Walking");
 		if (setter.target.position == origin)
 			OnReturn.Invoke();
-		else
+		else {
 			OnReached.Invoke(this);
-			ForestController.Instance.StartEndGameCoroutine();
+			if (this.GetComponent<Volunteer>() != null) {
+				StartCoroutine(CheckEndGame());
+			}
+			
+		}
 		setter.target = null;
+	}
+
+	public static IEnumerator CheckEndGame()
+	{
+		yield return new WaitForSeconds(1f);
+		ForestController.Instance.volunteersPlaced++;
+		if (ForestController.Instance.volunteersPlaced >= ForestController.Instance.maxVolunteers)
+		{
+			ForestController.Instance.EndGame();
+		}
 	}
 
 	protected virtual void Return() {

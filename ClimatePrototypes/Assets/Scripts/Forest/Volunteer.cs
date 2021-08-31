@@ -22,19 +22,10 @@ public class VolunteerActions {
 	}
 
 	public static void Plant(Volunteer v) {
-		//ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.02;
 		v.anim.SetTrigger("Shoveling");
 		var task = ForestController.Instance.volunteers[v.ID];
 		ForestController.Instance.StartCoroutine(TreeGrow(task.volunteer, task.activeTile.Value));
-		//ForestController.Instance.StartCoroutine(SetPlantChange(1, 0.03));
-		//ForestController.Instance.CheckEndGame();
 	}
-
-	/*public static IEnumerator SetPlantChange (float duration = 1, double change = 0.03)
-	{
-		
-		yield return new WaitForSeconds(duration);
-	}*/
 
 
 	public static IEnumerator TreeGrow(Volunteer v, Vector3Int tilePos) {
@@ -56,10 +47,7 @@ public class VolunteerActions {
     }
 
 	public static void Protest(Volunteer v) {
-		//ForestController.Instance.percentageIncrease = ForestController.Instance.percentageIncrease - 0.015;
-		//ForestController.Instance.forcingIncrease = EBM.F * ForestController.Instance.percentageIncrease;
 		v.anim.SetTrigger("Protesting");
-		//ForestController.Instance.CheckEndGame();
 	}
 
 	public static void Clear(Volunteer v) {
@@ -75,20 +63,8 @@ public class VolunteerActions {
 		ForestGrid.RemoveTree(tilePos);
 	}
 	public static void Capture(Volunteer v) {
-		//ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.04;
-		//World.money = World.money - 5f;
 		v.anim.SetTrigger("Working");
-		//ForestController.Instance.StartCoroutine(CaptureAndReturn(v, 3));
-		//ForestController.Instance.StartCoroutine(SetCaptureChanges(1, 0.09, 5f));
-		//ForestController.Instance.CheckEndGame();
 	}
-
-/*	public static IEnumerator SetCaptureChanges(float duration = 1, double change = 0.09, float moneyDecrease = 5f)
-	{
-		ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + change;
-		World.money = World.money - moneyDecrease;
-		yield return new WaitForSeconds(duration);
-	}*/
 
 	static IEnumerator CaptureAndReturn(Volunteer v, float time, int steps = 20) {
 		//ForestController.Instance.StartCoroutine(WaitAndReturn(v, time));

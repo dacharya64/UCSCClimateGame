@@ -9,9 +9,10 @@ public class Station : MonoBehaviour { // TODO: remove subtargets and make it mo
 	BoxCollider2D col;
 	Dictionary<Transform, bool> subtargets = new Dictionary<Transform, bool>();
 	int awaitSubTargetReached = 0;
-	int counter = 0;
+	public static int counter = 0;
 
-	void Start() {
+	void Start() { 
+		counter = 0;
 		col = GetComponent<BoxCollider2D>();
 		foreach (Transform child in transform)
 			subtargets.Add(child, false);

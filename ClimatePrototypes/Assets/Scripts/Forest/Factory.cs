@@ -12,9 +12,10 @@ public class Factory : MonoBehaviour {
 	public static int protesters = 0;
 	Dictionary<Transform, bool> subtargets = new Dictionary<Transform, bool>();
 	int awaitSubTargetReached = 0;
-	int counter = 0;
+	public static int counter = 0;
 
 	void Start() {
+		counter = 0;
 		col = GetComponent<BoxCollider2D>();
 		foreach (Transform child in transform)
 			subtargets.Add(child, false);
