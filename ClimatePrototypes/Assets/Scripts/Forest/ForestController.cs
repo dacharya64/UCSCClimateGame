@@ -324,7 +324,6 @@ public class ForestController : RegionController {
 	}
 
 	public void ResetAllWorkers() {
-		
 		if (volunteers.Count > 0) {
 			for (int i = 0; i < volunteers.Count; i++)
 			{
@@ -336,6 +335,8 @@ public class ForestController : RegionController {
 			volunteers.Clear();
 			volunteerAgents.Clear();
 			volunteersPlaced = 0;
+			Factory.counter = 0;
+			Station.counter = 0;
 		}
 	}
 }
