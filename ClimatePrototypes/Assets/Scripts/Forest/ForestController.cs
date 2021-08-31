@@ -236,7 +236,6 @@ public class ForestController : RegionController {
 
 	/// <summary> Creates volunteer and applies path target </summary>
 	public void SetVolunteerTarget(Vector3 pos, UnityAction<Volunteer> onReached) {
-		volunteersPlaced++;
 		var newVolunteer =  new Volunteer();
 		var value = Random.value;
 		if (value < 0.33)
@@ -250,7 +249,6 @@ public class ForestController : RegionController {
 		else {
 			newVolunteer = NewAgent(volunteerPrefab, Camera.main.ScreenToWorldPoint(selected.transform.position), pos) as Volunteer;
 		}
-		//Debug.Log("Random value is: " + value);
 		volunteerAgents.Add(newVolunteer.gameObject);
 		if (Random.value > 0.5)
 		{
@@ -268,7 +266,9 @@ public class ForestController : RegionController {
 		selected.AssignBubble(onReached);
 		selected = null;
 
-		newVolunteer.OnReached.AddListener((PathfindingAgent agent) => onReached.Invoke(agent as Volunteer));
+		newVolunteer.OnReached.AddListener((PathfindingAgent agent) => {
+			onReached.Invoke(agent as Volunteer);
+		});
 		newVolunteer.OnReturn.AddListener(() => {
 			volunteers[newVolunteer.ID]?.UI.Reset();
 			volunteers.RemoveAt(newVolunteer.ID);
@@ -281,22 +281,12 @@ public class ForestController : RegionController {
 		volunteers[volunteers.Count - 1].activeTile = pos;
 	}
 
-	public IEnumerator CheckEndGame()
+	public void EndGame()
 	{
-		// Check to see if player has placed all the workers 
-		if (volunteersPlaced >= maxVolunteers)
-		{
-			yield return new WaitForSeconds(0.01f);
 			GameOver();
-		}
-		yield return null;
 	}
 
-	public void StartEndGameCoroutine() {
-		StartCoroutine(CheckEndGame());
-	}
-
-	public void OpenAbout()
+    public void OpenAbout()
 	{
 		aboutPrompt.SetActive(true);
 	}
