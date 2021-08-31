@@ -24,7 +24,13 @@ public class SubtropicsPlayer : MonoBehaviour {
 	bool filling = false, slow = false;
 	float lastUsedWater = 0;
 
+	Rigidbody2D body;
+
+	float playerSpeed = 2; //speed player moves
+	float turnSpeed = 130; // speed player turns
+
 	void Start() {
+		body = GetComponent<Rigidbody2D>();
 		bladeAnimator = GetComponentInChildren<Animator>();
 		waterTR = GetComponentInChildren<TrailRenderer>();
 		playerRenderer = GetComponent<SpriteRenderer>();
@@ -67,8 +73,42 @@ public class SubtropicsPlayer : MonoBehaviour {
 		(leftWaterBarUI as RectTransform).localPosition = new Vector3(30, -(500 - height) / 2, 0);
 		// TODO: convert to slider
 
-		Path();
+		MoveForward(); // Player Movement
+		TurnRightAndLeft();//Player Turning
+		//Path();
 		Extinguish();
+	}
+
+
+	void MoveForward()
+	{
+
+		if (Input.GetKey("up") || Input.GetKey(KeyCode.W))//Press up arrow key to move forward on the Y AXIS
+		{
+			transform.Translate(0, playerSpeed * Time.deltaTime, 0);
+		}
+
+
+		if (Input.GetKey("down") || Input.GetKey(KeyCode.S))
+		{
+			transform.Translate(0, -playerSpeed * Time.deltaTime, 0);
+		}
+
+	}
+
+	void TurnRightAndLeft()
+	{
+
+		if (Input.GetKey("right") || Input.GetKey(KeyCode.D)) //Right arrow key to turn right
+		{
+			transform.Rotate(-Vector3.forward * turnSpeed * Time.deltaTime);
+		}
+
+		if (Input.GetKey("left") || Input.GetKey(KeyCode.A)) //Left arrow key to turn left
+		{
+			transform.Rotate(Vector3.forward * turnSpeed * Time.deltaTime);
+		}
+
 	}
 
 	void Path() {
@@ -162,6 +202,12 @@ public class SubtropicsPlayer : MonoBehaviour {
 			StartCoroutine(Camera.main.GetComponent<CameraShake>().Shake(0.40f, .10f));
 			if (!slow)
 				StartCoroutine(SlowDown(3f)); // if hit cloud, slows down to 1/4 speed for 3 sec
+		}
+
+		if (other.GetComponent("MountainID") != null)
+		{
+			//Camera.maib.GetComponent<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
+			Debug.Log("Hitting mountain");
 		}
 	}
 
