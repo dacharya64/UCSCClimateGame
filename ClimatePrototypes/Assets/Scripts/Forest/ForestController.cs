@@ -337,6 +337,12 @@ public class ForestController : RegionController {
 			volunteersPlaced = 0;
 			Factory.counter = 0;
 			Station.counter = 0;
+			
+			// reset values changed by placing workers
+			forcingDecrease = 0;
+			percentageIncrease = 0.1;
+			forcingIncrease = EBM.F * percentageIncrease;
+			emissionsTotal = forcingIncrease - forcingDecrease;
 		}
 	}
 }

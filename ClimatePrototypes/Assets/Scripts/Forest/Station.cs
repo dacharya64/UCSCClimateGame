@@ -13,7 +13,6 @@ public class Station : MonoBehaviour { // TODO: remove subtargets and make it mo
 
 	void Start() { 
 		counter = 0;
-		Debug.Log("running start");
 		col = GetComponent<BoxCollider2D>();
 		foreach (Transform child in transform)
 			subtargets.Add(child, false);
