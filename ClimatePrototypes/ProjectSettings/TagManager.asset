@@ -23,6 +23,7 @@ TagManager:
   - ThermometerBottom
   - Title
   - InfoPrompt
+  - image
   layers:
   - Default
   - TransparentFX

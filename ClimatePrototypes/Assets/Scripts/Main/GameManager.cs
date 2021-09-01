@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager> {
 	public Text worldNameText2;
 	public bool hasPlacedWorkers = false;
 	public RegionController currentRegion;
-	Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
+	public Dictionary<World.Region, int> visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
 	public bool arcticIsAddressed = true;
 	public bool tropicsIsAddressed = true;
 	public bool subtropicsIsAddressed = true;

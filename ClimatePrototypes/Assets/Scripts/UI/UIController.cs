@@ -182,7 +182,39 @@ public class UIController : Singleton<UIController> {
 			//	print.text = text.Substring(0, (i = text.Length));
             yield return WaitForRealSeconds(delay);
 		}
+	}
 
+	public static IEnumerator ArcticPicsTypewriter(Text print, string text, string text2, string text3, string header, GameObject[] pics, float delay = .05f)
+	{ //given text to print, text ref, and print speed, does typewriter effect
+		if (print.text == "Title")
+		{
+			print.text = text;
+			print.transform.position += print.preferredWidth / 2 * Vector3.right;
+		}
+		print.text = "";
+		for (int i = 0; i < text.Length; i++)
+		{
+			print.text += text[i];
+			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+			//	print.text = text.Substring(0, (i = text.Length));
+			yield return WaitForRealSeconds(delay);
+		}
+		pics[0].GetComponent<Image>().enabled = true;
+		for (int i = 0; i < text2.Length; i++)
+		{
+			print.text += text2[i];
+			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+			//	print.text = text.Substring(0, (i = text.Length));
+			yield return WaitForRealSeconds(delay);
+		}
+		pics[1].GetComponent<Image>().enabled = true;
+		for (int i = 0; i < text3.Length; i++)
+		{
+			print.text += text2[i];
+			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+			//	print.text = text.Substring(0, (i = text.Length));
+			yield return WaitForRealSeconds(delay);
+		}
 	}
 
 	public static IEnumerator TypewriterClickToAdvance(Text print, string text, float delay = .05f)
@@ -209,6 +241,8 @@ public class UIController : Singleton<UIController> {
 	public static IEnumerator ClickToAdvance(Text text, string[] words, GameObject button = null) { 
 		Text header = GameObject.FindWithTag("Title").GetComponent<Text>();
 		header.text = words[0];
+		GameObject[] pics;
+		pics = GameObject.FindGameObjectsWithTag("image");
 		var clickPrompt = text.GetComponentOnlyInChildren<Text>()?.gameObject;
 		yield return instance.StartCoroutine(Typewriter(text, words[1], words[0]));
 
@@ -224,8 +258,16 @@ public class UIController : Singleton<UIController> {
 		for (int i = 2; i < words.Length; i++) {
 			yield return new WaitForMouseDown();
 			clickPrompt.SetActive(false);
-			yield return instance.StartCoroutine(Typewriter(text, words[i], words[0]));
-			clickPrompt.SetActive(true);
+			if (GameManager.Instance.visits[World.Region.Arctic] == 1 && GameManager.Instance.currentRegion.region == World.Region.Arctic)
+			{
+				yield return instance.StartCoroutine(ArcticPicsTypewriter(text, words[i], words[i + 1], words[i + 2], words[0], pics));
+				clickPrompt.SetActive(true);
+				i = (words.Length - 1);
+			}
+			else {
+				yield return instance.StartCoroutine(Typewriter(text, words[i], words[0]));
+				clickPrompt.SetActive(true);
+			}
 			if (i == words.Length - 1) {
 				clickPrompt.SetActive(false);
 				if (button)
