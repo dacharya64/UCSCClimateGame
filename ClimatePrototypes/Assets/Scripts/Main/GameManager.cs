@@ -47,6 +47,16 @@ public class GameManager : Singleton<GameManager> {
 	public bool hasShownFirePopup = false;
 	public bool menuUp = false;
 
+	public GameObject forestNode;
+	public GameObject fireNode;
+	public GameObject arcticNode;
+	public GameObject cityNode;
+
+	public GameObject forestNodeHot;
+	public GameObject fireNodeHot;
+	public GameObject arcticNodeHot;
+	public GameObject cityNodeHot;
+
 	public override void Awake() {
 		base.Awake();
 		if (Instance.runModel && World.averageTemp == 0) {
@@ -151,6 +161,34 @@ public class GameManager : Singleton<GameManager> {
 
 		if (to.name == "Overworld")
 		{
+			Transform nodes = GameObject.FindWithTag("Nodes").GetComponent<Transform>();
+			Transform nodesHot = GameObject.FindWithTag("NodesHot").GetComponent<Transform>();
+			// Set the alternate art for regions if it is too hot
+			if (World.averageTemp < 20)
+			{
+				foreach (Transform node in nodes)
+				{
+					node.gameObject.SetActive(true);
+				}
+
+				foreach (Transform node in nodesHot)
+				{
+					node.gameObject.SetActive(false);
+				}
+			}
+			else
+			{
+				foreach (Transform node in nodes)
+				{
+					node.gameObject.SetActive(false);
+				}
+
+				foreach (Transform node in nodesHot)
+				{
+					node.gameObject.SetActive(true);
+				}
+			}
+
 			if (visits[World.Region.Fire] == 1 && !hasShownFirePopup) {
 				UIController.Instance.ChangeInfoBoxState(true);
 				hasShownFirePopup = true;
