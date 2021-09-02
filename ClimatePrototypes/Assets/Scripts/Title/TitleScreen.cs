@@ -24,8 +24,7 @@ public class TitleScreen : MonoBehaviour {
 
 	public void CheckName(string name) {
 		var filter = new ProfanityFilter_f();
-		var swearList = filter.DetectAllProfanities(name);
-		Debug.Log(name.Length);
+		var swearList = filter.DetectAllProfanities(name); 
 		if (swearList.Count <= 0 && name.Length < 15) 
 		{
 			ChangeName(name);
