@@ -43,6 +43,8 @@ public class UIController : Singleton<UIController> {
 	[SerializeField] Text increaseText;
 	[SerializeField] Text tempChangeText;
 
+	[TextArea] static string textToPrint;
+
 	/// <summary> Flips active status of UI element and stores it </summary>
 	public void Toggle(GameObject obj) {
 		if (!uiActiveStatus.ContainsKey(obj))
@@ -192,6 +194,9 @@ public class UIController : Singleton<UIController> {
 			print.transform.position += print.preferredWidth / 2 * Vector3.right;
 		}
 		print.text = "";
+
+		//[TextArea]
+		text = "Block incoming solar radiation \n (     )  and avoid atmospheric longwave radiation (     ).";
 		for (int i = 0; i < text.Length; i++)
 		{
 			print.text += text[i];
@@ -199,22 +204,25 @@ public class UIController : Singleton<UIController> {
 			//	print.text = text.Substring(0, (i = text.Length));
 			yield return WaitForRealSeconds(delay);
 		}
+		
+		/*textToPrint = text2;
+		for (int i = 0; i < textToPrint.Length; i++)
+		{
+			print.text += textToPrint[i];
+			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+			//	print.text = text.Substring(0, (i = text.Length));
+			yield return WaitForRealSeconds(delay);
+		}*/
 		pics[0].GetComponent<Image>().enabled = true;
-		for (int i = 0; i < text2.Length; i++)
-		{
-			print.text += text2[i];
-			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-			//	print.text = text.Substring(0, (i = text.Length));
-			yield return WaitForRealSeconds(delay);
-		}
 		pics[1].GetComponent<Image>().enabled = true;
-		for (int i = 0; i < text3.Length; i++)
+		/*textToPrint = text3;
+		for (int i = 0; i < textToPrint.Length; i++)
 		{
-			print.text += text2[i];
+			print.text += textToPrint[i];
 			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
 			//	print.text = text.Substring(0, (i = text.Length));
 			yield return WaitForRealSeconds(delay);
-		}
+		}*/
 	}
 
 	public static IEnumerator TypewriterClickToAdvance(Text print, string text, float delay = .05f)
