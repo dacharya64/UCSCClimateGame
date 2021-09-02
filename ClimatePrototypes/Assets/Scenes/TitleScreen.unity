@@ -1383,6 +1383,8 @@ MonoBehaviour:
   buttons: {fileID: 372753015}
   namingGroup: {fileID: 1242054836}
   text: {fileID: 1456201234}
+  chosenName: 
+  submitButton: {fileID: 441939407}
 --- !u!1 &726109519
 GameObject:
   m_ObjectHideFlags: 0
@@ -3046,7 +3048,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 699034868}
-        m_MethodName: ChangeName
+        m_MethodName: CheckName
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
