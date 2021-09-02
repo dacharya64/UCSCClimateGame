@@ -15,8 +15,9 @@ MonoBehaviour:
   tutorial:
   - Arctic
   - Use the A|D Keys or the Left|Right Arrow Keys to move your paddle!
-  - Block incoming solar radiation (orange) and avoid atmospheric longwave radiation
-    (purple).
+  - 'Block incoming solar radiation (    '
+  - '  )  and avoid atmospheric longwave radiation (  '
+  - '  ).'
   secondVisit:
   - Arctic
   - As the region warms, brighter clouds reflect more solar radiation.
