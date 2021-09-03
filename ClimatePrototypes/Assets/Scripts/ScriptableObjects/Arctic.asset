@@ -15,7 +15,7 @@ MonoBehaviour:
   tutorial:
   - Arctic
   - Use the A|D Keys or the Left|Right Arrow Keys to move your paddle!
-  - 'Block incoming solar radiation (    '
+  - 'Block incoming solar radiation \\n (   '
   - '  )  and avoid atmospheric longwave radiation (  '
   - '  ).'
   secondVisit:

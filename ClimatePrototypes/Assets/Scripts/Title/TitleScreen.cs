@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using ProfanityFilter_f = ProfanityFilter.ProfanityFilter;
 
 public class TitleScreen : MonoBehaviour {
 	Camera cam;
@@ -15,10 +16,24 @@ public class TitleScreen : MonoBehaviour {
 	public GameObject text;
 	public static bool isFirstTime = true;
 	public static GameObject loadingText;
+	public GameObject submitButton;
 
 	public void Quit() => Application.Quit();
 
 	public void ChangeName(string name) => World.worldName = name;
+
+	public void CheckName(string name) {
+		var filter = new ProfanityFilter_f();
+		var swearList = filter.DetectAllProfanities(name); 
+		if (swearList.Count <= 0 && name.Length < 15) 
+		{
+			ChangeName(name);
+			submitButton.GetComponent<Button>().interactable = true;
+		}
+		else {
+			submitButton.GetComponent<Button>().interactable = false;
+		}
+	}
 
 	void Start() {
 		if (!SceneManager.GetSceneByName("Overworld").isLoaded) {

@@ -47,6 +47,11 @@ public class GameManager : Singleton<GameManager> {
 	public bool hasShownFirePopup = false;
 	public bool menuUp = false;
 
+	public Sprite planet1;
+	public Sprite planet2;
+	public Sprite planet3;
+	public Sprite planet4;
+
 	public override void Awake() {
 		base.Awake();
 		if (Instance.runModel && World.averageTemp == 0) {
@@ -151,6 +156,54 @@ public class GameManager : Singleton<GameManager> {
 
 		if (to.name == "Overworld")
 		{
+			Transform nodes = GameObject.FindWithTag("Nodes").GetComponent<Transform>();
+			Transform nodesHot = GameObject.FindWithTag("NodesHot").GetComponent<Transform>();
+			// Set the alternate art for regions if it is too hot
+			if (World.averageTemp < 20)
+			{
+				foreach (Transform node in nodes)
+				{
+					node.gameObject.SetActive(true);
+				}
+
+				foreach (Transform node in nodesHot)
+				{
+					node.gameObject.SetActive(false);
+				}
+			}
+			else
+			{
+				foreach (Transform node in nodes)
+				{
+					node.gameObject.SetActive(false);
+				}
+
+				foreach (Transform node in nodesHot)
+				{
+					node.gameObject.SetActive(true);
+				}
+			}
+
+			//add alternate art for planet if world is too hot
+			GameObject world = GameObject.Find("world");
+			var temp = World.averageTemp;
+			if (temp > 20 && temp < 22)
+			{
+				world.GetComponent<SpriteRenderer>().sprite = planet2;
+			}
+			else if (temp >= 22 && temp < 24)
+			{
+				world.GetComponent<SpriteRenderer>().sprite = planet3;
+			}
+			else if (temp >= 24)
+			{
+				world.GetComponent<SpriteRenderer>().sprite = planet4;
+			}
+			else {
+				world.GetComponent<SpriteRenderer>().sprite = planet1;
+			}
+
+
 			if (visits[World.Region.Fire] == 1 && !hasShownFirePopup) {
 				UIController.Instance.ChangeInfoBoxState(true);
 				hasShownFirePopup = true;
