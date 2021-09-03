@@ -136,7 +136,8 @@ public class UIController : Singleton<UIController> {
 		else {
 			publicOpinionResult = "Greatly Decreases";
 		}
-		returnPrompt.GetComponentInChildren<Text>().text = "You have fought the fires!\nFires remaining: " + fires + "\nPublic opinion: " + publicOpinionResult;
+		returnPrompt.GetComponentInChildren<Text>().fontSize = 22;
+		returnPrompt.GetComponentInChildren<Text>().text = "You have fought the fires! The smoke from the wildfires covers the skies, slightly cooling the planet.\n\nFires remaining: " + fires + "\nPublic opinion: " + publicOpinionResult + "\n";
 		returnPrompt.SetActive(status);
 	}
 

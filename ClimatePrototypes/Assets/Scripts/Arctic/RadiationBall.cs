@@ -6,9 +6,10 @@ using Radiation = SolarRadiationSpawner.Radiation;
 
 public class RadiationBall : MonoBehaviour {
 	Rigidbody2D rb;
-	[SerializeField] Vector2 force = new Vector2(2, 5);
+	[SerializeField] public Vector2 force = new Vector2(2, 5);
 	Vector2 screenMin, screenMax; // TODO: global variable class
 	public Radiation radiationType = Radiation.ShortWave;
+	public int count = 1;
 
 	void Start() {
 		screenMin = Camera.main.ViewportToWorldPoint(Vector2.zero);
@@ -17,19 +18,18 @@ public class RadiationBall : MonoBehaviour {
 
 		if (radiationType == Radiation.ShortWave) {
 			rb.velocity = new Vector2(Random.Range(-force.x, force.x), -Random.Range(force.y * 0.8f, force.y));
-			
 		}
 			
 		else { // if longwave radiation
-			float rand = Random.value;
-			if (rand <= .5f) {
-				force = new Vector2(0.5f, -5);
-			}
-			else
-			{
-				force = new Vector2(0.5f, 5);
-			}			
-			rb.velocity = force;
+            if (count == 1)
+            {
+                force = new Vector2(0.5f, -5);
+            }
+            else
+            {
+                force = new Vector2(0.5f, 5);
+            }
+            rb.velocity = force;
 		}
 		Orient();
 	}

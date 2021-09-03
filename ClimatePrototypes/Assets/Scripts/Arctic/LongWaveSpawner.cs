@@ -10,8 +10,9 @@ public class LongWaveSpawner : MonoBehaviour { // TODO: rename to be consister w
 
 	IEnumerator EmitBall(float waitTime) { // TODO: update long wave radiation based on ratios
 		yield return new WaitForSeconds(waitTime);
-		for (int i = 0; i < (ArcticController.Instance.summer ? 2 : 2); i++)
-			Instantiate(longWavePrefab, transform.position, Quaternion.identity, ArcticController.Instance.longWaveParent);
+		Instantiate(longWavePrefab, transform.position, Quaternion.identity, ArcticController.Instance.longWaveParent);
+		GameObject secondBall = Instantiate(longWavePrefab, transform.position, Quaternion.identity, ArcticController.Instance.longWaveParent);
+		secondBall.GetComponent<RadiationBall>().count = 2;
 		if (ArcticController.Instance.summer)
 		{
 			StartCoroutine(EmitBall(Random.Range(1f, 2.2f)));
