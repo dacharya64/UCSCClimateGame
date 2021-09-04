@@ -35,6 +35,11 @@ public class CityScript : RegionController
     public GameObject[] arrows;
     public List<int> usedBills = new List<int>();
     public string selectedBillHalf;
+    [SerializeField] GameObject bg;
+    [SerializeField] GameObject smog;
+    [SerializeField] GameObject protesters;
+    [SerializeField] Sprite bg_cool;
+    [SerializeField] Sprite bg_hot;
 
     /// <summary> Namespace to hold bill data </summary>
     public struct BillData
@@ -62,6 +67,32 @@ public class CityScript : RegionController
 
     void Start()
     {
+        var temp = World.averageTemp;
+        // Check temp / public opinion and change backgrounds/sprites depending on values
+        if (temp > 20 && temp < 23)
+        {
+            bg.GetComponent<SpriteRenderer>().sprite = bg_hot;
+            smog.SetActive(false);
+        }
+        else if (temp >= 23)
+        {
+            bg.GetComponent<SpriteRenderer>().sprite = bg_hot;
+            smog.SetActive(true);
+        }
+        else {
+            bg.GetComponent<SpriteRenderer>().sprite = bg_cool;
+            smog.SetActive(false);
+        }
+
+        var publicOpinion = World.publicOpinion;
+        if (publicOpinion < 40)
+        {
+            protesters.SetActive(true);
+        }
+        else {
+            protesters.SetActive(false);
+        }
+
         // Tell the UI controller where the about prompt is
         UIController.Instance.timed = false;
         UIController.Instance.aboutPrompt = aboutPrompt;

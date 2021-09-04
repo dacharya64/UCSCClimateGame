@@ -184,9 +184,11 @@ public class GameManager : Singleton<GameManager> {
 				}
 			}
 
+			
 			//add alternate art for planet if world is too hot
 			GameObject world = GameObject.Find("world");
 			var temp = World.averageTemp;
+			temp = 21;
 			if (temp > 20 && temp < 22)
 			{
 				world.GetComponent<SpriteRenderer>().sprite = planet2;
@@ -204,10 +206,10 @@ public class GameManager : Singleton<GameManager> {
 			}
 
 
-			if (visits[World.Region.Fire] == 1 && !hasShownFirePopup) {
+			/*if (visits[World.Region.Fire] == 1 && !hasShownFirePopup) {
 				UIController.Instance.ChangeInfoBoxState(true);
 				hasShownFirePopup = true;
-			}
+			}*/
 			statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 			// Save the previous stats
 			previousPublicOpinion = statsPanel.previousPublicOpinion;
