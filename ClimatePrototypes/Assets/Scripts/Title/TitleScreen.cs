@@ -60,6 +60,9 @@ public class TitleScreen : MonoBehaviour {
 			text.SetActive(false);
 			World.Calc();
 			GameManager.Instance.SetThermometerValue();
+			GameManager.Instance.TurnOffMenu();
+			World.turn = 1;
+			UIController.Instance.ResetWorldTurn();
 		}
 	}
 
@@ -102,6 +105,7 @@ public class TitleScreen : MonoBehaviour {
 		overworldController.ClearWorld();
 		overworldController.SendToBottom();
 		overworldController.HideThermometer();
+		overworldController.HideNavBar();
 		// StartCoroutine(SlideUp());
 	}
 

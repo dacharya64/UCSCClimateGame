@@ -14,6 +14,7 @@ public class OverworldController : MonoBehaviour {
 	public float fadingSpeed = 5f;
 	[SerializeField] Canvas canvas;
 	private CanvasGroup canvasGroup;
+	public GameObject tutorial;
 	
 
 	public enum Direction { FadeIn, FadeOut };
@@ -70,10 +71,16 @@ public class OverworldController : MonoBehaviour {
 	}
 
 	public IEnumerator EnterWorld(float time = 1) {
+		if (tutorial != null) {
+			CanvasGroup tutorialGroup = tutorial.GetComponent<CanvasGroup>();
+			StartCoroutine(FadeCanvas(tutorialGroup, Direction.FadeIn, 0.5f));
+		}
+		
 		StartCoroutine(FadeCanvas(canvasGroup, Direction.FadeIn, fadingSpeed));
 		ClearWorld();
 		SpriteRenderer[] sprites = worldWrapper.GetComponentsInChildren<SpriteRenderer>();
-		for (var (start, step) = (Time.time, 0f); step < time; step = Time.time - start) {
+		for (var (start, step) = (Time.time, 0f); step < time; step = Time.time - start)
+		{
 			yield return null;
 			foreach (var sr in sprites)
 				sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, step);
@@ -86,6 +93,14 @@ public class OverworldController : MonoBehaviour {
 
 	public void HideThermometer() {
 		canvasGroup.alpha = 0;
+	}
+
+	public void HideNavBar () {
+		if (tutorial != null)
+		{
+			CanvasGroup tutorialGroup = tutorial.GetComponent<CanvasGroup>();
+			tutorialGroup.alpha = 0;
+		}
 	}
 
 	public IEnumerator FadeCanvas(CanvasGroup canvasGroup, Direction direction, float duration)

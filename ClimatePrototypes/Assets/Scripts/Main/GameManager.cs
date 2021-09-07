@@ -45,7 +45,7 @@ public class GameManager : Singleton<GameManager> {
 	public bool tropicsIsAddressed = true;
 	public bool subtropicsIsAddressed = true;
 	public bool hasShownFirePopup = false;
-	public bool menuUp = false;
+	public bool menuUp = true;
 
 	public Sprite planet1;
 	public Sprite planet2;

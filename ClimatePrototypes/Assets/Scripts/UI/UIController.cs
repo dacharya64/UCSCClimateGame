@@ -59,6 +59,10 @@ public class UIController : Singleton<UIController> {
 		turnText.text = $"Year {World.turn}";
 	}
 
+	public void ResetWorldTurn() {
+		turnText.text = $"Year {World.turn}";
+	}
+
 	void Update() {
 		//moneyText.text = $"{World.money:F2}"; // technically we don't use money anymore?
 	}
