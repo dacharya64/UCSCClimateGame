@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public class UIController : Singleton<UIController> {
 	exitButton = default;
 	[SerializeField] GameObject returnPrompt = default;
 	[SerializeField] GameObject loadingPrompt = default;
-	[SerializeField] GameObject infoBox = default;
+	[SerializeField] public GameObject infoBox = default;
 	[SerializeField] GameObject cityPrompt = default;
 	[SerializeField] GameObject outOfMoneyPrompt = default;
 	[SerializeField] GameObject gameOverPrompt;
@@ -87,12 +88,6 @@ public class UIController : Singleton<UIController> {
 	public void UITransition(string level) {
 		returnPrompt.SetActive(false);
 		GameManager.Transition(level);
-		/*if (previousRegion == World.Region.Fire && firstTimeVisiting)
-		{
-			ChangeInfoBoxState(true);
-		}
-		firstTimeVisiting = false;*/
-		
 	}
 
 	/* Controls the text for the game over prompts */
@@ -332,6 +327,15 @@ public class UIController : Singleton<UIController> {
 	}
 
 	public void OpenAboutBox() {
+		try
+		{
+			var name = GameManager.Instance.currentRegion.name;
+		}
+		catch (NullReferenceException ex)
+		{
+			aboutPrompt = infoBox;
+		}
+
         if (aboutPrompt != null)
         {
 			aboutPrompt.SetActive(true);

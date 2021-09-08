@@ -156,6 +156,7 @@ public class GameManager : Singleton<GameManager> {
 
 		if (to.name == "Overworld")
 		{
+			UIController.Instance.SetOverworldInfoBox();
 			Transform nodes = GameObject.FindWithTag("Nodes").GetComponent<Transform>();
 			Transform nodesHot = GameObject.FindWithTag("NodesHot").GetComponent<Transform>();
 			// Set the alternate art for regions if it is too hot

@@ -15,6 +15,7 @@ public class OverworldController : MonoBehaviour {
 	[SerializeField] Canvas canvas;
 	private CanvasGroup canvasGroup;
 	public GameObject tutorial;
+	public GameObject aboutPrompt;
 	
 
 	public enum Direction { FadeIn, FadeOut };
@@ -27,6 +28,7 @@ public class OverworldController : MonoBehaviour {
 	}
 
 	void Start() {
+		UIController.Instance.aboutPrompt = aboutPrompt; 
 		fadeMat = new Material(Shader.Find("Screen/Fade"));
 		world = worldWrapper.transform.GetChild(0);
 		if (canvas == null) canvas = GetComponent<Canvas>();
