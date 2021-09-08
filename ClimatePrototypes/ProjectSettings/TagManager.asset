@@ -26,6 +26,7 @@ TagManager:
   - image
   - NodesHot
   - Nodes
+  - AboutPrompt
   layers:
   - Default
   - TransparentFX

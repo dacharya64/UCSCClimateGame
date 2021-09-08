@@ -327,22 +327,18 @@ public class UIController : Singleton<UIController> {
 	}
 
 	public void OpenAboutBox() {
-		try
-		{
-			var name = GameManager.Instance.currentRegion.name;
-		}
-		catch (NullReferenceException ex)
-		{
+		if (previousRegion == World.Region.Arctic || previousRegion == World.Region.Fire || previousRegion == World.Region.City || previousRegion == World.Region.Forest) {
 			aboutPrompt = infoBox;
 		}
 
-        if (aboutPrompt != null)
-        {
+		if (aboutPrompt != null)
+		{
 			aboutPrompt.SetActive(true);
-			if (timed) {
+			if (timed)
+			{
 				Time.timeScale = 0;
 			}
-        }
+		}
     }
 
 	public void UpdateGameOverScreen() {
