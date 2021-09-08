@@ -19,9 +19,11 @@ public class SubtropicsController : RegionController {
 	[HideInInspector] public int difficulty = 2;
 	[HideInInspector] public SubtropicsWorld world;
 	public static SubtropicsWorld World { get => Instance.world; }
+	[SerializeField] public GameObject aboutPrompt;
 
 	void Start() {
 		UIController.Instance.timed = true;
+		UIController.Instance.aboutPrompt = aboutPrompt;
 
 		fireNumber = 0;
 		wind = GetComponentInChildren<Wind>();
@@ -100,5 +102,17 @@ public class SubtropicsController : RegionController {
 
 		//return fire / (float) trees;
 		return fire; 
+	}
+
+	public void OpenAbout()
+	{
+		//base.SetPause(1);
+		aboutPrompt.SetActive(true);
+	}
+
+	public void CloseAbout()
+	{
+		aboutPrompt.SetActive(false);
+		base.SetPause(0);
 	}
 }

@@ -16,6 +16,7 @@ public class CloudSpawner : MonoBehaviour {
 	public float chanceOfDarkCloud;
 	public float darkCloudReflectivity = 0.75f; // if this is higher, clouds let more through
 	bool left = true;
+	public float winterRate;
 
 	void Start() {
 		cloudParent = new GameObject($"{type.ToString()} Cloud").transform;
@@ -28,7 +29,7 @@ public class CloudSpawner : MonoBehaviour {
 	}
 
 	IEnumerator SpawnCloud() {
-		yield return new WaitForSeconds(Random.Range(3f, cloudSpawnWaitSeconds) * (1 - .5f * ArcticController.Instance.tempInfluence) * (ArcticController.Instance.summer ? 1 : .8f));
+		yield return new WaitForSeconds(Random.Range(3f, cloudSpawnWaitSeconds) * 0.5f * (ArcticController.Instance.summer ? 1 : winterRate));
 		float rand = Random.value;
 		if (rand <= chanceOfDarkCloud)
 		{
