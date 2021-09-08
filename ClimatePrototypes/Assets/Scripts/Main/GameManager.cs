@@ -52,6 +52,8 @@ public class GameManager : Singleton<GameManager> {
 	public Sprite planet3;
 	public Sprite planet4;
 
+	public bool inOverworld;
+
 	public override void Awake() {
 		base.Awake();
 		if (Instance.runModel && World.averageTemp == 0) {
@@ -61,6 +63,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	public void Start() {
+		inOverworld = true;
 		FindCurrentRegion(SceneManager.GetActiveScene());
 		SceneManager.activeSceneChanged += instance.InitScene;
 		thermometer = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
@@ -156,6 +159,7 @@ public class GameManager : Singleton<GameManager> {
 
 		if (to.name == "Overworld")
 		{
+			inOverworld = true;
 			//UIController.Instance.SetOverworldInfoBox();
 			Transform nodes = GameObject.FindWithTag("Nodes").GetComponent<Transform>();
 			Transform nodesHot = GameObject.FindWithTag("NodesHot").GetComponent<Transform>();
@@ -241,8 +245,11 @@ public class GameManager : Singleton<GameManager> {
 		else if (to.name != "TitleScreen") {
 			AudioManager.Instance.Play("BGM_" + to.name); // TODO: sound name variable class
 		}
-		if (to.name != "Overworld")
+		if (to.name != "Overworld") {
+			inOverworld = false;
 			FindCurrentRegion(to);
+		}
+			
 	}
 
 	void FindCurrentRegion(Scene s) {

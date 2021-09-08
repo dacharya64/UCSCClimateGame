@@ -327,7 +327,7 @@ public class UIController : Singleton<UIController> {
 	}
 
 	public void OpenAboutBox() {
-		if (previousRegion == World.Region.Arctic || previousRegion == World.Region.Fire || previousRegion == World.Region.City || previousRegion == World.Region.Forest) {
+		if (GameManager.Instance.inOverworld) {
 			aboutPrompt = infoBox;
 		}
 
