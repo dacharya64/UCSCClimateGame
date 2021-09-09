@@ -15,6 +15,7 @@ public partial class EBM {
 	public static Matrix<double> subtropics_array;
 	public static Vector<double> precip_subtropics;
 	public static double average_precip_subtropics;
+	public static List<double> temp_list = new List<double>();
 
 	public static void Reset() {
 		F = 2;
@@ -116,6 +117,19 @@ public partial class EBM {
 			{
 				arctic_temp = arctic_temp + Tfin[i, j];
 			}
+		}
+
+		// Calculate the average temp at each latitude
+		double temp = 0;
+		for (int i = 12; i < 24; i++) {
+			temp = 0;
+			for (int j = i; j < i + 1; j++) {
+				for (int k = 0; k < Tfin.ColumnCount; k++) {
+					temp = temp + Tfin[j, k];
+				}			
+			}
+			temp = temp / Tfin.ColumnCount;
+			temp_list.Add(temp);
 		}
 
 		avg_temp = avg_temp / (12 * Tfin.ColumnCount);
