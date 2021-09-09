@@ -27,6 +27,7 @@ TagManager:
   - NodesHot
   - Nodes
   - AboutPrompt
+  - UIController
   layers:
   - Default
   - TransparentFX

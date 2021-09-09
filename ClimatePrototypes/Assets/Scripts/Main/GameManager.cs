@@ -52,6 +52,8 @@ public class GameManager : Singleton<GameManager> {
 	public Sprite planet3;
 	public Sprite planet4;
 
+	public LineRenderer resultLine; 
+
 	public bool inOverworld;
 
 	public override void Awake() {
@@ -159,6 +161,8 @@ public class GameManager : Singleton<GameManager> {
 
 		if (to.name == "Overworld")
 		{
+			Canvas navBarCanvas = UIController.Instance.GetComponent<Canvas>();
+			navBarCanvas.worldCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
 			inOverworld = true;
 			//UIController.Instance.SetOverworldInfoBox();
 			Transform nodes = GameObject.FindWithTag("Nodes").GetComponent<Transform>();
@@ -500,7 +504,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
-		if (completedRegions > 19)
+		if (completedRegions > 1)
 		{
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);
@@ -522,7 +526,18 @@ public class GameManager : Singleton<GameManager> {
 			EBM.F = 2;
 			World.money = 70f; 
 			World.publicOpinion = 70f;
+			CalculateGraph();
 			//visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
 		}
 	}
+
+	void CalculateGraph() {
+		float counter = -1.3f;
+        for (int i = 0; i < 12; i++)
+        {
+            double temp_difference = World.current_temp_list[i] - World.starting_temp_list[i];
+            resultLine.SetPosition(i, new Vector3(counter, ((float)temp_difference * 0.2f) - 0.5f, 0.0f));
+			counter = counter + 0.35f;
+        }
+    }
 }
