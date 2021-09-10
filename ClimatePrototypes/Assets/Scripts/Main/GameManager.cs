@@ -151,15 +151,12 @@ public class GameManager : Singleton<GameManager> {
 			//first, increase emissions according to worker placement in tropics
 			// If they have never visited the tropics 
 			// Unless you are at title screen 
-			
-				if (!hasPlacedWorkers)
-				{
-					forcingIncrease = EBM.F * 0.1;
-				}
-				EBM.F = EBM.F + forcingIncrease;
-				World.ChangeAverageTemp();
-			
-			
+			if (!hasPlacedWorkers)
+			{
+				forcingIncrease = EBM.F * 0.1;
+			}
+			EBM.F = EBM.F + forcingIncrease;
+			World.ChangeAverageTemp();	
 		}
 
 		if (to.name == "Overworld")
