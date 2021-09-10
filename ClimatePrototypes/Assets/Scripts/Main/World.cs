@@ -21,6 +21,8 @@ public static class World {
 	public static Dictionary<string, Dictionary<double, List<double>>> ranges; // TODO: currently unused
 	public static List < (Region, Region, string) > lineToDraw = new List < (Region, Region, string) > (); // TODO: this draws lines on the overworld, store it there instead?
 	public static double globalStartingTemp, tropicsStartingTemp, subtropicsStartingTemp, arcticStartingTemp;
+	public static List<double> starting_temp_list = new List<double>();
+	public static List<double> current_temp_list = new List<double>();
 
 	public static void DetermineImpact() { // TODO: set up restart prompt or auto with player guide
 		if (averageTemp > startingTemp.Average() + maxTempChange) {
@@ -88,11 +90,13 @@ public static class World {
 		subtropicsStartingTemp = temp[1];
 		arcticStartingTemp = temp[2];
 		TitleScreen.TurnOffLoadingText();
+		starting_temp_list = EBM.temp_list;
 	}
 
 	public static double ChangeAverageTemp(bool useTemp = true, int years = 0, int steps = 0) {
 		(temp, energy, precip) = EBM.Calc(useTemp ? EBM.temp : null, years, steps);
 		Debug.Log($"New average Temp: {averageTemp} with regionals: {temp.AsString()}");
+		current_temp_list = EBM.temp_list;
 		return averageTemp; 
 	}
 }

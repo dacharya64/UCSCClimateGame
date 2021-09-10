@@ -52,6 +52,8 @@ public class GameManager : Singleton<GameManager> {
 	public Sprite planet3;
 	public Sprite planet4;
 
+	public LineRenderer resultLine; 
+
 	public bool inOverworld;
 
 	public override void Awake() {
@@ -149,18 +151,22 @@ public class GameManager : Singleton<GameManager> {
 			//first, increase emissions according to worker placement in tropics
 			// If they have never visited the tropics 
 			// Unless you are at title screen 
-			if (!hasPlacedWorkers)
-			{
-				forcingIncrease = EBM.F * 0.1;
-			}
-			EBM.F = EBM.F + forcingIncrease;
-			World.ChangeAverageTemp();
+			
+				if (!hasPlacedWorkers)
+				{
+					forcingIncrease = EBM.F * 0.1;
+				}
+				EBM.F = EBM.F + forcingIncrease;
+				World.ChangeAverageTemp();
+			
+			
 		}
 
 		if (to.name == "Overworld")
 		{
+			Canvas navBarCanvas = UIController.Instance.GetComponent<Canvas>();
+			navBarCanvas.worldCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
 			inOverworld = true;
-			//UIController.Instance.SetOverworldInfoBox();
 			Transform nodes = GameObject.FindWithTag("Nodes").GetComponent<Transform>();
 			Transform nodesHot = GameObject.FindWithTag("NodesHot").GetComponent<Transform>();
 			// Set the alternate art for regions if it is too hot
@@ -505,7 +511,7 @@ public class GameManager : Singleton<GameManager> {
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);
 			UIController.Instance.UpdateGameOverScreen();
-			if (worldNameText.text != "")
+			if (World.worldName != "")
 			{
 				worldNameText.text = World.worldName;
 				worldNameText2.text = World.worldName;
@@ -522,7 +528,20 @@ public class GameManager : Singleton<GameManager> {
 			EBM.F = 2;
 			World.money = 70f; 
 			World.publicOpinion = 70f;
+			CalculateGraph();
 			//visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
 		}
 	}
+
+	void CalculateGraph() {
+		float counter = -6.15f;
+        for (int i = 0; i < 12; i++)
+        {
+			double temp_difference = World.current_temp_list[i] - World.starting_temp_list[i];
+			Debug.Log(temp_difference);
+            resultLine.SetPosition(i, new Vector3(counter, (((float)temp_difference * 0.23f)/2) - 1.95f, 0.0f));
+			counter = counter + 0.4f;
+			temp_difference = temp_difference + 1;
+		}
+    }
 }
