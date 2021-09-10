@@ -151,12 +151,15 @@ public class GameManager : Singleton<GameManager> {
 			//first, increase emissions according to worker placement in tropics
 			// If they have never visited the tropics 
 			// Unless you are at title screen 
-			if (!hasPlacedWorkers)
-			{
-				forcingIncrease = EBM.F * 0.1;
-			}
-			EBM.F = EBM.F + forcingIncrease;
-			World.ChangeAverageTemp();
+			
+				if (!hasPlacedWorkers)
+				{
+					forcingIncrease = EBM.F * 0.1;
+				}
+				EBM.F = EBM.F + forcingIncrease;
+				World.ChangeAverageTemp();
+			
+			
 		}
 
 		if (to.name == "Overworld")
@@ -164,7 +167,6 @@ public class GameManager : Singleton<GameManager> {
 			Canvas navBarCanvas = UIController.Instance.GetComponent<Canvas>();
 			navBarCanvas.worldCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
 			inOverworld = true;
-			//UIController.Instance.SetOverworldInfoBox();
 			Transform nodes = GameObject.FindWithTag("Nodes").GetComponent<Transform>();
 			Transform nodesHot = GameObject.FindWithTag("NodesHot").GetComponent<Transform>();
 			// Set the alternate art for regions if it is too hot
@@ -504,12 +506,12 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
-		if (completedRegions > 1)
+		if (completedRegions > 19)
 		{
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);
 			UIController.Instance.UpdateGameOverScreen();
-			if (worldNameText.text != "")
+			if (World.worldName != "")
 			{
 				worldNameText.text = World.worldName;
 				worldNameText2.text = World.worldName;
@@ -532,12 +534,14 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CalculateGraph() {
-		float counter = -1.3f;
+		float counter = -6.15f;
         for (int i = 0; i < 12; i++)
         {
-            double temp_difference = World.current_temp_list[i] - World.starting_temp_list[i];
-            resultLine.SetPosition(i, new Vector3(counter, ((float)temp_difference * 0.2f) - 0.5f, 0.0f));
-			counter = counter + 0.35f;
-        }
+			double temp_difference = World.current_temp_list[i] - World.starting_temp_list[i];
+			Debug.Log(temp_difference);
+            resultLine.SetPosition(i, new Vector3(counter, (((float)temp_difference * 0.23f)/2) - 1.95f, 0.0f));
+			counter = counter + 0.4f;
+			temp_difference = temp_difference + 1;
+		}
     }
 }
