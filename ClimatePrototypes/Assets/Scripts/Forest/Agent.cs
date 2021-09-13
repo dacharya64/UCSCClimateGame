@@ -45,6 +45,12 @@ public class PathfindingAgent : MonoBehaviour {
 	}
 
 	public void AssignTarget(Vector3 targetPos) {
+		// Turn off tutorial
+		if (this.GetComponent<Volunteer>() != null && ForestController.Instance.tutorial2.activeSelf)
+		{
+			ForestController.Instance.tutorial2.SetActive(false);
+		}
+
 		// pathfinder.enabled = true;
 		pathfinder.canSearch = true;
 		pathfinder.isStopped = false;
