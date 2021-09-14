@@ -186,6 +186,24 @@ public class UIController : Singleton<UIController> {
 		}
 	}
 
+	public static IEnumerator TypewriterFirstForest(Text print, string text, string header, GameObject[] pics, float delay = .05f)
+	{ //given text to print, text ref, and print speed, does typewriter effect
+		if (print.text == "Title")
+		{
+			print.text = text;
+			print.transform.position += print.preferredWidth / 2 * Vector3.right;
+		}
+		print.text = "";
+		for (int i = 0; i < text.Length; i++)
+		{
+			print.text += text[i];
+			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+			//	print.text = text.Substring(0, (i = text.Length));
+			yield return WaitForRealSeconds(delay);
+		}
+		pics[2].GetComponent<Image>().enabled = true;
+	}
+
 	public static IEnumerator ArcticPicsTypewriter(Text print, string text, string text2, string text3, string header, GameObject[] pics, float delay = .05f)
 	{ //given text to print, text ref, and print speed, does typewriter effect
 		if (print.text == "Title")
@@ -205,24 +223,8 @@ public class UIController : Singleton<UIController> {
 			yield return WaitForRealSeconds(delay);
 		}
 		
-		/*textToPrint = text2;
-		for (int i = 0; i < textToPrint.Length; i++)
-		{
-			print.text += textToPrint[i];
-			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-			//	print.text = text.Substring(0, (i = text.Length));
-			yield return WaitForRealSeconds(delay);
-		}*/
 		pics[0].GetComponent<Image>().enabled = true;
 		pics[1].GetComponent<Image>().enabled = true;
-		/*textToPrint = text3;
-		for (int i = 0; i < textToPrint.Length; i++)
-		{
-			print.text += textToPrint[i];
-			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-			//	print.text = text.Substring(0, (i = text.Length));
-			yield return WaitForRealSeconds(delay);
-		}*/
 	}
 
 	public static IEnumerator TypewriterClickToAdvance(Text print, string text, float delay = .05f)
@@ -252,7 +254,14 @@ public class UIController : Singleton<UIController> {
 		GameObject[] pics;
 		pics = GameObject.FindGameObjectsWithTag("image");
 		var clickPrompt = text.GetComponentOnlyInChildren<Text>()?.gameObject;
-		yield return instance.StartCoroutine(Typewriter(text, words[1], words[0]));
+		if (GameManager.Instance.visits[World.Region.Forest] == 1 && GameManager.Instance.currentRegion.region == World.Region.Forest)
+		{
+			yield return instance.StartCoroutine(TypewriterFirstForest(text, words[1], words[0], pics));
+		}
+		else {
+			yield return instance.StartCoroutine(Typewriter(text, words[1], words[0]));
+		}
+		
 
 		if (words.Length <= 2)
 		{
@@ -265,6 +274,7 @@ public class UIController : Singleton<UIController> {
 		}
 		for (int i = 2; i < words.Length; i++) {
 			yield return new WaitForMouseDown();
+			pics[2].GetComponent<Image>().enabled = false;
 			clickPrompt.SetActive(false);
 			if (GameManager.Instance.visits[World.Region.Arctic] == 1 && GameManager.Instance.currentRegion.region == World.Region.Arctic)
 			{

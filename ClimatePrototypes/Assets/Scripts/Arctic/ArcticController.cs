@@ -34,6 +34,7 @@ public class ArcticController : RegionController {
 		//Debug.Log($"Arctic temp influence is: {tempInfluence}");
 		Paddle paddleScript = paddle.GetComponent<Paddle>();
 		var temp = base.GetArcticTemp();
+		temp = 10;
 		if (temp < -6)
 		{
 			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 1f;
@@ -46,7 +47,7 @@ public class ArcticController : RegionController {
 		else if (temp >= -6 && temp < -1)
 		{
 			difficulty = 2f;
-			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.9f;
+			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.95f;
 			highCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.9f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.6f);
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.6f);
@@ -56,7 +57,7 @@ public class ArcticController : RegionController {
 		else if (temp >= -1 && temp < 4)
 		{
 			difficulty = 3f;
-			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.8f;
+			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.9f;
 			highCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.8f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.4f);
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.4f);
@@ -66,7 +67,7 @@ public class ArcticController : RegionController {
 		else if (temp >= 4 && temp < 9)
 		{
 			difficulty = 4f;
-			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.7f;
+			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.85f;
 			highCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.7f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.2f);
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.2f);
@@ -76,7 +77,7 @@ public class ArcticController : RegionController {
 		else
 		{
 			difficulty = 5f;
-			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.6f;
+			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.8f;
 			highCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.6f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0f);
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0f);

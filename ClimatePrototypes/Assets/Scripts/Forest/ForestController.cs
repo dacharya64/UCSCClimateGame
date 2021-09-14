@@ -59,7 +59,13 @@ public class ForestController : RegionController {
 
 	public static double effect;
 
+	public GameObject tutorial1;
+	public GameObject tutorial2;
+
 	public void UIHover(bool over) => overUI = over;
+
+	public float inputTimer = 0;
+	public bool counting = false;
 
 	void Start() {
 		// Tell the UI controller where the about prompt is
@@ -102,7 +108,26 @@ public class ForestController : RegionController {
 		uiPanel.GetComponentsInChildren<VolunteerUI>().Skip(numActive).ToList().ForEach(v => v.Deactivate());
 	}
 
+	public void IntroInit() {
+		Init();
+	}
+
+	public void Init() {
+		counting = true;
+	}
+
 	protected override void Update() {
+		// add to a timer to determine when to open the tutorial
+		if (counting)
+			inputTimer += Time.deltaTime;
+
+		// if player does nothing, show the tutorial
+		if (inputTimer >= 10f)
+		{
+			inputTimer = 0;
+			tutorial1.SetActive(true);
+		}
+
 		base.Update();
 		percentageIncreaseText.text = (percentageIncrease * 100).ToString() + "%";
 		if (forcingIncrease > 0)

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorial:
   - Carbon
-  - 'Here you can deploy volunteers to take action to mitigate climate change in
-    one of three ways. '
+  - 'Here you can deploy volunteers (   ) to take action to mitigate climate change
+    in one of three ways. '
   - 'Place volunteers at different locations to protest emissions, plant trees, '
   - or capture carbon from the atmosphere.
   secondVisit:

@@ -32,6 +32,14 @@ public class VolunteerUI : MonoBehaviour {
 		//then turn on the appropriate selector
 		ForestController.Instance.selected = selected != this ? this : null;
 		selector.SetActive(selected);
+
+		// progress the tutorial if it is on 
+		ForestController.Instance.counting = false;
+        ForestController.Instance.inputTimer = 0;
+		if (ForestController.Instance.tutorial1.activeSelf) {
+			ForestController.Instance.tutorial1.SetActive(false);
+			ForestController.Instance.tutorial2.SetActive(true);
+		}
 	}
 
 	public void Reset() {
