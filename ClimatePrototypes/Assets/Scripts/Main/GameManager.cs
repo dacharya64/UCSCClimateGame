@@ -85,6 +85,14 @@ public class GameManager : Singleton<GameManager> {
 		SetThermometerValue();
 	}
 
+	public void Update() {
+		if (Application.platform != RuntimePlatform.WebGLPlayer) {
+			if (Input.GetKeyDown("escape")) {
+				QuitGame(0);
+			}
+		}
+	}
+
 	public void TurnOffMenu() {
 		menuUp = false;
 		Time.timeScale = 1;
