@@ -105,9 +105,6 @@ public class GameManager : Singleton<GameManager> {
 		TitleScreen.isFirstTime = false;
 		UIController.Instance.ChangeGameOverPromptState(false);
 		SceneManager.LoadScene("TitleScreen");
-		//TitleScreen.Instance.TurnOffLoadingText();
-		//EBM.Reset();
-		//World.Calc();
 	}
 
 	public void QuitGame(int exitStatus = 0) {
@@ -531,11 +528,10 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CalculateGraph() {
-		float counter = -6.15f;
+		float counter = -0.65f;
         for (int i = 0; i < 12; i++)
         {
 			double temp_difference = World.current_temp_list[i] - World.starting_temp_list[i];
-			Debug.Log(temp_difference);
             resultLine.SetPosition(i, new Vector3(counter, (((float)temp_difference * 0.23f)/2) - 1.95f, 0.0f));
 			counter = counter + 0.4f;
 			temp_difference = temp_difference + 1;
