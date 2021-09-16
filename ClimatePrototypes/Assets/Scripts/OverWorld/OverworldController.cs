@@ -75,7 +75,9 @@ public class OverworldController : MonoBehaviour {
 	public IEnumerator EnterWorld(float time = 1) {
 		if (tutorial != null) {
 			CanvasGroup tutorialGroup = tutorial.GetComponent<CanvasGroup>();
+			GameManager.Instance.menuUp = true;
 			StartCoroutine(FadeCanvas(tutorialGroup, Direction.FadeIn, 0.5f));
+		
 		}
 		
 		StartCoroutine(FadeCanvas(canvasGroup, Direction.FadeIn, fadingSpeed));

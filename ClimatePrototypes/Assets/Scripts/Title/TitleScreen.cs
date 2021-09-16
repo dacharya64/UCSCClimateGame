@@ -36,7 +36,8 @@ public class TitleScreen : MonoBehaviour {
 	}
 
 	void Start() {
-		if (!SceneManager.GetSceneByName("Overworld").isLoaded) {
+        Screen.SetResolution(1200, 750, false);
+        if (!SceneManager.GetSceneByName("Overworld").isLoaded) {
 			SceneManager.LoadScene("Overworld", LoadSceneMode.Additive);
 			SceneManager.sceneLoaded += SetOverWorldActive;
 		} else SetOverWorldActive(SceneManager.GetSceneByName("Overworld"), LoadSceneMode.Single);
@@ -46,7 +47,7 @@ public class TitleScreen : MonoBehaviour {
 		for (int i = 0; i < uiReveal.Length; i++) {
 			foreach (Graphic g in uiReveal[i].GetComponentsInChildren<Graphic>())
 				g.color = new Color(g.color.r, g.color.g, g.color.b, 0);
-			StartCoroutine(DropReveal(uiReveal[i].transform, i * .5f, uiReveal[i].TryGetComponent(out Button _)));
+			StartCoroutine(DropReveal(uiReveal[i].transform, i * .5f));
 		}
 
 		if (!isFirstTime) {
@@ -66,7 +67,7 @@ public class TitleScreen : MonoBehaviour {
 		}
 	}
 
-		IEnumerator DropReveal(Transform g, float delay = 0, bool drop = true, bool fade = true, float time = .5f) {
+		IEnumerator DropReveal(Transform g, float delay = 0, bool drop = false, bool fade = true, float time = .5f) {
 		yield return new WaitForSeconds(delay);
 		float height = 0, startingHeight = 0;
 

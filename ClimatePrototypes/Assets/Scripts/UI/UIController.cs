@@ -362,39 +362,6 @@ public class UIController : Singleton<UIController> {
 			globalDownArrow.SetActive(false);		
 		}
 
-		var finalTropicsChange = World.temp[0] - World.tropicsStartingTemp; 
-		FinalTropicsTempText.text = Mathf.Abs((float)finalTropicsChange).ToString("F2") + "°";
-		if (finalTropicsChange < 0)
-		{
-			tropicsUpArrow.SetActive(false);
-		}
-		else
-		{
-			tropicsDownArrow.SetActive(false);
-		}
-
-		var finalSubtropicsChange = World.temp[1] - World.subtropicsStartingTemp; 
-		FinalSubtropicsTempText.text = Mathf.Abs((float)finalSubtropicsChange).ToString("F2") + "°";
-		if (finalSubtropicsChange < 0)
-		{
-			subtropicsUpArrow.SetActive(false);
-		}
-		else
-		{
-			subtropicsDownArrow.SetActive(false);
-		}
-
-		var finalArcticChange = World.temp[2] - World.arcticStartingTemp;
-		FinalArcticTempText.text = Mathf.Abs((float)finalArcticChange).ToString("F2") + "°";
-		if (finalArcticChange < 0)
-		{
-			arcticUpArrow.SetActive(false);
-		}
-		else
-		{
-			arcticDownArrow.SetActive(false);
-		}
-
 		FinalPublicOpinionText.text = World.publicOpinion.ToString();
 		FinalEmissionsText.text = ((float)EBM.F).ToString("F2");
 		FinalEconomyText.text = World.money.ToString();
