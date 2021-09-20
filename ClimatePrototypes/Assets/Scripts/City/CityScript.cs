@@ -67,14 +67,14 @@ public class CityScript : RegionController
 
     void Start()
     {
-        var temp = World.averageTemp;
+        var tempDifference = World.averageTemp - World.globalStartingTemp;
         // Check temp / public opinion and change backgrounds/sprites depending on values
-        if (temp > 20 && temp < 23)
+        if (tempDifference > 4 && tempDifference < 7)
         {
             bg.GetComponent<SpriteRenderer>().sprite = bg_hot;
             smog.SetActive(false);
         }
-        else if (temp >= 23)
+        else if (tempDifference >= 7)
         {
             bg.GetComponent<SpriteRenderer>().sprite = bg_hot;
             smog.SetActive(true);

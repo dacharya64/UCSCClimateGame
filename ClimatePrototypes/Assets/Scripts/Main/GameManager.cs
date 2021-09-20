@@ -27,8 +27,8 @@ public class GameManager : Singleton<GameManager> {
 	GameObject fireAlert;
 	GameObject arcticAlert;
 	GameObject cityAlert;
-	double previousRegionalTemp;
-	double previousArcticTemp;
+	double previousSubtropicsTempDifference;
+	double previousArcticTempDifference;
 	int timesSinceVisitedCity = 0;
 	int completedRegions = 0;
 	GameObject GameOverPrompt;
@@ -79,8 +79,8 @@ public class GameManager : Singleton<GameManager> {
 		arcticAlert.GetComponent<SpriteRenderer>().enabled = false;
 		cityAlert = GameObject.FindGameObjectWithTag("CityAlert");
 		cityAlert.GetComponent<SpriteRenderer>().enabled = false;
-		previousRegionalTemp = World.temp[1];
-		previousArcticTemp = World.temp[2];
+		previousSubtropicsTempDifference = 0; 
+		previousArcticTempDifference = 0;
 		InitStats();
 		SetThermometerValue();
 	}
@@ -109,7 +109,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	public static void Restart() {
-		EBM.F = 2;
+		EBM.F = 0;
 		TitleScreen.isFirstTime = false;
 		UIController.Instance.ChangeGameOverPromptState(false);
 		SceneManager.LoadScene("TitleScreen");
@@ -149,6 +149,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void InitScene(Scene from, Scene to) {
+		Debug.Log(to.name);
 		instance.loadingScreen.SetActive(false);
 		UIController.Instance.ToggleBackButton(to.name != "Overworld");
 
@@ -156,12 +157,15 @@ public class GameManager : Singleton<GameManager> {
 			//first, increase emissions according to worker placement in tropics
 			// If they have never visited the tropics 
 			// Unless you are at title screen 
-			if (!hasPlacedWorkers)
-			{
-				forcingIncrease = EBM.F * 0.1;
-			}
-			EBM.F = EBM.F + forcingIncrease;
-			World.ChangeAverageTemp();	
+			//for (int i = 0; i < 10; i++) { //FOR DEBUGGING ONLY
+				if (!hasPlacedWorkers)
+				{
+					forcingIncrease = 0.6;
+				}
+				EBM.F = EBM.F + forcingIncrease;
+				World.ChangeAverageTemp();
+			//}
+			
 		}
 
 		if (to.name == "Overworld")
@@ -171,8 +175,9 @@ public class GameManager : Singleton<GameManager> {
 			inOverworld = true;
 			Transform nodes = GameObject.FindWithTag("Nodes").GetComponent<Transform>();
 			Transform nodesHot = GameObject.FindWithTag("NodesHot").GetComponent<Transform>();
+			var tempDifference = World.averageTemp - World.globalStartingTemp;
 			// Set the alternate art for regions if it is too hot
-			if (World.averageTemp < 20)
+			if (tempDifference < 7)
 			{
 				foreach (Transform node in nodes)
 				{
@@ -426,25 +431,26 @@ public class GameManager : Singleton<GameManager> {
 		}
 		
 		// Check if regional temp has gone up or down enough to change fire minigame
-		double currentRegionalTemp = World.temp[1];
+		double currentSubtropicsTemp = World.temp[1];
+		double subtropicsTempDifference = currentSubtropicsTemp - World.subtropicsStartingTemp;
 		fireAlert = GameObject.FindGameObjectWithTag("FireAlert");
-		if (previousRegionalTemp < 24 && currentRegionalTemp >= 24)
+		if (previousSubtropicsTempDifference < -1 && subtropicsTempDifference >= -1)
 		{
 			SetFireAlertOn();
 		}
-		else if (previousRegionalTemp >= 24 && previousRegionalTemp < 25 && (currentRegionalTemp >= 25 || currentRegionalTemp < 24))
+		else if (previousSubtropicsTempDifference >= -1 && previousSubtropicsTempDifference < 1 && (subtropicsTempDifference >= 1 || subtropicsTempDifference < -1))
 		{
 			SetFireAlertOn();
 		}
-		else if (previousRegionalTemp >= 25 && previousRegionalTemp < 27 && (currentRegionalTemp >= 27 || currentRegionalTemp < 25))
+		else if (previousSubtropicsTempDifference >= 1 && previousSubtropicsTempDifference < 3 && (subtropicsTempDifference >= 3 || subtropicsTempDifference < 1))
 		{
 			SetFireAlertOn();
 		}
-		else if (previousRegionalTemp >= 27 && previousRegionalTemp < 29 && (currentRegionalTemp >= 29 || currentRegionalTemp < 27))
+		else if (previousSubtropicsTempDifference >= 3 && previousSubtropicsTempDifference < 5 && (subtropicsTempDifference >= 5 || subtropicsTempDifference < 3))
 		{
 			SetFireAlertOn();
 		}
-		else if (previousRegionalTemp >= 29 && currentRegionalTemp < 29)
+		else if (previousSubtropicsTempDifference >= 5 && subtropicsTempDifference < 5)
 		{
 			SetFireAlertOn();
 		}
@@ -455,28 +461,29 @@ public class GameManager : Singleton<GameManager> {
 		else {
 			fireAlert.GetComponent<SpriteRenderer>().enabled = false;
 		}
-		previousRegionalTemp = currentRegionalTemp;
+		previousSubtropicsTempDifference = subtropicsTempDifference;
 
 		// Check if arctic temp has changed enough
 		double currentArcticTemp = World.temp[2];
+		double currentArcticTempDifference = currentArcticTemp - World.arcticStartingTemp;
 		arcticAlert = GameObject.FindGameObjectWithTag("ArcticAlert");
-		if (previousArcticTemp < -6 && currentArcticTemp >= -6)
+		if (previousArcticTempDifference < -1 && currentArcticTempDifference >= -1)
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTemp >= -6 && previousArcticTemp < -1 && (currentArcticTemp >= -1 || currentArcticTemp < -6))
+		else if (previousArcticTempDifference >= -1 && previousArcticTempDifference < 3 && (currentArcticTempDifference >= 3 || currentArcticTempDifference < -1))
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTemp >= -1 && previousArcticTemp < 4 && (currentArcticTemp >= 4 || currentArcticTemp < -1))
+		else if (previousArcticTempDifference >= -1 && previousArcticTempDifference < 4 && (currentArcticTempDifference >= 4 || currentArcticTempDifference < -1))
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTemp >= 4 && previousArcticTemp < 9 && (currentArcticTemp >= 9 || currentArcticTemp < 4))
+		else if (previousArcticTempDifference >= 3 && previousArcticTempDifference < 7 && (currentArcticTempDifference >= 7 || currentArcticTempDifference < 3))
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTemp >= 9 && currentArcticTemp < 9)
+		else if (previousArcticTempDifference >= 7 && currentArcticTempDifference < 11)
 		{
 			SetArcticAlertOn();
 		}
@@ -488,7 +495,7 @@ public class GameManager : Singleton<GameManager> {
 		{
 			arcticAlert.GetComponent<SpriteRenderer>().enabled = false;
 		}
-		previousArcticTemp = currentArcticTemp;
+		previousArcticTempDifference = currentArcticTempDifference;
 
 		// Check if it's been too long since visited city 
 		cityAlert = GameObject.FindGameObjectWithTag("CityAlert");

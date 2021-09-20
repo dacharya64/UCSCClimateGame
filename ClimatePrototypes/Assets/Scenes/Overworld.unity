@@ -2031,7 +2031,7 @@ GameObject:
   m_Component:
   - component: {fileID: 173451555}
   m_Layer: 0
-  m_Name: NodesHot
+  m_Name: Nodes
   m_TagString: NodesHot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6368,7 +6368,7 @@ GameObject:
   - component: {fileID: 493003536}
   - component: {fileID: 493003535}
   m_Layer: 0
-  m_Name: ArcticNodeHot
+  m_Name: ArcticNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7101,7 +7101,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 76.16, y: 2.23}
+  m_AnchoredPosition: {x: 76.160034, y: 2.23}
   m_SizeDelta: {x: 20, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &535246559
@@ -7148,7 +7148,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1739027695}
   m_Direction: 2
   m_MinValue: 15
-  m_MaxValue: 27
+  m_MaxValue: 26
   m_WholeNumbers: 0
   m_Value: 17
   m_OnValueChanged:
@@ -13805,7 +13805,7 @@ GameObject:
   - component: {fileID: 1175950755}
   - component: {fileID: 1175950754}
   m_Layer: 0
-  m_Name: FireNodeHot
+  m_Name: FireNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15298,7 +15298,7 @@ GameObject:
   - component: {fileID: 1329961014}
   - component: {fileID: 1329961013}
   m_Layer: 0
-  m_Name: CityNodeHot
+  m_Name: CityNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21609,7 +21609,7 @@ GameObject:
   - component: {fileID: 1864446906}
   - component: {fileID: 1864446905}
   m_Layer: 0
-  m_Name: ForestNodeHot
+  m_Name: ForestNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
