@@ -34,7 +34,7 @@ public partial class EBM {
 	static Vector<double> xb = Vector<double>.Build.Dense(bands - 1, i => -1 + dx + i++ * dx);
 	// standard consts
 	/// <summary> OLR when T = 0(W m^-2) </summary>
-	public static double A = 197;
+	public static double A = 195;
 	/// <summary> OLR temperature dependence(W M^-2 K^-1) </summary>
 	static readonly double B = 1.8;
 	/// <summary> Ocean mixed layer heat capacity(W yr m^-2 K^-1)  </summary>
@@ -62,7 +62,7 @@ public partial class EBM {
 	/// <summary> Open water albedos </summary>
 	static Vector<double> aw = a0 - a2 * x.PointwisePower(2);
 	/// <summary> Radiative forcing(W m^-2) </summary>
-	public static double F = 2;
+	public static double F = 0;
 	public static double maxF = 13; // 13 corresponds to 10 degrees of warming 
 
 	// // misc consts
