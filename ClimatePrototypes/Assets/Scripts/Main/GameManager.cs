@@ -203,17 +203,15 @@ public class GameManager : Singleton<GameManager> {
 			
 			//add alternate art for planet if world is too hot
 			GameObject world = GameObject.Find("world");
-			var temp = World.averageTemp;
-			temp = 21;
-			if (temp > 20 && temp < 22)
+			if (tempDifference > 3 && tempDifference < 5)
 			{
 				world.GetComponent<SpriteRenderer>().sprite = planet2;
 			}
-			else if (temp >= 22 && temp < 24)
+			else if (tempDifference >= 5 && tempDifference < 7)
 			{
 				world.GetComponent<SpriteRenderer>().sprite = planet3;
 			}
-			else if (temp >= 24)
+			else if (tempDifference >= 7)
 			{
 				world.GetComponent<SpriteRenderer>().sprite = planet4;
 			}
@@ -221,11 +219,6 @@ public class GameManager : Singleton<GameManager> {
 				world.GetComponent<SpriteRenderer>().sprite = planet1;
 			}
 
-
-			/*if (visits[World.Region.Fire] == 1 && !hasShownFirePopup) {
-				UIController.Instance.ChangeInfoBoxState(true);
-				hasShownFirePopup = true;
-			}*/
 			statsPanel = stats.GetComponent(typeof(StatsPanel)) as StatsPanel;
 			// Save the previous stats
 			previousPublicOpinion = statsPanel.previousPublicOpinion;
@@ -513,7 +506,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
-		if (completedRegions > 19) // CHANGE THIS FOR DEBUGGING, originally set to 19
+		if (completedRegions > 0) // CHANGE THIS FOR DEBUGGING, originally set to 19
 		{
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);

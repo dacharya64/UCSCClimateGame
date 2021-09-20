@@ -33,12 +33,6 @@ public class UIController : Singleton<UIController> {
 	[SerializeField] Text FinalEconomyText;
 	[SerializeField] GameObject globalUpArrow;
 	[SerializeField] GameObject globalDownArrow;
-	[SerializeField] GameObject tropicsUpArrow;
-	[SerializeField] GameObject tropicsDownArrow;
-	[SerializeField] GameObject subtropicsUpArrow;
-	[SerializeField] GameObject subtropicsDownArrow;
-	[SerializeField] GameObject arcticUpArrow;
-	[SerializeField] GameObject arcticDownArrow;
 
 	[SerializeField] GameObject gameOverPrompt2;
 	[SerializeField] Text increaseText;
@@ -50,6 +44,7 @@ public class UIController : Singleton<UIController> {
 	[SerializeField] GameObject publicOpinionDownArrow;
 	[SerializeField] GameObject economyUpArrow;
 	[SerializeField] GameObject economyDownArrow;
+	[SerializeField] Text resultsText;
 
 	/// <summary> Flips active status of UI element and stores it </summary>
 	public void Toggle(GameObject obj) {
@@ -409,5 +404,21 @@ public class UIController : Singleton<UIController> {
 			increaseText.text = "With a decrease in global temperature of ";
 		}
 		tempChangeText.text = Mathf.Abs((float)finalTempChange).ToString("F2") + "°:";
+
+		if (finalTempChange < 1)
+		{
+			resultsText.text = "The planet is warmer than it has been for thousands of years. Mountain glaciers and sea ice cover a small area.Sea level is rising. While global changes are modest, some regions have experienced larger climate changes.";
+		}
+		else if (finalTempChange >= 1 && finalTempChange < 2)
+		{
+			resultsText.text = "The planet is warmer. Polar regions have warmed more than the global average, and sea ice has retreated in late summer. Average rainfall has increased over many land regions. Heat waves and heavy precipitation events have become more frequent and more intense. Agricultural droughts in drying regions have become more frequent and more intense. Nevertheless, people have come together to reduce emissions and limit further climate change.";
+		}
+		else if (finalTempChange >= 2 && finalTempChange < 5)
+		{
+			resultsText.text = "The planet is much warmer. The polar oceans are ice-free in late summer. Permafrost has thawed. Average rainfall has increased in the tropics and polar regions, and decreased over large parts of the subtropics. Heat waves and heavy precipitation events have become more frequent and more intense. Agricultural droughts in drying regions have become more frequent and more intense. The planet is on a trajectory of further warming.";
+		}
+		else {
+			resultsText.text = "The planet is hot. The polar regions are free of sea ice year round. Climate events, such as heat waves, heavy precipitation, and droughts, are extreme and frequent. The proportion of intense tropical cyclones has increased, as well as their peak wind speeds. Sea level is high, leading to coastal flooding.";
+		}
 	}
 }
