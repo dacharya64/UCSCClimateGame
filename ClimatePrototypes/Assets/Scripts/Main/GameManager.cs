@@ -506,7 +506,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
-		if (completedRegions > 0) // CHANGE THIS FOR DEBUGGING, originally set to 19
+		if (completedRegions > 19) // CHANGE THIS FOR DEBUGGING, originally set to 19
 		{
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);
