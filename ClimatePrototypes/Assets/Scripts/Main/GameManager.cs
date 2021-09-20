@@ -149,7 +149,6 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void InitScene(Scene from, Scene to) {
-		Debug.Log(to.name);
 		instance.loadingScreen.SetActive(false);
 		UIController.Instance.ToggleBackButton(to.name != "Overworld");
 
@@ -157,14 +156,14 @@ public class GameManager : Singleton<GameManager> {
 			//first, increase emissions according to worker placement in tropics
 			// If they have never visited the tropics 
 			// Unless you are at title screen 
-			//for (int i = 0; i < 10; i++) { //FOR DEBUGGING ONLY
+			for (int i = 0; i < 20; i++) { //FOR DEBUGGING ONLY
 				if (!hasPlacedWorkers)
 				{
 					forcingIncrease = 0.6;
 				}
 				EBM.F = EBM.F + forcingIncrease;
 				World.ChangeAverageTemp();
-			//}
+			}
 			
 		}
 
@@ -515,7 +514,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
-		if (completedRegions > 19)
+		if (completedRegions > 0) // CHANGE THIS FOR DEBUGGING, originally set to 19
 		{
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);

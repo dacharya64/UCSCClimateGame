@@ -46,6 +46,11 @@ public class UIController : Singleton<UIController> {
 
 	[TextArea] static string textToPrint;
 
+	[SerializeField] GameObject publicOpinionUpArrow;
+	[SerializeField] GameObject publicOpinionDownArrow;
+	[SerializeField] GameObject economyUpArrow;
+	[SerializeField] GameObject economyDownArrow;
+
 	/// <summary> Flips active status of UI element and stores it </summary>
 	public void Toggle(GameObject obj) {
 		if (!uiActiveStatus.ContainsKey(obj))
@@ -362,9 +367,41 @@ public class UIController : Singleton<UIController> {
 			globalDownArrow.SetActive(false);		
 		}
 
-		FinalPublicOpinionText.text = World.publicOpinion.ToString();
+		if (World.publicOpinion < 0) {
+			World.publicOpinion = 0;
+		}
+
+		if (World.publicOpinion > 100) {
+			World.publicOpinion = 100;
+		}
+		var publicOpinionDifference = World.publicOpinion - 70;
+		FinalPublicOpinionText.text = Mathf.Abs(publicOpinionDifference).ToString();
+		if (publicOpinionDifference < 0)
+		{
+			publicOpinionUpArrow.SetActive(false);
+		} else {
+			publicOpinionDownArrow.SetActive(false);
+		}
+
 		FinalEmissionsText.text = ((float)EBM.F).ToString("F2");
-		FinalEconomyText.text = World.money.ToString();
+
+		if (World.money < 0)
+		{
+			World.money = 0;
+		}
+
+		if (World.money > 100)
+		{
+			World.money = 100;
+		}
+		var economyDifference = World.money - 70;
+		FinalEconomyText.text = Mathf.Abs(economyDifference).ToString();
+		if (economyDifference < 0)
+		{
+			economyUpArrow.SetActive(false);
+		} else {
+			economyDownArrow.SetActive(false);
+		}
 
 		//Change values on page 2
 		if (finalTempChange < 0)
