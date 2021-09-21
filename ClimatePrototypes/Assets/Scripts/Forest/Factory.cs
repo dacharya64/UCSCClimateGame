@@ -41,25 +41,25 @@ public class Factory : MonoBehaviour {
 			workersAtFactory++;
 			if (workersAtFactory == 1)
 			{
-				ForestController.Instance.forcingIncrease = ForestController.Instance.forcingIncrease - 0.05;
+				ForestController.forcingIncrease -= 0.05;
 			}
 			else if (workersAtFactory == 2)
 			{
-				ForestController.Instance.forcingIncrease = ForestController.Instance.forcingIncrease - 0.075;
+				ForestController.forcingIncrease -= 0.075;
 			}
 			else if (workersAtFactory == 3)
 			{
-				ForestController.Instance.forcingIncrease = ForestController.Instance.forcingIncrease - 0.1;
+				ForestController.forcingIncrease -= 0.1;
 			}
 			else if (workersAtFactory == 4)
 			{
-				ForestController.Instance.forcingIncrease = ForestController.Instance.forcingIncrease - 0.125;
+				ForestController.forcingIncrease -= 0.125;
 			}
 			else
 			{ //workersAtFactory = 5
-				ForestController.Instance.forcingIncrease = ForestController.Instance.forcingIncrease - 0.15;
+				ForestController.forcingIncrease -= 0.15;
 			}
-			Debug.Log(ForestController.Instance.forcingIncrease);
+			World.publicOpinion = World.publicOpinion + 5;
 
 			var selectedTarget = subtargets.ElementAt(counter).Key;
 			counter++;

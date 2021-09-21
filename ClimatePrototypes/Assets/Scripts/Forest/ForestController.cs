@@ -21,7 +21,7 @@ public class ForestController : RegionController {
 	public int volunteersPlaced;
 	public int maxVolunteers;
 	// for showing the results of changing the model
-	public double forcingIncrease = 0.6;
+	public static double forcingIncrease;
 
 	public GameObject aboutPrompt;
 	public Text aboutText;
@@ -45,7 +45,7 @@ public class ForestController : RegionController {
 	public Sprite arrowOutline;
 	public Sprite arrowFull;
 
-	public static double effect;
+	public static double result;
 
 	public GameObject tutorial1;
 	public GameObject tutorial2;
@@ -242,7 +242,7 @@ public class ForestController : RegionController {
 	public void SetAboutText(string area) {
 		if (area == "factory")
 		{
-			aboutText.text = "This is the factory. Volunteers here will protest, which will lower the rate at which emissions increases over time.";
+			aboutText.text = "This is the factory. Volunteers here will protest, which will lower emissions and improve public opinion. Having more volunteers here will decrease emissions at a greater rate.";
 		}
 		else if (area == "forest") {
 			aboutText.text = "This is the area being deforested. Volunteers placed here will help plant trees. This will reduce emissions slightly.";

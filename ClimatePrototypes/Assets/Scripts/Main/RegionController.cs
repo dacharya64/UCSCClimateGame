@@ -107,7 +107,7 @@ public abstract class RegionController : MonoBehaviour {
 		}
 		else if (region == World.Region.Forest)
 		{
-			UIController.Instance.SetForestPrompt(true, ForestController.effect);
+			UIController.Instance.SetForestPrompt(true, ForestController.forcingIncrease);
 			GameManager.Instance.tropicsIsAddressed = true;
 		}
 		else if (region == World.Region.Fire) {

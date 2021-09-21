@@ -4154,13 +4154,6 @@ MonoBehaviour:
   volunteersPlaced: 0
   maxVolunteers: 0
   forcingIncrease: 0
-  forcingDecrease: 0
-  percentageIncrease: 0
-  emissionsTotal: 0
-  percentageIncreaseText: {fileID: 0}
-  emissionsIncreaseText: {fileID: 0}
-  emissionsDecreaseText: {fileID: 0}
-  emissionsTotalText: {fileID: 0}
   aboutPrompt: {fileID: 506256797}
   aboutText: {fileID: 854287849}
   titleText: {fileID: 1361870897}
@@ -4379,7 +4372,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Return
+  m_Text: Close
 --- !u!222 &475417776
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5777,7 +5770,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.9, y: -6.9}
+  m_AnchoredPosition: {x: 1.9, y: -10}
   m_SizeDelta: {x: 592.4322, y: 190.50037}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &854287849
@@ -6340,7 +6333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -36.7}
+  m_AnchoredPosition: {x: 0, y: -39.800003}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &908893769

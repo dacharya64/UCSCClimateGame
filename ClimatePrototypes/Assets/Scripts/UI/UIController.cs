@@ -105,11 +105,11 @@ public class UIController : Singleton<UIController> {
 
 	public void SetForestPrompt(bool status, double result) {
 		string emissionsResult;
-		if (result < 0.06)
+		if (result < 0.2)
 		{
 			emissionsResult = "Small";
 		}
-		else if (result < 0.12)
+		else if (result < 0.4)
 		{
 			emissionsResult = "Moderate";
 		}
