@@ -33,9 +33,8 @@ public class ArcticController : RegionController {
 		tempInfluence = (float) (World.temp[2] - World.startingTemp[2]) / World.maxTempChange;
 		//Debug.Log($"Arctic temp influence is: {tempInfluence}");
 		Paddle paddleScript = paddle.GetComponent<Paddle>();
-		var temp = base.GetArcticTemp();
-		temp = 10;
-		if (temp < -6)
+		var tempDifference = base.GetArcticTemp() - World.arcticStartingTemp;
+		if (tempDifference < -1)
 		{
 			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 1f;
 			highCloudSpawner.GetComponent<CloudSpawner>().winterRate = 1f;
@@ -44,7 +43,7 @@ public class ArcticController : RegionController {
 			highCloudSpawner.GetComponent<CloudSpawner>().SetChanceOfDarkCloud(0.8f);
 			seaIceLossText.text = "Very Low";
 		}
-		else if (temp >= -6 && temp < -1)
+		else if (tempDifference >= -1 && tempDifference < 3)
 		{
 			difficulty = 2f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.95f;
@@ -54,7 +53,7 @@ public class ArcticController : RegionController {
 			paddleScript.ShrinkPaddle(0.90f);
 			seaIceLossText.text = "Low";
 		}
-		else if (temp >= -1 && temp < 4)
+		else if (tempDifference >= 3 && tempDifference < 7)
 		{
 			difficulty = 3f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.9f;
@@ -64,7 +63,7 @@ public class ArcticController : RegionController {
 			paddleScript.ShrinkPaddle(0.80f);
 			seaIceLossText.text = "Moderate";
 		}
-		else if (temp >= 4 && temp < 9)
+		else if (tempDifference >= 7 && tempDifference < 11)
 		{
 			difficulty = 4f;
 			lowCloudSpawner.GetComponent<CloudSpawner>().winterRate = 0.85f;

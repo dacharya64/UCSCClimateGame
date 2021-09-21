@@ -37,7 +37,7 @@ public class Station : MonoBehaviour { // TODO: remove subtargets and make it mo
 
 	void OnMouseDown() {
 		if (ForestController.Instance.hasSelected) {
-			ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.04;
+			ForestController.forcingIncrease -= 0.08;
 			World.money = World.money - 5f;
 			var selectedTarget = subtargets.ElementAt(counter).Key;
 			counter++;

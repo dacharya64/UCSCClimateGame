@@ -21,15 +21,7 @@ public class ForestController : RegionController {
 	public int volunteersPlaced;
 	public int maxVolunteers;
 	// for showing the results of changing the model
-	public double forcingIncrease;
-	public double forcingDecrease;
-	public double percentageIncrease = 0.1;
-	public double emissionsTotal;
-	// text objects for results UI
-	public Text percentageIncreaseText;
-	public Text emissionsIncreaseText;
-	public Text emissionsDecreaseText;
-	public Text emissionsTotalText;
+	public static double forcingIncrease;
 
 	public GameObject aboutPrompt;
 	public Text aboutText;
@@ -43,13 +35,6 @@ public class ForestController : RegionController {
 
 	[SerializeField] Slider emissionsTracker = default;
 
-	public Image upArrow1;
-	public Image upArrow2;
-	public Image upArrow3;
-	public Image downArrow1;
-	public Image downArrow2;
-	public Image downArrow3;
-
 	public Image totalArrow1;
 	public Image totalArrow2;
 	public Image totalArrow3;
@@ -57,7 +42,10 @@ public class ForestController : RegionController {
 	public Image totalArrow5;
 	public Image totalArrow6;
 
-	public static double effect;
+	public Sprite arrowOutline;
+	public Sprite arrowFull;
+
+	public static double result;
 
 	public GameObject tutorial1;
 	public GameObject tutorial2;
@@ -72,9 +60,7 @@ public class ForestController : RegionController {
 		UIController.Instance.timed = false;
 		UIController.Instance.aboutPrompt = aboutPrompt;
 
-		forcingDecrease = 0.0;
-		percentageIncrease = 0.1;
-		forcingIncrease = EBM.F * percentageIncrease;
+		forcingIncrease = 0.6;
 		agentParent = new GameObject("Agent Parent").transform;
 		agentParent.parent = transform;
 		utility = new GameObject("Utility").transform;
@@ -129,123 +115,55 @@ public class ForestController : RegionController {
 		}
 
 		base.Update();
-		percentageIncreaseText.text = (percentageIncrease * 100).ToString() + "%";
-		if (forcingIncrease > 0)
+		
+		if (forcingIncrease < 0.6)
 		{
-			upArrow1.gameObject.SetActive(true);
-			if (forcingIncrease > 0.06)
-			{
-				upArrow2.gameObject.SetActive(true);
-				if (forcingIncrease > 0.12)
-				{
-					upArrow3.gameObject.SetActive(true);
-				}
-				else
-				{
-					upArrow3.gameObject.SetActive(false);
-				}
-			}
-			else {
-				upArrow2.gameObject.SetActive(false);
-				upArrow3.gameObject.SetActive(false);
-			}
+			totalArrow6.GetComponent<Image>().sprite = arrowOutline;
 		}
 		else {
-			upArrow1.gameObject.SetActive(false);
-			upArrow2.gameObject.SetActive(false);
-			upArrow3.gameObject.SetActive(false);
+			totalArrow6.GetComponent<Image>().sprite = arrowFull;
 		}
-
-		if (forcingDecrease > 0)
+		if (forcingIncrease < 0.5)
 		{
-			downArrow1.gameObject.SetActive(true);
-			if (forcingDecrease > 0.06)
-			{
-				downArrow2.gameObject.SetActive(true);
-				if (forcingDecrease > 0.12) {
-					downArrow3.gameObject.SetActive(true);
-				}
-				else {
-					downArrow3.gameObject.SetActive(false);
-				}
-			}
-			else {
-				downArrow2.gameObject.SetActive(false);
-				downArrow3.gameObject.SetActive(false);
-			}
+			totalArrow5.GetComponent<Image>().sprite = arrowOutline;
 		}
-		else
-		{
-			downArrow1.gameObject.SetActive(false);
-			downArrow2.gameObject.SetActive(false);
-			downArrow3.gameObject.SetActive(false);
+		else {
+			totalArrow5.GetComponent<Image>().sprite = arrowFull;
 		}
-
-		emissionsTotal = forcingIncrease - forcingDecrease;
-		if (emissionsTotal > 0)
+		if (forcingIncrease < 0.4)
 		{
-			totalArrow1.gameObject.SetActive(true);
-			if (emissionsTotal > 0.06)
-			{
-				totalArrow2.gameObject.SetActive(true);
-				if (emissionsTotal > 0.12)
-				{
-					totalArrow3.gameObject.SetActive(true);
-				}
-				else 
-				{
-					totalArrow3.gameObject.SetActive(false);
-				}
-			}
-			else
-			{
-				totalArrow2.gameObject.SetActive(false);
-				totalArrow3.gameObject.SetActive(false);
-			}
+			totalArrow4.GetComponent<Image>().sprite = arrowOutline;
 		}
-		else
-		{
-			totalArrow1.gameObject.SetActive(false);
-			totalArrow2.gameObject.SetActive(false);
-			totalArrow3.gameObject.SetActive(false);
+		else {
+			totalArrow4.GetComponent<Image>().sprite = arrowFull;
 		}
-
-		if (emissionsTotal < 0)
+		if (forcingIncrease < 0.3)
 		{
-			totalArrow4.gameObject.SetActive(true);
-			if (emissionsTotal < -0.06)
-			{
-				totalArrow5.gameObject.SetActive(true);
-				if (emissionsTotal < -0.12)
-				{
-					totalArrow6.gameObject.SetActive(true);
-				}
-				else
-				{
-					totalArrow6.gameObject.SetActive(false);
-				}
-			}
-			else
-			{
-				totalArrow5.gameObject.SetActive(false);
-				totalArrow6.gameObject.SetActive(false);
-			}
+			totalArrow3.GetComponent<Image>().sprite = arrowOutline;
+		} else {
+			totalArrow3.GetComponent<Image>().sprite = arrowFull;
 		}
-		else
+		if (forcingIncrease < 0.2)
 		{
-			totalArrow4.gameObject.SetActive(false);
-			totalArrow5.gameObject.SetActive(false);
-			totalArrow6.gameObject.SetActive(false);
-		} 
+			totalArrow2.GetComponent<Image>().sprite = arrowOutline;
+		}
+		else {
+			totalArrow2.GetComponent<Image>().sprite = arrowFull;
+		}
+		if (forcingIncrease < 0.1)
+		{
+			totalArrow1.GetComponent<Image>().sprite = arrowOutline;
+		}
+		else {
+			totalArrow1.GetComponent<Image>().sprite = arrowFull;
+		}
 	}
 
 	protected override void GameOver() {
-		forcingIncrease = EBM.F * percentageIncrease;
-		effect = forcingIncrease - forcingDecrease;
 		base.GameOver();
 		StopAllCoroutines();
 		//TriggerUpdate(() => World.co2.Update(region, delta: effect));
-		GameManager.Instance.forcingIncrease = effect;
+		GameManager.Instance.forcingIncrease = forcingIncrease;
 		//TriggerUpdate(() => World.co2.Update(region, delta : effect * 1.18)); // [-1.18, 1.18]
 		GameManager.Instance.hasPlacedWorkers = true;
 	}
@@ -324,7 +242,7 @@ public class ForestController : RegionController {
 	public void SetAboutText(string area) {
 		if (area == "factory")
 		{
-			aboutText.text = "This is the factory. Volunteers here will protest, which will lower the rate at which emissions increases over time.";
+			aboutText.text = "This is the factory. Volunteers here will protest, which will lower emissions and improve public opinion. Having more volunteers here will decrease emissions at a greater rate.";
 		}
 		else if (area == "forest") {
 			aboutText.text = "This is the area being deforested. Volunteers placed here will help plant trees. This will reduce emissions slightly.";
@@ -364,10 +282,7 @@ public class ForestController : RegionController {
 			Station.counter = 0;
 			
 			// reset values changed by placing workers
-			forcingDecrease = 0;
-			percentageIncrease = 0.1;
-			forcingIncrease = EBM.F * percentageIncrease;
-			emissionsTotal = forcingIncrease - forcingDecrease;
+			forcingIncrease = 0.6;
 		}
 	}
 }

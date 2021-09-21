@@ -62,7 +62,7 @@ public partial class EBM {
 	/// <summary> Open water albedos </summary>
 	static Vector<double> aw = a0 - a2 * x.PointwisePower(2);
 	/// <summary> Radiative forcing(W m^-2) </summary>
-	public static double F = 2;
+	public static double F = 0;
 	public static double maxF = 13; // 13 corresponds to 10 degrees of warming 
 
 	// // misc consts

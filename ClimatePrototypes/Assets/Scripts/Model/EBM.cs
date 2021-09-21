@@ -18,7 +18,7 @@ public partial class EBM {
 	public static List<double> temp_list;
 
 	public static void Reset() {
-		F = 2;
+		F = 0;
 		//a0 = 0.7;
 		//Clear();
 	}

@@ -28,25 +28,26 @@ public class SubtropicsController : RegionController {
 		fireNumber = 0;
 		wind = GetComponentInChildren<Wind>();
 		world = GetComponentInChildren<SubtropicsWorld>();
-		if (base.GetSubtropicsTemp() < 24)
+		var tempDifference = base.GetSubtropicsTemp() - GlobalWorld.subtropicsStartingTemp; 
+		if (tempDifference < -1)
 		{
 			difficulty = 1;
 			fireActivityText.text = "Very Low";
 			waterLevelText.text = "Very High";
 		}
-		else if (base.GetSubtropicsTemp() >= 24 && base.GetSubtropicsTemp() < 25)
+		else if (tempDifference >= -1 && tempDifference < 1)
 		{
 			difficulty = 2;
 			fireActivityText.text = "Low";
 			waterLevelText.text = "High";
 		}
-		else if (base.GetSubtropicsTemp() >= 25 && base.GetSubtropicsTemp() < 27)
+		else if (tempDifference >= 1 && tempDifference < 3)
 		{
 			difficulty = 3;
 			fireActivityText.text = "Moderate";
 			waterLevelText.text = "Moderate";
 		}
-		else if (base.GetSubtropicsTemp() >= 27 && base.GetSubtropicsTemp() < 29)
+		else if (tempDifference >= 3 && tempDifference < 5)
 		{
 			difficulty = 4;
 			fireActivityText.text = "High";
@@ -57,6 +58,7 @@ public class SubtropicsController : RegionController {
 			fireActivityText.text = "Very High";
 			waterLevelText.text = "Very Low";
 		}
+		Debug.Log(difficulty);
 	}
 
 	protected override void GameOver() {
