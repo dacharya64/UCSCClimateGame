@@ -403,7 +403,7 @@ public class UIController : Singleton<UIController> {
 		{
 			increaseText.text = "With a decrease in global temperature of ";
 		}
-		tempChangeText.text = Mathf.Abs((float)finalTempChange).ToString("F2") + "°:";
+		tempChangeText.text = Mathf.Abs((float)finalTempChange).ToString("F2") + "°C:";
 
 		if (finalTempChange < 1)
 		{

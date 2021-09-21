@@ -50,12 +50,14 @@ public class ForestGrid : MonoBehaviour {
 			if (Input.GetMouseButtonDown(0) && map.cellBounds.Contains(hoverCell) && !ForestController.Instance.activeTiles.Contains(hoverCell)) {
 				if (map.GetTile(hoverCell) == empty)
 				{
-					ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.04;
+					ForestController.Instance.forcingIncrease = ForestController.Instance.forcingIncrease - 0.06;
+					Debug.Log(ForestController.Instance.forcingIncrease);
 					ForestController.Instance.SetVolunteerTarget(hoverCell, VolunteerActions.Plant);
 				}
 				else if (map.GetTile(hoverCell) == stump || map.GetTile(hoverCell) == dead)
 				{
-					ForestController.Instance.forcingDecrease = ForestController.Instance.forcingDecrease + 0.04;
+					ForestController.Instance.forcingIncrease = ForestController.Instance.forcingIncrease - 0.06;
+					Debug.Log(ForestController.Instance.forcingIncrease);
 					ForestController.Instance.SetVolunteerTarget(hoverCell, VolunteerActions.Clear);
 				}
 				ClearHover(hoverCell);

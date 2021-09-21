@@ -159,7 +159,7 @@ public class GameManager : Singleton<GameManager> {
 			//for (int i = 0; i < 20; i++) { //FOR DEBUGGING ONLY
 				if (!hasPlacedWorkers)
 				{
-					forcingIncrease = 0.6;
+					forcingIncrease = 0.6; // originally 0.6
 				}
 				EBM.F = EBM.F + forcingIncrease;
 				World.ChangeAverageTemp();
