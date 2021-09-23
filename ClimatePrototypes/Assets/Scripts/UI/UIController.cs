@@ -93,12 +93,14 @@ public class UIController : Singleton<UIController> {
 	/* Controls the text for the game over prompts */
 
 	public void SetCityPrompt(bool status) {
+		returnPrompt.GetComponentInChildren<Text>().alignment = TextAnchor.MiddleCenter;
 		returnPrompt.GetComponentInChildren<Text>().text = "You have selected all of the bills!";
 		returnPrompt.SetActive(status);
 	}
 
 	public void SetArcticPrompt(bool status)
 	{
+		returnPrompt.GetComponentInChildren<Text>().alignment = TextAnchor.MiddleCenter;
 		returnPrompt.GetComponentInChildren<Text>().text = "Another year has passed.";
 		returnPrompt.SetActive(status);
 	}
@@ -117,6 +119,7 @@ public class UIController : Singleton<UIController> {
 		{
 			emissionsResult = "Large";
 		}
+		returnPrompt.GetComponentInChildren<Text>().alignment = TextAnchor.UpperLeft;
 		returnPrompt.GetComponentInChildren<Text>().text = "You have placed all of the volunteers! \n\nPredicted emissions increase: " + emissionsResult;
 		returnPrompt.SetActive(status);
 	}
@@ -135,8 +138,9 @@ public class UIController : Singleton<UIController> {
 		else {
 			publicOpinionResult = "Greatly Decreases";
 		}
-		returnPrompt.GetComponentInChildren<Text>().fontSize = 22;
-		returnPrompt.GetComponentInChildren<Text>().text = "You have fought the fires! The smoke from the wildfires covers the skies, slightly cooling the planet.\n\nFires remaining: " + fires + "\nPublic opinion: " + publicOpinionResult + "\n";
+		returnPrompt.GetComponentInChildren<Text>().fontSize = 25;
+		returnPrompt.GetComponentInChildren<Text>().alignment = TextAnchor.UpperLeft;
+		returnPrompt.GetComponentInChildren<Text>().text = "You have fought the fires! The smoke from the wildfires covers the skies, slightly cooling the planet.\nFires remaining: " + fires + "\nPublic opinion: " + publicOpinionResult + "\n";
 		returnPrompt.SetActive(status);
 	}
 
@@ -193,15 +197,43 @@ public class UIController : Singleton<UIController> {
 			print.text = text;
 			print.transform.position += print.preferredWidth / 2 * Vector3.right;
 		}
-		print.text = "";
+		print.text = ""; 
+		text = "Here you can deploy volunteers\n (  ";
+		string text2 = "  ) to take action to mitigate climate change in one of three ways.";
 		for (int i = 0; i < text.Length; i++)
 		{
 			print.text += text[i];
-			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-			//	print.text = text.Substring(0, (i = text.Length));
 			yield return WaitForRealSeconds(delay);
 		}
 		pics[2].GetComponent<Image>().enabled = true;
+		for (int i = 0; i < text2.Length; i++)
+		{
+			print.text += text2[i];
+			yield return WaitForRealSeconds(delay);
+		}
+	}
+
+	public static IEnumerator ForestInfoTypewriter(Text print, string text, string header, GameObject[] pics, float delay = .05f)
+	{ //given text to print, text ref, and print speed, does typewriter effect
+		if (print.text == "Title")
+		{
+			print.text = text;
+			print.transform.position += print.preferredWidth / 2 * Vector3.right;
+		}
+		print.text = "";  
+		text = "Each region affects the climate differently--check out the    ";
+		string text2 = "    on each page to learn more.";
+		for (int i = 0; i < text.Length; i++)
+		{
+			print.text += text[i];
+			yield return WaitForRealSeconds(delay);
+		}
+		pics[3].GetComponent<Image>().enabled = true;
+		for (int i = 0; i < text2.Length; i++)
+		{
+			print.text += text2[i];
+			yield return WaitForRealSeconds(delay);
+		}
 	}
 
 	public static IEnumerator ArcticPicsTypewriter(Text print, string text, string text2, string text3, string header, GameObject[] pics, float delay = .05f)
@@ -212,19 +244,23 @@ public class UIController : Singleton<UIController> {
 			print.transform.position += print.preferredWidth / 2 * Vector3.right;
 		}
 		print.text = "";
-
-		//[TextArea]
-		text = "Block incoming solar radiation \n (     )  and avoid atmospheric longwave radiation (     ).";
 		for (int i = 0; i < text.Length; i++)
 		{
 			print.text += text[i];
-			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-			//	print.text = text.Substring(0, (i = text.Length));
 			yield return WaitForRealSeconds(delay);
 		}
-		
-		pics[0].GetComponent<Image>().enabled = true;
 		pics[1].GetComponent<Image>().enabled = true;
+		for (int i = 0; i < text2.Length; i++)
+		{
+			print.text += text2[i];
+			yield return WaitForRealSeconds(delay);
+		}
+		pics[0].GetComponent<Image>().enabled = true;
+		for (int i = 0; i < text3.Length; i++)
+		{
+			print.text += text2[i];
+			yield return WaitForRealSeconds(delay);
+		}
 	}
 
 	public static IEnumerator TypewriterClickToAdvance(Text print, string text, float delay = .05f)
@@ -242,8 +278,6 @@ public class UIController : Singleton<UIController> {
 				print.text = text.Substring(0, (i = text.Length));
 				AudioManager.Instance.StopSFX();
 			}
-				
-
 			yield return WaitForRealSeconds(delay);
 		}
 	}
@@ -258,7 +292,8 @@ public class UIController : Singleton<UIController> {
 		{
 			yield return instance.StartCoroutine(TypewriterFirstForest(text, words[1], words[0], pics));
 		}
-		else {
+		else
+		{
 			yield return instance.StartCoroutine(Typewriter(text, words[1], words[0]));
 		}
 		
@@ -279,6 +314,12 @@ public class UIController : Singleton<UIController> {
 			if (GameManager.Instance.visits[World.Region.Arctic] == 1 && GameManager.Instance.currentRegion.region == World.Region.Arctic)
 			{
 				yield return instance.StartCoroutine(ArcticPicsTypewriter(text, words[i], words[i + 1], words[i + 2], words[0], pics));
+				clickPrompt.SetActive(true);
+				i = (words.Length - 1);
+			}
+			else if (GameManager.Instance.visits[World.Region.Forest] == 2 && GameManager.Instance.currentRegion.region == World.Region.Forest && i == 3)
+			{
+				yield return instance.StartCoroutine(ForestInfoTypewriter(text, words[i], words[0], pics));
 				clickPrompt.SetActive(true);
 				i = (words.Length - 1);
 			}

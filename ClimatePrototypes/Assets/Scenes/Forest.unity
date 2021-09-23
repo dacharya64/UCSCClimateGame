@@ -4153,7 +4153,6 @@ MonoBehaviour:
   overUI: 0
   volunteersPlaced: 0
   maxVolunteers: 0
-  forcingIncrease: 0
   aboutPrompt: {fileID: 506256797}
   aboutText: {fileID: 854287849}
   titleText: {fileID: 1361870897}
@@ -4976,7 +4975,7 @@ RectTransform:
   m_GameObject: {fileID: 506256797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 2.3, z: 1}
+  m_LocalScale: {x: 4.44, y: 2.553, z: 1.11}
   m_Children:
   - {fileID: 1653534978}
   - {fileID: 854287848}
@@ -5770,7 +5769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.9, y: -10}
+  m_AnchoredPosition: {x: 1.9, y: -7.6}
   m_SizeDelta: {x: 592.4322, y: 190.50037}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &854287849
@@ -5794,7 +5793,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 043c4d43a15acf34189801c1b4fd98de, type: 3}
-    m_FontSize: 28
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -5805,8 +5804,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: This is the area being deforested. Volunteers placed here will help plant
-    trees. This will reduce emissions slightly.
+  m_Text: 'This area is being deforested. Volunteers placed here will help plant
+    trees, which will draw down carbon dioxide from the atmosphere. The left arrow
+    takes you to the carbon sequestration plant, the right arrow takes you to the
+    factory.
+
+'
 --- !u!222 &854287850
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6333,7 +6336,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -39.800003}
+  m_AnchoredPosition: {x: 0, y: -41}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &908893769

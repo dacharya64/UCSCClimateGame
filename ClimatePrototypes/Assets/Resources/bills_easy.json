@@ -1,35 +1,35 @@
 [
   {
     "name": "Moving Goods",
-    "tease": "People aren't the only ones moving around. Billions of tons of freight travels the planet every year. How can we lower emissions for goods?",
+    "tease": "People aren't the only ones moving around. A lot of freight circles the planet every year. How can we lower emissions for trade?",
     "left": {
-      "title": "Ocean Shipping",
-      "body": "Most goods travel between continents on large ships. Should we improve the design and technology onboard to reduce ocean shipping emissions?",
+      "title": "Ocean Trade",
+      "body": "On this planet, many kinds of materials travel between continents on large ships. Should we improve ship design to reduce their emissions?",
       "tags": "money-10 forcing-0.0108655755618388 emissions-10"
     },
     "right": {
-      "title": "Electric Trains",
-      "body": "Trains move passengers, goods, and equipment over land, and most of them run on fossil fuels. Should we develop and expand electric trains to replace diesel trains?",
+      "title": "Improved Trains",
+      "body": "Trains move passengers, goods, and equipment overland. The people on this planet, especially those who ride trains, wish they polluted less than they do now. Should we work on designing trains that do not rely on fossil fuels?",
       "tags": "money-5 forcing-0.000246700100126275 opinion+5 emissions-5"
     }
   },
   {
     "name": "Getting Around",
-    "tease": "We know we should use fewer cars--how should we help with personal travel?",
+    "tease": "We know we should use fewer cars--how should we improve personal travel?",
     "left": {
       "title": "Public Transit",
-      "body": "Busses, trains, and subway lines help people get around without relying on cars. They also help those who cannot drive or ride bikes. Should we increase these services?",
-      "tags": "money-10 emissions-10 opinion-10 forcing-0.0185588889116468"
+      "body": "Public transit helps people get around without relying on cars. It also helps those who cannot drive or ride bikes. Should we increase these services?",
+      "tags": "money-5 emissions-10 forcing-0.0185588889116468"
     },
     "right": {
-      "title": "Bicycle Paths and Planning",
-      "body": "Bikes provide exercise and freedom for riders to choose their own routes. Should we add more bike paths and bike parking to increase bike safety and convenience?",
+      "title": "Bicycle Path Support",
+      "body": "Bikes have become a popular form of exercise and they provide freedom for riders to choose their own routes. Should we add more bike paths and bike parking to increase bike safety and convenience?",
       "tags": "money-5 emissions-5 opinion+5 forcing-0.00631910575786769"
     }
   },
   {
     "name": "Breezy",
-    "tease": "Windpower is a way to generate cleaner electricity. But where do we build the turbines?",
+    "tease": "Wind power is a way to generate cleaner electricity. But where do we build the turbines?",
     "left": {
       "title": "Onshore Wind Power",
       "body": "Building wind turbines on land is easier-the ground is already there, after all. But some people don't like the look of these structures or the space they take up.",
@@ -37,22 +37,22 @@
     },
     "right": {
       "title": "Offshore Wind Power",
-      "body": "Building in the water is trickier and more expensive. On the plus-side, offshore wind turbines don't use up land that others want to build on.",
+      "body": "Building in the water is trickier and more expensive. On the plus-side, offshore wind turbines don't use up land that people want to build on.",
       "tags": "money-10 emissions-5 forcing-0.0258170606512055"
     }
   },
   {
     "name": "Building Power",
-    "tease": "Can the way we build structures help the climate?",
+    "tease": "Can we build structures in a way to mitigate climate change?",
     "left": {
       "title": "Green Roofs",
-      "body": "By adding dirt and plant life to more roofs, we help keep buildings cooler. That in turn lowers the use of air conditioning.",
+      "body": "By adding dirt and plant life to more roofs, we help keep buildings cooler. That in turn lowers the use of air conditioning. Some people enjoy bringing nature to the city.",
       "tags": "money-5 emissions-5 opinion+5 forcing-0.00148037119127195"
     },
     "right": {
       "title": "Insulation Efficiency",
       "body": "By improving existing buildings and requiring higher standards for new buildings, we can reduce the use of heating and cooling measures.",
-      "tags": "money-10 emissions-10 forcing-0.04202862174163"
+      "tags": "money-5 emissions-10 forcing-0.04202862174163"
     }
   },
   {
@@ -60,26 +60,26 @@
     "tease": "Where should we focus to preserve and protect wild spaces?",
     "left": {
       "title": "The Wetlands",
-      "body": "Wetlands along the coast are home to many kinds of birds and fish, and also can absorb CO2 from the atmosphere if we protect them from building and development.",
-      "tags": "emissions-5 forcing-0.00244283207564606"
+      "body": "Wetlands along the coast are home to many kinds of birds and fish, and also absorb carbon dioxide from the atmosphere if we protect them from building and development.",
+      "tags": "money-5 emissions-5 forcing-0.00244283207564606"
     },
     "right": {
       "title": "Temperate Forests",
-      "body": "If we restore temperate forests that have previously been logged, those forests can help lower CO2 in the atmosphere. Should we plant more trees and undertake measures to decrease deforestation?",
-      "tags": "emissions-10 forcing-0.013634883946367"
+      "body": "If we restore temperate forests that have previously been logged, those forests can absorb carbon dioxide from the atmosphere. Should we plant more trees and undertake measures to decrease deforestation?",
+      "tags": "money-5 emissions-10 forcing-0.013634883946367"
     }
   },
   {
     "name": "Food on the Table",
-    "tease": "What changes can we make to food that will help the climate?",
+    "tease": "What changes can we make to what we eat and how we produce food?",
     "left": {
       "title": "Silvopasture",
-      "body": "Silvopasture is a farming technique where animals graze in wooded areas or orchards instead of open pasture. This allows the land to capture more CO2, and it also gives farmers two incomes--in trees or produce and in animals.",
-      "tags": "money-10 emissions-5 forcing-0.0659763384775513"
+      "body": "Silvopasture is a farming technique where animals graze in wooded areas or orchards instead of open pasture. This land absorbs more carbon dioxide, and it also gives farmers two incomes--in produce and in animals.",
+      "tags": "money-5 emissions-5 forcing-0.0659763384775513"
     },
     "right": {
-      "title": "Plant-based diet",
-      "body": "Raising animals for meat and dairy is a large source of emissions on this planet. Should we reduce subsidies in these industries, and increase subsidies to support plant-based food production?",
+      "title": "Eating Less Meat",
+      "body": "Raising animals for meat and dairy is a large source of emissions on this planet, but these foods remain popular. Should we reduce subsidies in these industries, and increase subsidies to support plant-based food production?",
       "tags": "money-5 emissions-10 opinion-5 forcing-0.162827845037914"
     }
   },
@@ -89,11 +89,11 @@
     "left": {
       "title": "Plant-based Plastics",
       "body": "What if we made plastic out of plants instead of fossil fuels? Should we develop more alternative plastics for packaging, utensils, and electronics?",
-      "tags": "money-10 emissions-5 forcing-0.00236879047825019"
+      "tags": "money-5 emissions-5 forcing-0.00236879047825019"
     },
     "right": {
       "title": "More Home Recycling",
-      "body": "We throw away a lot of material that could be recycled. To encourage more recycling, should we increase landfill and manufacturing fees?",
+      "body": "We toss a lot of material that could be recycled. To encourage more recycling, should we increase the cost of throwing things away and of making items that cannot be reused?",
       "tags": "money-5 emissions-10 forcing-0.0135854194441767"
     }
   },
@@ -102,11 +102,11 @@
     "tease": "Growing food takes skill, land, and resources. How can we change the way we farm?",
     "left": {
       "title": "Irrigation Measures",
-      "body": "Getting water to farmland takes a lot of energy. Should we increase infrastructure to drip and sprinkler systems to lower the emissions relating to moving water?",
+      "body": "Managing and moving the water we need to grow food takes energy. Should we develop and deploy technology to lower the emissions relating to moving water?",
       "tags": "money-10 emissions-5 forcing-0.00278837307357436"
     },
     "right": {
-      "title": "Improved Grazing",
+      "title": "Livestock Grazing",
       "body": "Grassland can serve as a land sink, storing carbon from the atmosphere. Should we reduce the density of cattle grazing and better rotate grazing lands?",
       "tags": "money-5 emissions-10 forcing-0.0406612810405626"
     }
@@ -116,8 +116,8 @@
     "tease": "Large industry impacts our climate in a number of ways. How might we address these impacts?",
     "left": {
       "title": "Carbon Tax",
-      "body": "Carbon taxes effect companies based on their level of emissions. Companies that emit more are taxed at a higher level than companies that emit less. Should we try a Carbon tax policy to incentivise greener business?",
-      "tags": "money+5 emissions-5 opinion-5 forcing-0.0135997641027503" 
+      "body": "Carbon taxes affect companies based on their level of emissions. Companies that emit more are taxed at a higher level than companies that emit less. Should we try a Carbon tax policy to incentivise greener business?",
+      "tags": "money+5 emissions-5 opinion-5 forcing-0.0135997641027503"
     },
     "right": {
       "title": "Refrigerant Sanctions",
@@ -127,16 +127,16 @@
   },
   {
     "name": "Questions about power",
-    "tease": "Alternative energy sources might help us reduce emissions. Which should we develop further?",
+    "tease": "Alternative energy sources could help us reduce emissions. Which should we develop further?",
     "left": {
       "title": "Solar Thermal Electricity",
-      "body": "This technology uses reflected sunlight to generate heat, and then to turn that heat into electricity. It is easier to store heat than some other forms of alternative energy.",
+      "body": "This technology uses reflected sunlight to generate heat, and then to turn that heat into electricity. Should we work on building more solar thermal infrastructure?.",
       "tags": "money-10 emissions-5 forcing-0.0088636646335667"
     },
     "right": {
       "title": "Geothermal Power",
-      "body": "There's a lot of heat if you dig deep enough. Geothermal power is generated by drawing very hot water from deep under the planet. This heat is inexhaustible, but only part of the planet is suitable for this kind of digging.",
-      "tags": "money-5 5emissions-10 forcing-0.0152922089885554"
+      "body": "There's a lot of heat if you dig deep enough. Geothermal power is generated by drawing very hot water from deep under the planet. Should we invest in drilling for geothermal power?",
+      "tags": "money-5 emissions-10 forcing-0.0152922089885554"
     }
   },
   {

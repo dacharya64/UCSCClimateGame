@@ -1648,14 +1648,16 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: In cities around the world, people are coming up with ideas for how to
-    govern society to slow warming.
+  m_Text: 'In cities around the world, people are coming up with ideas for how to
+    govern society to limit warming.
+
+'
 --- !u!222 &100846626
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2286,7 +2288,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 44.808}
+  m_AnchoredPosition: {x: 0, y: 51}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &194200328
@@ -5176,8 +5178,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.4, y: 30.9}
-  m_SizeDelta: {x: 756.90515, y: 220.40924}
+  m_AnchoredPosition: {x: -0.4, y: 28}
+  m_SizeDelta: {x: 690.6941, y: 242.75912}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &391841899
 MonoBehaviour:
@@ -5200,25 +5202,21 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 043c4d43a15acf34189801c1b4fd98de, type: 3}
-    m_FontSize: 30
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 300
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '- City -- About the city
-
-    - Arctic -- About the arctic
-
-    - Carbon
-    -- About the carbon region
-
-    - Fire -- About the fire region'
+  m_Text: Like Earth, this planet is warmer than it has been for thousands of years.
+    Mountain glaciers and sea ice cover a smaller area than before. Sea level is
+    rising. Some regions have already experienced larger climate changes, and these
+    changes will get larger unless we do something about it.
 --- !u!222 &391841900
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5526,7 +5524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 67}
+  m_AnchoredPosition: {x: 0, y: 49}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &428911627
@@ -5946,14 +5944,14 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: As society makes choices, the planet will change. What will be the future
-    for this planet?
+  m_Text: "\rAs society makes choices, the planet will change. How much warmer will
+    this planet be?\r\n"
 --- !u!222 &449463596
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8543,7 +8541,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -9002,7 +9000,7 @@ PrefabInstance:
     - target: {fileID: 2500071287731641645, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
       propertyPath: m_FontData.m_Alignment
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2611764309580557417, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
@@ -9288,7 +9286,7 @@ PrefabInstance:
     - target: {fileID: 4492140674855053267, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4.9
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 4544380612640245742, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
@@ -9734,7 +9732,7 @@ PrefabInstance:
     - target: {fileID: 8872563230203501496, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 33
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 9049550459305720491, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
@@ -11584,7 +11582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000011444, y: -21}
+  m_AnchoredPosition: {x: -0.000011444, y: 24}
   m_SizeDelta: {x: 583.41223, y: 239.12299}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &898166635
@@ -11613,14 +11611,15 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 300
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Although you are out of money, the world comes together to make your plan
-    happen.
+  m_Text: 'While there is great pressure around the funds to fight climate change,
+    this world recognizes how important that fight is. Although you have exceeded
+    your budget, the world comes together to make your plan happen. '
 --- !u!222 &898166636
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12736,14 +12735,14 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Global industry is producing emissions that warm the planet, but <b>here</b>,
-    people are making choices to reduce those emissions.
+  m_Text: Global industry is producing emissions that warm the planet, but here,
+    people are making choices to reduce carbon dioxide emissions.
 --- !u!222 &996290685
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12942,7 +12941,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -16601,8 +16600,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -27.500008}
-  m_SizeDelta: {x: 784.18396, y: 368.2251}
+  m_AnchoredPosition: {x: 0, y: -28}
+  m_SizeDelta: {x: 784.18396, y: 406.5658}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1438224534
 MonoBehaviour:
@@ -17785,7 +17784,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 300
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -17864,7 +17863,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
