@@ -306,7 +306,7 @@ public class GameManager : Singleton<GameManager> {
 
 	// tween thermometer values
 	void UpdateThermometerValue() {
-		Transform thermometerTransform = thermometer.GetComponent<Transform>();
+		Transform thermometerTransform = thermometer.transform.parent.gameObject.GetComponent<Transform>();
 		float delay = 0.8f;
 		if (previousTempValue > (float)World.averageTemp) {
 			AudioManager.Instance.Play("SFX_SliderDown");
@@ -316,7 +316,7 @@ public class GameManager : Singleton<GameManager> {
 		DOTween.Sequence()
 			.Append(thermometerFill.DOColor(new Color32(173, 173, 173, 255), delay))
 			.Join(thermometerBottom.DOColor(new Color32(173, 173, 173, 255), delay))
-			.Join(thermometerTransform.DOScale(new Vector3(thermometerTransform.localScale.x + 0.5f, thermometerTransform.localScale.y + 0.5f, thermometerTransform.localScale.z), delay))
+			.Join(thermometerTransform.DOScale(new Vector3(thermometerTransform.localScale.x + 0.1f, thermometerTransform.localScale.y + 0.1f, thermometerTransform.localScale.z), delay))
 			.Append(thermometer.DOValue((float)World.averageTemp, 1.5f))
 			.Append(thermometerFill.DOColor(Color.white, delay))
 			.Join(thermometerBottom.DOColor(Color.white, delay))
