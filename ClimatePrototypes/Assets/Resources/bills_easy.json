@@ -1,4 +1,4 @@
-[
+ [
   {
     "name": "Moving Goods",
     "tease": "People aren't the only ones moving around. A lot of freight circles the planet every year. How can we lower emissions for trade?",
@@ -84,8 +84,8 @@
     }
   },
   {
-    "name": "Reduce, Reuse, Recycle",
-    "tease": "How can we manage the impacts individuals have on the climate?",
+    "name": "Garbage Matters",
+    "tease": "How can we manage garbage and the effects waste has on the climate?",
     "left": {
       "title": "Plant-based Plastics",
       "body": "What if we made plastic out of plants instead of fossil fuels? Should we develop more alternative plastics for packaging, utensils, and electronics?",
@@ -102,12 +102,12 @@
     "tease": "Growing food takes skill, land, and resources. How can we change the way we farm?",
     "left": {
       "title": "Irrigation Measures",
-      "body": "Managing and moving the water we need to grow food takes energy. Should we develop and deploy technology to lower the emissions relating to moving water?",
+      "body": "Managing and moving the water we need to grow food takes energy. Should we develop and deploy technology to lower the emissions relating to transporting water?",
       "tags": "money-10 emissions-5 forcing-0.00278837307357436"
     },
     "right": {
       "title": "Livestock Grazing",
-      "body": "Grassland can serve as a land sink, storing carbon from the atmosphere. Should we reduce the density of cattle grazing and better rotate grazing lands?",
+      "body": "Grassland can serve as a carbon sink, taking up carbon dioxide from the atmosphere. Should we reduce the density of cattle grazing and better rotate grazing lands?",
       "tags": "money-5 emissions-10 forcing-0.0406612810405626"
     }
   },
@@ -116,21 +116,21 @@
     "tease": "Large industry impacts our climate in a number of ways. How might we address these impacts?",
     "left": {
       "title": "Carbon Tax",
-      "body": "Carbon taxes affect companies based on their level of emissions. Companies that emit more are taxed at a higher level than companies that emit less. Should we try a Carbon tax policy to incentivise greener business?",
-      "tags": "money+5 emissions-5 opinion-5 forcing-0.0135997641027503"
+      "body": "Carbon taxes are applied to companies based on how much carbon dioxide they emit. Should we try a carbon tax policy to incentivise greener business?",
+      "tags": "money+5 emissions-5 forcing-0.0135997641027503"
     },
     "right": {
       "title": "Refrigerant Sanctions",
-      "body": "The chemicals we use in chilling (refrigeration, air conditioners and industrial cooling) cause a lot greenhouse gasses. Should we fine companies who do not dispose of them properly?",
+      "body": "The chemicals we use in chilling (refrigeration, air conditioners and industrial cooling) are greenhouse gasses. Should we fine companies who do not dispose of refrigerants properly?",
       "tags": "money+5 emissions-10 forcing-0.144396380934278"
     }
   },
   {
-    "name": "Questions about power",
-    "tease": "Alternative energy sources could help us reduce emissions. Which should we develop further?",
+    "name": "Questions About Power",
+    "tease": "Alternative energy sources can help us reduce carbon dioxide emissions. Which should we develop further?",
     "left": {
       "title": "Solar Thermal Electricity",
-      "body": "This technology uses reflected sunlight to generate heat, and then to turn that heat into electricity. Should we work on building more solar thermal infrastructure?.",
+      "body": "This technology uses reflected sunlight to generate heat, and then turns that heat into electricity. Should we work on building more solar thermal infrastructure?",
       "tags": "money-10 emissions-5 forcing-0.0088636646335667"
     },
     "right": {
@@ -140,7 +140,7 @@
     }
   },
   {
-    "name": "Check out those wheels",
+    "name": "Check Out Those Wheels",
     "tease": "We use cars and large trucks for moving goods and people. Which improvement to automobiles will help our planet the most?",
     "left": {
       "title": "Improving Large Trucks",
@@ -155,7 +155,7 @@
   },
   {
     "name": "See the Forest for the Trees",
-    "tease": "More trees will help reduce emissions in our atmosphere. Where should we plant them?",
+    "tease": "More trees will help reduce carbon dioxide emissions in our atmosphere. Where should we plant them?",
     "left": {
       "title": "Tropical Forest Regrowth",
       "body": "This initiative would restore land that was once tropical forest. That would mean working with our communities to turn some farmland back into preserved forest land in order for the forest to help capture emissions from the atmosphere.",

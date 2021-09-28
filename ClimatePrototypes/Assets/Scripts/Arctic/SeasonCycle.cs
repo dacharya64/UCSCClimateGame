@@ -14,9 +14,9 @@ public class SeasonCycle : MonoBehaviour {
 	[SerializeField] Text SeasonText;
 
 	void Start() {
-		
+		SeasonText.text = "Winter";
 		//isSummer = ArcticController.Instance.visits % 2 == 0;
-		isSummer = true;
+		isSummer = false;
 		var srs = GetComponentsInChildren<SpriteRenderer>();
 		(summerSR, winterSR) = (srs[0], srs[1]);
 
@@ -24,11 +24,14 @@ public class SeasonCycle : MonoBehaviour {
 		fadeIn = (float step, float dur) => EaseMethods.CubicEaseOut(step, 0, 1, dur);
 		fadeOut = (float step, float dur) => EaseMethods.CubicEaseIn(dur - step, 0, 1, dur);
 
-		StartCoroutine(ChangeSeasons());
+		//Invoke("ChangeSeasons", dayDuration);
+		StartCoroutine(ChangeSeasons(dayDuration));
 	}
 
 	/// <summary> Controls seasonal cycle. </summary>
 	IEnumerator ChangeSeasons(float duration = .5f) {
+		yield return new WaitForSeconds(dayDuration);
+		isSummer = !isSummer;
 		for (float timer = duration; timer > dayDuration - transitionTime; timer -= Time.deltaTime) {
 			yield return null;
 			float step = timer - (dayDuration - transitionTime);
@@ -36,8 +39,8 @@ public class SeasonCycle : MonoBehaviour {
 			winterSR.color = new Color(1, 1, 1, isSummer ? fadeIn(step, transitionTime) : fadeOut(step, transitionTime));
 		}
 		ArcticController.Instance.buffers.ToList().ForEach(b => b.AssignSprite());
-		yield return new WaitForSeconds(duration);
-		isSummer = !isSummer;
+		//yield return new WaitForSeconds(duration);
+		//isSummer = !isSummer;
 		if (isSummer)
 		{
 			SeasonText.text = "Summer";
@@ -46,6 +49,6 @@ public class SeasonCycle : MonoBehaviour {
 		{
 			SeasonText.text = "Winter";
 		}
-		StartCoroutine(ChangeSeasons(dayDuration));
+		//StartCoroutine(ChangeSeasons(dayDuration));
 	}
 }

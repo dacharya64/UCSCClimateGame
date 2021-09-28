@@ -28,6 +28,7 @@ TagManager:
   - Nodes
   - AboutPrompt
   - UIController
+  - ImageList
   layers:
   - Default
   - TransparentFX

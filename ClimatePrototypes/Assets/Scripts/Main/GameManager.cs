@@ -466,15 +466,15 @@ public class GameManager : Singleton<GameManager> {
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTempDifference >= -1 && previousArcticTempDifference < 4 && (currentArcticTempDifference >= 4 || currentArcticTempDifference < -1))
+		else if (previousArcticTempDifference >= -3 && previousArcticTempDifference < 7 && (currentArcticTempDifference >= 7 || currentArcticTempDifference < -3))
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTempDifference >= 3 && previousArcticTempDifference < 7 && (currentArcticTempDifference >= 7 || currentArcticTempDifference < 3))
+		else if (previousArcticTempDifference >= 7 && previousArcticTempDifference < 11 && (currentArcticTempDifference >= 11 || currentArcticTempDifference < 7))
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTempDifference >= 7 && currentArcticTempDifference < 11)
+		else if (previousArcticTempDifference >= 11 && currentArcticTempDifference < 11)
 		{
 			SetArcticAlertOn();
 		}

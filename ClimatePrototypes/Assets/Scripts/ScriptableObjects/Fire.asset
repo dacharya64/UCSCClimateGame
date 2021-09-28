@@ -20,7 +20,7 @@ MonoBehaviour:
   secondVisit:
   - Fire
   - The wildfires continue to spread.
-  - As the world warms, fires will be more frequent and the subtropical regions will
-    be dryer.
+  - As the world warms, fires will be more frequent, and the subtropical regions
+    will be dryer.
   - The fire remaining when the time runs out will also affect public opinion.
   thirdVisit: []
