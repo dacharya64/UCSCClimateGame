@@ -9559,6 +9559,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8003398446598069348, guid: 5b327410d7ac9db419b2785b56c9eca1,
+        type: 3}
+      propertyPath: m_TagString
+      value: TurnCounter
+      objectReference: {fileID: 0}
     - target: {fileID: 8003398446598069351, guid: 5b327410d7ac9db419b2785b56c9eca1,
         type: 3}
       propertyPath: m_RootOrder
@@ -9823,6 +9828,12 @@ MonoBehaviour:
 --- !u!224 &722623517 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2892939415237515730, guid: 5b327410d7ac9db419b2785b56c9eca1,
+    type: 3}
+  m_PrefabInstance: {fileID: 722623513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &722623518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8003398446598069348, guid: 5b327410d7ac9db419b2785b56c9eca1,
     type: 3}
   m_PrefabInstance: {fileID: 722623513}
   m_PrefabAsset: {fileID: 0}
@@ -24005,6 +24016,11 @@ PrefabInstance:
       propertyPath: thermometer
       value: 
       objectReference: {fileID: 535246559}
+    - target: {fileID: 5174851537695450224, guid: 91c0bc0f5c849914094e66a42dac4167,
+        type: 3}
+      propertyPath: turnCounter
+      value: 
+      objectReference: {fileID: 722623518}
     - target: {fileID: 5174851537695450224, guid: 91c0bc0f5c849914094e66a42dac4167,
         type: 3}
       propertyPath: tropicsAlert
