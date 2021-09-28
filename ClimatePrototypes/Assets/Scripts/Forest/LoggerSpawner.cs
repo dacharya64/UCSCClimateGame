@@ -14,14 +14,20 @@ public class LoggerSpawner : MonoBehaviour {
 			var targetIndex = (int) (Random.value * ForestController.Instance.activeTrees.Count);
 			var target = ForestController.Instance.activeTrees[targetIndex];
 			ForestController.Instance.activeTrees.RemoveAt(targetIndex);
-
-			SetLoggerTarget(target, LoggerActions.Chop);
+			Logger logger = MoveLoggerOnRoad(new Vector3Int(3, -2, -9), target);
+			yield return new WaitForSeconds(7);
+			SetLoggerTarget(logger, target, LoggerActions.Chop);
 		}
 		StartCoroutine(SpawnLogger(delay));
 	}
 
-	public void SetLoggerTarget(Vector3Int pos, UnityEngine.Events.UnityAction<Logger> onReached) {
-		var newLogger = ForestController.Instance.NewAgent(loggerPrefab, transform.position, (Vector3) pos) as Logger;
+	public Logger MoveLoggerOnRoad(Vector3Int pos, Vector3Int target) {
+		var newLogger = ForestController.Instance.NewAgent(loggerPrefab, transform.position, (Vector3)pos) as Logger;
+		return newLogger;
+	}
+	
+	public void SetLoggerTarget(Logger newLogger, Vector3Int pos, UnityEngine.Events.UnityAction<Logger> onReached) {
+		newLogger.AssignTarget(pos);
 		newLogger.choppingTile = pos;
 
 		newLogger.OnReached.AddListener((PathfindingAgent agent) => onReached.Invoke(agent as Logger));

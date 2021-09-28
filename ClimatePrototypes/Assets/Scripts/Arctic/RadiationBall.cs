@@ -17,17 +17,17 @@ public class RadiationBall : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 
 		if (radiationType == Radiation.ShortWave) {
-			rb.velocity = new Vector2(Random.Range(-force.x, force.x), -Random.Range(force.y * 0.8f, force.y));
+			rb.velocity = new Vector2(Random.Range(-force.x, force.x), -Random.Range(force.y * 0.7f, force.y));
 		}
 			
 		else { // if longwave radiation
             if (count == 1)
             {
-                force = new Vector2(0.5f, -5);
+                force = new Vector2(0.55f, -5);
             }
             else
             {
-                force = new Vector2(0.5f, 5);
+                force = new Vector2(0.55f, 5);
             }
             rb.velocity = force;
 		}
