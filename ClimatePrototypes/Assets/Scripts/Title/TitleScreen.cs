@@ -36,7 +36,7 @@ public class TitleScreen : MonoBehaviour {
 	}
 
 	void Start() {
-        Screen.SetResolution(1200, 750, false);
+        //Screen.SetResolution(1200, 750, false);
         if (!SceneManager.GetSceneByName("Overworld").isLoaded) {
 			SceneManager.LoadScene("Overworld", LoadSceneMode.Additive);
 			SceneManager.sceneLoaded += SetOverWorldActive;

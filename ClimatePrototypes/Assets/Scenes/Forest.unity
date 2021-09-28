@@ -4153,7 +4153,6 @@ MonoBehaviour:
   overUI: 0
   volunteersPlaced: 0
   maxVolunteers: 0
-  forcingIncrease: 0
   aboutPrompt: {fileID: 506256797}
   aboutText: {fileID: 854287849}
   titleText: {fileID: 1361870897}
@@ -4976,7 +4975,7 @@ RectTransform:
   m_GameObject: {fileID: 506256797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 2.3, z: 1}
+  m_LocalScale: {x: 4.44, y: 2.553, z: 1.11}
   m_Children:
   - {fileID: 1653534978}
   - {fileID: 854287848}
@@ -5770,7 +5769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.9, y: -10}
+  m_AnchoredPosition: {x: 1.9, y: -7.6}
   m_SizeDelta: {x: 592.4322, y: 190.50037}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &854287849
@@ -5794,7 +5793,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 043c4d43a15acf34189801c1b4fd98de, type: 3}
-    m_FontSize: 28
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -5805,8 +5804,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: This is the area being deforested. Volunteers placed here will help plant
-    trees. This will reduce emissions slightly.
+  m_Text: 'This area is being deforested. Volunteers placed here will help plant
+    trees, which will draw down carbon dioxide from the atmosphere. The left arrow
+    takes you to the carbon sequestration plant, the right arrow takes you to the
+    factory.
+
+'
 --- !u!222 &854287850
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6333,7 +6336,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -39.800003}
+  m_AnchoredPosition: {x: 0, y: -41}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &908893769
@@ -6663,7 +6666,7 @@ Transform:
   m_GameObject: {fileID: 1036580489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.001, y: -3.39, z: 0}
-  m_LocalScale: {x: 0.8852328, y: 1, z: -1}
+  m_LocalScale: {x: 0.8852328, y: 1, z: -10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -7781,6 +7784,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 7d1d6a4fd4a011249aee192e9a26599b,
         type: 3}
+    - target: {fileID: 5944379235779317813, guid: cc894a59053947347a5de93162a9e217,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc894a59053947347a5de93162a9e217, type: 3}
 --- !u!1 &1459010780 stripped
@@ -9102,6 +9110,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913437987}
   m_CullTransparentMesh: 0
+--- !u!1 &1916422317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1916422318}
+  m_Layer: 0
+  m_Name: Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1916422318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916422317}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.08, y: -2.09, z: -9.23}
+  m_LocalScale: {x: 8.882874, y: 6.392126, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2023326136}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1945008325
 GameObject:
   m_ObjectHideFlags: 0
@@ -9422,6 +9460,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 76746885}
+  - {fileID: 1916422318}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10373,6 +10412,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288259654106708135, guid: 4e6f3de1230fc074d8cb4d77699e71e6,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e6f3de1230fc074d8cb4d77699e71e6, type: 3}

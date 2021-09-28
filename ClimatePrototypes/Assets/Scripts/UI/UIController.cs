@@ -93,12 +93,14 @@ public class UIController : Singleton<UIController> {
 	/* Controls the text for the game over prompts */
 
 	public void SetCityPrompt(bool status) {
+		returnPrompt.GetComponentInChildren<Text>().alignment = TextAnchor.MiddleCenter;
 		returnPrompt.GetComponentInChildren<Text>().text = "You have selected all of the bills!";
 		returnPrompt.SetActive(status);
 	}
 
 	public void SetArcticPrompt(bool status)
 	{
+		returnPrompt.GetComponentInChildren<Text>().alignment = TextAnchor.MiddleCenter;
 		returnPrompt.GetComponentInChildren<Text>().text = "Another year has passed.";
 		returnPrompt.SetActive(status);
 	}
@@ -117,6 +119,7 @@ public class UIController : Singleton<UIController> {
 		{
 			emissionsResult = "Large";
 		}
+		returnPrompt.GetComponentInChildren<Text>().alignment = TextAnchor.UpperLeft;
 		returnPrompt.GetComponentInChildren<Text>().text = "You have placed all of the volunteers! \n\nPredicted emissions increase: " + emissionsResult;
 		returnPrompt.SetActive(status);
 	}
@@ -135,8 +138,9 @@ public class UIController : Singleton<UIController> {
 		else {
 			publicOpinionResult = "Greatly Decreases";
 		}
-		returnPrompt.GetComponentInChildren<Text>().fontSize = 22;
-		returnPrompt.GetComponentInChildren<Text>().text = "You have fought the fires! The smoke from the wildfires covers the skies, slightly cooling the planet.\n\nFires remaining: " + fires + "\nPublic opinion: " + publicOpinionResult + "\n";
+		returnPrompt.GetComponentInChildren<Text>().fontSize = 25;
+		returnPrompt.GetComponentInChildren<Text>().alignment = TextAnchor.UpperLeft;
+		returnPrompt.GetComponentInChildren<Text>().text = "You have fought the fires! The smoke from the wildfires covers the skies, slightly cooling the planet.\nFires remaining: " + fires + "\nPublic opinion: " + publicOpinionResult + "\n";
 		returnPrompt.SetActive(status);
 	}
 
@@ -186,25 +190,53 @@ public class UIController : Singleton<UIController> {
 		}
 	}
 
-	public static IEnumerator TypewriterFirstForest(Text print, string text, string header, GameObject[] pics, float delay = .05f)
+	public static IEnumerator TypewriterFirstForest(Text print, string text, string header, List<GameObject> pics, float delay = .05f)
 	{ //given text to print, text ref, and print speed, does typewriter effect
 		if (print.text == "Title")
 		{
 			print.text = text;
 			print.transform.position += print.preferredWidth / 2 * Vector3.right;
 		}
-		print.text = "";
+		print.text = ""; 
+		text = "Here you can deploy volunteers\n (  ";
+		string text2 = "  ) to take action to mitigate climate change in one of three ways.";
 		for (int i = 0; i < text.Length; i++)
 		{
 			print.text += text[i];
-			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-			//	print.text = text.Substring(0, (i = text.Length));
 			yield return WaitForRealSeconds(delay);
 		}
 		pics[2].GetComponent<Image>().enabled = true;
+		for (int i = 0; i < text2.Length; i++)
+		{
+			print.text += text2[i];
+			yield return WaitForRealSeconds(delay);
+		}
 	}
 
-	public static IEnumerator ArcticPicsTypewriter(Text print, string text, string text2, string text3, string header, GameObject[] pics, float delay = .05f)
+	public static IEnumerator ForestInfoTypewriter(Text print, string text, string header, List<GameObject> pics, float delay = .05f)
+	{ //given text to print, text ref, and print speed, does typewriter effect
+		if (print.text == "Title")
+		{
+			print.text = text;
+			print.transform.position += print.preferredWidth / 2 * Vector3.right;
+		}
+		print.text = "";  
+		text = "Each region affects the climate differently--check out the    ";
+		string text2 = "    on each page to learn more.";
+		for (int i = 0; i < text.Length; i++)
+		{
+			print.text += text[i];
+			yield return WaitForRealSeconds(delay);
+		}
+		pics[3].GetComponent<Image>().enabled = true;
+		for (int i = 0; i < text2.Length; i++)
+		{
+			print.text += text2[i];
+			yield return WaitForRealSeconds(delay);
+		}
+	}
+
+	public static IEnumerator ArcticPicsTypewriter(Text print, string text, string text2, string text3, string header, List<GameObject> pics, float delay = .05f)
 	{ //given text to print, text ref, and print speed, does typewriter effect
 		if (print.text == "Title")
 		{
@@ -212,19 +244,23 @@ public class UIController : Singleton<UIController> {
 			print.transform.position += print.preferredWidth / 2 * Vector3.right;
 		}
 		print.text = "";
-
-		//[TextArea]
-		text = "Block incoming solar radiation \n (     )  and avoid atmospheric longwave radiation (     ).";
 		for (int i = 0; i < text.Length; i++)
 		{
 			print.text += text[i];
-			//if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-			//	print.text = text.Substring(0, (i = text.Length));
 			yield return WaitForRealSeconds(delay);
 		}
-		
 		pics[0].GetComponent<Image>().enabled = true;
+		for (int i = 0; i < text2.Length; i++)
+		{
+			print.text += text2[i];
+			yield return WaitForRealSeconds(delay);
+		}
 		pics[1].GetComponent<Image>().enabled = true;
+		for (int i = 0; i < text3.Length; i++)
+		{
+			print.text += text3[i];
+			yield return WaitForRealSeconds(delay);
+		}
 	}
 
 	public static IEnumerator TypewriterClickToAdvance(Text print, string text, float delay = .05f)
@@ -242,8 +278,6 @@ public class UIController : Singleton<UIController> {
 				print.text = text.Substring(0, (i = text.Length));
 				AudioManager.Instance.StopSFX();
 			}
-				
-
 			yield return WaitForRealSeconds(delay);
 		}
 	}
@@ -251,14 +285,24 @@ public class UIController : Singleton<UIController> {
 	public static IEnumerator ClickToAdvance(Text text, string[] words, GameObject button = null) { 
 		Text header = GameObject.FindWithTag("Title").GetComponent<Text>();
 		header.text = words[0];
-		GameObject[] pics;
-		pics = GameObject.FindGameObjectsWithTag("image");
+		List<GameObject> pics = new List<GameObject>();
+		GameObject imageList = GameObject.FindGameObjectWithTag("ImageList");
+		for (int i = 0; i < imageList.transform.childCount; i++)
+		{
+			GameObject child = imageList.transform.GetChild(i).gameObject;
+			if (child.GetComponent<Image>())
+			{
+				pics.Add(child);
+			}
+		}
+
 		var clickPrompt = text.GetComponentOnlyInChildren<Text>()?.gameObject;
 		if (GameManager.Instance.visits[World.Region.Forest] == 1 && GameManager.Instance.currentRegion.region == World.Region.Forest)
 		{
 			yield return instance.StartCoroutine(TypewriterFirstForest(text, words[1], words[0], pics));
 		}
-		else {
+		else
+		{
 			yield return instance.StartCoroutine(Typewriter(text, words[1], words[0]));
 		}
 		
@@ -279,6 +323,12 @@ public class UIController : Singleton<UIController> {
 			if (GameManager.Instance.visits[World.Region.Arctic] == 1 && GameManager.Instance.currentRegion.region == World.Region.Arctic)
 			{
 				yield return instance.StartCoroutine(ArcticPicsTypewriter(text, words[i], words[i + 1], words[i + 2], words[0], pics));
+				clickPrompt.SetActive(true);
+				i = (words.Length - 1);
+			}
+			else if (GameManager.Instance.visits[World.Region.Forest] == 2 && GameManager.Instance.currentRegion.region == World.Region.Forest && i == 3)
+			{
+				yield return instance.StartCoroutine(ForestInfoTypewriter(text, words[i], words[0], pics));
 				clickPrompt.SetActive(true);
 				i = (words.Length - 1);
 			}
@@ -407,18 +457,18 @@ public class UIController : Singleton<UIController> {
 
 		if (finalTempChange < 1)
 		{
-			resultsText.text = "The planet is warmer than it has been for thousands of years. Mountain glaciers and sea ice cover a small area.Sea level is rising. While global changes are modest, some regions have experienced larger climate changes.";
+			resultsText.text = "The planet is warmer than it has been for thousands of years. Mountain glaciers and sea ice cover a small area. Sea level is rising. While global changes are modest, some regions have already experienced larger climate changes.";
 		}
 		else if (finalTempChange >= 1 && finalTempChange < 2)
 		{
-			resultsText.text = "The planet is warmer. Polar regions have warmed more than the global average, and sea ice has retreated in late summer. Average rainfall has increased over many land regions. Heat waves and heavy precipitation events have become more frequent and more intense. Agricultural droughts in drying regions have become more frequent and more intense. Nevertheless, people have come together to reduce emissions and limit further climate change.";
+			resultsText.text = "The planet is warmer. Polar regions have warmed more than the global average, and sea ice has retreated in late summer. Average rainfall has increased over many land regions. Heat waves and heavy precipitation events have become more frequent and more intense. In drying regions, droughts have also become more frequent and more intense. Nevertheless, people have come together to reduce carbon dioxide emissions and limit further climate change.";
 		}
 		else if (finalTempChange >= 2 && finalTempChange < 5)
 		{
-			resultsText.text = "The planet is much warmer. The polar oceans are ice-free in late summer. Permafrost has thawed. Average rainfall has increased in the tropics and polar regions, and decreased over large parts of the subtropics. Heat waves and heavy precipitation events have become more frequent and more intense. Agricultural droughts in drying regions have become more frequent and more intense. The planet is on a trajectory of further warming.";
+			resultsText.text = "The planet is much warmer. The polar oceans are ice-free in late summer. Permafrost has thawed, and snow cover has decreased. Average rainfall has increased in the tropics and polar regions, and decreased over large parts of the subtropics. Heat waves, heavy precipitation events, and droughts have become more frequent and more intense. The proportion of intense tropical cyclones has increased. The planet is on a trajectory of further warming.";
 		}
 		else {
-			resultsText.text = "The planet is hot. The polar regions are free of sea ice year round. Climate events, such as heat waves, heavy precipitation, and droughts, are extreme and frequent. The proportion of intense tropical cyclones has increased, as well as their peak wind speeds. Sea level is high, leading to coastal flooding.";
+			resultsText.text = "The planet is hot. The polar regions are free of sea ice year round. Permafrost has thawed, and snow cover has decreased. Climate events, such as heat waves, heavy precipitation, and droughts, are extreme and frequent. The proportion of intense tropical cyclones has increased. Sea level and ice sheets have changed irreversibly for centuries to millennia.";
 		}
 	}
 }

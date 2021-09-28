@@ -17,9 +17,12 @@ MonoBehaviour:
   - 'Here you can deploy volunteers (   ) to take action to mitigate climate change
     in one of three ways. '
   - 'Place volunteers at different locations to protest emissions, plant trees, '
-  - or capture carbon from the atmosphere.
+  - or capture carbon from the atmosphere. Use the arrows to navigate between the
+    areas.
   secondVisit:
   - Carbon
   - You may wish to change the placement of volunteers to mitigate climate change.
   - The number of volunteers available is based on public opinion.
+  - 'Each region affects the climate differently- check out the (i) on each page
+    to learn more.  '
   thirdVisit: []

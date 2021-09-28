@@ -6,7 +6,7 @@ using UnityEngine;
 public class Paddle : MonoBehaviour {
 	Rigidbody2D rb2D;
 	[SerializeField] float paddleSpeed = 5f;
-	float paddleWidth;
+	public float paddleWidth;
 	float horizontalInput = 0f;
 	Vector2 screenBounds; // TODO: global variable class
 
@@ -19,7 +19,10 @@ public class Paddle : MonoBehaviour {
 	void Update() => horizontalInput = Input.GetAxis("Horizontal");
 	void FixedUpdate() => Move(Mathf.Abs(horizontalInput) > 0.1f ? horizontalInput : 0);
 	void Move(float input) => rb2D.velocity = Vector3.right * input * paddleSpeed;
-	void LateUpdate() => transform.position += (Mathf.Clamp(transform.position.x, -screenBounds.x + paddleWidth / 2, screenBounds.x - paddleWidth / 2) - transform.position.x) * Vector3.right;
+	void LateUpdate() {
+		paddleWidth = GetComponent<SpriteRenderer>().bounds.size.x;
+		transform.position += (Mathf.Clamp(transform.position.x, -screenBounds.x + paddleWidth / 2, screenBounds.x - paddleWidth / 2) - transform.position.x) * Vector3.right;
+	}
 
 	/// <summary> handles short wave radiation </summary>
 	void OnCollisionEnter2D(Collision2D other) {

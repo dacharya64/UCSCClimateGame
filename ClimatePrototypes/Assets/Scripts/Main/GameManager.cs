@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager> {
 	double previousSubtropicsTempDifference;
 	double previousArcticTempDifference;
 	int timesSinceVisitedCity = 0;
-	int completedRegions = 0;
+	public int completedRegions = 0;
 	GameObject GameOverPrompt;
 	[SerializeField] Image thermometerFill;
 	Image thermometerBottom;
@@ -55,6 +55,10 @@ public class GameManager : Singleton<GameManager> {
 	public LineRenderer resultLine; 
 
 	public bool inOverworld;
+
+	public static bool gameOver = false;
+
+	public static GameObject turnCounter;
 
 	public override void Awake() {
 		base.Awake();
@@ -109,6 +113,8 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	public static void Restart() {
+		turnCounter.SetActive(true);
+		gameOver = false;
 		EBM.F = 0;
 		TitleScreen.isFirstTime = false;
 		UIController.Instance.ChangeGameOverPromptState(false);
@@ -276,28 +282,31 @@ public class GameManager : Singleton<GameManager> {
 
 	IEnumerator UpdateOverworldValues()
 	{
-		isAnimating = true;
-		float publicOpinion = (float)previousPublicOpinion * 100f;
-		float econ = (float)previousEconomy * 100f;
-
-		if ((float) World.averageTemp != thermometer.value) {
-			UpdateThermometerValue();
-			yield return new WaitForSeconds(1.5f);
-		}
-		if (!Mathf.Approximately(publicOpinion, World.publicOpinion) || previousEmissions != (float)EBM.F || econ != World.money)
-		{
-			statsPanel.Toggle(true);
-		}
-		yield return StartCoroutine(statsPanel.CallUpdate());
-		statsPanel.Toggle(false);
-		CheckAlerts();
-		isAnimating = false;
 		CheckGameOver();
+		if (!gameOver) {
+			isAnimating = true;
+			float publicOpinion = (float)previousPublicOpinion * 100f;
+			float econ = (float)previousEconomy * 100f;
+
+			if ((float)World.averageTemp != thermometer.value)
+			{
+				UpdateThermometerValue();
+				yield return new WaitForSeconds(1.5f);
+			}
+			if (!Mathf.Approximately(publicOpinion, World.publicOpinion) || previousEmissions != (float)EBM.F || econ != World.money)
+			{
+				statsPanel.Toggle(true);
+			}
+			yield return StartCoroutine(statsPanel.CallUpdate());
+			statsPanel.Toggle(false);
+			CheckAlerts();
+			isAnimating = false;
+		}
 	}
 
 	// tween thermometer values
 	void UpdateThermometerValue() {
-		Transform thermometerTransform = thermometer.GetComponent<Transform>();
+		Transform thermometerTransform = thermometer.transform.parent.gameObject.GetComponent<Transform>();
 		float delay = 0.8f;
 		if (previousTempValue > (float)World.averageTemp) {
 			AudioManager.Instance.Play("SFX_SliderDown");
@@ -307,7 +316,7 @@ public class GameManager : Singleton<GameManager> {
 		DOTween.Sequence()
 			.Append(thermometerFill.DOColor(new Color32(173, 173, 173, 255), delay))
 			.Join(thermometerBottom.DOColor(new Color32(173, 173, 173, 255), delay))
-			.Join(thermometerTransform.DOScale(new Vector3(thermometerTransform.localScale.x + 0.5f, thermometerTransform.localScale.y + 0.5f, thermometerTransform.localScale.z), delay))
+			.Join(thermometerTransform.DOScale(new Vector3(thermometerTransform.localScale.x + 0.1f, thermometerTransform.localScale.y + 0.1f, thermometerTransform.localScale.z), delay))
 			.Append(thermometer.DOValue((float)World.averageTemp, 1.5f))
 			.Append(thermometerFill.DOColor(Color.white, delay))
 			.Join(thermometerBottom.DOColor(Color.white, delay))
@@ -334,8 +343,8 @@ public class GameManager : Singleton<GameManager> {
 				Time.timeScale = 1;
 				asyncLoad.allowSceneActivation = true;
 				//AudioManager.Instance.StopMusic(); // could move earlier and play new music during newsscroll
-				if (name == "Overworld")
-					UIController.Instance.IncrementTurn();
+				//if (name == "Overworld")
+					//UIController.Instance.IncrementTurn();
 				UIController.Instance.SetPrompt(false);
 				Cursor.visible = true;
 				yield break;
@@ -466,15 +475,15 @@ public class GameManager : Singleton<GameManager> {
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTempDifference >= -1 && previousArcticTempDifference < 4 && (currentArcticTempDifference >= 4 || currentArcticTempDifference < -1))
+		else if (previousArcticTempDifference >= -3 && previousArcticTempDifference < 7 && (currentArcticTempDifference >= 7 || currentArcticTempDifference < -3))
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTempDifference >= 3 && previousArcticTempDifference < 7 && (currentArcticTempDifference >= 7 || currentArcticTempDifference < 3))
+		else if (previousArcticTempDifference >= 7 && previousArcticTempDifference < 11 && (currentArcticTempDifference >= 11 || currentArcticTempDifference < 7))
 		{
 			SetArcticAlertOn();
 		}
-		else if (previousArcticTempDifference >= 7 && currentArcticTempDifference < 11)
+		else if (previousArcticTempDifference >= 11 && currentArcticTempDifference < 11)
 		{
 			SetArcticAlertOn();
 		}
@@ -508,6 +517,9 @@ public class GameManager : Singleton<GameManager> {
 	void CheckGameOver() {
 		if (completedRegions > 19) // CHANGE THIS FOR DEBUGGING, originally set to 19
 		{
+			turnCounter = GameObject.FindWithTag("TurnCounter");
+			turnCounter.SetActive(false);
+			gameOver = true;
 			// show stats screen and let player restart
 			UIController.Instance.ChangeGameOverPromptState(true);
 			UIController.Instance.UpdateGameOverScreen();

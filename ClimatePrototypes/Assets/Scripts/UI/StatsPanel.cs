@@ -14,7 +14,7 @@ public class StatsPanel : MonoBehaviour {
 
 	public void InitializeValues() {
 		SetSlider(landUse, (float) EBM.a0);
-		SetSlider(publicOpinion, World.publicOpinion / 100, invertColors : true);
+		SetSlider(publicOpinion, World.publicOpinion / 100);
 		previousPublicOpinion = .7f;
 		SetSlider(emissions, (float) EBM.F); // used to be /14
 		previousEmissions = (float) EBM.F;
@@ -27,7 +27,7 @@ public class StatsPanel : MonoBehaviour {
 		float newEcon = (float) previousEconomy * 100f;
 		if (!Mathf.Approximately(newPublicOpinion, World.publicOpinion))
 		{
-			previousPublicOpinion = UpdateSlider(publicOpinion, World.publicOpinion / 100, previousPublicOpinion, invertColors: true);
+			previousPublicOpinion = UpdateSlider(publicOpinion, World.publicOpinion / 100, previousPublicOpinion);
 			yield return new WaitForSeconds(1.5f);
 		}
 		
@@ -66,14 +66,14 @@ public class StatsPanel : MonoBehaviour {
 			.Append(slider.DOValue(value, 1.8f))
 			.Append(slider.fillRect.GetComponentInChildren<Image>(true).DOColor(originalColor, delay))
 			.Join(sliderTransform.DOScale(new Vector3(sliderTransform.localScale.x, sliderTransform.localScale.y, sliderTransform.localScale.z), delay));
-		slider.fillRect.GetComponentInChildren<Image>(true).color = invertColors ? Color.Lerp(Color.red, Color.green, value) : Color.Lerp(Color.green, Color.red, value);
+		//slider.fillRect.GetComponentInChildren<Image>(true).color = invertColors ? Color.Lerp(Color.red, Color.green, value) : Color.Lerp(Color.green, Color.red, value);
 		return value;
 	}
 
 	void SetSlider(Slider slider, float value, bool invertColors = false)
 	{
 		slider.value = value;
-		slider.fillRect.GetComponentInChildren<Image>(true).color = invertColors ? Color.Lerp(Color.red, Color.green, value) : Color.Lerp(Color.green, Color.red, value);
+		//slider.fillRect.GetComponentInChildren<Image>(true).color = invertColors ? Color.Lerp(Color.red, Color.green, value) : Color.Lerp(Color.green, Color.red, value);
 	}
 
 	public void Toggle() => gameObject.SetActive(!gameObject.activeSelf);

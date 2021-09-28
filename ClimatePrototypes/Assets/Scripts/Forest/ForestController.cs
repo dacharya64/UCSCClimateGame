@@ -56,6 +56,7 @@ public class ForestController : RegionController {
 	public bool counting = false;
 
 	void Start() {
+		SetAboutText("forest");
 		// Tell the UI controller where the about prompt is
 		UIController.Instance.timed = false;
 		UIController.Instance.aboutPrompt = aboutPrompt;
@@ -242,12 +243,12 @@ public class ForestController : RegionController {
 	public void SetAboutText(string area) {
 		if (area == "factory")
 		{
-			aboutText.text = "This is the factory. Volunteers here will protest, which will lower emissions and improve public opinion. Having more volunteers here will decrease emissions at a greater rate.";
+			aboutText.text = "This is the factory. Volunteers here will protest, which will reduce emissions and improve public opinion. Having more volunteers here will reduce emissions at a greater rate.";
 		}
 		else if (area == "forest") {
-			aboutText.text = "This is the area being deforested. Volunteers placed here will help plant trees. This will reduce emissions slightly.";
+			aboutText.text = "This area is being deforested. Volunteers placed here will help plant trees, which will reduce net emissions slightly. The left arrow takes you to the carbon sequestration plant, the right arrow takes you to the factory.";
 		} else {
-			aboutText.text = "This is the carbon sequestration plant, which captures and stores carbon dioxide. Volunteers placed here will reduce emissions significantly, but this costs money.";
+			aboutText.text = "This is the carbon sequestration plant, which captures and stores carbon dioxide. Workers placed here will reduce net emissions substantially, but this effort and technology cost money.";
 		}
 	}
 
