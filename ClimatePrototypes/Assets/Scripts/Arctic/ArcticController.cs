@@ -99,6 +99,7 @@ public class ArcticController : RegionController {
 	}
 
 	protected override void GameOver() {
+		World.money = World.money + 5;
 		base.Loading(false);
 		base.GameOver();
 		Debug.Log($"Remaining {buffers.Select(b => b.health).Aggregate((sum, b) => b + sum)} ice of total {buffers.Length * 5} ice");

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Logger : PathfindingAgent {
 	[HideInInspector] public Vector3Int choppingTile;
-	void Start() => OnReturn.AddListener(() => ForestController.Instance.damage += 20);
+	/*void Start() => OnReturn.AddListener(() => ForestController.Instance.damage += 20);*/
 }
 
 public static class LoggerActions {

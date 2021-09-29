@@ -243,10 +243,10 @@ public class ForestController : RegionController {
 	public void SetAboutText(string area) {
 		if (area == "factory")
 		{
-			aboutText.text = "This is the factory. Volunteers here will protest, which will reduce emissions and improve public opinion. Having more volunteers here will reduce emissions at a greater rate.";
+			aboutText.text = "This is the factory. Volunteers here will protest, which will reduce emissions. Having more volunteers here will reduce emissions at a greater rate.";
 		}
 		else if (area == "forest") {
-			aboutText.text = "This area is being deforested. Volunteers placed here will help plant trees, which will reduce net emissions slightly. The left arrow takes you to the carbon sequestration plant, the right arrow takes you to the factory.";
+			aboutText.text = "This area is being deforested. Volunteers placed here will help plant trees, which will reduce net emissions slightly and improve public opinion. The left arrow takes you to the carbon sequestration plant, the right arrow takes you to the factory.";
 		} else {
 			aboutText.text = "This is the carbon sequestration plant, which captures and stores carbon dioxide. Workers placed here will reduce net emissions substantially, but this effort and technology cost money.";
 		}
