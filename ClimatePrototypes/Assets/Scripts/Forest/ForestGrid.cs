@@ -50,11 +50,13 @@ public class ForestGrid : MonoBehaviour {
 			if (Input.GetMouseButtonDown(0) && map.cellBounds.Contains(hoverCell) && !ForestController.Instance.activeTiles.Contains(hoverCell)) {
 				if (map.GetTile(hoverCell) == empty)
 				{
+					World.publicOpinion = World.publicOpinion + 5;
 					ForestController.forcingIncrease -= 0.06;
 					ForestController.Instance.SetVolunteerTarget(hoverCell, VolunteerActions.Plant);
 				}
 				else if (map.GetTile(hoverCell) == stump || map.GetTile(hoverCell) == dead)
 				{
+					World.publicOpinion = World.publicOpinion + 5;
 					ForestController.forcingIncrease -= 0.06;
 					ForestController.Instance.SetVolunteerTarget(hoverCell, VolunteerActions.Clear);
 				}
@@ -109,7 +111,7 @@ public class ForestTree {
 		yield return new WaitForSeconds(initialDelay);
 		yield return new WaitForSeconds(interval);
 		float effect = index >= 3 ? index * (1 - NeighbourCount() / 8f) : index == 2 ? 0 : -index;
-		ForestController.Instance.damage = Mathf.Max(ForestController.Instance.damage - effect / 2, 0);
+		//ForestController.Instance.damage = Mathf.Max(ForestController.Instance.damage - effect / 2, 0);
 		sequestration = ForestController.Instance.StartCoroutine(Sequestre(interval));
 	}
 

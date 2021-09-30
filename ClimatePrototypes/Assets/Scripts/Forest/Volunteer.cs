@@ -72,7 +72,7 @@ public class VolunteerActions {
 		// yield return null;
 		for (int i = steps; i > 0; i--) {
 			yield return new WaitForSeconds(time / steps);
-			ForestController.Instance.damage = Mathf.Max(-100, ForestController.Instance.damage - 1);
+			/*ForestController.Instance.damage = Mathf.Max(-100, ForestController.Instance.damage - 1);*/
 		}
 	}
 }

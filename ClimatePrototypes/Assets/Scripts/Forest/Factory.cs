@@ -23,8 +23,8 @@ public class Factory : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (step++ % 10 == 0)
-			ForestController.Instance.damage += damageMultiplier * ((1 - protesters / ForestController.Instance.numActive) * 2 / 3f + 1 / 3f);
+	//	if (step++ % 10 == 0)
+			//ForestController.Instance.damage += damageMultiplier * ((1 - protesters / ForestController.Instance.numActive) * 2 / 3f + 1 / 3f);
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
@@ -59,7 +59,7 @@ public class Factory : MonoBehaviour {
 			{ //workersAtFactory = 5
 				ForestController.forcingIncrease -= 0.15;
 			}
-			World.publicOpinion = World.publicOpinion + 5;
+			
 
 			var selectedTarget = subtargets.ElementAt(counter).Key;
 			counter++;

@@ -100,8 +100,9 @@ public class UIController : Singleton<UIController> {
 
 	public void SetArcticPrompt(bool status)
 	{
-		returnPrompt.GetComponentInChildren<Text>().alignment = TextAnchor.MiddleCenter;
-		returnPrompt.GetComponentInChildren<Text>().text = "Another year has passed.";
+		returnPrompt.GetComponentInChildren<Text>().alignment = TextAnchor.UpperLeft;
+		returnPrompt.GetComponentInChildren<Text>().fontSize = 25;
+		returnPrompt.GetComponentInChildren<Text>().text = "In response to observations and research on amplified warming in the Arctic, the people of this planet are growing concerned. More funds have been added to your effort to mitigate the global impacts of climate change.";
 		returnPrompt.SetActive(status);
 	}
 

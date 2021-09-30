@@ -174,6 +174,22 @@ public class GameManager : Singleton<GameManager> {
 
 		if (to.name == "Overworld")
 		{
+			// Cap the values for money and public opinion
+			if (World.money > 100f) {
+				World.money = 100f;
+			}
+			if (World.money < 0f) {
+				World.money = 0f;
+			}
+			if (World.publicOpinion > 100f) 
+			{
+				World.publicOpinion = 100f;
+			}
+			if (World.publicOpinion < 0f)
+			{
+				World.publicOpinion = 0f;
+			}
+
 			Canvas navBarCanvas = UIController.Instance.GetComponent<Canvas>();
 			navBarCanvas.worldCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
 			inOverworld = true;
@@ -515,7 +531,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
-		if (completedRegions > 19) // CHANGE THIS FOR DEBUGGING, originally set to 19
+		if (completedRegions > 4) // CHANGE THIS FOR DEBUGGING, originally set to 19
 		{
 			turnCounter = GameObject.FindWithTag("TurnCounter");
 			turnCounter.SetActive(false);
