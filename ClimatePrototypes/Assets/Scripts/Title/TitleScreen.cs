@@ -51,7 +51,7 @@ public class TitleScreen : MonoBehaviour {
 		}
 
 		if (!isFirstTime) {
-			EBM.F = 2;
+			EBM.F = 0;
 			World.money = 70f;
 			World.publicOpinion = 70f;
 			GameManager.Instance.InitStats();

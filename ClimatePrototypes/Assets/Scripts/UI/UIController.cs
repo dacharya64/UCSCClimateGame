@@ -384,6 +384,14 @@ public class UIController : Singleton<UIController> {
 	}
 
 	public void RestartGame() {
+		EBM.Reset();
+		GameManager.Instance.completedRegions = 0; //reset # of completed regions
+		World.turn = 1;
+		GameManager.Instance.timesSinceVisitedCity = 0;
+		GameManager.Instance.billIndices = new List<int>();
+		EBM.F = 0;
+		World.money = 70f;
+		World.publicOpinion = 70f;
 		GameManager.Restart();
 	}
 

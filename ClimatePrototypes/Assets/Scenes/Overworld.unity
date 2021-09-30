@@ -6940,6 +6940,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5174851537730288579}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &526211879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15295,6 +15306,28 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1028333809}
+        m_MethodName: TurnOffMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5174851537730288579}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1329790224
 MonoBehaviour:
@@ -24262,6 +24295,12 @@ PrefabInstance:
 --- !u!224 &5174851537730288578 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5174851536263030417, guid: 91c0bc0f5c849914094e66a42dac4167,
+    type: 3}
+  m_PrefabInstance: {fileID: 5174851537730288577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5174851537730288579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5174851536263030414, guid: 91c0bc0f5c849914094e66a42dac4167,
     type: 3}
   m_PrefabInstance: {fileID: 5174851537730288577}
   m_PrefabAsset: {fileID: 0}

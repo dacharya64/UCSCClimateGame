@@ -58,7 +58,6 @@ public class SubtropicsController : RegionController {
 			fireActivityText.text = "Very High";
 			waterLevelText.text = "Very Low";
 		}
-		Debug.Log(difficulty);
 	}
 
 	protected override void GameOver() {
