@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager> {
 	GameObject cityAlert;
 	double previousSubtropicsTempDifference;
 	double previousArcticTempDifference;
-	int timesSinceVisitedCity = 0;
+	public int timesSinceVisitedCity = 0;
 	public int completedRegions = 0;
 	GameObject GameOverPrompt;
 	[SerializeField] Image thermometerFill;
@@ -113,7 +113,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	public static void Restart() {
-		turnCounter.SetActive(true);
+		//turnCounter.SetActive(true);
 		gameOver = false;
 		EBM.F = 0;
 		TitleScreen.isFirstTime = false;
@@ -531,7 +531,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	void CheckGameOver() {
-		if (completedRegions > 4) // CHANGE THIS FOR DEBUGGING, originally set to 19
+		if (completedRegions > 19) // CHANGE THIS FOR DEBUGGING, originally set to 19
 		{
 			turnCounter = GameObject.FindWithTag("TurnCounter");
 			turnCounter.SetActive(false);
@@ -548,14 +548,7 @@ public class GameManager : Singleton<GameManager> {
 				worldNameText.text = "Your Planet";
 				worldNameText2.text = "Your Planet";
 			}
-			
-			completedRegions = 0; //reset # of completed regions
-			World.turn = 1;
-			timesSinceVisitedCity = 0;
-			billIndices = new List<int>();
-			EBM.F = 2;
-			World.money = 70f; 
-			World.publicOpinion = 70f;
+
 			CalculateGraph();
 			//visits = new Dictionary<World.Region, int> { { World.Region.Arctic, 0 }, { World.Region.Fire, 0 }, { World.Region.Forest, 0 }, { World.Region.City, 0 } };
 		}

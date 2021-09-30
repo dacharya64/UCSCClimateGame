@@ -2351,8 +2351,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000021189373, y: -969.56683}
-  m_SizeDelta: {x: 612.1195, y: 2208.6975}
+  m_AnchoredPosition: {x: 0.0000021189373, y: -595.79596}
+  m_SizeDelta: {x: 612.1195, y: 1461.1555}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1150061255
 MonoBehaviour:
@@ -2375,21 +2375,21 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 043c4d43a15acf34189801c1b4fd98de, type: 3}
-    m_FontSize: 30
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 300
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<size=34><b>Faculty Design Team\r</b></size>\nElizabeth Swensen + Nicole
-    Feldl\r\n\r\n<size=34><b>Student Design Team\r</b></size>\nDevi Acharya\r\nJanel
+  m_Text: "<size=28><b>Faculty Design Team\r</b></size>\nElizabeth Swensen + Nicole
+    Feldl\r\n\r\n<size=28><b>Student Design Team\r</b></size>\nDevi Acharya\r\nJanel
     Catajoy\r\nJoshua Husting\r\nAlexandria McGill\r\nTiffany Phan\r\nEmily Rodriguez\r\nAmber
-    Sargeant\r\nSean Song\r\nDallas Truong\r\nXueer Zhu\r\n\n<size=34><b>References\r</b></size>\nFeldl,
+    Sargeant\r\nSean Song\r\nDallas Truong\r\nXueer Zhu\r\n\n<size=28><b>References\r</b></size>\nFeldl,
     N., & Merlis, T. M. (2021), Polar amplification in idealized climates: The role
     of ice, moisture, and seasons, <i>Geophysical Research Letters</i>, 48, e2021GL094130
     (doi.org/10.1029/2021GL094130). This paper describes the climate model underlying
@@ -2399,7 +2399,7 @@ MonoBehaviour:
     Zhai, A. Pirani, S.L. Connors, C. P\xE9an, S. Berger, N. Caud, Y. Chen, L. Goldfarb,
     M.I. Gomis, M. Huang, K. Leitzell, E. Lonnoy, J.B.R. Matthews, T.K. Maycock,
     T. Waterfield, O. Yelek\xE7i, R. Yu, and B. Zhou (eds.)]. Cambridge University
-    Press.\n\n<size=34><b>Attribution and Acknowledgements\r</b></size>\nClimate
+    Press.\n\n<size=28><b>Attribution and Acknowledgements\r</b></size>\nClimate
     solutions from the city include those adapted from Project Drawdown (drawdown.org)
     data, which is licensed under the CC-BY-NC-2.0 license for non-commercial use
     (creativecommons.org/licenses/by-nc/2.0). Changes have been made to convert carbon
@@ -2495,7 +2495,7 @@ RectTransform:
   m_Father: {fileID: 1059378319}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.87796307}
+  m_AnchorMin: {x: 0, y: 0.8155161}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -3364,8 +3364,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1355613860}
   m_HandleRect: {fileID: 1355613859}
   m_Direction: 2
-  m_Value: 0.99999994
-  m_Size: 0.122036904
+  m_Value: 1
+  m_Size: 0.18448392
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
