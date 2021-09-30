@@ -102,7 +102,7 @@ public class UIController : Singleton<UIController> {
 	{
 		returnPrompt.GetComponentInChildren<Text>().alignment = TextAnchor.UpperLeft;
 		returnPrompt.GetComponentInChildren<Text>().fontSize = 25;
-		returnPrompt.GetComponentInChildren<Text>().text = "In response to observations and research on amplified warming in the Arctic, the people of this planet are growing concerned. More funds have been added to your effort to mitigate the impacts of climate change.";
+		returnPrompt.GetComponentInChildren<Text>().text = "In response to observations and research on amplified warming in the Arctic, the people of this planet are growing concerned. More funds have been added to your effort to mitigate the global impacts of climate change.";
 		returnPrompt.SetActive(status);
 	}
 
